@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-07-15 ~ 2026-07-24</span>
+      <span class="dpr-home-dashboard-kicker">2026-07-24</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 21 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 15 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-07-24 07:28:06 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-07-24 21:07:39 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日聚焦时间序列预测前沿：精读VAR到AI的综述与混合频率深度网络，速读电力负荷预测、洪水风险估计等5篇高分论文。</p>
-<p>最值得关注方向：混合频率时间序列预测（深度可分离网络）及变压器模型在电力负荷预测中的超越表现。</p>
-<p>建议优先精读VAR综述构建理论框架，再结合电力负荷基准测试案例实践Transformer模型。</p>
+<p>今日主攻混沌系统预测与不完全观测优化，精读两篇8分论文分别揭示稳定-表达性转移机制和海洋建模中的进化性能提升。最值得关注的方向是混沌边缘的预测方法及不完全观测的进化优化策略。建议普通读者关注这些方法在能源预测、动态网络生成中的实际应用潜力。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Vector Autoregressions to AI-based Time Series Forecasting: A Review">From Vector Autoregressions to AI-based Time Series Forecasting: A Review</span></li><li><span class="dpr-home-dashboard-paper-title" title="Mixed-Frequency Time Series Forecasting via Depth-Separable Neural Networks">Mixed-Frequency Time Series Forecasting via Depth-Separable Neural Networks</span></li><li><span class="dpr-home-dashboard-paper-title" title="Physics-Based Deep Spatiotemporal Hyperlocal Radar Nowcasting with a Multi-Variable U-Net for High-Resolution Precipitation Forecasting">Physics-Based Deep Spatiotemporal Hyperlocal Radar Nowcasting with a Multi-Variable U-Net for High-Resolution Precipitation Forecasting</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond the Edge of Chaos: Stability-Expressivity Transfer in Reservoir Forecasting">Beyond the Edge of Chaos: Stability-Expressivity Transfer in Reservoir Forecasting</span></li><li><span class="dpr-home-dashboard-paper-title" title="Incomplete Observations Boost Evolutionary Performance in Ocean Modeling">Incomplete Observations Boost Evolutionary Performance in Ocean Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="Time Series Network Utilization KPI Forecasting Using Advanced AI/ML Models">Time Series Network Utilization KPI Forecasting Using Advanced AI/ML Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>10</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>4</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -89,7 +87,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Flood risk estimation via geometric extremal graphical models">Flood risk estimation via geometric extremal graphical models</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Benchmark for Electrical Load Forecasting Across Grid Levels: Time-Series Transformers Outperform Established Methods">A Benchmark for Electrical Load Forecasting Across Grid Levels: Time-Series Transformers Outperform Established Methods</span></li><li><span class="dpr-home-dashboard-paper-title" title="AquaAugmentor: A Novel Feature Augmentation Algorithm for Water Potability Prediction">AquaAugmentor: A Novel Feature Augmentation Algorithm for Water Potability Prediction</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Day-Ahead Forecasting of Largest Single Infeed/Outfeed on the Irish Power Grid: A Generative Artificial Intelligence Approach">Day-Ahead Forecasting of Largest Single Infeed/Outfeed on the Irish Power Grid: A Generative Artificial Intelligence Approach</span></li><li><span class="dpr-home-dashboard-paper-title" title="Behaviour-Conditioned Neural Processes for Adaptive Residential Short-Term Load Forecasting">Behaviour-Conditioned Neural Processes for Adaptive Residential Short-Term Load Forecasting</span></li><li><span class="dpr-home-dashboard-paper-title" title="TVGL-CFM:Generating and Forecasting Time-Varying Trajectories of Dynamic Networks with Conditional Flow Matching">TVGL-CFM:Generating and Forecasting Time-Varying Trajectories of Dynamic Networks with Conditional Flow Matching</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>11</strong></span></div>
 </section>

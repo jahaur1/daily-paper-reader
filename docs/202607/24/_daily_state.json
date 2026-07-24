@@ -1,0 +1,249 @@
+{
+  "date": "20260724",
+  "date_label": "",
+  "generated_at": "2026-07-24 21:07:39 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.17909v1",
+      "route": "202607/24/2607.17909v1-beyond-the-edge-of-chaos-stability-expressivity-transfer-in-reservoir-forecasting",
+      "title": "Beyond the Edge of Chaos: Stability-Expressivity Transfer in Reservoir Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "水库计算预测的稳定性-表达性转移",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.19147v1",
+      "route": "202607/24/2607.19147v1-incomplete-observations-boost-evolutionary-performance-in-ocean-modeling",
+      "title": "Incomplete Observations Boost Evolutionary Performance in Ocean Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于稀疏观测的海洋建模生成状态空间模型",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.19974v1",
+      "route": "202607/24/2607.19974v1-time-series-network-utilization-kpi-forecasting-using-advanced-aiml-models",
+      "title": "Time Series Network Utilization KPI Forecasting Using Advanced AI/ML Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "网络KPI时间序列预测",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.20230v1",
+      "route": "202607/24/2607.20230v1-pier-physics-informed-environmental-retrieval-for-time-series-modeling",
+      "title": "PIER: Physics-Informed Environmental Retrieval for Time-Series Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "物理信息检索用于环境时间序列建模",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.15900v1",
+      "route": "202607/24/2607.15900v1-day-ahead-forecasting-of-largest-single-infeedoutfeed-on-the-irish-power-grid-a-generative-artificial-intelligence-approach",
+      "title": "Day-Ahead Forecasting of Largest Single Infeed/Outfeed on the Irish Power Grid: A Generative Artificial Intelligence Approach",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "使用生成式AI进行日前预测",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.16168v1",
+      "route": "202607/24/2607.16168v1-behaviour-conditioned-neural-processes-for-adaptive-residential-short-term-load-forecasting",
+      "title": "Behaviour-Conditioned Neural Processes for Adaptive Residential Short-Term Load Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "神经过程用于居民负荷预测",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.16894v1",
+      "route": "202607/24/2607.16894v1-tvgl-cfmgenerating-and-forecasting-time-varying-trajectories-of-dynamic-networks-with-conditional-flow-matching",
+      "title": "TVGL-CFM:Generating and Forecasting Time-Varying Trajectories of Dynamic Networks with Conditional Flow Matching",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "预测时变轨迹",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.17037v1",
+      "route": "202607/24/2607.17037v1-apeliotes-a-diffusion-based-modeling-framework-for-km-scale-multi-level-atmospheric-fields",
+      "title": "Apeliotes: A Diffusion-Based Modeling Framework for km-scale Multi-Level Atmospheric Fields",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "扩散模型用于公里级大气场降尺度",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.19006v1",
+      "route": "202607/24/2607.19006v1-subject-conditioned-glucose-forecasting-in-type-1-diabetes",
+      "title": "Subject-Conditioned Glucose Forecasting in Type-1 Diabetes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "个性化血糖预测，多模态深度学习时间序列模型",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.19161v1",
+      "route": "202607/24/2607.19161v1-on-the-sensitivity-of-machine-learned-probabilistic-weather-forecast-models-to-scale-aware-scoring-rules",
+      "title": "On the sensitivity of machine-learned probabilistic weather forecast models to scale-aware scoring rules",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "天气预报模型对评分规则的敏感性",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.17758v1",
+      "route": "202607/24/2607.17758v1-towards-reliable-zero-shot-crowd-forecasting-evaluating-time-series-foundation-models-for-special-event-pedestrian-forecasting",
+      "title": "Towards Reliable Zero-Shot Crowd Forecasting: Evaluating Time Series Foundation Models for Special Event Pedestrian Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时间序列基础模型用于预测",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.17858v1",
+      "route": "202607/24/2607.17858v1-organization-of-computation-in-reservoir-computing",
+      "title": "Organization of computation in reservoir computing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "储层计算用于时间处理",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.18226v1",
+      "route": "202607/24/2607.18226v1-causal-discovery-on-irregular-time-series",
+      "title": "Causal Discovery on Irregular Time Series",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向不规则时间序列的因果发现方法，可应用于时间系统",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.18899v1",
+      "route": "202607/24/2607.18899v1-black-mamba-biologically-inspired-leaky-accumulation-for-conceptual-knowledge-under-distribution-drift",
+      "title": "Black-Mamba: Biologically-Inspired Leaky Accumulation for Conceptual Knowledge under Distribution Drift",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "测试时自适应预测用于非平稳时间序列",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    },
+    {
+      "paper_id": "2607.19975v1",
+      "route": "202607/24/2607.19975v1-forecasting-the-number-of-harvest-ready-fruits-of-sweet-peppers-using-multimodal-time-series-data",
+      "title": "Forecasting the Number of Harvest-ready Fruits of Sweet Peppers Using Multimodal Time-Series Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在农业应用中利用LSTM进行多模态时间序列预测",
+      "first_seen_at": "2026-07-24 21:07:39 UTC",
+      "updated_at": "2026-07-24 21:07:39 UTC"
+    }
+  ]
+}

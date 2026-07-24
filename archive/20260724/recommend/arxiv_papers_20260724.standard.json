@@ -1,0 +1,605 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-24T20:58:39.614979+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 4,
+    "deep_cap": 6,
+    "deep_selected": 4,
+    "quick_candidates": 24,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2607.17909v1",
+      "source": "arxiv",
+      "title": "Beyond the Edge of Chaos: Stability-Expressivity Transfer in Reservoir Forecasting",
+      "abstract": "The edge-of-chaos heuristic has long served as a guiding principle for designing reservoir computers, yet its relevance to machine performance remains elusive. Here, taking the spectral radius of the reservoir network as the control parameter, we show that the radius yielding the best forecasting performance does not coincide with the Lyapunov edge of the isolated, teacher-forced, or closed-loop generative reservoir. By analyzing the collective dynamics of the teacher-forced reservoir, we find that the target dynamics are represented mainly by stable Lyapunov modes whose finite-time stability is strongly modulated by the input. This finding motivates a stability-expressivity transfer index, which balances the stability of these modes against their expressivity in representing the target. Across chaotic and quasiperiodic targets, and for both asymmetric and symmetric reservoirs, this index accurately identifies the optimal spectral radius for autonomous forecasting.",
+      "authors": [
+        "Yao Du",
+        "Xingang Wang"
+      ],
+      "primary_category": "nlin.CD",
+      "categories": [
+        "nlin.CD",
+        "cs.LG",
+        "nlin.AO"
+      ],
+      "published": "2026-07-20T12:59:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.17909v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reservoir forecasting with stability-expressivity transfer",
+      "llm_evidence_cn": "水库计算预测的稳定性-表达性转移",
+      "llm_evidence": "水库计算预测的稳定性-表达性转移",
+      "canonical_evidence": "水库计算预测的稳定性-表达性转移",
+      "llm_tldr_en": "Shows the optimal spectral radius for reservoir forecasting does not align with edge of chaos; proposes stability-expressivity transfer index for better design.",
+      "llm_tldr_cn": "该论文发现水库计算的最佳谱半径与混沌边缘不一致，提出稳定性-表达性转移指数来平衡，为时序预测提供更优的水库设计准则。",
+      "llm_tldr": "该论文发现水库计算的最佳谱半径与混沌边缘不一致，提出稳定性-表达性转移指数来平衡，为时序预测提供更优的水库设计准则。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.19147v1",
+      "source": "arxiv",
+      "title": "Incomplete Observations Boost Evolutionary Performance in Ocean Modeling",
+      "abstract": "Data-driven methods have revolutionized ocean modeling, yet current approaches rely heavily on complete reanalysis datasets, imposing computational constraints and limiting model performance to that of the training data. Here, we present a generative state-space model and an optimization framework that enable learning directly from sparse and noisy observations. The model is essentially a hidden Markov model with a continuous state space, where oceanic physical quantities are treated as hidden states and measurements as observations, enabling a unified representation of ocean fields and observational data. Both the initial-state and state-transition modules are implemented as neural networks to capture the complexity and temporal evolution of ocean states, while the emission module is formulated as a masked Gaussian distribution. To train the model from sparse observations, we derive an optimization framework based on the expectation-maximization (EM) algorithm. The framework alternately reconstructs high-fidelity ocean fields via Langevin dynamics and optimizes deep neural networks to capture temporal evolution. Theoretical analysis shows that the framework maximizes the likelihood of observations under the generative model. For efficiency, we assume that ocean-state evolution follows a stationary, ergodic, and Markovian stochastic process and adopt only length-two state sequences during optimization. Experiments on CMIP6 simulation data and FY-3D satellite data demonstrate high-fidelity reconstruction and accurate prediction, showing that sparse observations can directly improve the model's representation of ocean-state dynamics. This work offers a scalable pathway for next-generation Earth system models to learn directly from sparse, incomplete real-world observations.",
+      "authors": [
+        "Yangyang Kong",
+        "Yutong Jiang",
+        "Yanhai Gan",
+        "Junyu Dong",
+        "Feng Gao",
+        "Xiaopei Lin"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-21T14:39:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.19147v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generative state-space model for ocean modeling from sparse observations",
+      "llm_evidence_cn": "基于稀疏观测的海洋建模生成状态空间模型",
+      "llm_evidence": "基于稀疏观测的海洋建模生成状态空间模型",
+      "canonical_evidence": "基于稀疏观测的海洋建模生成状态空间模型",
+      "llm_tldr_en": "Presents a generative state-space model that learns ocean dynamics directly from sparse and noisy observations, using neural networks for state transition and initial state, enabling unified representation of ocean fields and data.",
+      "llm_tldr_cn": "针对数据驱动海洋建模依赖完整再分析数据集的计算和性能限制，提出了一种生成状态空间模型，可直接从稀疏噪声观测中学习。该模型将海洋物理量作为隐状态，观测作为显状态，通过神经网络实现状态转移和初始化。在多种海洋数据集上验证了其有效性和进化性能的提升，为海洋预测提供了新范式。",
+      "llm_tldr": "针对数据驱动海洋建模依赖完整再分析数据集的计算和性能限制，提出了一种生成状态空间模型，可直接从稀疏噪声观测中学习。该模型将海洋物理量作为隐状态，观测作为显状态，通过神经网络实现状态转移和初始化。在多种海洋数据集上验证了其有效性和进化性能的提升，为海洋预测提供了新范式。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "hydrological prediction",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.19974v1",
+      "source": "arxiv",
+      "title": "Time Series Network Utilization KPI Forecasting Using Advanced AI/ML Models",
+      "abstract": "The rapid proliferation of data-intensive applications, cloud infrastructure, and IoT ecosystems has made proactive resource provisioning critical for maintaining optimal network performance. However, network administrators face a constant battle against capacity constraints, where traditional reactive approaches fail to accurately anticipate traffic fluctuations. This inability to foresee demand leads to costly over-provisioning, unexpected downtime, and degraded quality of service directly impacting operational budgets and business continuity. To achieve efficient capacity planning, accurate forecasting of bandwidth utilization is essential. This study addresses the challenge by evaluating a diverse spectrum of models including seasonal decomposition, Prophet, Random Forest, XGBoost, Support Vector Regression, and advanced deep learning architectures like bidirectional and Convolutional LSTMs - using a common interface dataset benchmarked across MAPE, NRMSE, and R-square metrics. Ultimately, this research delivers actionable insights into the trade-offs between model accuracy and computational efficiency, empowering engineers, operators, and business owners to select the optimal forecasting model for their specific infrastructure needs.",
+      "authors": [
+        "Niraj Gadhe",
+        "Kirti Bhardwaj",
+        "Moulik Jain",
+        "Shubhi Sharma",
+        "Vinay Saini"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-22T09:57:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.19974v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "time series forecasting of network KPIs",
+      "llm_evidence_cn": "网络KPI时间序列预测",
+      "llm_evidence": "网络KPI时间序列预测",
+      "canonical_evidence": "网络KPI时间序列预测",
+      "llm_tldr_en": "Evaluates diverse AI/ML models for time series network utilization forecasting to enable proactive capacity planning.",
+      "llm_tldr_cn": "本文针对网络带宽利用率的预测问题，评估了包括季节性分解在内的多种AI/ML模型，旨在实现主动容量规划，避免过度配置和服务降级。",
+      "llm_tldr": "本文针对网络带宽利用率的预测问题，评估了包括季节性分解在内的多种AI/ML模型，旨在实现主动容量规划，避免过度配置和服务降级。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20230v1",
+      "source": "arxiv",
+      "title": "PIER: Physics-Informed Environmental Retrieval for Time-Series Modeling",
+      "abstract": "Accurate modeling of environmental systems is fundamental to scientific understanding and decision-making, yet remains challenging because observations are limited and physical dynamics vary across systems. Retrieval-augmented approaches offer a natural path to transfer knowledge across systems, but standard embedding-based retrieval does not guarantee consistency of underlying physical processes, since scenarios with similar embeddings may arise from different underlying mechanisms. We propose Physics-Informed Environmental Retrieval (PIER), a model-agnostic framework that augments embedding-based retrieval with a physics-aware stream that scores candidates by flux-response consistency with the target, using local verifiers trained on physics-derived flux features. A weight adjustment mechanism then learns per-scenario weights that adaptively balance the two retrieval streams based on diagnostic features summarizing physics-stream reliability. Experiments on 356 lakes across the Midwestern United States spanning 41 years show that PIER consistently outperforms baselines for water temperature and dissolved oxygen prediction, and serves as a general augmentation strategy across diverse backbones.",
+      "authors": [
+        "Shiyuan Luo",
+        "Runlong Yu",
+        "Chonghao Qiu",
+        "Yue Qin",
+        "Rahul Ghosh",
+        "Robert Ladwig",
+        "Paul C. Hanson",
+        "Yiqun Xie",
+        "Xiaowei Jia"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-22T14:49:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.20230v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "physics-informed retrieval for environmental time-series modeling",
+      "llm_evidence_cn": "物理信息检索用于环境时间序列建模",
+      "llm_evidence": "物理信息检索用于环境时间序列建模",
+      "canonical_evidence": "物理信息检索用于环境时间序列建模",
+      "llm_tldr_en": "Proposes PIER, a model-agnostic framework that augments embedding-based retrieval with physics-aware stream for environmental time-series modeling, improving transfer across systems.",
+      "llm_tldr_cn": "该论文提出PIER框架，通过物理感知流增强嵌入检索，用于环境时间序列建模，确保跨系统知识迁移的物理一致性，显著提升建模精度。",
+      "llm_tldr": "该论文提出PIER框架，通过物理感知流增强嵌入检索，用于环境时间序列建模，确保跨系统知识迁移的物理一致性，显著提升建模精度。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.15900v1",
+      "source": "arxiv",
+      "title": "Day-Ahead Forecasting of Largest Single Infeed/Outfeed on the Irish Power Grid: A Generative Artificial Intelligence Approach",
+      "abstract": "This paper presents a generative artificial intelligence (Gen AI) approach for forecasting, at a day-ahead stage, the largest single infeed (LSI) and largest single outfeed (LSO) on the Irish power system to assist in reserve dimensioning. Developed collaboratively between EirGrid, the electric transmission system operator (TSO) for Ireland, and GridZero.ai using the GridZero.ai platform, the system delivers accurate forecasts up to 38 hours ahead of real-time using limited data available before the day-ahead and intra-day energy market gate closure timings. Initial performance demonstrates an accuracy with a mean absolute percentage error (MAPE) that is only 1.1\\% higher than the results possible using full market data (8-hours ahead). Thus, if this approach is integrated into operational systems and such high levels of accuracy are maintained, reserve procurement costs could be significantly reduced. The results also demonstrate the practicality and extensibility of AI-powered resource planning for TSOs.",
+      "authors": [
+        "Amir Moshari",
+        "Mo Cloonan",
+        "Taulant Kerci",
+        "Zhi Li",
+        "Colm Gaffney",
+        "Chotiya Mahittigul",
+        "Manuel Hurtado",
+        "Simon Tweed",
+        "Bryan Murray",
+        "Michael Walsh",
+        "Eoin Kennedy",
+        "Ritesh Madan"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-07-17T12:12:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.15900v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "day-ahead forecasting using generative AI",
+      "llm_evidence_cn": "使用生成式AI进行日前预测",
+      "llm_evidence": "使用生成式AI进行日前预测",
+      "canonical_evidence": "使用生成式AI进行日前预测",
+      "llm_tldr_en": "Applies generative AI for day-ahead load forecasting on the Irish power grid, achieving accuracy close to ideal.",
+      "llm_tldr_cn": "针对电力系统日前负荷预测，使用生成式AI方法（Gen AI）预测最大单输入/输出，仅用有限数据实现高精度（MAPE仅比理想高1.1%），展示了生成模型在时间序列预测中的应用潜力。",
+      "llm_tldr": "针对电力系统日前负荷预测，使用生成式AI方法（Gen AI）预测最大单输入/输出，仅用有限数据实现高精度（MAPE仅比理想高1.1%），展示了生成模型在时间序列预测中的应用潜力。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17758v1",
+      "source": "arxiv",
+      "title": "Towards Reliable Zero-Shot Crowd Forecasting: Evaluating Time Series Foundation Models for Special Event Pedestrian Forecasting",
+      "abstract": "Managing massive crowds during infrequent special events requires reliable real-time pedestrian-flow forecasting to ensure public safety and operational efficiency. However, supervised forecasting methods face limitations in these contexts due to scarce historical data, heterogeneous data distributions, and short in-event observation windows. To effectively support operational decision-making, forecasts should provide not only accurate point estimates but also informative predictive uncertainty. Probabilistic uncertainty quantification plays a critical role in this aspect, particularly capturing sudden volatility and tail risks. This paper investigates pretrained time series foundation models as a lightweight approach for zero-shot probabilistic forecasting without extensive local retraining. Using decision-oriented metrics tailored to short events, we conduct a comprehensive assessment of two time series foundation models on crowd forecasting, with the SAIL2025 event as a use case. We then distill practical insights for crowd managers, specifying when zero-shot forecasts remain operationally reliable.",
+      "authors": [
+        "Ziteng Li",
+        "Yanan Xin",
+        "Tina Comes",
+        "Serge Hoogendoorn"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-20T09:49:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.17758v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "time series foundation models for forecasting",
+      "llm_evidence_cn": "时间序列基础模型用于预测",
+      "llm_evidence": "时间序列基础模型用于预测",
+      "canonical_evidence": "时间序列基础模型用于预测",
+      "llm_tldr_en": "Evaluates pretrained time series foundation models for zero-shot crowd forecasting, highlighting their potential for probabilistic prediction.",
+      "llm_tldr_cn": "该论文评估了预训练时间序列基础模型在零样本场景下对特殊事件人群流量预测的能力。实验表明这些模型能提供准确的点估计和有意义的不确定性量化，尤其适合历史数据稀缺的情况。为零样本时间序列预测提供了评估基准，展示了基础模型在特殊事件管理中的潜力。",
+      "llm_tldr": "该论文评估了预训练时间序列基础模型在零样本场景下对特殊事件人群流量预测的能力。实验表明这些模型能提供准确的点估计和有意义的不确定性量化，尤其适合历史数据稀缺的情况。为零样本时间序列预测提供了评估基准，展示了基础模型在特殊事件管理中的潜力。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.16168v1",
+      "source": "arxiv",
+      "title": "Behaviour-Conditioned Neural Processes for Adaptive Residential Short-Term Load Forecasting",
+      "abstract": "Residential short-term load forecasting (STLF) is challenging because household demand is heterogeneous, temporally variable, and shaped by diverse behavioural routines. This work investigates whether inferred behavioural structure can be embedded within the forecasting mechanism of a Neural Process-based probabilistic model, rather than used only as an external grouping signal, for context-conditioned residential STLF. We propose a behaviour-conditioned Attentive Neural Process framework that treats each load profile as a forecasting task. Behavioural structure is represented by a discrete latent variable inferred from the available context and used for behaviour-conditioned decoder conditioning, while a continuous latent variable captures shared functional uncertainty across heterogeneous profiles. To enable conditioning without ground-truth behavioural labels, clustering-derived information provides weak supervision during training, whereas test-time conditioning relies only on context-inferred class distributions. Experiments on the Smart Grid, Smart City (SGSC) dataset use user-disjoint train/validation/test splits, variable context lengths, and multi-step forecast horizons, with comparisons against a label-agnostic ANP baseline and fixed-window deterministic STLF baselines. The proposed variants improve MAE and CRPS over ANP across horizons and context settings, with the largest gains under limited context. The best-performing variant achieves average reductions of 7.9% in MAE and 6.9% in CRPS relative to ANP. Compared with fixed-window baselines, this variant achieves lower RMSE across all evaluated horizons while maintaining competitive MAE, suggesting fewer large prediction deviations under heterogeneous consumption patterns. These results support single-model, uncertainty-aware forecasting across heterogeneous households, contexts, and horizons.",
+      "authors": [
+        "Ramin Soleimani",
+        "Andrea Visentin",
+        "Dirk Pesch"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-17T17:48:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.16168v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "neural processes for residential load forecasting",
+      "llm_evidence_cn": "神经过程用于居民负荷预测",
+      "llm_evidence": "神经过程用于居民负荷预测",
+      "canonical_evidence": "神经过程用于居民负荷预测",
+      "llm_tldr_en": "Proposes a behaviour-conditioned Attentive Neural Process for adaptive residential short-term load forecasting, using inferred behavioural structure.",
+      "llm_tldr_cn": "该论文针对居民短期负荷预测中异质性和时变性问题，提出行为条件化注意力神经过程。将行为结构作为离散潜变量融入预测机制，结合连续潜变量进行任务条件化预测。实验表明考虑行为多样性可提升预测精度。",
+      "llm_tldr": "该论文针对居民短期负荷预测中异质性和时变性问题，提出行为条件化注意力神经过程。将行为结构作为离散潜变量融入预测机制，结合连续潜变量进行任务条件化预测。实验表明考虑行为多样性可提升预测精度。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17858v1",
+      "source": "arxiv",
+      "title": "Organization of computation in reservoir computing",
+      "abstract": "Reservoir computing exploits nonlinear dynamical systems to encode temporal inputs into high-dimensional state space representations. Although reservoir performance is often characterized through memory, nonlinearity, and their tradeoff, such aggregate measures do not reveal how task-relevant information is organized within the state space. Here, we introduce an eigen-spectral decomposition framework linking the degree-wise information processing capacity to the corresponding state space modes. As a result, we are able to quantify the degree-wise representation energy, and show that in some cases, substantial amounts of information processing capacity may reside in low-energy modes that are vulnerable to experimental noise. These results suggest that useful reservoir computation depends not only on dimensionality expansion, but also on the geometric organization of task-relevant information, with direct implications on physical reservoir computers.",
+      "authors": [
+        "Mohab Abdalla",
+        "Damien Rontani"
+      ],
+      "primary_category": "cs.NE",
+      "categories": [
+        "cs.NE",
+        "cs.LG"
+      ],
+      "published": "2026-07-20T11:59:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.17858v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "reservoir computing for temporal processing",
+      "llm_evidence_cn": "储层计算用于时间处理",
+      "llm_evidence": "储层计算用于时间处理",
+      "canonical_evidence": "储层计算用于时间处理",
+      "llm_tldr_en": "Introduces eigen-spectral decomposition to quantify information organization in reservoir computing, revealing low-energy modes vulnerable to noise.",
+      "llm_tldr_cn": "本文引入特征谱分解框架，量化储层计算中状态空间的信息处理能力组织方式，发现部分信息容量存在于对实验噪声敏感的低能量模式中，为改进储层设计提供理论依据。",
+      "llm_tldr": "本文引入特征谱分解框架，量化储层计算中状态空间的信息处理能力组织方式，发现部分信息容量存在于对实验噪声敏感的低能量模式中，为改进储层设计提供理论依据。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.16894v1",
+      "source": "arxiv",
+      "title": "TVGL-CFM:Generating and Forecasting Time-Varying Trajectories of Dynamic Networks with Conditional Flow Matching",
+      "abstract": "Many complex systems such as brain networks, financial markets, and gene-regulatory circuits are described not by a fixed graph but by one that changes over time. A standard way to summarise such structure at each instant is the sparse precision (inverse-covariance) matrix, and the time-varying graphical lasso (TVGL) turns a multivariate signal into a smooth chain of these matrices. We introduce TVGL-CFM, a single model that learns the distribution of such chains and can both generate new, realistic time-varying network trajectories for a given class and forecast how an observed trajectory will continue. Each precision matrix lives on a curved space of positive-definite matrices, but a log-Euclidean chart flattens an entire trajectory into an ordinary vector space, so a simple conditional flow-matching model can be trained and sampled there while every decoded matrix is guaranteed to be a valid precision matrix. For forecasting we start the flow not from noise but from a rough extrapolation of the recent history, so the model only has to learn a small correction. Across EEG motor-imagery, chaotic systems, and gene-expression data, TVGL-CFM generates trajectories that keep the class-discriminative structure of real data, and it forecasts future connectivity more accurately than raw-signal baselines. Generating the structured precision trajectory directly is therefore more faithful than generating raw signals and estimating connectivity afterwards.",
+      "authors": [
+        "Om Roy",
+        "Yashar Moshfeghi",
+        "Keith Malcolm Smith"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-18T17:29:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.16894v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "forecasting time-varying trajectories",
+      "llm_evidence_cn": "预测时变轨迹",
+      "llm_evidence": "预测时变轨迹",
+      "canonical_evidence": "预测时变轨迹",
+      "llm_tldr_en": "Introduces TVGL-CFM, a model to generate and forecast time-varying network trajectories using conditional flow matching, demonstrating a transferable time series forecasting approach.",
+      "llm_tldr_cn": "该论文提出TVGL-CFM模型，利用条件流匹配生成和预测动态网络的时变轨迹。模型通过平稳化精确矩阵空间来学习轨迹分布，可同时生成新轨迹和预测已有轨迹的未来。方法在时间序列预测领域具有通用性，为动态网络预测提供了新思路。",
+      "llm_tldr": "该论文提出TVGL-CFM模型，利用条件流匹配生成和预测动态网络的时变轨迹。模型通过平稳化精确矩阵空间来学习轨迹分布，可同时生成新轨迹和预测已有轨迹的未来。方法在时间序列预测领域具有通用性，为动态网络预测提供了新思路。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.18226v1",
+      "source": "arxiv",
+      "title": "Causal Discovery on Irregular Time Series",
+      "abstract": "Causal discovery methods have shown strong performance in temporal systems, but they typically rely on regular and discrete lag structures, limiting their applicability to regularly sampled data. However, many real-world tasks require dealing with irregularly sampled streams of events, such as sensor streams, healthcare data, and financial transactions. In this work, we propose an extension of PCMCI+, a state-of-the-art method for causal discovery on regular multivariate time series, to allow for handling irregular time series. Instead of modelling causal relations through fixed-lag dependencies, our method aggregates causal influence over predefined temporal windows. We evaluate our method on synthetic irregular event streams with known causal structures under different signal-to-noise ratios, showing that it consistently recovers the underlying causal graph and substantially outperforms the standard PCMCI+ on irregularly sampled data.",
+      "authors": [
+        "Martim Penim",
+        "Ricardo Ribeiro Pereira",
+        "Jacopo Bono",
+        "Hugo Ferreira",
+        "Mário A. T. Figueiredo",
+        "Pedro Bizarro"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ME"
+      ],
+      "published": "2026-07-20T17:57:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.18226v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "causal discovery on irregular time series, method applicable to temporal systems",
+      "llm_evidence_cn": "面向不规则时间序列的因果发现方法，可应用于时间系统",
+      "llm_evidence": "面向不规则时间序列的因果发现方法，可应用于时间系统",
+      "canonical_evidence": "面向不规则时间序列的因果发现方法，可应用于时间系统",
+      "llm_tldr_en": "Extends PCMCI+ for causal discovery on irregular time series by aggregating causal influence over temporal windows, evaluated on synthetic and real sensor data.",
+      "llm_tldr_cn": "该论文将因果发现方法PCMCI+扩展到不规则时间序列，通过定义时间窗口内聚合因果影响来替代固定滞后依赖。在合成和真实传感器数据上的实验表明，该方法能有效恢复因果结构。这对于水文水质时间序列中的因果关系发现具有潜在价值，可辅助预测模型的特征选择。",
+      "llm_tldr": "该论文将因果发现方法PCMCI+扩展到不规则时间序列，通过定义时间窗口内聚合因果影响来替代固定滞后依赖。在合成和真实传感器数据上的实验表明，该方法能有效恢复因果结构。这对于水文水质时间序列中的因果关系发现具有潜在价值，可辅助预测模型的特征选择。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.17037v1",
+      "source": "arxiv",
+      "title": "Apeliotes: A Diffusion-Based Modeling Framework for km-scale Multi-Level Atmospheric Fields",
+      "abstract": "High-resolution atmospheric data are required to resolve mesoscale and localized meteorological structures, however such datasets remain limited in many regions of the world. Existing high-resolution weather products are typically produced through dynamical downscaling, which is computationally expensive and difficult to scale across locations, variables, and forecast scenarios. These limitations motivate machine-learning-based downscaling systems that can generate multiple weather variables stochastically while producing new high-resolution fields directly. In this paper we present Apeliotes, a framework for high-resolution weather forecasting. Built on the global re-analysis atmospheric data, a pre-trained global weather foundation model, and a regionally trained generative diffusion model, Apeliotes not only provides accurate kilometer-scale weather variables, but also multi-level atmospheric fields which are not directly available in the existing global atmospheric data. Our comprehensive evaluation demonstrates that Apeliotes achieves highly competitive performance. The model predicts vertical wind profile with less than 3\\% error between truth and predicted fields, achieving correlations of 0.91 for 10-m wind speed and 0.99 for 2-m temperature, with NRMSE values of 0.42 and 0.17, respectively.",
+      "authors": [
+        "Evangelia Rafaela Frastali",
+        "Achyut Paudel",
+        "Maryam Golbazi",
+        "Frank Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CE"
+      ],
+      "published": "2026-07-19T02:50:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.17037v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "diffusion-based weather downscaling for km-scale atmospheric fields",
+      "llm_evidence_cn": "扩散模型用于公里级大气场降尺度",
+      "llm_evidence": "扩散模型用于公里级大气场降尺度",
+      "canonical_evidence": "扩散模型用于公里级大气场降尺度",
+      "llm_tldr_en": "Presents Apeliotes, a diffusion-based framework for high-resolution weather forecasting, pre-trained on global re-analysis data.",
+      "llm_tldr_cn": "该论文提出Apeliotes框架，基于扩散模型实现公里级多层大气场的高分辨率预报。利用全球再分析数据预训练，可随机生成多种天气变量。相比传统动力降尺度，计算成本大幅降低，且能直接生成高分辨率场。",
+      "llm_tldr": "该论文提出Apeliotes框架，基于扩散模型实现公里级多层大气场的高分辨率预报。利用全球再分析数据预训练，可随机生成多种天气变量。相比传统动力降尺度，计算成本大幅降低，且能直接生成高分辨率场。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "hydrological prediction",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.18899v1",
+      "source": "arxiv",
+      "title": "Black-Mamba: Biologically-Inspired Leaky Accumulation for Conceptual Knowledge under Distribution Drift",
+      "abstract": "Forecasting under real-world conditions is inherently non-stationary, as the conditional distribution of future observations evolves over time. Recent test-time adaptive sequence models address this challenge by updating internal states during inference, but tie adaptation to instantaneous prediction errors or surprise. This coupling can conflate persistent distribution shift with stochastic innovations, leading to unnecessary updates and inefficient adaptation. We introduce Black-Mamba, a test-time adaptive forecasting architecture that formulates online adaptation as evidence-gated state tracking under distribution drift. The model augments a base predictor with a dynamic memory updated when temporally accumulated surprisal provides sufficient evidence of a regime change. This turns adaptation into a selective, event-driven process rather than a continuous one. Across multiple forecasting benchmarks with non-stationary dynamics, Black-Mamba achieves competitive or improved predictive performance compared to existing test-time adaptation methods while significantly reducing the number of memory updates during inference. Together with mathematical analysis and biological evidence, these results suggest that accumulated surprisal provides a principled signal for distinguishing persistent drift from transient noise, yielding more efficient and robust adaptation.",
+      "authors": [
+        "Giuseppe Soriano",
+        "Nicola Tonellotto",
+        "Alberto Gotta"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-21T09:37:55+00:00",
+      "link": "https://arxiv.org/pdf/2607.18899v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "test-time adaptive forecasting for non-stationary time-series",
+      "llm_evidence_cn": "测试时自适应预测用于非平稳时间序列",
+      "llm_evidence": "测试时自适应预测用于非平稳时间序列",
+      "canonical_evidence": "测试时自适应预测用于非平稳时间序列",
+      "llm_tldr_en": "Introduces Black-Mamba, a test-time adaptive forecasting architecture that uses evidence-gated state tracking under distribution drift for time-series prediction.",
+      "llm_tldr_cn": "该论文提出Black-Mamba，一种测试时自适应预测架构，通过证据门控状态跟踪处理分布漂移，适用于非平稳时间序列预测。",
+      "llm_tldr": "该论文提出Black-Mamba，一种测试时自适应预测架构，通过证据门控状态跟踪处理分布漂移，适用于非平稳时间序列预测。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.19006v1",
+      "source": "arxiv",
+      "title": "Subject-Conditioned Glucose Forecasting in Type-1 Diabetes",
+      "abstract": "Accurate forecasting of blood glucose concentration is key in the management of Type 1 Diabetes, facilitating early detection of adverse glycemic events and supporting timely therapeutic interventions. Despite recent advances in glucose prediction, most existing approaches rely on population-level representations or implicit personalization strategies that fail to deliver effective subject-specific forecasts. In this work, we propose Subject-Conditioned Glucose Prediction (SCGP), a novel multimodal deep learning architecture conceived for personalized blood glucose prediction. SCGP conditions glucose predictions based on observed glucose data and a compact subject-specific representation learned from contextual information. By explicitly separating subject characterization from glucose dynamics modeling and avoiding early fusion of heterogeneous inputs, the proposed framework effectively captures inter-subject variability while preserving robust and reliable temporal modeling. Experiments on two state-of-the-art benchmark datasets demonstrate that SCGP consistently improves forecasting performance, enabling reliable detection of adverse glycemic events across multiple prediction horizons, highlighting the benefits of explicit subject conditioning for personalized diabetes management.",
+      "authors": [
+        "Giorgia Rigamonti",
+        "Mirko Paolo Barbato",
+        "Davide Marelli",
+        "Paolo Napoletano"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "q-bio.QM"
+      ],
+      "published": "2026-07-21T11:42:34+00:00",
+      "link": "https://arxiv.org/pdf/2607.19006v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "personalized glucose forecasting using multimodal deep learning",
+      "llm_evidence_cn": "个性化血糖预测，多模态深度学习时间序列模型",
+      "llm_evidence": "个性化血糖预测，多模态深度学习时间序列模型",
+      "canonical_evidence": "个性化血糖预测，多模态深度学习时间序列模型",
+      "llm_tldr_en": "Proposes Subject-Conditioned Glucose Prediction (SCGP), a multimodal deep learning architecture for personalized blood glucose forecasting using subject-specific representations.",
+      "llm_tldr_cn": "该论文提出了一种面向1型糖尿病的个性化血糖预测模型SCGP。利用多模态深度学习架构，通过观测血糖数据和从上下文信息提取的紧凑主题特定表示来调节预测。显式分离主题特征使得预测更加精准，解决了现有方法个性化不足的问题。",
+      "llm_tldr": "该论文提出了一种面向1型糖尿病的个性化血糖预测模型SCGP。利用多模态深度学习架构，通过观测血糖数据和从上下文信息提取的紧凑主题特定表示来调节预测。显式分离主题特征使得预测更加精准，解决了现有方法个性化不足的问题。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.19975v1",
+      "source": "arxiv",
+      "title": "Forecasting the Number of Harvest-ready Fruits of Sweet Peppers Using Multimodal Time-Series Data",
+      "abstract": "Accurate yield forecasting at the individual-plant level is critical for precision agriculture and supply-chain planning, yet public datasets capturing both visual growth dynamics and per-plant measurement labels are scarce. In this paper, we introduce a novel, annotated image time-series dataset of 691 sweet pepper plants monitored over two growing seasons, comprising 4837 images with per-plant fruit counts categorized by maturity. We propose a multimodal deep learning framework that fuses high-dimensional image features, extracted using the DinoV3 encoder, with numerical count measurements. Our architecture utilizes a Long Short-Term Memory (LSTM) network to model temporal dependencies and handles irregular sampling intervals common in greenhouse monitoring. Through quantitative experiments, we demonstrate that this multimodal approach reduces RMSE over a persistence baseline by 33% and 38% in the 2022 and 2023 seasons, respectively, with a further 1.2% average gain over a measurement-only model. Furthermore, we employ Deep Ensembles and Gaussian Negative Log-Likelihood (NLL) to provide calibrated uncertainty estimates, with an Uncertainty Calibration Error (UCE) ranging from 0.39 to 0.89 depending on the cross-season evaluation direction, offering a principled confidence signal for real-world agricultural decision-making. We release the dataset and code to support reproducible research and to accelerate development of data-driven yield forecasting methods for horticultural crops.",
+      "authors": [
+        "Enrico Pallotta",
+        "Mohamed Farag",
+        "Esra Guclu",
+        "Chris McCool",
+        "Ribana Roscher",
+        "Juergen Gall"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-22T09:58:03+00:00",
+      "link": "https://arxiv.org/pdf/2607.19975v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "uses LSTM for multimodal time series forecasting in agriculture",
+      "llm_evidence_cn": "在农业应用中利用LSTM进行多模态时间序列预测",
+      "llm_evidence": "在农业应用中利用LSTM进行多模态时间序列预测",
+      "canonical_evidence": "在农业应用中利用LSTM进行多模态时间序列预测",
+      "llm_tldr_en": "A dataset and multimodal framework using LSTM for forecasting sweet pepper harvest-ready fruit counts from images and numerical data.",
+      "llm_tldr_cn": "该论文针对个体植物水平产量预测数据集稀缺的问题，构建了包含691株甜椒植物的图像时间序列数据集，并提出融合图像特征和数值计数的多模态深度学习框架。利用DinoV3编码器和LSTM网络建模时间依赖，有效预测成熟果实数量。该工作为时间序列预测在精准农业中的应用提供了数据和方法支持，但其方法可迁移至其他领域的时间序列预测任务。",
+      "llm_tldr": "该论文针对个体植物水平产量预测数据集稀缺的问题，构建了包含691株甜椒植物的图像时间序列数据集，并提出融合图像特征和数值计数的多模态深度学习框架。利用DinoV3编码器和LSTM网络建模时间依赖，有效预测成熟果实数量。该工作为时间序列预测在精准农业中的应用提供了数据和方法支持，但其方法可迁移至其他领域的时间序列预测任务。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.19161v1",
+      "source": "arxiv",
+      "title": "On the sensitivity of machine-learned probabilistic weather forecast models to scale-aware scoring rules",
+      "abstract": "Probabilistic forecast models can be machine-learned from data using loss functions based on scoring rules such as the Continuous Ranked Probability Score (CRPS). This note summarises a preliminary study comparing versions of AIFS-CRPS, a global weather forecast model, trained with different univariate and multivariate scoring rules that aim to explicitly represent scale-awareness in the loss function. In the first part, we compare the (almost) fair CRPS, a fair global energy score, and a graph energy score based on node neighbourhoods. Across standard verification metrics, forecast skill is broadly similar. In the extratropics we find only small differences, while in the tropics the graph energy score setup performs somewhat better and the global energy score shows some degradation. These results suggest that multivariate scores are a viable alternative to CRPS-based training for global machine-learned weather forecasting. In the second part of the study, we analyse how different scoring rules and scale-aware loss constraints shape the spectra of forecast fields. It is apparent that any form of explicit scale-awareness improves realism. Here, the largest differences are likely associated with different effective weights per scale.",
+      "authors": [
+        "Simon Lang",
+        "Martin Leutbecher",
+        "Sam Hatfield"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph",
+        "stat.ML"
+      ],
+      "published": "2026-07-21T14:59:11+00:00",
+      "link": "https://arxiv.org/pdf/2607.19161v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "weather forecast model sensitivity to scoring rules",
+      "llm_evidence_cn": "天气预报模型对评分规则的敏感性",
+      "llm_evidence": "天气预报模型对评分规则的敏感性",
+      "canonical_evidence": "天气预报模型对评分规则的敏感性",
+      "llm_tldr_en": "Studies scale-aware scoring rules for machine-learned probabilistic weather models, showing marginal skill differences but potential for hydrological prediction improvement.",
+      "llm_tldr_cn": "该论文比较了不同尺度感知评分规则训练的概率天气预报模型，发现整体技能相似，但在热带区域图能量评分有潜力，可为水文预测提供参考。",
+      "llm_tldr": "该论文比较了不同尺度感知评分规则训练的概率天气预报模型，发现整体技能相似，但在热带区域图能量评分有潜力，可为水文预测提供参考。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "hydrological prediction",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
