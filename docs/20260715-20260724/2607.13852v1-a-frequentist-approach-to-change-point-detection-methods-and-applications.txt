@@ -1,0 +1,936 @@
+Title: A Frequentist Approach to Change Point Detection: Methods and Applications
+
+URL Source: https://arxiv.org/pdf/2607.13852v1
+
+Published Time: Thu, 16 Jul 2026 01:27:19 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# A Frequentist Approach to Change Point Detection: Methods and Applications 
+
+Debanjana Datta Indian Statistical Institute, Bangalore 
+
+Abstract 
+
+In this paper we study the problem of change point detection in func-tional time series where the observations are allowed to vary on both sparse and dense support. We address the problem of mean shift as well as the process volatility. Our methodology is based on the maximization of the conditional probability of change point given all the other parameters. Further, it has been proved that the proposed estimator is consistent. 
+
+Keywords: Functional data, time series, change point 
+
+# 1 Introduction 
+
+In recent times, the importance of functional data analysis lies in its ability to handle and extract meaningful information from complex phenomena occurring in biomedicine, finance, meteorology, environmental science, and others.Most of the works rely on the assumption of independent and identically distributed data, which is often not the case in observational data. With the lapse of time, the inherent structure of the data may change due to the underlying stochastic process generating it.Hence, such an instance is of prior importance. 
+
+# 2 Literature Review 
+
+In functional data, our observations are random continuous trajectories gener-ated from some process and hence these are ultra-high-dimensional objects. In practice, these functions are observed at some finitely many grids in a compact domain. The most common approach used to model functional observations is to project them onto some finite-dimensional space using some dimension reduction technique, namely Functional Principal Component Analysis (FPCA).Ramsay 
+
+> *Corresponding author: dbnjanad@gmail.com
+
+1arXiv:2607.13852v1 [math.ST] 15 Jul 2026 and Silverman [2005] have enhanced the FDA literature with detailed discus-sions on several techniques and usefulness of FPCA.The functional autoregres-sive (FAR) model, developed by Bosq [2000], plays a central role in modeling and predicting functional time series.Gabrys and Kokoszka [2007] proposed a test for independence and identical distribution of functional observations. For functional data, analysis has mainly been carried out under the assumption of a single change point. Noted works in this area include Horv´ ath et al. [2010] where a test for equality of the functional autoregressive operator (FAR), Aue et al. [2009b] where a test has been formulated to access the stability of volatili-ties and crossvolatilities of a process whereas Berkes et al. [2009] and tested the assumption of constant mean in a sequence of functional observations and Aue et al. [2009a] have dealt with the position of such a change.Further Banerjee and Mazumder [2018] have provided a different test for detecting the change point in mean in a sequence of independent as well as weakly dependent functional data. Aue and Van Delft [2020] improvised a test for stationarity functional observa-tions.Further, van Delft et al. [2021] proposed a non-parametric test of station-arity based on an explicit representation of the L2 distance between the spectral density operator of a nonstationary process and its best L2 approximation by a spectral density operator corresponding to a stationary process. A different version of functional stationarity tests, based on time domain methodology in-volving cumulative sum statistics was given in Horv´ ath et al. [2014]. Following the Bayesian perspective pioneering works have been done by Chernoff and Za-cks [1964],Smith [1975] and Carlin et al. [1992] and recently by Li and Ghosal [2021]. The rest of the paper is organized as follows. Section 3 illustrates the FAR model and its representation in a dynamic linear model (DLM) form, which is further used for inferential purposes. Algorithms have been proposed in section 4 whereas in Section 5 simulation results have been provided under different setups. Data analysis have been carried out in Section 6. 
+
+# 3 Model 
+
+Let Y1,. . . , YT be a time ordered sequence of random functions in L2(T ) where 
+
+T is a compact indexing set. For brevity, consider T =[0,1]. A Functional Autoregressive process of order 1 (FAR(1)) is given by Yt =Ψ( Yt−1) + ϵt ; t = 1,. . . , T where Ψ : L2 → L2 is an autoregressive opera-tor and {ϵt}t≤T is a sequence of independently and identically distributed(iid) random errors in L2(T ). We restrict our attention to integral operators only defined by Ψ( Yt)( k) = R 10 ψ(k, s )Yt−1(s) ds. These functional observations Yt
+
+are not observed directly, but rather via discrete samples of each curve, and typically with measurement error. Suppose we observe yi,t ∈ R sampled with noise vi,t from Yt ∈ L2 :
+
+yi,t = Yt(ki,t ) + vi,t ; t = 1,. . . ,T; where τt = {k1,t , . . . , k mt,t } are observation points of Yt and vi,t is a mean zero measurement error with finite variance. 2Proposition 1. (Kowal et al. [2019]) Let Xt −μ = Ppi=1 Ψi(Xt−i −μ)+ ϵt, and suppose that we observe xt = Xt + νt, where {ϵt} and {νt} are two independent white noise processes. Then, the observable process {xt} follows a Functional Autoregressive Moving Average process of order(p,p) (FARMA(p,p)). 
+
+Let αt(.) = Yt(.)-μ(.). Hence the two level hierarchical model is given as: 
+
+yi,t = μ(ki,t ) + αt(ki,t ) + vi,t 
+
+αt(k) = 
+
+Z 10
+
+ψ(k, s )αt−1(s) ds + ϵt(τ ) , ∀ k ∈ T 
+
+where we assume {vi,t } and {ϵt} are mutually independent sequences. This two level hierarchical model bridges that gap between model misspecifi-cation and hence increases forecast accuracy. For implementation of model(1), a finite set of evaluation points τe = {k1, . . . , k M } ∈ T is to be selected. Assume, 
+
+τt ⊆ τe∀ t. Using quadrature methods approximate the integral in (1) accurately by choos-ing M large and τe to be dense in T : R 10 ψ(k, s )αt−1(s) ds ≈ (ψ(k, k 1), . . . , ψ (k, k M )) Qαt−1
+
+where Q is a known quadrature weight matrix and αt−1 = ( αt−1(k1), . . . , α t−1(kM )) Let Zt is the mt × M incidence matrix that identifies the observation points at time t. We can have a state space formulation of model(1) as a dynamic linear model (West and Harrison [2006]) in αt(.): 
+
+yt = Ztμ + Ztαt + νt; νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = 1 , 2, .., T αt = ΨQ αt−1 + ϵt ; ϵt
+
+> indep
+
+∼ N (0 , Kϵ), t = 2 , ...., T α1 ∼ N (0 , K ϵ)where yt = ( y1,t , . . . , y mt,t ) , μ = ( μ(k1), . . . , μ (kM )), Ψ = {ψ(ki, k j )}Mi,j =1 and 
+
+Kϵ = {Kϵ(ki, k j )}Mi,j =1 
+
+The change point τ in the mean function is defined as follows: 
+
+yt =
+
+(
+
+Ztμ1 + Ztαt + νt; t = 1 , 2, .., τ 
+
+Ztμ2 + Ztαt + νt; t = τ + 1 , .., T ; νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt )Similarly, in case of process volatility, the change point τ is given by 
+
+yt =
+
+(
+
+Ztμ + Ztαt + νt; νt
+
+> indep
+
+∼ N (0 , σ 21 Imt ) for t = 1 , 2, .., τ 
+
+Ztμ + Ztαt + νt; νt
+
+> indep
+
+∼ N (0 , σ 22 Imt ) for t = τ + 1 , .., T 
+
+34 Algorithms 
+
+4.1 Mean Problem 
+
+• For each τ ∈ { 2, . . . , T − 1}
+
+– Estimate μ1 and μ2 by the method of least squares. 
+
+– Fit a spline {yt − ˆμ}Tt=1 to get the {ˆαt}Tt=1 
+
+– Obtain the MLE estimate ˆ σ2 
+
+> ν
+
+.
+
+– Estimate Ψ as a function of {ˆαt}Tt=1 .Ψ is based on the parametrization Ψ = BΨΘΨB′ 
+
+> Ψ
+
+where BΨ is a matrix of cubic B-spline basis functions and θΨ = vec (Θ Ψ) is sampled from N (Aψ aψ , A ψ ), where 
+
+A−1 
+
+> ψ
+
+= Ω ψ + [( B′ 
+
+> ψ
+
+Q){
+
+> T
+
+X
+
+> t=2
+
+ˆαt−1 ˆα′
+
+> t−1
+
+}(B′ 
+
+> ψ
+
+Q)′
+
+] ⊗ [( B′ 
+
+> ψ
+
+Bψ )] 
+
+aψ = vec (B′
+
+> ψT
+
+X
+
+> t=2
+
+ˆαt ˆα′
+
+> t−1
+
+(B′ 
+
+> ψ
+
+Q)′
+
+)
+
+– Re-estimate the {αt}Tt=1 and hence μ1, μ2, and σ2 
+
+> ν
+
+according to the dynamic linear model structure. 
+
+• Find that particular value of τ which maximizes the conditional probabil-ity [ τ |. . . ]. 
+
+4.2 Volatility Problem 
+
+• Estimate μ by the method of least squares. 
+
+• Estimate {αt}Tt=1 by fitting a spline to {yt − ˆμ}Tt=1 .
+
+• For each τ ∈ { 2, .., T − 1}
+
+– Estimate σ21 and σ22 by the method of maximum likelihood. 
+
+– Estimate Ψ as a function of {ˆαt}Tt=1 similarly as the previous one. 
+
+– Re-estimate {αt}Tt=1 according to the dynamic linear model structure. 
+
+– Hence, re-estimate μ, σ21 and σ22 .
+
+• Find that particular value of τ which maximizes the conditional probabil-ity [ τ |. . . ]. 45 Simulation Studies 
+
+For the mean problem, we have considered ( μ1(u), μ 2(u)) = ( 110 u3 sin(2 πu ),  
+
+> 110
+
+u3 sin(2 πu )+ u2) and ( sin (u), cos (u)). The measurement errors νi,t 
+
+> iid
+
+∼ N (0 , σ 2 
+
+> ν
+
+)with σν = 0.001 and the FAR(1) kernel used is Bimodal-Gaussian kernel, 
+
+ψ(s, u ) ∝ 0.75  
+
+> π(0 .3)(0 .4)
+
+exp 
+
+n
+
+− (s−0.2) 2 
+
+> (0 .3) 2
+
+− (u−0.3) 2
+
+> (0 .4) 2
+
+o
+
++ 0.45  
+
+> π(0 .3)(0 .4)
+
+exp 
+
+n
+
+− (s−0.7) 2 
+
+> (0 .3) 2
+
+− (u−0.8) 2
+
+> (0 .4) 2
+
+o
+
+;rescaled according to a pre-specified squared norm, Cψ = R R ψ2(s, u ) ds du ,with Cψ < 1 for stationarity. We select Cψ = 0 .4 for the simulation. We vary the sample size from small T = 50 to large T = 200 and the grid sizes from sparse m = 30 to dense m = 100. The estimated change points exactly matches with the true ones for all sample sizes. For the volatility problem, we have considered the mean function μ(u) = 110 u3 sin(2 πu )and the same kernel as in the previous one. It is noted that for every T fixed increasing grid size gives accurate results. Table 1: σ1 = 0 .001 , σ2 = 0 .002 T m CP at  T
+
+> 4
+
+ CP at T/2 CP at  3T
+
+> 4
+
+
+
+50 30 3 17 39 50 45 25 36 100 14 25 37 100 30 25 49 74 50 25 49 76 100 26 50 75 200 30 48 109 147 50 51 96 150 100 50 100 147 Table 2: σ1 = 0 .001 , σ2 = 0 .01 T m CP at  T
+
+> 4
+
+ CP at T/2 CP at  3T
+
+> 4
+
+
+
+50 30 13 25 38 50 13 25 38 100 13 25 38 100 30 25 50 71 50 25 50 75 100 25 50 75 200 30 49 99 148 50 50 100 150 100 50 100 150 56 Real Data Analysis 
+
+For the first real data analysis we compare the performance of the proposed methodology with Banerjee and Mazumder [2018] and Berkes et al. [2009]. We have studied the average daily temperatures of central England for 228 years, from 1780 to 2007. This data can be viewed as 228 curves with 365 measure-ments on each curve. We shall study this dataset under mean shift problem. Table 3: Performance comparison of the algorithm for Central England temper-ature data 
+
+Year Estimated CP Estimated CP Estimated CP 
+
+1780-2007 1926 1926 1919 
+
+For the second application, logarithm of the closing prices of AdaniPower stock from 7th Jan’19 to 1st Jan’21 is considered on a weekly basis at a definite interval of time. Our estimated changepoint for the AdaniPower stock is the week of 20th July 2020. 
+
+# References 
+
+A. Aue and A. Van Delft. Testing for stationarity of functional time series in the frequency domain. 2020. A. Aue, R. Gabrys, L. Horv´ ath, and P. Kokoszka. Estimation of a change-point in the mean function of functional data. Journal of Multivariate Analysis ,100(10):2254–2269, 2009a. A. Aue, S. H¨ ormann, L. Horv´ ath, and M. Reimherr. Break detection in the co-variance structure of multivariate time series models. The Annals of Statistics ,37(6B):4046–4087, 2009b. B. Banerjee and S. Mazumder. A more powerful test identifying the change in mean of functional data. Annals of the Institute of Statistical Mathematics ,70:691–715, 2018. 
+
+> Berkes et al. Banerjee and Mazumder CP: Change Point
+
+6I. Berkes, R. Gabrys, L. Horv´ ath, and P. Kokoszka. Detecting changes in the mean of functional observations. Journal of the Royal Statistical Society Series B: Statistical Methodology , 71(5):927–946, 2009. D. Bosq. Linear processes in function spaces: theory and applications , volume 149. Springer Science & Business Media, 2000. B. P. Carlin, A. E. Gelfand, and A. F. Smith. Hierarchical bayesian analysis of changepoint problems. Journal of the royal statistical society: series C (applied statistics) , 41(2):389–405, 1992. H. Chernoff and S. Zacks. Estimating the current mean of a normal distribution which is subjected to changes in time. The Annals of Mathematical Statistics ,35(3):999–1018, 1964. R. Gabrys and P. Kokoszka. Portmanteau test of independence for functional observations. Journal of the American Statistical Association , 102(480):1338– 1348, 2007. L. Horv´ ath, M. Huˇ skov´ a, and P. Kokoszka. Testing the stability of the func-tional autoregressive process. Journal of Multivariate Analysis , 101(2):352– 367, 2010. L. Horv´ ath, P. Kokoszka, and G. Rice. Testing stationarity of functional time series. Journal of Econometrics , 179(1):66–82, 2014. D. R. Kowal, D. S. Matteson, and D. Ruppert. Functional autoregression for sparsely sampled data. Journal of Business & Economic Statistics , 37(1): 97–109, 2019. X. Li and S. Ghosal. Bayesian change point detection for functional data. Jour-nal of Statistical Planning and Inference , 213:193–205, 2021. J. Ramsay and B. Silverman. Functional data analysis 2 edition springer. New York , 2005. A. F. Smith. A bayesian approach to inference about a change-point in a se-quence of random variables. Biometrika , 62(2):407–416, 1975. A. van Delft, V. Characiejus, and H. Dette. A nonparametric test for stationarity in functional time series. Statistica Sinica , 31(3):1375–1395, 2021. M. West and J. Harrison. Bayesian forecasting and dynamic models . Springer Science & Business Media, 2006. 7Appendix: Proof 
+
+Model: 
+
+yt = Ztμ1 + Ztαt + νt; νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = 1 , 2, .., τ 
+
+yt = Ztμ2 + Ztαt + νt; νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = τ + 1 , .., T 
+
+Let, ˆμ1 and ˆμ1E be the estimates of μ1 under the true change point τ and the estimated change point ˆ τ respectively. Similarly, ˆ μ2 and ˆ μ2E be the estimates of μ2 under the true change point τ and the estimated change point ˆ τ respectively. 1. Estimating μ1 and μ2 as a smooth mean of {yt}Tt=1 under τ under the parametrization μ1 = Bθ 1; μ2 = Bθ 2.
+
+yt = Ztμ1 + νt, νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = 1 , 2, . . . , τ 
+
+yt = Ztμ2 + νt, νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = τ + 1 , . . . , T 
+
+)
+
+⇐⇒ 
+
+(
+
+yt = ZtBθ1 + νt, νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = 1 , 2, . . . , τ 
+
+yt = ZtBθ2 + νt, νt
+
+> indep
+
+∼ N (0 , σ 2 
+
+> ν
+
+Imt ), t = τ + 1 , . . . , T 
+
+By the method of least squares, under τ :ˆθ1 = ( AT 
+
+> 1
+
+A1)−1AT 
+
+> 1
+
+Y1
+
+ˆθ2 = ( AT 
+
+> 2
+
+A2)−1AT 
+
+> 2
+
+Y2
+
+where 
+
+Y1 =
+
+
+
+y1
+
+y2
+
+...
+
+yτ
+
+ ; Y2 =
+
+
+
+yτ +1
+
+yτ +2
+
+...
+
+yT
+
+
+
+and 
+
+A1 =
+
+
+
+Z1BZ2B
+
+...
+
+Zτ B
+
+ ; A2 =
+
+
+
+Zτ +1BZτ +2B
+
+...
+
+ZTB
+
+
+
+Also, ˆθ1
+
+> P
+
+−→ θ1
+
+and ˆθ2
+
+> P
+
+−→ θ2
+
+.8By the method of least squares, under ˆ τ
+
+ˆθE 
+
+> 1
+
+= ( A∗ T 
+
+> 1
+
+A∗
+
+> 1
+
+)−1A∗ T 
+
+> 1
+
+Y ∗
+
+> 1
+
+ˆθE 
+
+> 2
+
+= ( A∗ T 
+
+> 2
+
+A∗
+
+> 2
+
+)−1A∗ T 
+
+> 2
+
+Y ∗
+
+> 2
+
+where 
+
+Y ∗ 
+
+> 1
+
+=
+
+
+
+y1
+
+y2
+
+...
+
+yˆτ
+
+ ; Y ∗ 
+
+> 2
+
+=
+
+
+
+yˆτ +1
+
+yˆτ +2
+
+...
+
+yT
+
+
+
+and 
+
+A∗ 
+
+> 1
+
+=
+
+
+
+Z1BZ2B
+
+...
+
+Zˆτ B
+
+ ; A∗ 
+
+> 2
+
+=
+
+
+
+Zˆτ +1BZˆτ +2B
+
+...
+
+ZTB
+
+
+
+Consider these two quantities, || B ˆθ1 − B ˆθE 
+
+> 1
+
+|| 22 and || B ˆθ2 − B ˆθE 
+
+> 2
+
+|| 22.We know, ˆθ1 −→ θ1; ˆθE 
+
+> 1
+
+−→ θ1 − (A∗ T 
+
+> 1
+
+A∗
+
+> 1
+
+)−1A∗ T 
+
+> 1
+
+Z(θ2 − θ1)where 
+
+Z =
+
+
+
+0
+
+...
+
+0Zτ +1B
+
+...
+
+Zˆτ B
+
+
+
+Therefore, || B ˆθ1 − B ˆθE 
+
+> 1
+
+|| 22 = || (A∗ T 
+
+> 1
+
+A∗
+
+> 1
+
+)−1A∗ T 
+
+> 1
+
+Z(θ2 − θ1)|| 22
+
+Consider, ZTt Zt = IM ∀ t
+
+Then, || (A∗ T 
+
+> 1
+
+A∗
+
+> 1
+
+)−1A∗ T 
+
+> 1
+
+Z(θ2 − θ1)|| 22 = || ( ˆτ −τ 
+
+> ˆτ
+
+)( μ2 − μ1)|| 22 = ( ˆτ −τ 
+
+> ˆτ
+
+)2|| μ2 − μ1|| 22
+
+Hence, || B ˆθ1 − B ˆθE 
+
+> 1
+
+|| 22 −→ ( ˆτ −τ 
+
+> ˆτ
+
+)2|| μ2 − μ1|| 22
+
+We know, ˆθ2 −→ θ2; ˆθE 
+
+> 2
+
+−→ θ2 − (A∗ T 
+
+> 2
+
+A∗
+
+> 2
+
+)−1A∗ T 
+
+> 2
+
+Z∗(θ1 − θ2)where 
+
+Z∗ =
+
+
+
+Zˆτ +1B
+
+...
+
+Zτ B0
+
+...
+
+0
+
+
+
+Therefore, 
+
+|| B ˆθ2 − B ˆθE 
+
+> 2
+
+|| 22 = || (A∗ T 
+
+> 2
+
+A∗
+
+> 2
+
+)−1A∗ T 
+
+> 2
+
+Z∗(θ1 − θ2)|| 22
+
+= || (A∗ T 
+
+> 2
+
+A∗
+
+> 2
+
+)−1A∗ T 
+
+> 2
+
+Z∗(θ2 − θ1)|| 22
+
+9Consider, 
+
+ZTt Zt = IM ∀ t
+
+Then, 
+
+|| (A∗ T 
+
+> 2
+
+A∗
+
+> 2
+
+)−1A∗ T 
+
+> 2
+
+Z∗(θ2 − θ1)|| 22 =
+
+ τ − ˆτT − ˆτ
+
+
+
+(μ2 − μ1)
+
+> 22
+
+=
+
+ τ − ˆτT − ˆτ
+
+2
+
+|| μ2 − μ1|| 22
+
+Hence, 
+
+|| B ˆθ2 − B ˆθE 
+
+> 2
+
+|| 22 −→
+
+ τ − ˆτT − ˆτ
+
+2
+
+|| μ2 − μ1|| 22
+
+Therefore we have proved, 
+
+|| B ˆθ1 − B ˆθE 
+
+> 1
+
+|| 22 −→
+
+ ˆτ − τ
+
+ˆτ
+
+2
+
+|| μ2 − μ1|| 22
+
+|| B ˆθ2 − B ˆθE 
+
+> 2
+
+|| 22 −→
+
+ τ − ˆτT − ˆτ
+
+2
+
+|| μ2 − μ1|| 22
+
+ˆσ2 
+
+> ν
+
+=
+
+Pτt=1 
+
+Pmt
+
+> i=1
+
+(yi,t − cμ1(ki,t ) − bαt(ki,t )) 2 + PTt=τ +1 
+
+Pmt
+
+> i=1
+
+(yi,t − cμ2(ki,t ) − bαt(ki,t )) 2
+
+PTt=1 mt
+
+ˆσ2
+
+> νE
+
+=
+
+Pˆτt=1 
+
+Pmt
+
+> i=1
+
+(yi,t − cμ1E (ki,t ) − bαEt (ki,t )) 2 + PTt=ˆ τ +1 
+
+Pmt
+
+> i=1
+
+(yi,t − cμ2E (ki,t ) − bαEt (ki,t )) 2
+
+PTt=1 mt
+
+Hence, ˆσ2 
+
+> ν
+
+=
+
+Pτt=1 || yt − Zt ˆμ1 − Zt ˆαt|| 22 + PTt=τ +1 || yt − Zt ˆμ2 − Zt ˆαt|| 22
+
+PTt=1 mt
+
+and ˆσ2
+
+> νE
+
+=
+
+Pτt=1 || yt − Zt ˆμ1E − Zt ˆαtE || 22 + PTt=τ +1 || yt − Zt ˆμ2E − Zt ˆαtE || 22
+
+PTt=1 mt
+
+Consider ˆ τ = τ :ˆσ2
+
+> νE
+
+=
+
+Pτt=1 || yt − Zt ˆμ1 − Zt ˆαt|| 22 + PTt=τ +1 || yt − Zt ˆμ2 − Zt ˆαt|| 22 + PTt=1 || Zt ˆαt − Zt ˆαtE || 22
+
+PTt=1 mt
+
+10 =
+
+Pτt=1 || yt − Zt ˆμ1 − Zt ˆαt|| 22 + PTt=τ +1 || yt − Zt ˆμ2 − Zt ˆαt|| 22
+
+PTt=1 mt
+
++
+
+PTt=1 || Zt ˆαt − Zt ˆαtE || 22
+
+PTt=1 mt
+
+= ˆσ2 
+
+> ν
+
++ K
+
+Consider ˆ τ < τ :ˆσ2
+
+> νE
+
+=
+
+Pˆτt=1 || yt − Zt ˆμ1 − Zt ˆαt|| 22 + Pτt=ˆ τ +1 || yt − Zt ˆμ2 − Zt ˆαt|| 22 + PTτ +1 || yt − Zt ˆμ2 − Zt ˆαt|| 22+
+
+PTt=1 mt
+
++
+
+PTt=1 || Zt ˆαt − Zt ˆαEt || 22 + Pˆτt=1 || Zt ˆμ1E − Zt ˆμ1|| 22 + Pτt=ˆ τ +1 || Zt ˆμ1 − Zt ˆμ2E || 22 + PTτ +1 || Zt ˆμ2E − Zt ˆμ2|| 22
+
+PTt=1 mt
+
+ˆσ2 
+
+> ν
+
++ K + A1; A1 =
+
+Pˆτt=1 || Zt ˆμ1E − Zt ˆμ1|| 22 + Pτt=ˆ τ +1 || Zt ˆμ1 − Zt ˆμ2E || 22 + PTτ +1 || Zt ˆμ2E − Zt ˆμ2|| 22
+
+PTt=1 mt
+
+Consider ˆ τ > τ :ˆσ2
+
+> νE
+
+= ˆσ2 
+
+> ν
+
++K+A2; A2 =
+
+Pτt=1 || Zt ˆμ1 − Zt ˆμ1E || 22 + Pτt=τ +1 || Zt ˆμ2 − Zt ˆμ1E || 22 + PT  
+
+> ˆτ+1
+
+|| Zt ˆμ2E − Zt ˆμ2|| 22
+
+PTt=1 mt
+
+11

@@ -1,0 +1,636 @@
+Title: Flood risk estimation via geometric extremal graphical models
+
+URL Source: https://arxiv.org/pdf/2607.15000v2
+
+Published Time: Mon, 20 Jul 2026 00:55:48 GMT
+
+Number of Pages: 35
+
+Markdown Content:
+# Flood risk estimation via geometric extremal graphical models 
+
+## Kristina Grolmusova 1, Jennifer L. Wadsworth 2, and Thordis L. Thorarinsdottir 31STOR-i Centre for Doctoral Training, Lancaster University, Lancaster, United Kingdom 
+
+> 2
+
+## School of Mathematical Sciences, Lancaster University, Lancaster, United Kingdom 
+
+> 3
+
+## Department of Mathematics, University of Oslo, Oslo, Norway 
+
+Abstract 
+
+We exploit the new framework of multivariate geometric extreme value theory for the statistical analysis of river flow extremes at multiple locations on a river network. Current methodologies within the geometric framework are limited to a relatively low number of dimensions. This is insufficient for the purposes of flood risk estima-tion, since the number of gauging stations on a river network is often of the order 10 − 20+. In order to create a parsimonious model in higher dimensions, we trans-late recent theoretical work on geometric extremal graphical models into statistical practice. We define the gauge function, a key object in geometric extremes, in a structured way using block graphs, which are a natural way of expressing the river network. We introduce both simple models, and more complex ones that can accom-modate both simultaneous and non-simultaneous flows, and apply them to extreme flows at 10 locations on a river network around Preston, in north-west England. The models are shown to fit well and indicate strong extrapolation performance. We also introduce a correction coefficient for the geometric framework to address potential over- or under-estimation of marginal probabilities. The overall utility of our approach is illustrated through calculation of probabilities of simultaneous flooding at four locations on the network. 
+
+# 1 Introduction 
+
+The importance of flood risk estimation is indisputable. For example, according to UK Health Security Agency (2023), approximately 6.1 million people in the UK currently live in flood prone areas, which is around 10% of the total UK population. Moreover, the number of people in the UK significantly at risk of flooding is projected to increase between 61% to 118% by 2050. According to findings of Rentschler et al. (2022), 1.81 billion people, around 23% of the global population, live in locations that are directly exposed to a significant level of flood risk (1-in-100-year floods) with South and East Asia being the most affected. Approximately 89% of the population that are exposed to flooding are in low- and middle-income countries. Understanding the risks of floods is crucial to mitigate negative impacts that they have on individuals, society and environment. 1arXiv:2607.15000v2 [stat.AP] 17 Jul 2026 The challenge of estimating flood risk through statistical models has been addressed in several different ways. Many of the methods used by UK hydrologists are based on the Flood Estimation Handbook (FEH) (Institute of Hydrology, 1999), which is considered to be an industry standard for flood risk estimation. It comprises two main approaches – statistical flood frequency estimation and rainfall-runoff methods. In the statistical approach, which has been updated since in reports by Kjeldsen et al. (2008) and Vesuviano and Griffin (2025), a flood frequency curve is estimated for a site of interest from which the risk is subsequently calculated. If the site is ungauged, does not have data measurements, or if the site does not have a long record or has a lot of missing data, data from other hydrologically similar sites are used to estimate the frequency curve. While the FEH provides a very comprehensive guide to UK flood risk estimation, the statistical model only focuses on the estimation at each site individually. However, in order to understand flood risk at multiple locations, dependence modelling is crucial. Approaches to dependence modelling that accommodate both simultaneous and non-simultaneous extremes across sites are typically based on conditional extreme value theory (Heffernan and Tawn, 2004). Extensions of this framework allow for temporal dependence and missing data (Keef, Tawn and Svensson, 2009), and have been used to study river flow dependence at regional and national scales, including applications across Great Britain, Austria and the UK (Keef, Svensson and Tawn, 2009; Schneeberger and Steinberger, 2018; Keef et al., 2013). Subsequent developments address high-dimensional residual structure and substantial missingness (Towe et al., 2019), incorporate river-network graphical struc-ture to reduce the effective parameter dimension and enable higher-dimensional analyses (Farrell et al., 2024), and support large-scale, model-based flood event catalogues in data-sparse regions (Quinn et al., 2019; Wing et al., 2020; Olcese et al., 2022, 2024). These methods have been used to estimate joint flood risk, population exposure and related exceedance probabilities. As shown through some of these applications, the conditional model is relatively easy to fit in high dimensions. The disadvantage is that a conditioning site has to be chosen, and there is usually no natural choice. In that case, multiple models can be fitted for each conditioning site in turn. However, the risk at multiple sites can be calculated using a number of these models, so that we must make a non-trivial choice about which model to use, or how to combine estimates. Asadi et al. (2015) modelled joint river flow extremes using max-stable processes, mod-ified for flood risk estimation by incorporating river distance and hydrological distance into the dependence structure. While this model avoids issues with the single site condi-tioning, it entails an assumption that floods may occur simultaneously at all sites, which does not always hold. Engelke and Hitz (2020) developed extremal graphical models based around multivariate Pareto distributions. Like the max-stable approach of Asadi et al. (2015), Pareto models also entail that all sites may record simultaneous extremes. Despite this limitation, their model was shown to fit relatively well when applied to flow data on a small portion of the Danube river. Wadsworth and Campbell (2024) introduced statistical inference for the tail of a mul-tivariate distribution based on the shape of the underlying data. This framework, known as the geometric approach to multivariate extreme value analysis, avoids several of the issues encountered in the approaches mentioned above. Only one model fit is required to estimate the risk at different combinations of sites in different regions of space. To-gether with the ability to capture both simultaneous and non-simultaneous extremes and the potential to capture complex dependence structures such as floods occurring at all sites at the same time, or at two specific sites, but not at others etc., the geometric ap-proach provides an excellent choice for the problem of estimating the risk of widespread floods. Owing to the recent nature of the geometric approach, current methodologies 2within this framework are limited to relatively low number of dimensions. Parametric and semi-parametric approaches have been fit in up to four dimensions in the literature (Wadsworth and Campbell, 2024; Majumder et al., 2025; Simpson and Tawn, 2024; Camp-bell and Wadsworth, 2024). Two deep-learning approaches have been introduced that go up to eight (Murphy-Barltrop et al., n.d.) and 10 dimensions (De Monte et al., 2025). However, these can lack interpretability and the model by De Monte et al. (2025), when applied to a 10-dimensional problem, gives less accurate results than in lower dimensions. Many river networks have 10 − 20+ sites, suggesting that new methods are needed. This is the contribution of the present paper. In order to create a parsimonious model in higher dimensions, we incorporate the river structure into our model via the statistical exploitation of geometric extremal graphical models , introduced in a theoretical setting by Papastathopoulos and Wadsworth (2026). To our knowledge, this is the first statistical implementation of this approach. We fit the geometric graphical models to extreme flows at 10 locations on a river network around Preston, in the north west of England. Both De Monte et al. (2025), and in a spatial setting Kakampakou and Wadsworth (2025), can fit models in such dimensions, but in both cases performance is sub-optimal. In contrast, our model fit diagnostics appear strong. Various extremal dependence structures can be achieved within the setting of geometric extremal graphical models. The simplest model that we present ultimately entails that the most extreme events cannot occur simultaneously. We therefore propose an extension to this simpler model, where the choice of simultaneous or non-simultaneous extremes is determined during the fitting procedure. Finally, we introduce a correction coefficient for the geometric framework to address potential over- or underestimation of marginal probabilities. The rest of the paper proceeds as follows. Section 2 introduces the river flow data used for the analysis and the pre-processing steps applied to the data. Section 3 provides background on geometric extreme value theory, and proposes the new correction coeffi-cient. Section 4 introduces geometric extremal graphical models, and how these can be leveraged for inference in the geometric setting. The modelling of the river flow data and the performance of the model is illustrated in Section 5. An extension to the model, which allows inference on whether connected sites exhibit simultaneous extremes, is proposed in Section 6. We conclude with a discussion in Section 7. 
+
+# 2 River flow data and pre-processing 
+
+## 2.1 Data 
+
+We obtained data from the National River Flow Archive (UK Centre for Ecology & Hydrology, 2025) at gauging stations on a river network in north west England. We consider gauged daily flow (GDF) data, which is the mean river flow in cubic metres per second in a water-day (09.00 to 08.59 GMT). The selected river network is close to the city of Preston, and consists of rivers Ribble and Yarrow and their tributaries. Data from all currently operating gauging stations with natural flows and GDF data available for more than 30 years were chosen for the analysis, with any rows of missing data removed. This resulted in a data set with 43 years worth of data between 1980 and 2023 for 10 gauging stations, which are shown in Figure 1. Gauging stations (3) - (9) are interconnected with each other – water from one of these stations flows directly into another one of these stations: we say they are flow-connected stations. Water from stations (1), (2) and (10) does not pass through any other gauging stations: we say these are flow-unconnected stations. We also define the term flow-connected pairs, which are pairs of gauging stations (i, j ), where water from station ( i) eventually flows to station ( j) or vice versa. If there is 370004  
+
+> 70003
+> 71001
+> 71013
+> 71009
+> 71004 71010
+> 71006 71008
+> 71011
+
+2
+
+9
+
+5
+
+7
+
+1
+
+3 4
+
+6 8
+
+10Figure 1: Partial map of the UK showing the rivers as blue lines with gauging stations as orange dots (UK Centre for Ecology & Hydrology, 2025). Black numbered dots represent the gauging stations used for the analysis with station IDs (left) and numbering used throughout the paper (right). a direct flow between station ( i) and ( j), we say these are adjacent flow-connected pairs. Flow-unconnected pairs are any pairs of gauging stations ( i, j ), where water from station (i) does not flow to station ( j) or vice versa. 
+
+## 2.2 Pre-processing 
+
+Despite the fact that the river network is contained in a relatively small area, time lags can occur between the most extreme recorded flows. This may happen due to differences in runoffs at the different gauging stations, or when the river distances between gauging stations are large, or the river flows are slow. In the Preston dataset, this time lag can be illustrated by looking at the extreme river flows at gauging stations (9), (5) and (3). The water from gauging station (9) flows directly to (5) and eventually to (3). The distance between stations (3) and (9) is around 95 km. Dates of events with the most extreme river flows at the station (9) were recorded and GDF values on the dates around the recorded event were investigated at the other gauging stations. The aim was to track the peak flow event and investigate whether these peak flows are also observed on the same day. The left panel of Figure 2 shows the GDF against the date at the three selected gauging stations. It shows that a peak flow event occurred on 13th November 1994 at gauging station (9) which reached station (5) on the same day, but station (3) on the next one. Due to the largest values being recorded on different days, the extreme river flows would be considered as separate events in the data. However, this is not desirable, since we would like to accurately represent a single flood event through one multivariate data point. In order to obtain a dataset of unique flood events, we pre-processed the data by matching the peak flows. The matching of the peak flows is based on a method by Asadi et al. (2015), where a time window of size ± p is constructed around the highest ranked event and the peak flows within the time window at each station are taken as the values of river flows for the highest ranked event. Only this event is added to a new dataset and the remaining events within the time window are deleted. This procedure is repeated until no events are left in the dataset. Further details of this procedure are given in Appendix A.1. For the Preston dataset, p = 2 was selected based on the time lag analysis discussed in the previous section. This resulted in a matched dataset of 2,582 points, which is approximately 17% of the original 15,459 observations. Despite the number of data points being significantly 4Nov 10 Nov 14 Nov 18 Nov 22 10  50               
+
+> Date GDF.9
+> Nov 10 Nov 14 Nov 18 Nov 22 20  80
+> Date GDF.5
+> Nov 10 Nov 14 Nov 18 Nov 22 50  200
+> Date GDF.3 010 20 30 40 50 0 200  400  600
+> GDF.2 GDF.3
+> Original Modified 0200 400 600 0 100  300  500
+> GDF.3 GDF.7
+> Original Modified
+
+Figure 2: Left: Plot of the GDF at gauging stations (9), (5) and (3) with an extreme event on 13/11/1994 at (9) and (5), and on 14/11/1994 at (3) shown as red dot. Dashed red vertical lines show the window of ±2 days. Middle and right: Plot of the original (blue) and matched (red) dataset for a pair of flow-unconnected and adjacent flow-connected gauging stations. reduced, it was found to be sufficient for further analysis. Plot in the middle and right of Figure 2 demonstrates the effect of the pre-processing on a pair of flow-unconnected and adjacent flow-connected stations. In both cases, the matched dataset exhibits stronger dependence, which is expected since many of the river flow values are matched with higher values in the matched dataset compared to the original one. A few flow values at gauging station (7) were significantly lower than the sum of the flow values at (4), (5) and (6), which are the stations directly upstream of (7). This suggests that the inflow is a lot higher than the outflow, which means the water was lost before reaching (7), or that there is some discrepancy between the measurements at the different stations. For that reason, we removed any data points where 80% of the sum of the river flows at (4), (5) and (6) was higher than the river flows at (7). This step was performed after the pre-processing and 23 points were removed. None of these points correspond to river heights close to bankfull, and so are not highly informative on the extremes. Seasonality both in the original and matched dataset was assessed by obtaining a plot of river flows at a given day of the year for each gauging station. Figure S.1 in Appendix A.2 shows an example for gauging station (1). There appears to be a seasonal pattern in the data with higher and lower river flows in the winter and summer months, respectively. In common with several previous studies (e.g. Keef, Tawn and Svensson, 2009; Keef, Svensson and Tawn, 2009; Keef et al., 2013), we decided not to address the seasonality in the data and proceeded with the matched dataset. Discussion on the reasons for this can be found in Appendix A.2. 
+
+# 3 Geometric approach to multivariate extremes 
+
+We now introduce the framework of geometric extreme value theory. We describe the background theory, statistical estimation, and extrapolation from the fitted model. 
+
+## 3.1 Convergence of the scaled sample cloud onto the limit set 
+
+The geometric approach to extreme value theory is based on the convergence of scaled sample clouds of light-tailed random vectors onto a limit set. To disentangle the ef-fects of margins and dependence, a common marginal form is adopted, which is possible 50.0 0.4 0.8 1.2 0.0  0.4  0.8  1.2          
+
+> X1log (n)
+> X 2 log (n)
+> 0.0 0.4 0.8 1.2 0.0  0.4  0.8  1.2
+> X1log (n)
+> X 2 log (n)
+> 0.0 0.4 0.8 1.2 0.0  0.4  0.8  1.2
+> X1log (n)
+> X 2 log (n)
+
+Figure 3: Illustration of the convergence of scaled sample cloud Nn (black points) onto limit set G (grey region) described by the Gaussian gauge function with ρ = 0 .9. From left to right, sample sizes are n = 100, 1000, 10000. statistically via estimation and transformation. We assume standard exponential mar-gins. The scaled sample cloud is defined as Nn = {X1/ log( n), . . . , Xn/ log( n)}, where 
+
+Xi ∈ Rd, i = 1 , . . . , n are iid random vectors with exponential margins. Under mild conditions, as n → ∞ , the scaled sample cloud Nn converges onto a limit set, defined by G = {x ∈ Rd 
+
+> +
+
+: g(x) ≤ 1}, where g(x) is termed the gauge function. The gauge function g(x) is 1-homogeneous, i.e., g(cx) = cg (x) for any c > 0, and describes the shape of the boundary of the limit set G. The set G is star-shaped, which means that for any t ∈ (0 , 1), if x is in G, then tx is also in G. Taking the scaling sequence as log( n) means that the coordinate-wise supremum of G is (1 , . . . , 1). Figure 3 illustrates the notion of convergence of Nn onto G for random samples from a bivariate Gaussian vector with exponential margins, and the limit set defined by the corresponding gauge function gG(x1, x 2) = ( x1 + x2 − 2ρ√x1x2)/(1 − ρ2). With increasing sample size, the black points start to form the shape of the grey region. The shape of G is informative about the extremal dependence structure. Nolde and Wadsworth (2022) linked the geometry of G to several existing dependence concepts, including the key parameters of the conditional extreme value model. Campbell and Wadsworth (2024) and Papastathopoulos and Wadsworth (2026) use the intersections of the limit set with its boundary box to determine which variables exhibit simultaneous extremes. For D = {1, . . . , d } and A ⊆ D, the variables in group A are simultaneously extreme while the rest of the variables are of smaller order, if the intersection of the boundary of the limit set G with the unit box [0 , 1] d occurs at xj = 1 for all j ∈ A
+
+and xj = γj for all j ∈ D\A for some γj ∈ [0 , 1). Papastathopoulos and Wadsworth (2026) termed the full collection of sets A geometric extremal directions . In Figure 3, the boundary of the limit set G intersects the unit box [0 , 1] 2 at (1 , 0.92) and (0 .92, 1), which means the variables do not take their most extreme values simultaneously. 
+
+## 3.2 Truncated gamma model 
+
+Wadsworth and Campbell (2024) introduced a model for the extreme observations, which is rooted in this geometric representation. The multivariate random vector X with stan-dard exponential margins can be expressed in terms of radii and angles, R = Pdj=1 Xj
+
+and W = X/R , respectively. Under certain assumptions, they showed that the condi-tional distribution of radii greater than a high, angle-dependent, radial threshold r0(w), asymptotically follows the gamma distribution with some shape parameter α > 0 and rate parameter given by the gauge function g(w). That is, we assume 
+
+R|{ W = w, R > r 0(w)} ˙∼ truncGamma( α, g (w)) . (1) 6This model was shown to be applicable in many different cases by Wadsworth and Camp-bell (2024), and can be assessed through model diagnostics. The shape parameter is often theoretically equal to the dimension d, but estimated for extra flexibility. 
+
+3.2.1 Fitting 
+
+To fit the truncated gamma model, the data need to be transformed to exponential margins. We first transform to uniform margins by applying the rank transform to the body of the data and the generalised Pareto distribution (GPD) fitted to the tail (Coles and Tawn, 1991), then apply the standard exponential quantile function. We then perform the radial-angular transformation, and consider estimation of r0(w). Here we obtain this using a method based on kernel density estimation, introduced by Campbell and Wadsworth (2024). The threshold is defined as the τ quantile of the univariate radial distribution F (r|w). Since F (r|w) is not known, kernel based estimates are used to get an estimate for F (r|w), ˆF (r|w). The high radial threshold r0(w) is then obtained by numerical inversion of the ˆF (r|w) = τ , for τ near 1. This method can return a value of r0(w) at any angle w, which is particularly advantageous in high dimensions, where more empirical methods struggle to obtain r0(w) in the regions in the angular space that contain very few points. The truncated gamma model (1) can be fitted to the exceedances above r0(w) using maximum likelihood estimation. The maximum likelihood estimates (MLEs) from the fitted model are (ˆ α, ˆθ), where ˆθ are the parameters in the gauge function. In two dimen-sions, there are a few different choices for the gauge function: standard parametric models such as logistic, Gaussian, square or inverted logistic, which can also be additively mixed to obtain more flexible shapes (Wadsworth and Campbell, 2024; Lee and Wadsworth, 2025), and semi-parametric options such as piecewise-linear (Campbell and Wadsworth, 2024), or B´ ezier splines (Majumder et al., 2025). As we increase the number of dimensions, there are fewer options for the standard gauge functions and the number of parameters increases significantly. For example, the 
+
+d-dimensional Gaussian gauge has d(d − 1) /2 parameters. Both additively mixed and piecewise-linear gauge functions require even higher number of parameters. In order to apply the methodologies within the geometric framework for flood risk estimation along a river network, reduction in the number of parameters is essential. To obtain a parsimonious model, we incorporate the river structure into the gauge function via the graphical modelling framework. The details of how this is done are described in Section 4. 
+
+3.2.2 Extrapolation from the model 
+
+Fitting a model to the extreme observations allows extrapolation beyond the region of the data and calculation of probabilities of extreme events far into the tail. Wadsworth and Campbell (2024) perform extrapolation by simulating from the estimated distribution of 
+
+X|{ R > r 0(W )}. This is done first by drawing w⋆ from the distribution of W |{ R > r0(W )}. In this case, the samples of w⋆ are taken from the empirical distribution of the angles. Secondly, conditional upon w⋆, r⋆ is drawn from the distribution of R|{ W =
+
+w⋆, R > r 0(w⋆)}, which is the fitted truncated gamma distribution at the sampled angle 
+
+w⋆. The new observation is then x⋆ = r⋆w⋆.Once the set of new observations is obtained, we seek to estimate Pr( X ∈ B), where 
+
+B is extreme in some way. To do this, we use the decomposition Pr( X ∈ B) = Pr( X ∈ B|R > r 0(W )) Pr( R > r 0(W )) + Pr( X ∈ B, R < r 0(W )) . (2) Both of the probabilities in the first term of the equation (2) are obtained empirically. The quantity Pr( X ∈ B|R > r 0(W )) is equated to the fraction of simulated points in the 7region B, while Pr( R > r 0(W )) is the fraction of data points where R > r 0(W ), which will be approximately, but rarely exactly, 1 −τ . The probability Pr( X ∈ B, R < r 0(W )) is calculated empirically using the data as the fraction of non-exceedances in the region B. If the set B lies entirely in the region for which {R > r 0(W )}, Pr( X ∈ B, R < r 0(W )) = 0. It is possible to simulate points in more extreme regions where R > kr 0(W ), for 
+
+k > 1; this is useful for extrapolating further into the tail. In Section 5.2.4, we do this to calculate probabilities of simultaneous floods. Details on how this is done can be found in Wadsworth and Campbell (2024). 
+
+3.2.3 Correction coefficient 
+
+The data that we are working with has an underlying marginal standard exponential distribution. The method of simulating new points, described in Section 3.2.2, does not enforce that the simulated points exactly follow a standard exponential distribu-tion. This can be seen by comparing the marginal probability obtained using simulated points with using the exponential distribution directly. The plot on the left of Figure 4 shows a random sample from the logistic distribution, along with points simulated ac-cording to the method described in Section 3.2.2, and an example region of interest 
+
+B = ( b11 , b 12 ) × (b21 , b 22 ) = (10 , 12) × (6 , 8). Using the simulated data, we obtain the dis-tribution of marginal probabilities for X2 for values x ∈ [b21 , ∞) using simulated points with equation (2). This is compared to the probabilities obtained using exp ( −x), shown in the plot on the right of Figure 4. We can see that in this case, the probability is underestimated when calculated using the simulated points. This discrepancy can lead to systematic over- or underestimation of the probability Pr( X ∈ B). In order to correct for this, we multiply the estimate of Pr( X ∈ B) by a correction coefficient Ccorr , based on the ratio of the true to estimated marginal probabil-ities of the lower endpoints of B. Numerical experiments show that margins tend to be under/overestimated to a similar degree. We thus take the average of these ratios to get 
+
+Ccorr = 1
+
+|S|
+
+X
+
+> s∈S
+
+exp( −bs)
+
+cPr( Xs > b s), (3) 0 2 4 6 8 10 12 14 0 5 10  15      
+
+> X1X 2 BData Simulated points 6810 12 14 0.0000  0.0010  0.0020
+> bsPr (X 2 > b s)
+
+Figure 4: Left: Plot of the data (black) and simulated points (orange) with the region of interest B = (10 , 12) × (6 , 8) (black box). Dashed black lines represent lower boundary of B for calculation of the marginal distribution. Right: Distribution of the marginal probability Pr( X2 > b s) for bs ∈ [6 , 14) calculated using the simulated data (red) and using the exponential distribution (black). 8where bs is the lower boundary of B in exponential margins for variable s, cPr( Xs > b s)is the marginal estimate, and S ⊆ { 1, . . . , d }, such that only dimensions are included for which bs̸ = 0. In the above example, the correction coefficient becomes 
+
+Ccorr = 12
+
+(
+
+exp( −b1)
+
+cPr( X1 > b 1) + exp( −b2)
+
+cPr( X2 > b 2)
+
+)
+
+, b1 = b11 = 10 , b2 = b21 = 6 .
+
+# 4 Incorporating river structure into the model 
+
+In this section, we outline the necessary basics of graphical modelling and introduce geometric extremal graphical models. We then detail the form of these that is suitable for the stations on the Preston river network. 
+
+## 4.1 Graphical modelling and terminology 1 2   
+
+> 345
+> 6
+> 79
+> 8
+> 10
+
+Figure 5: An example of a block graph. A graph G is defined as G = ( V, E), where V = {1, . . . , d } is a set of vertices and 
+
+E ⊂ V × V is a set of edges between pairs of distinct vertices. We focus on an undi-rected graph, meaning that for two vertices i, j ∈ V, ( i, j ) ∈ E implies ( j, i ) ∈ E.This means that there is not a distinct edge when going from i to j and when go-ing from j to i. A special class of graphs, termed decomposable graphs, can be de-scribed in terms of ( C, D), where C is the set of cliques, which are maximal fully con-nected subsets of vertices, and D is the set of separators, which are intersections of cliques. Block graphs are a sub-type of decomposable graphs, where the separators are all singletons. Figure 5 shows an example of a block graph with V = {1, . . . , 10 },
+
+E = {(1 , 2) , (1 , 3) , (2 , 3) , (3 , 4) , (4 , 5) , (4 , 10) , (5 , 7) , (6 , 7) , (6 , 8) , (6 , 9) , (7 , 8) , (7 , 9) , (8 , 9) },
+
+C = {(1 , 2, 3) , (3 , 4) , (4 , 5) , (4 , 10) , (5 , 7) , (6 , 7, 8, 9) } and D = {3, 4, 4, 5, 7}. A tree is a sub-type of block graph in which any two vertices are only connected by one path, which means all cliques are of size two. In Figure 5 the graph formed by vertices 3, 4, 5, 7 and 10, for example, is a tree. For further details on decomposable graphs see Section 2.3 and Appendix A in Engelke and Hitz (2020) and Chapter 2 in Lauritzen (1996). 
+
+## 4.2 Geometric extremal graphical models 
+
+Papastathopoulos and Wadsworth (2026) introduced geometric graphical models on block graphs, which are defined through the gauge function of the limit set and take the following form 
+
+g(x) = X
+
+> C∈C
+
+gC (xC ) − X
+
+> D∈D
+
+xD. (4) The gauge function for a tree can also be expressed through E and V, where E = C, by 
+
+g(x) = X
+
+> (i,j )∈E
+
+g{i,j }(xi, x j ) − xi − xj + X
+
+> k∈V
+
+xk. (5) 9They showed some useful properties of the extremal graphical models in relation to joint extremes, proving that joint extremes cannot occur between groups of variables that cross cliques, without including the separators. Using the block graph in Figure 5 as an example, vertices 2 and 5 cannot have joint extremes on their own without including vertices 3 and 4. They also showed that all cliques exhibiting joint extremes is equivalent to all variables exhibiting joint extremes. These properties are useful when interpreting the results from the fitted graphical models. Nolde and Wadsworth (2022) showed that in general marginal gauge functions can be obtained from the full d-dimensional gauge function through the following minimisation: 
+
+gJ (xJ ) = min 
+
+> xi∈[0 ,∞): i / ∈J
+
+g(x), (6) where xJ = ( xj : j ∈ J) for any index set J ⊆ { 1, . . . , d }, and gJ is the marginal gauge function for the variables in J. This is especially useful for visualisation purposes as we can project higher dimensional limit sets to two or three dimensional margins. In the case of extremal graphical models, there are some simplifications of the minimisation, which can be computationally costly. For example, the marginal gauge function of a clique is 
+
+gC . Papastathopoulos and Wadsworth (2026) showed that for a block graph the marginal bivariate gauge function g{i,j }(xi, x j ) can be expressed in terms of a chain graph with vertices lying on the shortest path between i and j. They also showed that the marginal three-dimensional gauge function g{i,π,j }(xi, x π, x j ), where π is the penultimate vertex in the shortest path from i to j can also be expressed in terms of a chain graph such that 
+
+g{i,π,j }(xi, x π, x j ) = g{i,π }(xi, x π) + g{π,j }(xπ, x j ) − xπ. Depending on the graph and the vertices i and j that we are interested in, minimisation may or may not be required. 
+
+## 4.3 Model for the Preston river network 
+
+Flow gauging stations along a river network can naturally be expressed as a block graph with the flow-connected stations forming a tree. Figure 6 on the left shows the struc-ture of the gauging stations of the Preston river network shown in Figure 1. The flow-connected stations (3), (4), . . . , (9) form a tree with V = {3, . . . , 10 } and E =10 
+
+> 2
+> 9
+> 1
+> 3
+> 4
+> 56
+> 7
+> 810
+> 2
+> 9
+> 1
+> 3
+> 4
+> 56
+> 7
+> 8
+
+Figure 6: Left: River structure of the gauging stations of the Preston river network. The flow-connected stations are shown as filled blue circles and flow-unconnected as unfilled black circles. Right: Block graph of these stations, where the red lines show the extra edges between the flow-unconnected stations and the closest separator on the tree of flow-connected stations (filled green circle) to create a clique of vertices (1), (2), (3) and (10). 10 {(3 , 7) , (4 , 7) , (4 , 8) , (5 , 7) , (5 , 9) , (6 , 7) }. The tree extremal graphical model (5) is used for these stations. In order to model the whole river network, the flow-unconnected stations (1), (2) and (10) were assumed to form a clique on their own, connected to the rest of the graph via station (3), the closest flow-connected gauging station. There is no natural tree structure from the river flow between the flow-unconnected stations since the water is not flowing from one station to another, but there is still a dependence between these stations: due to their close geographical location, these gauging stations are likely to ex-perience similar rainfall events. Figure 6 on the right shows the additional edges between the gauging stations (1), (2), (3) and (10) that join the flow-unconnected stations to the tree of flow-connected stations with station (3) being a new separator. Applying expression (4) to the block graph of the Preston river network in Figure 6, the graphical gauge function for this river network is 
+
+g{1,..., 10 }(x1, . . . , x 10 ) = g{3,7}(x3, x 7) + g{4,7}(x4, x 7) + g{4,8}(x4, x 8) + g{5,7}(x5, x 7)+ g{5,9}(x5, x 9) + g{6,7}(x6, x 7) + g{1,2,3,10 }(x1, x 2, x 3, x 10 ) − x3 − x4 − x5 − 3x7.
+
+(7) The 10 dimensional gauge function in this case is expressed as a sum of six bivariate gauge functions coming from the adjacent flow-connected pairs and one four-dimensional gauge function coming from the clique formed when joining the flow-unconnected stations to the tree of flow-connected stations. 
+
+# 5 Modelling the river flow data 
+
+## 5.1 Fitting the extremal graphical model to the river flow data 
+
+The pre-processed river flow data was transformed to exponential margins as described in Section 3.2.1, where we took the body of the data to correspond to observations less than the 0.95 quantile. In order to obtain the high radial threshold r0(w), we need to select 
+
+τ . In general, τ should be as high as possible since we want to consider only extreme values, but at the same time it needs to result in enough exceedances for the fitting of the truncated gamma model (1). In this case, τ = 0 .85 was chosen since it gave the best diagnostics in a threshold sensitivity analysis. To fit the graphical gauge function using maximum likelihood estimation, choices for the bivariate and four-dimensional gauge functions had to be made. These choices impact the modelling and conclusions on whether gauging stations experience joint extremes or not. To begin with, we fitted each of four bivariate gauge functions to all adjacent flow-connected pairs: logistic, Gaussian, inverted logistic and square gauge functions. For each pair, the two best candidates were chosen and different combinations of these were considered in the higher-dimensional graphical gauge functions. It was found that the simple choice of Gaussian, gG(x1, x 2) = ( x1 + x2 − 2ρ√x1x2)/(1 − ρ2), ρ ∈ [0 , 1], performed consistently best or near best for all pairs, and so we proceed with this choice. In Section 6, we also introduce an exponential-Gaussian gauge function, which provides an extension to the Gaussian gauge function that allows joint extremes for some or all adjacent flow-connected pairs. A multivariate Gaussian gauge function was chosen for the clique of flow-unconnected stations as there are not many other flexible candidates that could be used in four dimen-sions. It has the form g(x1, x 2, x 3, x 4) = ( x1/21 , x 1/22 , x 1/23 , x 1/24 )Σ −1(x1/21 , x 1/22 , x 1/23 , x 1/24 )⊤,where Σ is positive definite with diagonal elements equal to 1 and off-diagonal elements equal to θ1, . . . , θ 6 where θi ∈ [0 , 1) for i = 1 , . . . , 6. The choice of Gaussian gauge func-tion for all cliques allowed us to obtain the marginal gauge functions more easily using 11 equation (6), since the minimisation is known explicitly in this Gaussian case. This is useful for the assessment of the model fit. This graphical gauge function has 12 parameters that need to be estimated, six from the bivariate Gaussian gauge functions of the adjacent flow-connected pairs and six from the four-dimensional Gaussian gauge function of the clique formed by joining the flow-unconnected stations to the tree of flow-connected stations. The gauge function is thus written as a function of parameters θ = ( ρ3,7, ρ 4,7, ρ 4,8, ρ 5,7, ρ 5,9, ρ 6,7, θ 1,2, θ 1,3, θ 1,10 , θ 2,3,θ2,10 , θ 3,10 ). 
+
+## 5.2 Results 
+
+5.2.1 Parameter estimates 
+
+When fitting the truncated gamma model (1), the shape parameter α is estimated together with the parameters of the graphical gauge function. We express α = ad and estimate 
+
+a. This way all the parameters are of the same order of magnitude, which simplifies the optimisation. Table 1: Estimated parameters with 90% CIs for the truncated gamma model with the graphical gauge function. 
+
+a ρ3,7 ρ4,7 ρ4,8 ρ5,7 ρ5,9 ρ6,7 θ1,2 θ1,3 θ1,10 θ2,3 θ2,10 θ3,10 
+
+Estimate 0.33 0.98 0.95 0.96 0.94 0.97 0.89 0.97 0.75 0.71 0.76 0.74 0.73 Lower CI 0.33 0.93 0.88 0.87 0.83 0.84 0.77 0.93 0.30 0.27 0.35 0.32 0.40 Upper CI 0.61 1.00 0.99 0.99 1.00 0.99 0.99 0.99 0.91 0.92 0.92 0.95 0.88 Table 1 shows the estimated parameters for this model with their 90% confidence intervals (CIs). The CIs were obtained through block-bootstrap sampling, since the pre-processed data retains some temporal dependence. When looking at the ACF plots of the matched data, the dependence disappeared around time lag 10. Based on this, and a small sensitivity analysis, the CIs were obtained from 1000 block-bootstrap samples with block size 10. Kernel density estimation was performed on the block-bootstrap samples in order to provide CIs representing the highest density of the bootstrap distribution. We selected this technique because some bootstrap distributions had long tails, even though the majority of support lay in a small region. We selected to provide 90% CIs as a summary for the same purpose. The full bootstrap distributions are provided in Figure S.2 and Figure S.3 in Appendix B.1. Estimates of the Gaussian parameters for the adjacent flow-connected pairs are high, with pair (6 , 7) having slightly lower value compared to the rest of them. Estimates of the Gaussian parameters for the flow-unconnected pairs are lower and the corresponding CIs are wider with the exception of pair (1 , 2). This is natural because we expect flow-connection to give rise to higher dependence. The flow-unconnected stations exhibit weaker dependence but are geographically still relatively close to one another and very likely affected by similar rainfall events. 
+
+5.2.2 Assessment of model fit 
+
+The model fit is assessed via a transformed probability-probability (PP) plot. A PP plot compares the empirical cdf to the cdf of the fitted model, ˆFtg . It is defined as 
+
+{i/ (n + 1) , u (i)}, where ui = ˆFtg [ri; wi, r 0(wi)] for threshold exceedances i = 1 , . . . , n ,and u(1) ≤ . . . ≤ u(n) are the order statistics. In order to see clearly whether the fit is within the tolerance intervals, the difference between the cdf of the fitted model and the empirical cdf was plotted, resulting in the transformed PP plot. If the model is describing 12 0.0 0.2 0.4 0.6 0.8 1.0 −0.05  0.00  0.05             
+
+> empirical model − empirical 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X2 log (n)
+> X3  log (n)0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X3 log (n)
+> X7  log (n)
+
+Figure 7: Transformed PP plot for the truncated gamma model with the graphical gauge function for the Preston river network (left). Plots of the bivariate projections of the limit set (red line) with corresponding scaled sample clouds (black points) for a flow-unconnected pair (2 , 3) (middle) and an adjacent flow-connected pair (right). the data well, we would expect the points to lie close to the line y = 0 and be within the tolerance intervals, which are obtained from the beta distribution of order statistics. Such intervals are appropriate for independent data, and would likely be slightly wider for dependent data. The left plot of Figure 7 shows the transformed PP plot for the fitted model to all 10 gauging stations, indicating a good fit. The other two plots in Figure 7 display bi-variate projections of unit level sets from the graphical gauge function, together with the scaled data for a flow-unconnected and an adjacent flow-connected pair. Additional bivariate projections for the adjacent flow-connected pairs can be found in Figure S.7 in Appendix C.1. Such plots give an indication of whether the fitted graphical gauge function represents a plausible limit set for the scaled sample cloud. If the model fits the data well, we would expect a broad agreement between the shape of the limit set and of the scaled sample cloud with the points being largely contained within the limit set; this appears to be the case here. For the pair (6 , 7), the shape of the limit set is a little wider than the scaled sample cloud. In Appendix B.3, we describe a sensitivity analysis, which suggests that the position of a single point is responsible for this result. We also observe that in the case of the flow-unconnected pair the dependence is weaker, which is reflected in a wider shape of the projection of the fitted limit set. 
+
+5.2.3 Simulated points and comparison of model-based and empirical χS (u)A main objective of fitting extreme value models is to extrapolate beyond the range of the data. In order to check the suitability of the model for this purpose, we begin by simulating points from the fitted model, and visually comparing them to the observed data. We first simulate 5,000 points on the exponential scale, as described in Section 3.2.2, then reverse the marginal transformation. Points above the 0.95 quantile are back-transformed via the fitted GPD, while those below are transformed via the inverse empirical cdf, obtained by joining the points in the empirical cdf by a straight line. Figure 8 illustrates data at two pairs of stations, showing both the simulated points from the 10-dimensional model and the data on the original scale for a flow-unconnected and an adjacent flow-connected pair of gauging stations. It can be seen that the simulated points mimic the shape of the data, and provide plausible extrapolation. On the left hand side plot, trails of points can be seen, which is due to the fact that the empirical distribution W |{ R > r 0(W )} was used to sample new w⋆.In addition to the plot of simulated points, we used simulation to calculate a well-13 0 20 40 60 80 0 200  400  600  800     
+
+> GDF.2 GDF.3
+> Data Simulated points 0200 400 600 800 0 200  400  600  800
+> GDF.3 GDF.7
+> Data Simulated points
+
+Figure 8: Plot of matched data (black) and simulated points (orange) for flow-unconnected (left) and adjacent flow-connected (right) pair. known tail dependence measure χS (u), defined as 
+
+χS (u) = 11 − u Pr[ Fj (Xj ) > u, ∀j ∈ S], u ∈ (0 , 1) , S ⊆ { 1, . . . , d }.
+
+We compare empirical estimates of χS (u) with model-based values, calculated using simu-lated points for a range of quantile levels u ∈ (0 , 1) and S ⊆ { 1, . . . , d }. This dependence measure gives an indication of the tendency of all variables to be large conditional on one variable being large. The probability Pr[ Fj (Xj ) > u, ∀j ∈ S] is obtained as the probability Pr( X ∈ B) where B is the cross product of intervals ( − log(1 − u), ∞) for variables that are within the subset S, and (0 , ∞) for the variables that are not. In the case of the empirical χS (u), the probability was obtained as a fraction of data points lying in the region B. The probability Pr( X ∈ B) for the model-based χS (u) was obtained using equation (2), where Pr( X ∈ B|R > r 0(w)) was calculated from 100,000 simulated points, which ensured that there were enough points in the region B for u → 1. We used 1,000,000 points for the zoomed-in versions of the χS (u) plots for the original fit to produce a smoother curve. Alternatively, a fewer points could be simulated in region where R > kr 0(W ). The correction coefficient was obtained using equation (3), where 
+
+bs = − log(1 − u), ∀s ∈ S. The probability Pr( Xs > b s) was calculated using equation (2) where B is ( − log(1 − u), ∞) for variable s and (0 , ∞) for the rest of the variables. Block-bootstrap sampling with block size 10 was used to generate 1000 samples for both the empirical and model-based χS (u) separately. The empirical χS (u) was calculated directly from these samples. For the model-based χS (u), the truncated gamma model was fitted to each sample and new points were simulated for each sample. The model-based 
+
+χS (u) was calculated from these. Since we are taking the bootstrap samples from the matched data in exponential margins, we need to account for the fact that the bootstrap samples might not precisely follow standard exponential distribution. This has an im-pact on the correction coefficient, since we assume the data follows standard exponential distribution in its calculation. Instead of making this assumption, we fit an exponential distribution to each bootstrap sample and use the fitted exponential distribution in the calculation. The 95% CIs were obtained for both empirical and model-based χS (u) plots by taking the pointwise 2.5 and 97.5% quantiles of the respective χS (u) samples. The top plots in Figure 9 show the comparison of the empirical and model-based 
+
+χS (u) with S = {1, . . . , 10 }. It can be seen that the model-based χS (u) agrees well with the empirical one. The empirical χS (u) is mostly within the model-based CIs. Non-zero 14 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0         
+
+> u
+> χ{1, ..., 10} 0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{1, ..., 10} 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{2,3} 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{3,7}
+
+Figure 9: Plot of empirical (solid black) and model-based χS (u) (solid red) with empirical (grey region) and model-based (light red region) 95% CIs with S = {1, . . . , 10 } (top), 
+
+{2, 3} (bottom left) and {3, 7} (bottom right). The top right-hand side plot zooms in on 
+
+u → 1 values. values for the model-based χS (u) can be observed for u close to 1 when the empirical is zero. This highlights the ability of the model to extrapolate beyond the range of the data. The bottom plots show the comparison of bivariate empirical and model-based χS (u) for a flow-unconnected pair S = {2, 3} and an adjacent flow-connected S = {3, 7}. Additional 
+
+χS (u) plots can be found in Figure S.8 in Appendix C.2.1. The model-based χS (u) agrees well with the empirical one in different cases. The CIs widen as u → 1, which is especially noticeable for the flow-connected pairs. The χS (u) plots were obtained in three different ways: without Ccorr , with Ccorr as-suming standard exponential distribution, and with Ccorr using a fitted exponential distri-bution. It was found that the model-based χS (u) was closer to the empirical χS (u) when the probability was multiplied by Ccorr , especially for u → 1. The CIs were narrower when the probability was multiplied by Ccorr . When a standard exponential distribution was assumed for Ccorr , the CIs were very narrow whereas fitting the exponential distri-bution resulted in wider CIs, but ones that likely better reflect the true uncertainty of the model. An example of a comparison of these intervals can be seen in Figure S.9 in Appendix C.2.2. 15 5.2.4 Probability of floods at gauging stations (3), (4), (5) and (7) 
+
+In order to illustrate practical utility of the model, we calculate the annual probability of floods occurring at gauging stations (3), (4), (5) and (7) simultaneously. We chose to focus on this particular probability because there is an indication that these gauging stations can experience simultaneous extremes, which is further discussed in Section 6. In this case a flood is defined as river flow values at each location exceeding their corresponding river flow value at bankfull. This value is obtained through the statistical equation used to obtain river flows from river heights that are measured. This equation, together with the river height corresponding to bankfull, were obtained from the information on each gauging station from UK Centre for Ecology & Hydrology (2025). The bankfull values at stations (3), (4), (5) and (7) are v3 = 860, v4 = 318, v5 = 580 and v7 = 900 m 3/s, respectively, which on exponential margins are vexp ,3 = 8 .6, vexp ,4 = 9 .3, vexp ,5 = 13 .0 and 
+
+vexp ,7 = 9 .7. There are no observations exceeding bankfull at any of these locations, hence the probability cannot be calculated empirically. There are two approaches to calculating this probability. One approach is based on the idea of event set generation that has previously been used with the conditional approach, see for example Keef et al. (2013). The event set generation method with our framework is described in more detail in Appendix D. This approach can be computationally expensive if B is very far in the tail. We thus focus on a more direct and efficient way to calculate this probability. One million points were simulated from the fitted model with the graphical gauge function using methods described in Section 3.2.2, but in a region where R > kr 0(W ) with k > 1, since the river flow values corresponding to bankfull are far in the tail. This entails a modified version of equation (2) to calculate the probability Pr( X ∈ B), as outlined in Wadsworth and Campbell (2024). In this case B = (0 , ∞)2 ×
+
+(vexp ,3, ∞) × (vexp ,4, ∞) × (vexp ,5, ∞) × (0 , ∞) × (vexp ,7, ∞) × (0 , ∞)3. To minimise Monte Carlo uncertainty, we want to select k as high as possible, subject to the high radial threshold kr 0(W ) remaining below the marginal values vexp ,i for i = 3 , 4, 5, 7. The value of 
+
+k was obtained using a heuristic method introduced by Campbell et al. (2026), where a set of values k′ ∈ { 1, 1.1, . . . , 4} was considered. For each k′, the non-exceedances were scaled by k′ and the number of these scaled non-exceedances in the region max i={3,4,5,7} Xi >
+
+min i={3,4,5,7} vexp ,i was obtained. The value of k was chosen as the highest value in the range that gave zero scaled non-exceedances, leading to k = 2 .7 The resulting exceedance probability per event, with 95% CIs obtained from the 1000 block-bootstrap samples by taking the 2.5 and 97.5% quantile, is 2 .9[1 .3, 3.9] ·10 −6. The annual exceedance probability is obtained by multiplying this estimate by the average number of events per year in which there is no missing data — recalling our pre-processing — which gives 1 .8[0 .8, 2.4] · 10 −4.This simple multiplication is highly accurate given the very small probability. The annual probability of floods occurring at stations (3), (4), (5) and (7) is therefore very low, corresponding to a return period of over 5000 years. This was an example used for illustration purposes. However, using the fitted model with the graphical gauge function, we are in theory able to calculate probabilities in the whole region of space. This is an advantage compared to the framework of conditional extremes, where multiple models conditioning on different stations in turn have to be fitted. For example, if we wanted to calculate the same probability using the conditional approach, we would have to use a model conditioning on station (3), (4), (5) or (7). This gives four different models, where each one of them might give slightly different result or the models might have to be combined using a method with importance weights (Wadsworth and Tawn, 2022), for example. Moreover, none of these models could be used if we were interested in calculating the probability of flooding at station (1) and (2), for example. This means that in order to be able to calculate probabilities for all different possible combinations, d different models 16 conditioning on each of the stations in turn would have to be fitted, each with 2( d − 1) parameters, where in this case d = 10. The appropriate models would then have to be chosen depending on the probabilities of interest and potentially combined together. 
+
+# 6 Extension of the model 
+
+Using the Gaussian gauge function for the adjacent flow-connected pairs entails an as-sumption that the pairs do not experience joint extreme river flows at the very highest levels. This is because the boundary of the limit set does not intersect the unit square at (1 , 1), as discussed in Section 3.1. For greater flexibility, we propose an extension to the model that modifies the bivariate Gaussian gauge function in a way that allows for the possibility of joint extremes between these pairs. This gauge function corresponds to that of the model introduced by Huser and Wadsworth (2019) for interpolating between asymptotic dependence and asymptotic independence. Following Lee and Wadsworth (2025) we term this the exponential-Gaussian gauge function, with form 
+
+gEG (x1, x 2) = 
+
+
+
+min 
+
+> s∈[0 ,min( x1,x 2)/γ ]
+
+{s + gG(x1 − γs, x 2 − γs )}, γ ∈ (0 , 1] min 
+
+> s∈[0 ,min( x1,x 2)]
+
+{s + gG(γx 1 − γs, γx 2 − γs )}, γ > 1,
+
+where gG is the bivariate Gaussian gauge and γ is an extra parameter that controls whether there is a point at (1,1) or not. When γ ≤ 1/g G(1 , 1), the shape of the Gaussian gauge function is unaffected. When γ ∈ (1 /g G(1 , 1) , 1), the shape alters but there is still no point at (1,1). When γ ≥ 1, the resulting gauge function has a point at (1,1). This means that for γ < 1 the pair does not experience joint extremes and for γ ≥ 1 it does. This value is estimated when fitting the model, hence no prior assumption has to be made about the occurrence of joint extremes between the pairs. In addition, joint extreme river flows for certain pairs creates a higher order group of joint extreme river flows, which links to the property showed by Papastathopoulos and Wadsworth (2026), whereby all cliques exhibiting joint extremes is equivalent to all variables exhibiting joint extremes. This property is still applicable to a subgraph involving sites (3), (4), (5) and (7). Fitting the model with exponential-Gaussian gauge function for all adjacent flow-connected pairs resulted in the 10-dimensional gauge function having 18 parameters. The likelihood corresponding to this model was found to be relatively flat, leading to difficul-ties in optimisation and parameter estimates with large uncertainties. To simplify the optimisation, we decided to apply the exponential-Gaussian gauge function only to the pairs that showed an indication of joint extremes in the full exponential-Gaussian model. These pairs were (3 , 7), (4 , 7), and (5 , 7). Results for this model follow. 
+
+## 6.1 Results 
+
+Table 2 shows the estimated parameters with 90% CIs for the model with exponential-Gaussian gauge functions used for pairs (3 , 7), (4 , 7), and (5 , 7). The full bootstrap distributions of all parameter estimates are provided in Figure S.4 and Figure S.5 in Appendix B.2. The parameter estimates are similar to the ones obtained with the orig-inal model for the pairs where the Gaussian gauge function was used for adjacent flow-connected pairs and for flow-unconnected pairs. The estimates of the γ parameters are 
+
+≥ 1 suggesting joint extreme river flows for these pairs. However, the CIs also include values of γ < 1. The CIs are particularly wide for γ{5,7} and ρ{5,7}, which suggests that different combinations of γ{5,7} and ρ{5,7} can lead to similar likelihoods. 17 Table 2: Estimated parameters with 90% CIs for the truncated gamma model with the graphical gauge function with exponential-Gaussian gauge function used for pairs (3 , 7), (4 , 7), and (5 , 7). 
+
+a γ3,7 ρ3,7 γ4,7 ρ4,7 ρ4,8 γ5,7 ρ5,7 ρ5,9 ρ6,7
+
+Estimate 0.36 1.06 0.96 1.27 0.86 0.96 1.00 0.85 0.97 0.89 Lower CI 0.34 0.83 0.83 0.81 0.67 0.87 0.67 0.16 0.86 0.78 Upper CI 0.63 1.81 1.00 1.93 0.99 0.99 1.97 1.00 0.99 0.99 
+
+θ1,2 θ1,3 θ1,10 θ2,3 θ2,10 θ3,10 
+
+Estimate 0.97 0.77 0.71 0.77 0.74 0.74 Lower CI 0.93 0.32 0.29 0.35 0.34 0.43 Upper CI 0.99 0.91 0.92 0.92 0.95 0.88 The effect of the parameter estimates on the shape of the sample cloud can be seen through the bivariate projections. Figure 10 shows the comparison between the bivariate projections of the graphical gauge function for the original model with Gaussian gauge function used for all flow-connected pairs, and the extended model with exponential-Gaussian used for pairs (3 , 7), (4 , 7), and (5 , 7). Projections from both models for pair (3 , 7) describe the shape of the scaled sample cloud well. The projection from the extended model for pair (4 , 7) is significantly influenced by the exponential, which is also reflected in the high γ parameter in Table 2. The projection from the extended model for pair (5 , 7) is a lot wider than for the original model. In this case, the Gaussian gauge function appears to describe the shape of the scaled sample cloud better. Figure 11 compares the model-based χS (u) for the original and extended model for 
+
+u → 1 for a flow-unconnected and an adjacent flow-connected pair. Additional χS (u)plots can be found in Figure S.10 in Appendix C.2.3. The model-based χS (u) for both models are very close to each other. The 95% CIs are wider for the extended model in some cases, for example for flow-connected pairs (4 , 8) and (3 , 4). This is likely due to larger parameter space of the extended model, and its ability to capture both joint and separate extremes. The annual probability of a flood at gauging station (3), (4), (5) and (7) was also cal-culated using this extended model to see whether the fact that the exponential-Gaussian gauge function used for the pairs (3 , 7), (4 , 7) and (5 , 7) would have an effect on this prob-0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0  
+
+> X3 log
+
+(n)      
+
+> X7  log (n)
+> Original Extended 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X4 log
+
+(n)      
+
+> X7  log (n)
+> Original Extended 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X5 log
+
+(n)
+
+> X7  log (n)
+> Original Extended
+
+Figure 10: Unit level sets of the bivariate projections of the graphical gauge function with Gaussian gauge function used for all pairs (red line) and with exponential-Gaussian used for pairs (3 , 7), (4 , 7) and (5 , 7) with corresponding scaled sample clouds (black points). 18 0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0   
+
+> u
+> χ{2,3}
+> empirical model − original model − extended 0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{3,7}
+> empirical model − original model − extended
+
+Figure 11: Plot of empirical (solid black) and model-based χS (u) for original (solid red) and extended (solid blue) model with empirical (grey region) and model-based for original (light red region) and for extended (light blue region) 95% CIs for flow-unconnected 
+
+S = {2, 3} (left) and an adjacent flow-connected S = {3, 7} pair (right). ability. The exceedance probability per event with 95% CIs is 2 .7[1 .3, 3.7] · 10 −6, which gives an annual exceedance probability of 1 .6[0 .8, 2.2] · 10 −4. Interestingly, the probability from the original fit, and the upper CI, are slightly lower than in the original model. 
+
+# 7 Discussion 
+
+In this work, we implemented the first statistical model using the geometric extremal graphical modelling framework introduced by Papastathopoulos and Wadsworth (2026). We fitted this graphical model to river flow data from 10 gauging stations on a river network near Preston, in the north west of England. This allows extrapolation and estimation of flood risk at 10 locations, which has previously only been done within the geometric framework in a spatial setting or using deep-learning methods. Through numerous diagnostics, the model was found to perform very well. Flood risk estimation in the whole region of space is possible using just one model fit, which is an advantage compared to the conditional extremes approach, where different models each conditioning on a different station have to be fitted and used to calculate probabilities for different regions of space. While in theory probabilities for any combinations of stations could be calculated, in practice river flows corresponding to bankfull could not be obtained for all gauging stations on this river network. This was due to all observations being far from bankfull and the statistical relationship between river height and river flow not being valid for the values near bankfull. For additional flexibility, an extension to the model was proposed, that allows the adjacent flow-connected pairs to experience the most extreme river flows jointly or sepa-rately. This is determined based on the estimate of the parameter and does not have to be assumed a priori, whereas the extremal graphical model of Engelke and Hitz (2020) assumes full asymptotic dependence between all stations. However, the differences in extrapolation between the original and extended model can only be seen very far in the tail, beyond the levels that we are interested in. For that reason, the simpler model was preferred in this case. If the sample cloud of the pairs was more complex, more flexible shapes might be required. In that case, other additively mixed gauge functions (Wadsworth and Camp-19 bell, 2024; Lee and Wadsworth, 2025) or piecewise-linear gauge functions (Campbell and Wadsworth, 2024) could be explored within the graphical gauge function. For estimating a suitable threshold, we used a kernel density estimation based tech-nique. In higher dimensions, other methods will likely be required. It may be possible in this case to also exploit a graphical structure, since the gauge function has an approxi-mate inverse relationship with high quantiles of R|{ W = w} (Wadsworth and Campbell, 2024). Finally, the simulation of points above the high threshold r0(w) could be improved by introducing an angular distribution rather than resampling the angles from the empirical distribution. This would resolve the problem of the trails in the data illustrated in the left hand side plot in Figure 8. This, however, did not seem to impede our analysis. 
+
+# Funding 
+
+This paper is based on work completed while KG was part of the EPSRC funded STOR-i Centre for Doctoral Training EP/S022252/1. JW gratefully acknowledges funding from EPSRC grant EP/X010449/1. TLT acknowledges the support of the Research Council of Norway through its Centre of Excellence Integreat – The Norwegian Centre for Knowledge-driven Machine Learning, project number 332645. 
+
+# Data and code availability 
+
+Data underpinning this publication are openly available from NRFA at https://nrfa. ceh.ac.uk/ . A sample code to run and reproduce the results can be found at https:// github.com/grolmus-k/flood_risk_estimation_via_geometric_extremal_graphical_ modelling.git .
+
+# Supplementary Material 
+
+## A: River flow data and pre-processing 
+
+Additional details of the matching of the peaks and seasonality. 
+
+## B: Histograms of parameter estimates 
+
+Investigation of parameter estimates from bootstrap samples. 
+
+## C: Diagnostics 
+
+Additional bivariate projections and χS (u) plots. 
+
+## D: Event set generation for calculating probabilities 
+
+Description of event set generation for flood risk estimation calculation. 20 References 
+
+Asadi, P., Davison, A. C. and Engelke, S. (2015). Extremes on river networks, The Annals of Applied Statistics 9(4). Campbell, R., Grolmusova, K., Kakampakou, L. and Lee, J. (2026). Analysing extreme rainfall via a geometric framework, arXiv preprint arXiv:2603.18149 .Campbell, R. and Wadsworth, J. (2024). Piecewise-linear modeling of multivariate geo-metric extremes, arXiv preprint arXiv:2412.05195 .Coles, S. G. and Tawn, J. A. (1991). Modelling extreme multivariate events, Journal of the Royal Statistical Society. Series B (Methodological) 53 (2): 377–392. De Monte, L., Huser, R., Papastathopoulos, I. and Richards, J. (2025). Generative modelling of multivariate geometric extremes using normalising flows, arXiv preprint arXiv:2505.02957 .Engelke, S. and Hitz, A. S. (2020). Graphical models for extremes, Journal of the Royal Statistical Society Series B: Statistical Methodology 82 (4): 871–932. Farrell, A., Eastoe, E. F. and Lee, C. (2024). Conditional extremes with graphical models, 
+
+arXiv preprint arXiv:2411.17013 .Heffernan, J. E. and Tawn, J. A. (2004). A conditional approach for multivariate extreme values (with discussion), Journal of the Royal Statistical Society Series B: Statistical Methodology 66 (3): 497–546. Huser, R. G. and Wadsworth, J. L. (2019). Modeling spatial processes with un-known extremal dependence class, Journal of the American Statistical Association 
+
+114 (525): 434–444. Institute of Hydrology (1999). Flood Estimation Handbook , Institute of Hydrology, Wallingford, UK. Kakampakou, L. and Wadsworth, J. L. (2025). Geometric modelling of spatial extremes, 
+
+arXiv preprint arXiv:2511.08192 .Keef, C., Svensson, C. and Tawn, J. A. (2009). Spatial dependence in extreme river flows and precipitation for Great Britain, Journal of Hydrology 378 (3-4): 240–252. Keef, C., Tawn, J. A. and Lamb, R. (2013). Estimating the probability of widespread flood events, Environmetrics 24 (1): 13–21. Keef, C., Tawn, J. and Svensson, C. (2009). Spatial risk assessment for extreme river flows, 
+
+Journal of the Royal Statistical Society Series C: Applied Statistics 58 (5): 601–618. Kjeldsen, T. R., Jones, D. A. and Bayliss, A. C. (2008). Improving the FEH statistical procedures for flood frequency estimation: Science report: Sc050050, https://nora.nerc.ac.uk/id/eprint/3545/. [Accessed: 22-08-2025]. Lauritzen, S. L. (1996). Graphical models , Oxford University Press, Oxford. Lee, J. and Wadsworth, J. L. (2025). Geometric criteria for identifying extremal depen-dence and flexible modeling via additive mixtures, arXiv preprint arXiv:2512.24392 
+
+.21 Majumder, R., Shaby, B. A., Reich, B. J. and Cooley, D. S. (2025). Semiparametric estimation of the shape of the limiting bivariate point cloud, Bayesian Analysis 1(1). Murphy-Barltrop, C. J. R., Majumder, R. and Richards, J. (n.d.). Deep learning of multivariate extremes via a geometric representation, arXiv preprint arXiv:2406.19936 
+
+.Nolde, N. and Wadsworth, J. L. (2022). Linking representations for multivariate extremes via a limit set, Advances in Applied Probability 54 (3): 688–717. Olcese, G., Bates, P. D., Neal, J. C., Sampson, C. C., Wing, O. E. J., Quinn, N. and Beck, H. E. (2022). Use of hydrological models in global stochastic flood modeling, 
+
+Water Resources Research 58 (12): e2022WR032743. Olcese, G., Bates, P. D., Neal, J. C., Sampson, C. C., Wing, O. E. J., Quinn, N., Murphy-Barltrop, C. J. R. and Probyn, I. (2024). Developing a fluvial and pluvial stochastic flood model of Southeast Asia, Water Resources Research 60 (6): e2023WR036580. Papastathopoulos, I. and Wadsworth, J. (2026). Geometric extremal graphical models and coefficients of extremal dependence on block graphs, arXiv preprint arXiv:2601.00239 .Quinn, N., Bates, P. D., Neal, J., Smith, A., Wing, O., Sampson, C., Smith, J. and Heffernan, J. (2019). The spatial dependence of flood hazard and risk in the United States, Water Resources Research 55 (3): 1890–1911. Rentschler, J., Salhab, M. and Jafino, B. A. (2022). Flood exposure and poverty in 188 countries, Nat Commun 13 (1): 3527. Schneeberger, K. and Steinberger, T. (2018). Generation of spatially heterogeneous flood events in an Alpine region — Adaptation and application of a multivariate modelling procedure, Hydrology 5(1): 5. Simpson, E. S. and Tawn, J. A. (2024). Estimating the limiting shape of bivariate scaled sample clouds: With additional benefits of self-consistent inference for existing extremal dependence properties, Electronic Journal of Statistics 18 (2): 4582 – 4611. Towe, R. P., Tawn, J. A., Lamb, R. and Sherlock, C. G. (2019). Model-based inference of conditional extreme value distributions with hydrological applications, Environmetrics 
+
+30 (8): e2575. UK Centre for Ecology & Hydrology (2025). National River Flow Archive (NRFA), https://nrfa.ceh.ac.uk/. [Accessed: 11-10-2024]. UK Health Security Agency (2023). Health Effects of Climate Change (HECC) in the UK: 2023 report, https://www.gov.uk/government/publications/climate-change-health-effects-in-the-uk. [Accessed: 08-09-2025]. Vesuviano, G. and Griffin, A. (2025). The FEH 2025 statistical method update, https://www.ceh.ac.uk/services/feh-2025-statistical-updates. [Accessed: 08-09-2025]. Wadsworth, J. L. and Campbell, R. (2024). Statistical inference for multivariate extremes via a geometric approach, Journal of the Royal Statistical Society Series B: Statistical Methodology 86 (5): 1243–1265. Wadsworth, J. L. and Tawn, J. A. (2022). Higher-dimensional spatial extremes via single-site conditioning, Spatial Statistics 51 : 100677. 22 Wing, O. E. J., Quinn, N., Bates, P. D., Neal, J. C., Smith, A. M., Sampson, C. C., Coxon, G., Yamazaki, D., Sutanudjaja, E. H. and Alfieri, L. (2020). Toward global stochastic river flood modeling, Water Resources Research 56 (8): e2020WR027692. 23 Supplementary Material for ”Flood risk estimation via geometric extremal graphical models” 
+
+## Kristina Grolmusova 1, Jennifer L. Wadsworth 2, and Thordis L. Thorarinsdottir 31STOR-i Centre for Doctoral Training, Lancaster University, Lancaster, United Kingdom 
+
+> 2
+
+## School of Mathematical Sciences, Lancaster University, Lancaster, United Kingdom 
+
+> 3
+
+## Department of Mathematics, University of Oslo, Oslo, Norway 
+
+# A River flow data and pre-processing 
+
+## A.1 Matching the peak flows 
+
+Here we explain the procedure of Asadi et al. (2015) in detail. Our dataset consists of 10 time series corresponding to the GDF at all of the considered gauging stations. This dataset will be referred to as the original dataset and will not be modified during the pre-processing. Each event within an individual time series is ranked based on the value of the river flow, where the highest river flow has the highest rank. This results in a new dataset, which contains the 10 time series of river flows as well as 10 time series of ranks. This dataset will be referred to as the ranked dataset and will be modified during the pre-processing. The highest ranked event is chosen from the ranked dataset. If there are multiple events, the earliest one is chosen. A window of ±p days is constructed around the event. Within this time window, the highest river flows are identified for each of the time series of river flows in the original dataset. The highest ranked event is modified such that for each gauging station the highest river flow from the time window is considered as the river flow for the highest ranked event. This event is added to a new dataset, which will be referred to as the matched dataset. A window of ±2p around the highest ranked event is deleted in the ranked dataset and new highest ranked event is selected. This process continues until there are no events left in the ranked dataset. The matched dataset is the new dataset of unique flood events. 
+
+## A.2 Seasonality 
+
+Figure S.1 shows an example plot of GDF against the day of the year using original and matched data for gauging station (1). There appears to be a seasonal pattern in the data with higher and lower river flows in the winter and summer months, respectively. We have considered addressing this seasonality in two different ways: splitting the dataset into summer and winter seasons which has been done for example by Schneeberger and Steinberger (2018), and performing the analysis on these separately, or modelling the marginal non-stationarity using methods discussed by Kakampakou et al. (2024), for 1example. However, splitting the dataset into summer and winter would leave very few data points (around 100) for fitting of the extreme value model increasing the uncertainty of the model fit. When it comes to modelling the marginal non-stationarity, many approaches rely on pre-processing the data at each gauging station to remove seasonal patterns and/or trends. This results in the summer values being more extreme after pre-processing and therefore more summer values contributing to the fitting of the model. In flood risk estimation, we are particularly interested in river flows that are above a certain high value, which does not change depending on the season. Many of the extra summer extreme values will not be close to this value in the original dataset making them less interesting from flooding perspective. Finally, Kakampakou et al. (2024) also illustrated that decoupling dependence and margins is a non-trivial task, and different pre-processing methods for marginal non-stationarity can lead to different conclusions from the model. 0 100 200 300 0 5 10  15  20    
+
+> Day of Year GDF.1 0100 200 300 0 5 10  15  20
+> Day of Year GDF.1
+
+Figure S.1: Plot of GDF against the day of the year using original (left) and matched data (right) for station (1). 2B Histograms of parameter estimates 
+
+## B.1 Original model 
+
+Figure S.2 and Figure S.3 show the histograms of parameters from block-bootstrap sam-ples of the fit from the truncated gamma model with the graphical gauge function for the Preston river network with Gaussian gauge function used for all adjacent flow-connected pairs. aDensity                                   
+
+> 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0 1 2 3 4 5ρ{3,7} Density
+> 0.2 0.4 0.6 0.8 1.0 0 5 10  15  20  25  30 ρ{4,7} Density
+> 0.75 0.80 0.85 0.90 0.95 1.00 0 5 10  15  20 ρ{4,8} Density
+> 0.4 0.5 0.6 0.7 0.8 0.9 1.0 0 5 10  15 ρ{5,7} Density
+> 0.2 0.4 0.6 0.8 1.0 0 2 4 6 8 10 ρ{5,9} Density
+> 0.0 0.2 0.4 0.6 0.8 1.0 0 5 10  15 ρ{6,7} Density
+> 0.2 0.4 0.6 0.8 1.0 0 2 4 6
+
+Figure S.2: Histograms of a and ρ{i,j } for adjacent flow-connected pairs ( i, j ) from block-bootstrap samples of the fit from the truncated gamma model with the graphical gauge function for the Preston river network, with Gaussian gauge function used for all adjacent flow-connected pairs. Vertical red line shows the maximum likelihood estimate obtained using the matched dataset. 3θ{1,2} Density                           
+
+> 0.4 0.6 0.8 1.0 0 5 10  15  20 θ{1,3} Density
+> 0.0 0.2 0.4 0.6 0.8 0.0  0.5  1.0  1.5  2.0 θ{1,10} Density
+> 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.5  1.0  1.5  2.0 θ{2,3} Density
+> 0.0 0.2 0.4 0.6 0.8 0.0  0.5  1.0  1.5  2.0  2.5 θ{2,10} Density
+> 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.5  1.0  1.5  2.0 θ{3,10} Density
+> 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.5  1.0  1.5  2.0  2.5  3.0
+
+Figure S.3: Histograms of θ{i,j } for flow-unconnected pairs ( i, j ) from block-bootstrap samples of the fit from the truncated gamma model with the graphical gauge function for the Preston river network, with Gaussian gauge function used for all adjacent flow-connected pairs. Vertical red line shows the maximum likelihood estimate obtained using the matched dataset. 
+
+## B.2 Extended model 
+
+Figure S.4 and Figure S.5 show the histograms of parameters from block-bootstrap sam-ples of the fit from the truncated gamma model with the graphical gauge function for the Preston river network with exponential-Gaussian gauge function used for flow-connected pairs (3 , 7), (4 , 7) and (5 , 7). 4aDensity 
+
+0.3 0.4 0.5 0.6 0.7 0.8 0 1 2 3 4 5γ{3,7} Density 
+
+0 1 2 3 4 50.0  0.5  1.0  1.5  2.0  2.5  3.0 γ{4,7} Density 
+
+0.5 1.0 1.5 2.0 2.5 3.0 3.5 0 1 2 3γ{5,7} Density 
+
+0 1 2 30.0  0.5  1.0  1.5  2.0  2.5  3.0 ρ{3,7} Density 
+
+0.0 0.2 0.4 0.6 0.8 1.0 0 2 4 6 8 10  12 ρ{4,7} Density 
+
+0.0 0.2 0.4 0.6 0.8 1.0 0 1 2 3 4 5ρ{4,8} Density 
+
+0.5 0.6 0.7 0.8 0.9 1.0 0 5 10  15 ρ{5,7} Density 
+
+0.0 0.2 0.4 0.6 0.8 1.0 0 1 2 3 4ρ{5,9} Density 
+
+0.2 0.4 0.6 0.8 1.0 0 5 10  15 ρ{6,7} Density 
+
+0.2 0.4 0.6 0.8 1.0 0 2 4 6Figure S.4: Histograms of a, γ{3,7}, γ{4,7}, γ{5,7} and ρ{i,j } for flow-connected pairs ( i, j )from block-bootstrap samples of the fit from the truncated gamma model with the graph-ical gauge function for the Preston river network, with exponential-Gaussian gauge func-tion used for flow-connected pairs (3 , 7), (4 , 7) and (5 , 7). Vertical red line shows the maximum likelihood estimate obtained using the matched dataset. 5θ{1,2} Density                          
+
+> 0.2 0.4 0.6 0.8 1.0 0 5 10  15  20 θ{1,3} Density
+> 0.0 0.2 0.4 0.6 0.8 0.0  0.5  1.0  1.5  2.0 θ{1,10} Density
+> 0.0 0.2 0.4 0.6 0.8 0.0  0.5  1.0  1.5  2.0 θ{2,3} Density
+> 0.0 0.2 0.4 0.6 0.8 0.0  0.5  1.0  1.5  2.0  2.5 θ{2,10} Density
+> 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.5  1.0  1.5  2.0 θ{3,10} Density
+> 0.0 0.2 0.4 0.6 0.8 0 1 2 3
+
+Figure S.5: Histograms of θ{i,j } for flow-unconnected pairs ( i, j ) from block-bootstrap samples of the fit from the truncated gamma model with the graphical gauge function for the Preston river network, with exponential-Gaussian gauge function used for flow-connected pairs (3 , 7), (4 , 7) and (5 , 7). Vertical red line shows the maximum likelihood estimate obtained using the matched dataset. 
+
+## B.3 Investigating an influential point for pair (6 , 7) and its im-pact on the fit 
+
+The shape of the limit set for the pair (6 , 7) in Figure S.7 is a little wider than the scaled sample cloud. We investigated whether this could be due to the slightly outlying point at (0.69, 0.96). We looked at the 1000 bootstrap samples and determined whether this point is present in a particular sample or not, and then plotted a histogram of the estimates of the parameter ρ{6,7} for the two cases, which can be found in Figure S.6. There were 375 samples without and 625 with this particular point. The estimates of the parameter ρ{6,7}
+
+were in general higher for the case where the outlying point was not present, supporting the belief that the wider fit is likely due to this point. 6ρ{6,7} Density 
+
+0.0 0.2 0.4 0.6 0.8 1.0 0 5 10  15  Without outlier With outlier Figure S.6: Histogram of the estimate of ρ{6,7} for bootstrap samples that contain the outlier (red) and that do not contain the outlier (blue). 7C Diagnostics 
+
+## C.1 Bivariate projections 
+
+Figure S.7 shows the bivariate projections for the rest of the adjacent flow-connected pairs. 0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0  
+
+> X4 log
+
+(n)      
+
+> X7  log (n)0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X4 log
+
+(n)      
+
+> X8  log (n)0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X5 log
+
+(n)      
+
+> X7  log (n)0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X5 log
+
+(n)      
+
+> X9  log (n)0.0 0.2 0.4 0.6 0.8 1.0 0.0  0.2  0.4  0.6  0.8  1.0
+> X6 log
+
+(n)
+
+> X7  log (n)
+
+Figure S.7: Plots showing the bivariate projections of the limit set (red line) fitted to all 10 stations on the Preston river network with corresponding scaled sample clouds (black points) for adjacent flow-connected pairs. 
+
+## C.2 χS (u) plots 
+
+C.2.1 Original model 
+
+Figure S.8 shows the comparison of bivariate empirical and model-based χS (u) for flow-connected S = {4, 8}, {3, 4} and flow-unconnected pairs S = {8, 9}, {9, 10 }. Pair (4 , 7) is adjacent flow-connected, and (3 , 4) is non-adjacent flow-connected. Pair (8 , 9) is a flow-unconnected pair with both gauging stations being on the tree of flow-connected stations, whereas for pairs (9 , 10) one of the stations is on the tree and the other one is not. 80.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0          
+
+> u
+> χ{4,8} 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{3,4} 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{8,9} 0.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0
+> u
+> χ{9,10}
+
+Figure S.8: Plot of empirical (solid black) and model-based χS (u) (solid red) with em-pirical (grey region) and model-based (light red region) 95% CIs for flow-connected 
+
+S = {4, 8}, {3, 4} (top) and flow-unconnected pairs S = {8, 9}, {9, 10 } (bottom). 
+
+C.2.2 Impact of correction coefficient on χS (u) plots 
+
+Figure S.9 shows an example of a plot of empirical and model-based χS (u), illustrating three different model-based 95% confidence intervals (CIs). The widest CI is that from the model without the correction coefficient Ccorr , while the narrowest one is that obtained with Ccorr and assuming a standard exponential distribution in the block bootstrap. Fi-nally, when Ccorr is used with a fitted exponential distribution in the block bootstrap, we obtain the middle width. 90.85 0.90 0.95 1.00 0.0  0.2  0.4  0.6  0.8  1.0 
+
+> u
+> χ{3,4}
+
+Figure S.9: Plot of empirical (solid black) and model-based χS (u) without Ccorr (solid blue), with Ccorr assuming standard exponential distribution (solid red) and with Ccorr 
+
+with fitted exponential distribution (solid green) for S = {3, 4}. The corresponding empirical and model-based 95% CIs are shown as grey and light blue, red and green regions, respectively. 
+
+C.2.3 Extended model 
+
+Figure S.10 shows the comparison of bivariate empirical and model-based χS (u) for the original and extended model for flow-connected S = {4, 8}, {3, 4} and flow-unconnected pairs S = {8, 9}, {9, 10 }. Pair (4 , 7) is adjacent flow-connected, and (3 , 4) is non-adjacent flow-connected. Pair (8 , 9) is a flow-unconnected pair with both gauging stations being on the tree of flow-connected stations, whereas for pairs (9 , 10) one of the stations is on the tree and the other one is not. The model-based χS (u) estimates are very similar for both models with slightly higher upper CI for the extended model as u → 1. 10 0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0 
+
+u
+
+> χ{4,8}
+> empirical model − original model − extended
+
+0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0 
+
+u
+
+> χ{3,4}
+> empirical model − original model − extended
+
+0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0 
+
+u
+
+> χ{8,9}
+> empirical model − original model − extended
+
+0.990 0.994 0.998 0.0  0.2  0.4  0.6  0.8  1.0 
+
+u
+
+> χ{9,10}
+> empirical model − original model − extended
+
+Figure S.10: Plot of empirical (solid black) and model-based χS (u) for original (solid red) and extended (solid blue) model with empirical (grey region) and model-based for original (light red region) and for extended (light blue region) 95% CIs for flow-connected 
+
+S = {4, 8}, {3, 4} (top) and flow-unconnected pairs S = {8, 9}{ 9, 10 } (bottom). 11 D Event set generation for calculating probabilities 
+
+In the event set generation approach, the desired number of years is selected. For each year, we resample the number of events per year from the empirical distribution of number of events per year for the years with no missing data. In our dataset, there were 29 years with no missing data and the average number of events per year ¯ nevent /year was 60 .5, with range 56 − 64. This procedure gives the total number of events that need to be simulated. In order to simulate an event, we resample an event from the matched dataset. If this event is a non-exceedance, we add this event to our new dataset. If this event is an exceedance, we simulate a new point above the high radial threshold r0(w)from the fitted model with the graphical gauge function using the methods described in Section 3.2.2. We repeat this procedure until the desired number of events is reached. The annual exceedance probability is calculated by counting the number of points that fall into the region of interest B and dividing by the total number of years. In this case 
+
+B = (0 , ∞)2 × (vexp ,3, ∞) × (vexp ,4, ∞) × (vexp ,5, ∞) × (0 , ∞) × (vexp ,7, ∞) × (0 , ∞)3. We also calculate the correction coefficient to account for the difference between the marginal distribution of the sampled points and the exponential distribution. This is done by obtaining the annual exceedance probability using the exponential distribution, which is approximately exp( −vi, exp )¯ nevent /year , for i = 3 , 4, 5, 7. We then divide this by a fraction, where the numerator is the number of points in the region where Xi > v i, exp and the denominator is the total number of years. This approach allows us to generate a new long dataset with extreme values that have not been observed before. The downside of this is that if B is very far in the tail, a very high number of years is necessary to observe a few events in B, which is computationally expensive. In this case, to obtain around 100 events in B, we needed 1,000,000 years worth of data, which we found to be challenging for a standard computer. 
+
+# References 
+
+Asadi, P., Davison, A. C. and Engelke, S. (2015). Extremes on river networks, The Annals of Applied Statistics 9(4). Kakampakou, L., Simpson, E. S. and Wadsworth, J. L. (2024). Spatial extremal modelling: A case study on the interplay between margins and dependence, Stat 13 (4): e70021. Schneeberger, K. and Steinberger, T. (2018). Generation of spatially heterogeneous flood events in an Alpine region — Adaptation and application of a multivariate modelling procedure, Hydrology 5(1): 5. 12

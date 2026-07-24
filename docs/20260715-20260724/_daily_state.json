@@ -1,0 +1,345 @@
+{
+  "date": "20260715-20260724",
+  "date_label": "2026-07-15 ~ 2026-07-24",
+  "generated_at": "2026-07-24 07:28:06 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.14279v1",
+      "route": "20260715-20260724/2607.14279v1-from-vector-autoregressions-to-ai-based-time-series-forecasting-a-review",
+      "title": "From Vector Autoregressions to AI-based Time Series Forecasting: A Review",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于AI的时间序列预测综述",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.14771v1",
+      "route": "20260715-20260724/2607.14771v1-mixed-frequency-time-series-forecasting-via-depth-separable-neural-networks",
+      "title": "Mixed-Frequency Time Series Forecasting via Depth-Separable Neural Networks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "混合频率时间序列预测方法",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.16080v1",
+      "route": "20260715-20260724/2607.16080v1-physics-based-deep-spatiotemporal-hyperlocal-radar-nowcasting-with-a-multi-variable-u-net-for-high-resolution-precipitation-forecasting",
+      "title": "Physics-Based Deep Spatiotemporal Hyperlocal Radar Nowcasting with a Multi-Variable U-Net for High-Resolution Precipitation Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "深度学习降水现在预报，直接相关于水文水质预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.16358v1",
+      "route": "20260715-20260724/2607.16358v1-a-quantum-classical-hybrid-framework-for-multivariate-time-series-forecasting-complexity-fidelity-trade-offs-and-limitations",
+      "title": "A Quantum-Classical Hybrid Framework for Multivariate Time-Series Forecasting Complexity-Fidelity Trade-offs and Limitations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "量子-经典混合框架用于多变量时间序列预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.16882v1",
+      "route": "20260715-20260724/2607.16882v1-hybdm-multi-scale-hybrid-experts-for-time-series-forecasting-with-bidirectional-dependency-modeling",
+      "title": "HyBDM: Multi-Scale Hybrid Experts for Time Series Forecasting with Bidirectional Dependency Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多尺度混合模型用于时间序列预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.17507v1",
+      "route": "20260715-20260724/2607.17507v1-residual-guided-multi-resolution-refinement-of-foundation-models-a-case-study-in-drought-forecasting",
+      "title": "Residual-Guided Multi-Resolution Refinement of Foundation Models: A Case Study in Drought Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "干旱预测属于水文预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.17511v1",
+      "route": "20260715-20260724/2607.17511v1-lightweight-wrappers-for-adapting-time-series-foundation-models-to-regional-drought-forecasting",
+      "title": "Lightweight Wrappers for Adapting Time Series Foundation Models to Regional Drought Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "时间序列基础模型用于区域干旱预报",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.19902v1",
+      "route": "20260715-20260724/2607.19902v1-nonlinear-bias-compensated-adaptive-filter-and-its-application-for-time-series-prediction",
+      "title": "Nonlinear Bias-Compensated Adaptive Filter and Its Application for Time-Series Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向时间序列预测的非线性自适应滤波与偏差补偿",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.21080v1",
+      "route": "20260715-20260724/2607.21080v1-nipping-the-butterfly-effect-in-the-bud-self-output-fine-tuning-for-autoregressive-weather-prediction",
+      "title": "Nipping the Butterfly Effect in the Bud: Self-Output Fine-Tuning for Autoregressive Weather Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "使用自回归深度学习的天气预报（水文预测）",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.21200v1",
+      "route": "20260715-20260724/2607.21200v1-transformer-based-diffusion-models-for-hydrological-time-series-probabilistic-imputation-and-forecasting",
+      "title": "Transformer-based Diffusion models for Hydrological Time Series Probabilistic Imputation and Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于Transformer的扩散模型用于水文时间序列插补和预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.15000v2",
+      "route": "20260715-20260724/2607.15000v2-flood-risk-estimation-via-geometric-extremal-graphical-models",
+      "title": "Flood risk estimation via geometric extremal graphical models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于几何极值图模型的河流流量洪水风险评估",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.15705v1",
+      "route": "20260715-20260724/2607.15705v1-a-benchmark-for-electrical-load-forecasting-across-grid-levels-time-series-transformers-outperform-established-methods",
+      "title": "A Benchmark for Electrical Load Forecasting Across Grid Levels: Time-Series Transformers Outperform Established Methods",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "电力负荷预测基准，时间序列预测方法对比",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.15775v1",
+      "route": "20260715-20260724/2607.15775v1-aquaaugmentor-a-novel-feature-augmentation-algorithm-for-water-potability-prediction",
+      "title": "AquaAugmentor: A Novel Feature Augmentation Algorithm for Water Potability Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用于水适饮性预测的特征增强算法",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.16050v1",
+      "route": "20260715-20260724/2607.16050v1-deluge-towards-continental-scale-daily-pluvial-flood-damage-prediction-via-interpretable-conditioning-on-foundation-model-embeddings",
+      "title": "DELUGE: Towards Continental-Scale Daily Pluvial Flood Damage Prediction via Interpretable Conditioning on Foundation Model Embeddings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "大陆尺度每日暴雨洪水损失预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.13550v1",
+      "route": "20260715-20260724/2607.13550v1-parallel-gradient-boosting-for-flexible-estimation-of-conditional-distributions",
+      "title": "Parallel gradient boosting for flexible estimation of conditional distributions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多输出提升方法用于条件分布估计，可应用于时间序列预测",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.13852v1",
+      "route": "20260715-20260724/2607.13852v1-a-frequentist-approach-to-change-point-detection-methods-and-applications",
+      "title": "A Frequentist Approach to Change Point Detection: Methods and Applications",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "函数型时间序列中的变点检测，可用于水文时间序列分析",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.14871v1",
+      "route": "20260715-20260724/2607.14871v1-asymmetric-peak-aware-loss-for-peak-critical-time-series-forecasting",
+      "title": "Asymmetric Peak-Aware Loss for Peak-Critical Time Series Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向峰值关键时间序列预测的非对称损失函数",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.16731v1",
+      "route": "20260715-20260724/2607.16731v1-bg4sea-biogeochemical-seasonal-forecastability-via-progressive-information-scaling",
+      "title": "BG4Sea: Biogeochemical Seasonal Forecastability via Progressive Information Scaling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "海洋生物地球化学预测，与水质相关",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.13627v1",
+      "route": "20260715-20260724/2607.13627v1-the-value-of-perfect-endpoint-forecasts-for-offshore-wind-thermal-firming",
+      "title": "The Value of Perfect Endpoint Forecasts for Offshore-Wind Thermal Firming",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "应用于能源系统的时间序列预测方法（分位数傅里叶回归）",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.14196v1",
+      "route": "20260715-20260724/2607.14196v1-ocelot-direct-atmospheric-forecasting-from-heterogeneous-earth-observations-using-a-graph-transformer-hybrid-model",
+      "title": "OCELOT: Direct Atmospheric Forecasting from Heterogeneous Earth Observations Using a Graph-Transformer Hybrid Model",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "大气预报与水文预测相关",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    },
+    {
+      "paper_id": "2607.14632v1",
+      "route": "20260715-20260724/2607.14632v1-criticality-and-reduced-dynamical-resilience-in-pm25-pollution-systems",
+      "title": "Criticality and reduced dynamical resilience in PM2.5 pollution systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分析PM2.5污染的动态临界性，与水质预测方法相关",
+      "first_seen_at": "2026-07-24 07:28:06 UTC",
+      "updated_at": "2026-07-24 07:28:06 UTC"
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+Title: AquaAugmentor: A Novel Feature Augmentation Algorithm for Water Potability Prediction
+
+URL Source: https://arxiv.org/pdf/2607.15775v1
+
+Published Time: Mon, 20 Jul 2026 00:42:01 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+2024 6 th International Conference on Sustainable Technologies for Industry 5.0 (STI), 14-15 December, Dhaka 
+
+# AquaAugmentor: A Novel Feature Augmentation Algorithm for Water Potability Prediction 
+
+Muntasir Tabasum 1, Al Zadid Sultan Bin Habib 2, Tanpia Tasnim 3, Md. Ekramul Islam 4,Md Younus Ahamed 5, Md Asif Bin Syed 6,
+
+> 1,2,5,6
+
+West Virginia University, Morgantown, WV 26506, USA 
+
+> 3
+
+Green University of Bangladesh, Narayanganj-1461, Dhaka, Bangladesh 
+
+> 4
+
+Stamford University Bangladesh, Dhaka-1217, Bangladesh Email: {mt00079 1, ah00069 2, ma00087 5, ms00110 6}@mix.wvu.edu, tanpia@cse.green.edu.bd 3, eislam706@gmail.com 4
+
+Abstract —Access to potable water is crucial for health, eco-nomic development, and sustainability. However, accurately clas-sifying water quality remains a significant challenge due to the complexity and variability of water source data. This paper addresses the challenge of predicting water potability through machine learning and deep learning algorithms. It introduces a novel feature augmentation algorithm, AquaAugmentor, to enhance the predictive performance of these models for low-dimensional datasets. Utilizing a dataset that includes chemical attributes of water, such as pH, hardness, solids, chloramines, sulfate, and others. This study evaluates the performance of the models with and without AquaAugmentor. Each model applied to classify water as potable or non-potable and its performance is then evaluated and compared based on test accuracy and AUC score. The results highlight the strengths and limitations of our proposed algorithm, providing insights into the most effective techniques for improving the predictive performance of water quality classification. This study contributes to the broader efforts of ensuring safe water access and serves as a framework for employing machine learning in environmental quality assessments. The findings aim to assist researchers, policymakers, and public health officials in making informed decisions based on reliable machine learning predictions. 
+
+Index Terms —Water Potability, Machine Learning, Deep Learning, Feature Augmentation, Public Health, Environment 
+
+I. I NTRODUCTION 
+
+Access to clean and safe drinking water is a basic human right, yet it remains a major challenge around the world. The World Health Organization (WHO) reports that more than two billion people live in water-stressed countries, where access to safe water is either limited or entirely unavailable [1]. Efficient testing and verification of water quality is cru-cial for both public health and environmental sustainability. However, traditional water quality testing methods can be time-consuming, often requiring specialized equipment and trained personnel. As a result, there is increasing interest in using advanced technologies to streamline and improve the accuracy of water quality testing. Innovative solutions, such as real-time monitoring systems, biosensors, and machine learning algorithms, are being explored to provide rapid and precise assessments of water potability. These advancements have the potential to greatly reduce the risks associated with contaminated water, ensuring safer drinking water for more people and supporting global efforts to achieve the United Nations’ Sustainable Development Goals (SDGs) related to clean water and sanitation [2], [3]. Machine learning offers promising solutions to these chal-lenges by enabling the rapid, cost-effective, and accurate clas-sification of water potability based on chemical and physical parameters. Recent studies have demonstrated the potential of various machine learning algorithms in environmental moni-toring and public health applications, including water quality assessment [4], [5]. For instance, Support Vector Machines (SVM) and neural networks have been particularly noted for their predictive accuracy in complex environmental data scenarios [4]. These models can process large datasets to identify patterns and correlations that might be missed by traditional methods, providing more reliable predictions about water quality. Additionally, machine learning models can be continuously updated and improved with new data, ensuring they remain effective as environmental conditions and pollu-tion sources change. Integrating machine learning with sensor networks and real-time data collection can develop more re-sponsive and adaptive water quality monitoring systems. These advancements hold great potential for enhancing public health protection, reducing the incidence of waterborne diseases, and supporting the sustainable management of water resources [6]. This research explores and compares the effectiveness of vari-ous machine learning and deep learning models in classifying water as potable or non-potable. Each model’s performance was evaluated using test accuracy and AUC score to identify the most suitable approaches for real-world applications. Our novel contribution, AquaAugmentor, a feature augmentation algorithm, significantly enhances the predictive performance of these models, especially for low-dimensional datasets. This advancement highlights the potential of integrating advanced computational techniques to improve water quality assessment, contributing to broader environmental science efforts to ensure safe water access. In this paper, section II highlights the litera-ture review of related existing works. Section III elaborates the methodological framework. Section IV discusses the results, and section V concludes the paper with a blueprint of future works. II. R ELATED WORK 
+
+Access to potable water is a global concern that impacts health, sustainability, and economic development. Recent stud-
+
+979-8-3315-3197-3/24/$31.00 © 2024 IEEE arXiv:2607.15775v1 [cs.LG] 17 Jul 2026 ies have focused on evaluating and classifying water potability using machine learning or deep learning, exploring various models to predict water quality from chemical and physical parameters. Mukati et al. explored the effectiveness of ensemble methods like Random Forest, Decision Trees, and XGBoost, emphasiz-ing the improved predictive accuracy these methods provide over traditional statistical techniques [7]. This aligns with findings from De Luna et al., who tested AdaBoost, XGBoost, and ExtraTree Classifier, finding that more complex ensemble models could sometimes significantly enhance prediction ac-curacy, particularly in handling non-linear and complex dataset structures [8]. Gao et al. employed binomial Logistic Re-gression and K-Nearest Neighbor (KNN) algorithms, demon-strating their suitability for smaller datasets and emphasizing the importance of each water quality feature’s independent influence on potability [9]. SVM was particularly noted for its high accuracy in datasets with clear margin separations. Khanna et al. introduced a novel approach using deep learning for water potability classification, highlighting its capability to capture deeper insights from complex interdependencies among water quality parameters [10]. Their findings suggest that deep learning could offer a significant step forward in predictive accuracy and reliability. Yusuf et al. demonstrated the effectiveness of Random Forest and Decision Trees in achieving higher classification accuracy, underscoring the sig-nificance of feature selection in model performance [11]. Deep learning models, especially Artificial Neural Networks (ANNs) and Long Short-Term Memory (LSTM) networks, have been applied to predict water quality with high preci-sion, addressing complex non-linear relationships within the data. Such models were highlighted by Suleiman et al. for their exceptional ability to classify groundwater potability, reflecting their growing application in environmental sciences [12]. As Alipio discussed, integrating Internet of Things (IoT) technologies with machine learning models transforms water quality monitoring. This approach leverages real-time data ac-quisition and machine learning-driven analytics to enhance the responsiveness and accuracy of water potability assessments [13]. Comparative studies of machine learning algorithms reveal varying strengths across different techniques. Haq et al. compared several machine learning algorithms and found that models like XGBoost and ExtraTree classifiers provided superior performance due to their robust handling of diverse datasets [14]. Argreen et al. [15] explore the application of deep learning models for water potability classification in rural areas of the Philippines, highlighting the effectiveness of these models in enhancing water quality monitoring. Ahmad Musleh [16] conducted a comprehensive comparative study of six machine learning algorithms for water potability classification, finding that Random Forest and J48 achieved the highest accuracy and precision in predicting water quality. Alipio [17] developed a data-driven IoT-based system for real-time water quality monitoring and potability classification for rural areas. He matched his results with conventional laboratory tests and demonstrated high accuracy and minimal data transmission delays. Patel et al. [18] proposed a machine learning-based water potability prediction model using the Synthetic Minor-ity Over-sampling Technique (SMOTE) and explainable AI techniques, achieving significant accuracy improvements and providing insights into the feature importance of water quality assessment. Abuzir and Abuzir [19] demonstrated that Multi-Layer Perceptron (MLP) outperforms J48 and Na¨ ıve Bayes in water quality classification, highlighting the significance of feature selection and dimensionality reduction using PCA for improving prediction accuracy. These existing works incorporate a broad spectrum of cur-rent research, highlighting the dynamic nature of machine learning applications in environmental monitoring. Integrating advanced computational techniques, such as deep learning and IoT-enabled machine learning models, is noteworthy and offers promising avenues for enhancing water quality assessment. However, these approaches are often dataset-specific and vary significantly across different datasets. The dimensionality of data can differ, posing challenges for achieving good accuracy with low-dimensional datasets. Our proposed AquaAugmentor algorithm addresses this challenge by leveraging the concept of feature augmentation, providing a robust solution for improv-ing predictive performance with low-dimensional datasets. Our work advances sustainable water management with AI-driven predictions, crucial for industry 5.0. III. M ETHODOLOGY 
+
+A. Input Dataset 
+
+The dataset [20] used in this study comprises 3,276 samples, each with nine chemical attributes of water: pH, Hardness, Solids, Chloramines, Sulfate, Conductivity, Organic Carbon, Trihalomethanes, and Turbidity. These features are crucial for determining water potability. The dataset includes potable and non-potable classes, with 1,998 samples labeled as non-potable and 1,278 samples labeled as potable. Before proceeding to preprocessing and analysis, we performed mean imputation to address missing values, ensuring a complete and reliable dataset for accurate modeling. 
+
+B. Feature Augmentation 
+
+Feature augmentation is the process of enhancing the orig-inal feature set by generating new features through various methods, including polynomial combinations, statistical sum-marizations, and domain-specific calculations. 
+
+Polynomial Features: It generates new features by taking polynomial combinations of existing features up to a specified degree. 
+
+Statistical Features: It adds features that summarize the data, such as mean, standard deviation, minimum, and maximum values for each sample. 
+
+Domain Specific Features: It creates new features based on domain knowledge, such as ratios and other relationships between existing features. By combining these methods, feature augmentation signifi-cantly expands the feature space, potentially improving the model’s ability to capture complex patterns in the data. In this study, we applied feature augmentation to enhance the original dataset. This involved generating polynomial features, adding statistical summaries, and creating domain-specific ratios. This comprehensive approach aimed to provide the model with a richer and more informative feature set, thereby improving its performance. Given a dataset D with n samples and m
+
+features, where the last column is the target variable y:
+
+X = D[: , : m] (1) 
+
+y = D[: , m ] (2) Where, X is the feature matrix of shape (n, m ) and y is the target vector of shape (n, ). Given a feature matrix X
+
+of shape (n, m ), the polynomial feature matrix Xpoly includes all polynomial combinations of the features up to a specified degree d:
+
+Xpoly = Poly (X, d ) (3) Where Poly (X, d ) generates a new matrix including all poly-nomial combinations of features in X up to degree d and the shape of Xpoly depends on the number of polynomial features generated. For each sample i in the feature matrix X, calculate the mean ( μi), standard deviation ( σi), minimum ( min i), and maximum ( max i): 
+
+μi = 1
+
+m
+
+> m
+
+X
+
+> j=1
+
+Xij (4) 
+
+σi =
+
+vuut 1
+
+m
+
+> m
+
+X
+
+> j=1
+
+(Xij − μi)2 (5) 
+
+min  
+
+> i
+
+= m
+
+min  
+
+> j=1
+
+Xij (6) 
+
+max  
+
+> i
+
+= m
+
+max  
+
+> j=1
+
+Xij (7) Where Xij is the value of the j-th feature for the i-th sample, and m is the number of features. To create new features based on domain knowledge by calculating specific ratios of the original features, we can assume that Xa,b denote the element-wise ratio of columns a and b of X:Feature k = X[: , a k]
+
+X[: , b k] (8) Table I shows how we can choose a set of index pairs (ak, b k)
+
+based on domain knowledge. We need to combine the original polynomial features, statistical features, and domain-specific features into a combined feature matrix Xcomb :
+
+Xcomb = concat (Xpoly , μ, σ, min , max , F1, F2, . . . , F14 ) (9) Where concat denotes the concatenation operation along the feature axis. Xcomb is the final expanded feature matrix in-cluding all derived features. Xpoly represents the polynomial features. μ, σ, min , max are the statistical features (mean, standard deviation, minimum, and maximum). F 1, F2, . . . , F14 
+
+represents the domain-specific features generated as ratios of the original features ak and bk as described in Table I. TABLE I: Index pairs for domain-specific features.                
+
+> akbk
+> 3521527636340582740641518361
+
+Algorithm 1 represents the pseudocode of the AquaAugmentor algorithm, Table II analyzes the computational complexities, and Fig. 1 illustrates the workflow of the AquaAugmentor algorithm. 
+
+Algorithm 1 AquaAugmentor Algorithm 
+
+Require: Dataset D with n samples and m features, target variable y in the last column 
+
+Ensure: Combined feature matrix Xcomb  
+
+> 1:
+
+Step 1: Separate Features and Target  
+
+> 2:
+
+X = D[: , : m], y = D[: , m ] 
+
+> 3:
+
+Step 2: Create Polynomial Features  
+
+> 4:
+
+poly = PolynomialFeatures (degree = d, 
+
+interaction only = True , include bias = False ) 
+
+> 5:
+
+Xpoly = poly.f it transf orm (X) 
+
+> 6:
+
+Step 3: Add Statistical Features  
+
+> 7:
+
+Initialize stat f eatures  
+
+> 8:
+
+for each sample i in X do  
+
+> 9:
+
+Calculate μi, σi, min i, max i 
+
+> 10:
+
+Append μi, σi, min i, max i to stat f eatures  
+
+> 11:
+
+end for  
+
+> 12:
+
+Step 4: Add Domain-Specific Features  
+
+> 13:
+
+index pairs = {(3 , 5) , (2 , 1) , (5 , 2) , (7 , 6) , (3 , 6) , (3 , 4) ,
+
+(0 , 5) , (8 , 2) , (7 , 4) , (0 , 6) , (4 , 1) , (5 , 1) , (8 , 3) , (6 , 1) } 
+
+> 14:
+
+Initialize domain f eatures  
+
+> 15:
+
+for each pair (ak, b k) in index pairs do  
+
+> 16:
+
+Calculate f eature k = X[: ,a k ]  
+
+> X[: ,b k]
+> 17:
+
+Append f eature k to domain f eatures  
+
+> 18:
+
+end for  
+
+> 19:
+
+Step 5: Combine All Features  
+
+> 20:
+
+Xcomb = concat (Xpoly , μ, σ, min , max , feature 1,
+
+feature 2, . . . , feature 14 ) 
+
+> 21:
+
+return Xcomb 
+
+C. Data Balancing and Normalization 
+
+After applying the feature augmentation, the number of features increased from 9 to 62. We then combined the target attribute with the augmented features and applied the SMOTE to balance the class distribution. We split the dataset into training, validation, and test sets in a 70:15:15 ratio. Finally, TABLE II: Computational complexity of the AquaAugmentor algorithm.                                     
+
+> Step Operation Time Complexity Space Complexity 1Splitting dataset into features and target
+> O(n)O(nm )
+> (features), O(n)
+> (target)
+> 2Generating polynomial features
+> O(n·md)O(n·md)
+> 3Calculating mean, std, min, max
+> O(nm )(each) O(n)(each)
+> 4Creating domain-specific ratios
+> O(n·k)O(n·k)
+> 5Concatenating all features
+> O(n·(md+
+> k+ 4))
+> O(n·(md+
+> k+ 4))
+> Overall All steps combined
+> O(n·md)O(n·md)
+
+Fig. 1: Workflow of the AquaAugmentor algorithm. we normalized the data using StandardScaler to ensure that each feature contributed equally to the model’s performance. 
+
+D. Predictive Modeling 
+
+We employed a variety of machine learning and deep learning models to classify water potability. The machine learning models used include Linear Regression, Random For-est, Linear SVM, KNN, MLP, CatBoost, AdaBoost, XGBoost, GBM, Naive Bayes, and Logistic Regression. In addition, several deep learning models were implemented, such as 1-D CNN, LSTM, Autoencoder, Variational Autoencoder, TabNet, TabTransformer, and a hybrid CNN-LSTM model. These mod-els were selected to evaluate their effectiveness in accurately classifying water quality and to determine the impact of our novel feature augmentation algorithm, AquaAugmentor, on their predictive performance. TABLE III: Results for different machine learning and deep learning models (* = with AquaAugmentor algorithm).                                                                             
+
+> Model Accuracy AUC Accuracy* AUC* Linear Regression 61.22% 0.50 63.83% 0.70 Random Forest 65.71% 0.68 72.62% 0.80 Linear SVM 61.02% 0.51 66.67% 0.73 KNN 64.90% 0.64 64.90% 0.69 MLP 61.02% 0.57 69.50% 0.77 CatBoost 56.30% 0.57 71.29% 0.80 AdaBoost 54.88% 0.54 64.44% 0.70 XGBoost 54.27% 0.55 71.83% 0.80 GBM 56.30% 0.57 66.94% 0.73 Naive Bayes 43.70% 0.47 55.09% 0.58 Logistic Regression 50% 0.54 64.50% 0.70 1-D CNN 55.66% 0.55 70% 0.75 LSTM 57.93% 0.53 66.67% 0.73 Autoencoder 57.93% 0.51 67.67% 0.76 Variational Autoencoder 56.30% 0.53 66.67% 0.70 TabNet 57.93% 0.53 65.11% 0.71 TabTransformer 57.93% 0.50 64.17% 0.71 CNN-LSTM 56.78% 0.54 63.17% 0.71
+
+IV. R ESULTS ANALYSIS 
+
+The results shown in Table III and the accompanying graphs highlight the significant influence of the AquaAugmentor algorithm on the effectiveness of several machine learning and deep learning models. This approach improves accuracy and increases the AUC scores of most models. The accuracy of the Random Forest model is significantly enhanced from 65.71% to 72.62% and its AUC score from 0.68 to 0.80. This significantly enhances the model’s capacity to classify samples of drinkable and non-drinkable water accurately. Similarly, the XGBoost model also got a significant increase in accuracy, rising from 54.27% to 71.37%. Additionally, its AUC score improved from 0.55 to 0.80, indicating a notable enhancement in prediction capability and reliability due to using AquaAugmentor. Linear Regression, which typically faces challenges when dealing with complex datasets, also saw substantial advantages. The model’s accuracy improved from 61.22% to 63.83%, while the AUC score significantly increased from 0.50 to 0.70, showing a substantial improvement in distinguishing between potable and non-potable classes. The accuracy of models such as LSTM and Autoencoder demonstrated significant enhancements. LSTM’s accuracy increased from 57.93% to 66.67%, and its AUC improved from 0.53 to 0.71. The Autoencoder, a model proficient in dealing with intricate patterns, improved its accuracy from 57.93% to 67.67% and its AUC from 0.51 to 0.80, showcasing AquaAugmentor’s capability to boost deep learning models. The bar chart depicted in Fig. 2 clearly illustrates the enhancements in test accuracies among various models, both with and without the implementation of AquaAugmentor. Improved models with AquaAugmentor routinely achieve better results than models without it, highlighting the algorithm’s ability to enhance model performance. For instance, the increase in accuracy of the Random Forest model is noticeable, as is the improvement in the XGBoost and LSTM models. This graphic offers a concise and easily understandable comparison of the efficacy of AquaAugmentor. Fig. 3 illustrates a radar chart illustrating the AUC scores, providing a comprehensive perspective on the model’s performance across multiple dimensions. This graphic showcases the extensive enhancements made to several models, with notable increases in the areas shown by the radar plot for models improved with AquaAugmentor. Models such as CatBoost, XGBoost, and MLP demonstrate significant improvements in their AUC scores, highlighting the efficacy of AquaAugmentor in enhancing the model’s capacity to differentiate between classes. The clustered heatmap in Fig. 4 illustrates the interconnections among the different characteristics following augmentation. This heatmap visually represents the correlations between different features, providing insights into the relationships and interdependencies among the features after augmentation. Specifically, certain characteristics have strong connections, creating separate groups essential for the enhanced performance observed in the models. Furthermore, the t-test findings illustrated in Fig. 5 offer a statistical confirmation of the relevance of the feature enhancements implemented by AquaAugmentor. The bar chart of p-values illustrates that numerous attributes have p-values below the 0.05 significance level, signifying that the disparities in these variables between potable and non-potable water samples are statistically significant. The statistical significance confirms the improvements in model performance and verifies the efficiency of AquaAugmentor in enhancing features. 
+
+Fig. 2: Comparison of test accuracies for different models. It is crucial to acknowledge that several research studies of different domains claim very high accuracies of 90% or higher, and these findings are frequently not reproducible in practical situations due to environmental data’s intricate and fluctuating nature. Real-world datasets, such as those employed for wa-ter potability classification, often contain noise and display substantial fluctuation, rendering the achievement of high 
+
+Fig. 3: Comparison of AUC scores for different models. accuracies impractical. On the other hand, the enhancements accomplished by AquaAugmentor are practical and show tangible usefulness. AquaAugmentor greatly improves models’ accuracy and AUC scores, increasing their robustness and reliability. This makes them more appropriate for real-world applications where maintaining safe drinking water is crucial. When determining which models are appropriate, machine learning models such as Random Forest, XGBoost, and GBM benefit from AquaAugmentor since they help them properly manage enriched and sophisticated feature sets. Deep learning models, such as LSTM and Autoencoders, provide significant enhancements, suggesting their appropriateness for intricate pattern identification and feature interactions. Nevertheless, it is important to take into account the restrictions. The process of feature augmentation using AquaAugmentor can result in higher computing complexity and longer training durations, especially when applied to deep learning models. Furthermore, the method’s efficacy may differ based on the excellence and characteristics of the initial dataset, requiring meticulous preprocessing and validation to guarantee optimal performance. Although AquaAugmentor has a few limitations, it is a valuable tool for improving the performance of models used in water quality categorization and other environmental data applications. V. C ONCLUSIONS 
+
+In this study, AquaAugmentor algorithm represents remark-able progress in environmental data science, namely in the classification of water potability, a major concern in the public health sector. This originality resides in its capacity to enhance low-dimensional datasets by adding features obtained from Fig. 4: Clustered correlation heatmap matrix after applying the AquaAugmentor algorithm. 
+
+Fig. 5: t-Test p-values for each feature after applying the AquaAugmentor algorithm. polynomial expansions, statistical measurements, and domain-specific information. This greatly improves the predictive per-formance of machine learning and deep learning models. The results exhibit consistent performance improvements across multiple models, highlighting AquaAugmentor’s capacity to enhance accuracy and dependability in water quality pre-dictions. The statistical validation using t-tests validated the importance of these changes, which is consistent with the observed performance benefits and reinforces the practical usefulness of AquaAugmentor. AquaAugmentor’s practical advancements showcase its potential for effectively ensuring safe drinking water, in contrast to the frequently unexplained high accuracies mentioned in many research works. Fur-ther research could investigate adaptive feature augmentation methods to dynamically modify feature complexity according to dataset properties, reducing computing costs and training durations of the AquaAugmentor algorithm. Incorporating AquaAugmentor with real-time data collecting systems, such as IoT sensor networks, could facilitate ongoing monitoring and prompt analysis of water quality. This would offer timely insights and interventions. ACKNOWLEDGMENT 
+
+We would like to express our gratitude to the Center for Research Innovation and Transformation (CRIT) at Green University of Bangladesh for their generous financial support. REFERENCES [1] World Health Organization, “Drinking-Water,” 2019, accessed: 2024-06-10. [Online]. Available: https://www.who.int/news-room/fact-sheets/detail/drinking-water [2] M. Khondoker et al. , “Freshwater Shortage, Salinity Increase, and Global Food Production: A Need for Sustainable Irrigation Water Desalination—A Scoping Review,” Earth , vol. 4, no. 2, pp. 223–240, 2023. [3] M. Khondoker, R. Gurav, and S. Hwang, “Utilization of Water Hyacinth Biomass as Eco-Friendly Sorbent for Oil Spill Cleanup,” AQUA , vol. 73, no. 2, pp. 183–199, 2024. [4] T. S. Cheong et al. , “Application of Big Data, Deep Learning, Machine Learning, and Other Advanced Analytical Techniques in Environmental Economics and Policy,” p. 953659, 2022. [5] R. A. Johnson and D. W. Wichern, Applied Multivariate Statistical Analysis . Upper Saddle River, NJ: Prentice Hall, 2002. [6] M. Zhu et al. , “A Review of the Application of Machine Learning in Water Quality Evaluation,” Eco-Environment & Health , vol. 1, no. 2, pp. 107–116, 2022. [7] A. Mukati et al. , “Understanding the Concept of Water Potability through Machine Learning,” J Curr Trends Comp Sci Res , vol. 3, no. 2, pp. 01–04, 2024. [8] R. G. de Luna et al. , “A Comparative Study of Machine Learning Techniques for Water Potability Classification,” in TENCON 2023-2023 IEEE Region 10 Conference (TENCON) . IEEE, 2023, pp. 1345–1350. [9] H. Gao et al. , “Water Potability Analysis and Prediction,” Highlights in Science, Engineering and Technology , vol. 16, pp. 70–77, 2022. [10] A. Khanna et al. , “Deep learning for water potability classification: A novel approach,” Int. J. Environ. Res. Public Health , 2023. [11] M. I. Alipio, “Towards Developing a Classification Model for Water Potability in Philippine Rural Areas,” ASEAN Engineering Journal ,vol. 10, no. 2, 2020. [12] M. I. K. Haq et al. , “Efficiency of Machine Learning Algorithms in Water Quality Prediction,” Water Quality Research Journal , 2021. [13] A. A. Suleiman et al. , “Comparative Analysis of Machine Learning and Deep Learning Models for Groundwater Potability Classification,” 
+
+Engineering Proceedings , vol. 56, no. 1, p. 249, 2023. [14] H. Yusuf et al. , “Classification of Water Potability Using Machine Learn-ing Algorithms,” in 2022 International Conference on Data Analytics for Business and Industry (ICDABI) . IEEE, 2022, pp. 454–458. [15] A. Blanco et al. , “Deep Learning Models for Water Potability Classifi-cation in Rural Areas in the Philippines,” in 2022 IEEE World AI IoT Congress (AIIoT) . IEEE, 2022, pp. 225–231. [16] F. Musleh, “A Comprehensive Comparative Study of Machine Learning Algorithms for Water Potability Classification,” Int. J. Comput. Digit. Syst. , vol. 15, no. 1, pp. 1189–1200, 2024. [17] M. I. Alipio, “Data-driven IoT-based Water Quality Monitoring and Potability Classification System in Rural Areas,” in 2020 International Conference on Information and Communication Technology Conver-gence (ICTC) . IEEE, 2020, pp. 634–639. [18] J. Patel et al. , “A Machine Learning-Based Water Potability Prediction Model by Using Synthetic Minority Oversampling Technique and Ex-plainable AI,” Computational Intelligence and Neuroscience , vol. 2022, no. 1, p. 9283293, 2022. [19] S. Y. Abuzir and Y. S. Abuzir, “Machine Learning for Water Quality Classification,” Water Quality Research Journal , vol. 57, no. 3, pp. 152– 164, 2022. [20] “Water Quality,” https://www.kaggle.com/datasets/adityakadiwal/water-potability, (Accessed on 06/10/2024).
