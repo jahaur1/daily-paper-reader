@@ -25,3 +25,54 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: ts-wq
+      description: 请帮我查找时间序列预测和水文水质预测的内容
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: time series prediction
+          keyword_cn: 时间序列预测
+          query: time series prediction
+        - keyword: water quality prediction
+          keyword_cn: 水质预测
+          query: water quality prediction
+        - keyword: hydrological prediction
+          keyword_cn: 水文预测
+          query: hydrological prediction
+        - keyword: time series forecasting
+          keyword_cn: 时间序列预报
+          query: time series forecasting
+      intent_queries:
+        - query: time series forecasting methods for water quality
+          query_cn: 水质的时间序列预测方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: hydrological water quality prediction using deep learning
+          query_cn: 使用深度学习进行水文水质预测
+          enabled: true
+          source: manual
+          note: ''
+        - query: temporal prediction models for water quality
+          query_cn: 水质的时间预测模型
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-07-24T06:56:38.889Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
