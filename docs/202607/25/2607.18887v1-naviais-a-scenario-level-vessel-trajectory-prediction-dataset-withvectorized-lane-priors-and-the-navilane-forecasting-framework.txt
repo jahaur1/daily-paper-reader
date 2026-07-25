@@ -1,0 +1,521 @@
+Title: NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset withVectorized Lane Priors and the NaviLane Forecasting Framework
+
+URL Source: https://arxiv.org/pdf/2607.18887v1
+
+Published Time: Wed, 22 Jul 2026 00:55:59 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+> 1
+
+# NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset with Vectorized Lane Priors and the NaviLane Forecasting Framework 
+
+Yuan Gui, Hongchen Luo, Liqi Qu, Longyue Fu, and Jiao Wang 
+
+Abstract —Vessel trajectory prediction in complex maritime environments is essential for traffic management, collision risk warning, route planning, and autonomous navigation. Although AIS-based learning methods have achieved rapid progress, exist-ing datasets are often released as raw message streams or irregu-lar time series, suffering from inconsistent sampling rates, noisy observations, heterogeneous coordinate systems, and non-unified scenario construction protocols. Moreover, most public AIS resources lack structured representations of navigational lanes, waterway geometry, and navigable-region constraints, limiting reproducible and environment-aware trajectory forecasting. To address these limitations, we introduce NaviAIS , a standardized scenario-level AIS dataset for vessel trajectory prediction. Navi-AIS organizes multi-vessel historical–future trajectories within unified temporal windows and local coordinate systems, and fur-ther provides rasterized navigable maps, vectorized lane priors, lane graphs, and structured map representations. Compared with existing vessel trajectory prediction datasets, NaviAIS jointly supports vectorized lanes, multi-scenario coverage, vectorized maps, open accessibility, and processed trajectories. Built upon this dataset, we propose NaviLane , a hierarchical macro-action forecasting framework for map-aware vessel trajectory predic-tion. NaviLane first performs trajectory–map joint encoding to obtain a unified scene representation, then uses a discrete macro-action codebook to generate multimodal trajectory candidates in a coarse-to-refined manner. A residual refinement module improves local geometric and dynamical consistency, while a world-model-based consequence-aware evaluator further ranks candidates according to interaction risk and environmental fea-sibility. Experiments on NaviAIS show that NaviLane outperforms representative baselines in both single-modal and multimodal prediction settings, demonstrating the effectiveness of structured navigational priors, hierarchical multimodal generation, and consequence-aware candidate evaluation. 
+
+Index Terms —trajectory prediction, AIS, scenario-level dataset, vectorized lane priors, macro-action modeling, world model 
+
+I. I NTRODUCTION 
+
+# WITH the continuous growth of global maritime trans-portation, vessel trajectory prediction has become in-creasingly important in maritime traffic management, collision risk warning [1], route planning, and autonomous navigation. Accurate forecasting of future vessel motion is essential for understanding vessel behavior and improving the safety and efficiency of intelligent maritime systems [2], [3]. Early studies on vessel trajectory prediction were mainly based on physical and kinematic motion models, such as constant-velocity models, constant-turn-rate models, and 
+
+This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible. All authors are with Northeastern University, Shenyang 110819, China. Corresponding author: Jiao Wang. 
+
+Fig. 1. This figure illustrates the multi-layer structure of a single navigation scenario in the proposed dataset, including vessel trajectories, lane graphs, vector maps, raster maps, and the complete scene representation obtained by integrating multi-source information. By jointly representing AIS trajectories, lane vectors, water–land raster maps, and map boundaries in a unified format, the dataset captures vessel motion patterns, navigational constraints, and complex maritime geographic environments, thereby providing richer scene context for map-aware vessel trajectory prediction. 
+
+Nomoto-type dynamics. With the large-scale accumulation of Automatic Identification System (AIS) data [8], [9], data-driven approaches have gradually become dominant, including traditional machine learning methods and, more recently, deep neural architectures such as recurrent neural networks (RNNs) [10]–[12], Transformers [13], and graph neural networks (GNNs) [14]–[17]. Despite the rapid progress in modeling techniques, the development of standardized data resources for vessel trajectory prediction still lags behind [18], [19]. arXiv:2607.18887v1 [cs.AI] 21 Jul 2026 2                                                   
+
+> TABLE I COMPARISON OF DIFFERENT VESSEL TRAJECTORY PREDICTION DATASETS .Dataset Scale Vectorized Lanes Multi-Scenario Vectorized Map Open Source Trajectory Processing USCG AIS Vessel Tracks ⋆⋆⋆⋆⋆ ✗✓✗✓✗
+> Danish Maritime Authority Historical AIS ⋆⋆⋆⋆ ⋆✗✓✗✓✗
+> OMTAD [4] ⋆⋆⋆⋆⋆ ✗✓✗✓✓
+> North Sea ocean vessel traffic dataset [5] ⋆⋆⋆⋆⋆ ✗✓✗✓✓
+> DI-MTP [6] ⋆⋆ ⋆ ⋆ ⋆ ✗✗✗✗✓
+> Tptrans [7] ⋆⋆ ⋆ ⋆ ⋆ ✗✗✗✗✓
+> Ours ⋆⋆⋆ ⋆ ⋆ ✓✓✓✓✓
+
+From the modeling perspective, many existing vessel tra-jectory prediction methods still face three major limitations. First, methods built primarily on historical motion sequences often lack a unified trajectory–map representation, making it difficult to explicitly incorporate structured environmental constraints such as waterway geometry, lane topology, and navigable-region boundaries. As a result, their multimodal candidates may be weakly organized at the strategy level, especially in narrow channels, curved waterways, and port areas [11]–[13], [16], [17]. Second, even when plausible coarse future modes can be generated, existing methods usually lack an explicit refinement mechanism to correct local geomet-ric and dynamical errors, such as endpoint drift, curvature mismatch, and motion inconsistency. This limits the accuracy and physical plausibility of long-horizon predictions [6], [7], [20], [21]. Third, final candidate selection is often dominated by trajectory likelihood, intention scores, or reconstruction quality, while the interaction consequences induced by each candidate future and its compatibility with environmental constraints are not explicitly evaluated in a unified manner [6], [7], [20]. These limitations suggest that high-quality vessel trajectory forecasting requires a unified trajectory– map representation with structured multimodal generation, an explicit local refinement mechanism, and a consequence-aware candidate evaluation strategy. To address these limitations, we further propose NaviLane ,a hierarchical macro-action forecasting framework with joint trajectory–map modeling. The framework first constructs a unified scene representation from vessel motion history, static map context, and scene interaction cues. A discrete macro-action codebook is then introduced to capture high-level navigational intent, allowing the model to first select plausible strategy prototypes and then decode continuous future trajec-tories conditioned on the selected macro-actions. To further improve prediction quality, a residual refinement module is used to correct local geometric and dynamical errors under scene and macro-action conditions. Finally, we introduce an interaction world model together with a Counterfactual Risk (CFR) assessment mechanism to evaluate the consequences induced by different candidate futures. Specifically, the world model predicts the future states of surrounding vessels, while CFR scores each candidate trajectory according to its antici-pated interaction risk and environmental feasibility, providing a principled mechanism for candidate selection beyond pure imitation [21], [22]. Most existing AIS datasets are published in the form of raw sensor streams or irregular time series [20], [23]. Such data often exhibit inconsistent reporting frequencies across vessels and regions, making trajectory extraction and temporal alignment highly nontrivial. Moreover, AIS data typically contain noise, outliers, missing observations, and localiza-tion errors, which require substantial preprocessing before being used for learning-based prediction. Existing studies also differ significantly in trajectory segmentation rules, tempo-ral horizons, coordinate normalization schemes, and scenario construction strategies. As a result, experimental settings are often inconsistent across works, making fair comparison and reproducibility difficult. Another important limitation is that existing AIS datasets usually do not provide explicit structured representations of the navigational environment [24], such as waterway boundaries, lane centerlines, or navigable-area constraints, which are crucial for modeling vessel behavior in complex waterways. To address these issues, we construct and release NaviAIS ,a standardized scenario-level AIS dataset for vessel trajectory prediction, as illustrated in Fig. 1. NaviAIS organizes each sample as a scene containing multi-vessel trajectories within a unified temporal window and a standardized local coordinate system. In addition to trajectory observations, NaviAIS pro-vides vectorized lane priors, including water/land polygons, rasterized navigable masks, and lane centerlines, thereby en-abling explicit modeling of environmental geometry and navi-gational constraints. The dataset covers multiple representative environments, including open-sea routes, inland rivers, and lake regions, and supports multi-agent interaction modeling as well as environment-aware prediction. As summarized in Table I, compared with existing vessel trajectory prediction datasets, NaviAIS provides a more complete scenario-level representation by jointly supporting vectorized lanes, multi-scenario coverage, vectorized maps, open accessibility, and processed trajectories [20]. The main contributions of this work are summarized as follows:  
+
+> •
+
+We construct and release NaviAIS , a standardized scenario-level AIS dataset for vessel trajectory predic-tion with vectorized lane priors and diverse navigational environments.  
+
+> •
+
+We propose a hierarchical forecasting framework, Nav-iLane , which integrates trajectory–map joint encoding, macro-action selection, conditional decoding, residual 3MLP CNN PolylineEncoder SelfAttn CrossAttn Transformer World Model CFR Selector 
+
+... ...   
+
+> Anchor Decoder
+> ��
+> �1,�
+> �2,�
+> �3,�
+> ��,�
+> Fig. 2. Framework overview: The proposed NaviLane first encodes historical vessel trajectories, vectorized lane polylines, and rasterized map priors, and fuses them with a scene interaction Transformer. Based on the fused scene context, a world model predicts surrounding-agent futures, while a macro-action anchor decoder generates multi-modal trajectory candidates in a coarse-to-refined manner. Finally, safety-aware energy, map constraints, and selector/reranker modules are jointly used to score and rank all candidates, producing the final top-Kout trajectories and the best top-1 prediction.
+
+refinement, and world-model-based evaluation.  
+
+> •
+
+We introduce a structured prediction pipeline that explicitly incorporates navigational lane priors and consequence-aware candidate evaluation, improving mul-timodal coverage, environmental consistency, and dynam-ical plausibility. II. R ELATED WORK 
+
+Vessel trajectory prediction has evolved from classical kine-matic models to AIS-driven learning-based approaches. Recent studies have explored recurrent architectures for sequential motion modeling, attention-based networks for multi-attribute feature fusion, Transformer-style frameworks for long-horizon dependency modeling, graph-based methods for interaction-aware prediction in crowded maritime environments, and multimodal intention-aware predictors [6], [7], [11]–[13], [16]. Meanwhile, game-theoretic ideas have been increasingly intro-duced into trajectory prediction and interactive planning, since they explicitly model the mutual dependence among multi-ple agents. Representative works include hierarchical game-theoretic planning, Transformer-based interactive prediction and planning with hierarchical game reasoning, and Nash-equilibrium-inspired multimodal trajectory prediction [25]– [27]. Although these studies have demonstrated the value of structured interaction reasoning, they are mainly developed for road traffic scenarios. In contrast, our work focuses on AIS-based maritime environments and combines structured lane-aware representation, hierarchical multimodal generation, local refinement, and consequence-aware candidate evaluation within a unified vessel trajectory prediction framework. III. M ETHOD 
+
+This section presents a hierarchical multimodal vessel tra-jectory prediction framework, termed NaviLane . Given histor-ical trajectories and static environmental information as inputs, the proposed framework explicitly models multimodal naviga-tional intentions, trajectory dynamics, and environmental in-teractions to generate high-quality future predictions. Specifi-cally, multi-source inputs are first encoded into a unified global scene representation. Then, a macro-action-based multimodal decoder generates multiple coarse candidate trajectories, which are further refined in parallel through conditional sequence modeling. As shown in Fig. 2, a hybrid evaluation strategy that combines learning-based scoring and rule-based energy modeling is finally adopted to hierarchically filter and re-rank the candidate trajectories, yielding the final prediction. Formally, let the historical observation sequence be X =
+
+{xt}Th
+
+> t=1
+
+, the prediction horizon be T , and the model gener-ate Kmacro macro-action candidate trajectories {Yk}Kmacro  
+
+> k=1
+
+,where Yk ∈ RT ×d. In this work, we set Kmacro = 128 and retain Kout = 6 trajectories as the final multimodal outputs. The final top-1 prediction is selected from the macro-action candidates through hierarchical scoring and ranking: 
+
+Y∗ = Yk∗ , k∗ = arg max 
+
+> k∈{ 1,...,K macro }
+
+sk , (1) 
+
+where sk denotes the comprehensive score of the k-th candi-date trajectory. The key idea of the framework is to progres-sively improve candidate quality through multi-stage modeling while preserving diversity and enhancing physical plausibility and safety. 
+
+A. Encoding and Trajectory Generation 
+
+To adequately model vessel behaviors and environmental constraints, we first jointly encode historical trajectories and waterway information. The historical trajectories are mapped into agent representations Ha via a sequence encoder, while map information such as lane polylines and semantic attributes is encoded into map representations Hm through a separate map encoder: 
+
+Ha = fa(X), Hm = fm(M), (2) 
+
+where Ha ∈ RN ×C denotes the latent representations of all vessels, and M denotes the map input. A Transformer-based fusion module is then employed to perform cross-modal interaction, producing a unified scene representation Hs. A masked average pooling operation is further applied to obtain a global scene context vector cs:
+
+Hs = Fusion( Ha, Hm), cs = Pool( Hs). (3) 4
+
+Algorithm 1 Trajectory Refinement                                                                              
+
+> Require: Coarse trajectories {Y(0)
+> k}Kmacro
+> k=1 , scene representation Hs, mode embeddings {mk}Kmacro
+> k=1 , decoder hidden states {ck,t }
+> Ensure: Refined trajectories {Yk}Kmacro
+> k=1
+> 1: for k= 1 to Kmacro do
+> 2: for t= 1 to Tdo
+> 3: Extract kinematics vk,t ,ak,t , and sk,t via Eq. (9) 4: zk,t ←[y(0)
+> k,t ,vk,t ,ak,t , s k,t ]
+> 5: hk,t ←MLP( zk,t ) + ck,t
+> 6: end for
+> 7: [γk,βk]←MLP( mk)
+> 8: ¯hk←(1 + tanh( γk)) ⊙hk+βk
+> 9: ¯hk←SelfAttn( ¯hk)
+> 10: h′
+> k←CrossAttn( ¯hk,Hs)
+> 11: ∆Y(r)
+> k←fref (h′
+> k)
+> 12: Yk←Y(0)
+> k+ ∆ Y(r)
+> k
+> 13: end for
+> 14: return {Yk}Kmacro
+> k=1
+
+To model multimodal futures, an anchor-driven decoding mechanism is adopted. Let {Ak}Kmacro  
+
+> k=1
+
+denote the anchor set, where each anchor corresponds to a macro-level naviga-tion mode with a relative trajectory template Rk ∈ RT ×d.The current state x0 and velocity v0 of the target vessel are extracted as conditional inputs and transformed into the global coordinate system through a coordinate transformation function T (·):
+
+Bk = T (Rk ; x0, v0), (4) 
+
+where Bk denotes the base trajectory of the k-th mode. Conditioned on the macro-action anchors, time-dependent queries are constructed and cross-attended with the scene representation to extract contextual information and predict trajectory residuals ∆Yk. The coarse trajectory of the k-th mode is then given by 
+
+∆Yk = fdec (Ak , cs, Hs), Y(0)  
+
+> k
+
+= Bk + ∆ Yk . (5) 
+
+In addition, the decoder outputs a prior score for each mode, 
+
+sprior  
+
+> k
+
+= g(Ak , cs), (6) 
+
+which reflects the prior plausibility of different navigational intentions. The Kmacro = 128 candidate trajectories generated at this stage capture macro-level planning strategies, and the top Kout = 6 trajectories are retained after scoring and re-ranking. 
+
+B. Trajectory Refinement 
+
+To improve the dynamic feasibility and environmental con-sistency of the candidate trajectories, a refinement module is designed to process all Kmacro candidates in parallel. This module applies residual corrections through a shared network structure, thereby improving trajectory quality while preserv-ing multimodal diversity. First, explicit kinematic features are extracted from the coarse trajectories and concatenated with the original positions to form enhanced trajectory representa-tions. For the k-th trajectory at time step t, let yk,t denote its position. The corresponding velocity, acceleration, and speed are defined as vk,t = yk,t − yk,t −1,
+
+ak,t = vk,t − vk,t −1,sk,t = ∥vk,t ∥.
+
+(7) 
+
+The enhanced feature vector is then written as 
+
+zk,t = [ yk,t , vk,t , ak,t , s k,t ]. (8) 
+
+These features are projected into a high-dimensional latent space through a multilayer perceptron (MLP) and fused with the hidden states from the decoding stage to form the refine-ment representation: 
+
+hk,t = MLP( zk,t ) + ck,t , (9) 
+
+where ck,t denotes the contextual feature inherited from the decoder. To enable intention-aware refinement, a FiLM-style con-ditional modulation mechanism is introduced. Specifically, the macro-action embedding mk corresponding to the k-th candidate is used to generate modulation parameters: 
+
+[γk , βk ] = MLP( mk ), γk , βk ∈ Rdmodel . (10) 
+
+A tanh function is applied to constrain the modulation mag-nitude, leading to 
+
+˜hk,t = (1 + tanh( γk )) ⊙ hk,t + βk , (11) 
+
+where ⊙ denotes element-wise multiplication. For sequence modeling, temporal self-attention is first used to capture intra-trajectory dynamic consistency, and cross-attention is then applied to incorporate scene constraints from the global representation: 
+
+h′ 
+
+> k
+
+= CrossAttn 
+
+
+
+SelfAttn( ˜hk ), Hs
+
+
+
+. (12) 
+
+Finally, as summarized in Algorithm 1, a residual correction is predicted through a linear mapping and added to the coarse trajectory: 
+
+Yk = Y(0)  
+
+> k
+
++ ∆ Y(r) 
+
+> k
+
+, ∆Y(r) 
+
+> k
+
+= fref (h′ 
+
+> k
+
+). (13) 
+
+C. Scoring and Ranking 
+
+After obtaining the refined trajectories, we adopt a hybrid evaluation mechanism that combines learning-based and rule-based scoring for candidate ranking. To characterize interac-tion risk over the prediction horizon, an Interaction World Model is introduced to predict the future trajectories of neigh-boring vessels: ˆXnbr = fw (Ha, x0, v0), (14) 
+
+where ˆXnbr ∈ RNn×T ×d denotes the predicted future trajec-tories of neighboring vessels. Based on this prediction, a Counterfactual Risk (CFR) 
+
+assessment mechanism is constructed, as illustrated in Fig. 3. For each candidate trajectory Yk, joint analysis is performed with neighboring trajectories to evaluate the interaction risk under the corresponding hypothetical future. Specifically, the distance between the k-th candidate trajectory and the j-th neighboring vessel at time step t is defined as �� �푛�  Top-6 Top-1 ��       
+
+> ��  ↓
+> Fig. 3. CFR Selector 5
+> dk,j (t) = yk,t −ˆxnbr
+> j,t .(15)
+
+Based on this distance, two key risk terms are defined. The first is the closest point of approach (CPA) constraint:        
+
+> Ecpa
+> k=X
+> j
+> ϕ
+> 
+> dsafe −min
+> tdk,j (t)
+> 
+> ,(16)
+
+and the second is the instantaneous collision risk:        
+
+> Ecol
+> k=X
+> j
+> X
+> t
+> ϕ(dcol −dk,j (t)) ,(17)
+
+where ϕ(·) = log(1 + exp( ·)) denotes the softplus function. Building upon the interaction risk terms, a comprehensive energy function is further introduced to evaluate physical feasibility and environmental consistency:          
+
+> Ek=λ1Ecpa
+> k+λ2Ecol
+> k+λ3Edyn
+> k+λ4Emap
+> k+λ5Eland
+> k+λ6Ehead
+> k.(18)
+
+Here, Edyn  
+
+> k
+
+and Ehead  
+
+> k
+
+measure trajectory smoothness and head-ing consistency, while Emap  
+
+> k
+
+and Eland  
+
+> k
+
+penalize lane deviation and boundary violation, respectively. Meanwhile, a learned scoring model is introduced to evalu-ate trajectory quality from data. This model fuses sequence features and explicit scalar features to produce a selection score ssel  
+
+> k
+
+for each candidate trajectory:      
+
+> ssel
+> k=fsel (Yk,Hs).(19)
+
+This score is combined with the prior probability from the decoder and the normalized energy value ˆEk to obtain a pre-ranking score:          
+
+> spre
+> k=αs prior
+> k+βs sel
+> k−γˆEk.(20)
+
+A stronger re-ranking model is then applied to further improve ranking accuracy:              
+
+> srerank
+> k=frerank (Yk, s pre
+> k, E k,Hs),(21)
+> sk=spre
+> k+δs rerank
+> k.(22)
+
+The final probability is normalized through a softmax func-tion:        
+
+> pk=exp( sk)
+> PKmacro
+> j=1 exp( sj).(23)
+
+The trajectory with the highest score,         
+
+> Y∗=Yk∗,k∗= arg max
+> k∈{ 1,...,K macro }
+> sk,(24)
+
+is selected as the final top-1 prediction, while the top Kout = 6 
+
+trajectories are retained as the multimodal prediction outputs. IV. E XPERIMENTS 
+
+A. NaviAIS Dataset and Experimental Setup Analysis 
+
+All experiments are conducted on the proposed NaviAIS 
+
+dataset, and the forecasting model is referred to as NaviLane .Unlike public AIS resources released as raw message streams, NaviAIS adopts a standardized scenario-level format, where multi-vessel historical–future trajectories, rasterized waterway maps, and vectorized lane priors are jointly stored. The raw source is USCG AIS Vessel Tracks , which provides large-scale unprocessed AIS point data and route-related information. In our pipeline, AIS records from September to December 2024 were used to compute aggregated navigational priors, including lane density, route patterns, and waterway attributes. These statistics serve only as static map-related priors and are not used as prediction targets. The scenario-level samples were constructed from representative AIS records in January 2024: the training set uses data from January 1 and contains 4,000 scenarios; the validation set uses data from January 4 and contains 1,000 scenarios; and the test set uses data from January 7 and also contains 1,000 scenarios. NaviAIS is constructed through a systematic pipeline rather than directly from raw AIS point sequences. First, raw trajec-tories are cleaned [28], temporally ordered, and filtered to re-move abnormal observations [29], after which fixed historical– future windows are used to extract candidate clips [28], [30], [31]. Second, each scenario is built around a motion-valid target vessel, and both the target and neighboring vessels are transformed into an ego-centric local coordinate system. Third, OSM waterways are used as the global backbone [32], while NOAA line-type features are fused through endpoint snapping, projection, and edge splitting. NOAA area-type elements are further converted into additional lane geometries to preserve wide fairways and route bands [33]. Finally, lane centerlines, lane graphs, and optional density maps are queried from offline tiles and injected into each scene according to its spatial extent. The original route annotations are derived from NOAA ENC electronic chart data. From the Harbor , Approach , and Coastal 
+
+layers, we extract Navigation line, Recommended Track line, Recommended Route Centerline line, Ferry Route line, Berth line, Canal line, and Tideway line. For area layers, centerlines are extracted and resampled into multiple parallel route lines to better cover constrained navigation regions. Each NaviAIS scene contains metadata, trajectory informa-tion, raster maps, and vector maps. The metadata include the scenario identifier, temporal range, and participating vessels. The trajectory part contains state tensors, validity masks, ves-sel identities, ego MMSI, timestamps, temporal interval, and local-coordinate references. The raster-map part includes water masks, land masks, lane-density maps, and raster metadata. The vector-map part includes water polygons, land polygons, lane centerlines, lane attributes, and an explicit lane graph with node coordinates, edge connectivity, and edge polylines [34]. This unified representation supports sequence-based forecast-ing, environment-constrained prediction, and topology-aware reasoning. Fig. 4 and Fig. 5 illustrate representative NaviAIS scenarios, including narrow inland waterways, port areas, and curved inland channels. These examples show that raster maps pro-vide coarse water–land occupancy priors, vector maps cap-ture boundary geometry, and lane vectors highlight principal navigational structures. By jointly providing raster and vector representations, NaviAIS enables models to leverage both global occupancy constraints and structured lane-aware priors [35], [36]. NaviAIS also exhibits strong scene diversity. As shown in Fig. 4, it covers narrow channels, harbor entrances, and highly curved waterways, requiring models to handle straight-going motion, turning behavior, constrained navigation, and local interaction under different waterway geometries. This makes the benchmark more representative of real-world maritime navigation. Table I compares NaviAIS with existing vessel trajectory 6 
+
+> Fig. 4. Visualization of dataset scenarios. First show raster maps, vector maps, navigable-channel vectors, and AIS vessel trajectories for narrow inland waterways, respectively. Second show the corresponding results for curved inland waterways. Third show the corresponding results for port areas.
+
+prediction datasets in terms of scale, vectorized lanes, multi-scenario coverage, vectorized maps, openness, and trajectory processing. Most public AIS datasets are large-scale and multi-scenario, but lack vectorized lane priors, structured vector maps, or task-oriented processed trajectories. In con-trast, NaviAIS jointly provides scenario-level organization, vectorized lanes, vectorized maps, open accessibility, and processed trajectories, making it a more complete benchmark for environment-aware vessel trajectory prediction. The proposed model NaviLane was trained on NVIDIA A100 GPUs. All baseline and comparison methods were trained and evaluated under the same protocol, using 30 epochs and a batch size of 16. For open-source methods such as DI-MTP and TPTrans, we retained their default configurations and modified only the data loading interface for NaviAIS. All ADE/FDE-related displacement metrics are reported in units of 100 meters, i.e., a value of 1.0 corresponds to 100 meters. For fair multimodal comparison, all methods were constrained to output the best top-6 trajectories, and minADE@6 and minFDE@6 were computed accordingly. 
+
+B. Evaluation Metrics 
+
+We evaluate trajectory prediction performance using ADE, FDE, minADE@ Kout , minFDE@ Kout , RMSE, MaxDE, and MHE, as defined in Eqs. (25)–(32). Here, ADE measures the average displacement error over the whole predicted trajectory, while FDE measures the displacement error at the final predic-tion step. For multimodal prediction, minADE and minFDE denote the minimum ADE and FDE among the top-Kout 
+
+predicted trajectories [37], [38], respectively; in this work, we set Kout = 6 . RMSE evaluates the root mean square positional error over the entire trajectory, and MaxDE characterizes the maximum displacement error at the worst time step. 
+
+C. Metric Formulations 
+
+Let the ground-truth trajectory be P = {pt}Tt=1 and the 
+
+k-th predicted trajectory be ˆP(k) = {ˆp(k) 
+
+> t
+
+}Tt=1 , where pt =(xt, y t) ∈ R2 and ˆp(k) 
+
+> t
+
+= (ˆ x(k) 
+
+> t
+
+, ˆy(k) 
+
+> t
+
+) ∈ R2 denote the ground-truth and predicted 2D positions at time step t, respectively. 
+
+ADE = 1
+
+T
+
+> T
+
+X
+
+> t=1
+
+∥ˆpt − pt∥2 (25) 
+
+FDE = ∥ˆpT − pT ∥2 (26) 
+
+minADE = min 
+
+> k∈{ 1,...,K out }
+
+1
+
+T
+
+> T
+
+X
+
+> t=1
+
+ˆp(k) 
+
+> t
+
+− pt 2
+
+(27) 7                                                                                                       
+
+> TABLE II QUANTITATIVE COMPARISON OF DIFFERENT METHODS ON THE NAVI AIS TEST SET . T HE BEST RESULT IN EACH COLUMN IS SHOWN IN BOLD .Method ADE@3 ↓FDE@3 ↓ADE@5 ↓FDE@5 ↓ADE@10 ↓FDE@10 ↓RMSE ↓MaxDE ↓MHE ↓
+> LSTM [39] 1.06 1.76 1.84 3.45 4.54 10.21 5.77 10.35 0.78 CA [40] 1.84 3.12 3.47 6.97 9.48 22.36 11.86 22.39 0.81 CV [41] 1.56 2.37 2.40 4.10 4.80 9.55 5.63 9.67 0.53 CTRV [42] 1.50 2.30 2.36 4.12 4.98 10.28 5.95 10.41 0.63 Transformer [43] 2.15 3.33 3.49 6.28 7.40 14.71 8.73 14.78 1.02 Tptrans [7] 1.47 2.23 2.30 3.98 4.60 8.85 5.38 8.99 0.53 Traisformer [44] 1.86 2.77 2.93 5.16 6.13 12.14 7.25 12.31 0.59 DI-MTP [6] 1.80 2.74 2.82 4.91 5.56 10.63 6.47 10.77 0.72 PECnet [45] 1.53 2.28 2.33 3.94 4.77 9.59 5.65 9.70 0.58 Ours 1.18 1.74 1.83 3.03 3.57 7.03 4.23 7.27 0.44
+> (a) (b)
+> Fig. 5. Visualization of local navigable channels.
+
+minFDE = min 
+
+> k∈{ 1,...,K out }
+
+ˆp(k) 
+
+> T
+
+− pT 2
+
+(28) 
+
+RMSE = 
+
+vuut 1
+
+T
+
+> T
+
+X
+
+> t=1
+
+∥ˆpt − pt∥22 (29) 
+
+MaxDE = max  
+
+> t∈{ 1,...,T }
+
+∥ˆpt − pt∥2 (30) 
+
+θt = atan2( yt − yt−1, x t − xt−1),
+
+ˆθt = atan2(ˆ yt − ˆyt−1, ˆxt − ˆxt−1), t = 2 , . . . , T (31) 
+
+MHE = 1
+
+T − 1
+
+> T
+
+X
+
+> t=2
+
+wrap 
+
+ˆθt − θt
+
+
+
+(32) 
+
+where wrap(∆ θ) maps the angular difference into (−π, π ],which can be written as 
+
+wrap(∆ θ) = ((∆ θ + π) mod 2 π) − π. (33) 
+
+D. Single-Modal Comparison Results 
+
+Table II reports the quantitative comparison of different methods on the NaviAIS test set. Overall, the proposed Nav-iLane model achieves the best performance on most metrics, especially in medium- and long-horizon prediction [46]. In particular, NaviLane obtains the best results on FDE@3, ADE@5, FDE@5, ADE@10, FDE@10, RMSE, MaxDE, and MHE. At the longest prediction horizon, NaviLane reduces ADE@10 to 3.57 and FDE@10 to 7.03, while also achieving the lowest RMSE and MaxDE. The best MHE result further shows that NaviLane produces trajectories with more realistic heading evolution and better directional consistency. A closer examination of the baselines reveals several impor-tant patterns. Classical kinematic baselines such as CV, CTRV, and CA remain relatively competitive at short horizons, which is expected because they rely on strong motion priors and can extrapolate local trends in simple scenarios. However, their errors increase rapidly as the prediction horizon grows. This phenomenon is particularly clear for CA, whose ADE@10 and FDE@10 are substantially worse than those of the pro-posed model. Such degradation suggests that fixed motion assumptions are insufficient for vessel forecasting in realistic waterways, where trajectory evolution is jointly affected by lane geometry, local constraints, and nearby vessel interaction. Sequence-based learning methods such as LSTM, Trans-former, and TrAISformer improve the ability to model tem-poral dependencies, but they still underperform NaviLane on most medium- and long-horizon metrics. This result indicates that historical trajectory sequences alone are not enough to fully characterize vessel motion in structured navigational environments. In contrast, NaviLane explicitly incorporates vectorized lane priors and scene-level map context, which allows the model to distinguish between geometrically fea-sible and infeasible futures. This is especially beneficial in narrow inland channels, curved waterways, and constrained port regions. Compared with stronger learned baselines such as TPTrans, DI-MTP, and PECNet, NaviLane still maintains a clear advan-tage. This suggests that the gain of the proposed framework does not come from a larger generic backbone alone, but from the combination of several task-specific design choices: trajectory–map joint encoding, strategy-level macro-action or-ganization, local residual refinement, and world-model-based consequence-aware reranking. In other words, NaviLane im-proves both the representation of the scene and the mechanism used to generate and select future trajectories. Another notable observation is that NaviLane does not simply optimize endpoint accuracy at the cost of intermediate trajectory quality. The simultaneous improvement in ADE, FDE, RMSE, MaxDE, and MHE indicates that the predicted trajectories are globally closer to the ground truth, locally smoother, and directionally more faithful. Since maritime mo-tion is usually continuous, inertia-dominated, and constrained by waterway structure, a method that reduces average dis-placement but produces unrealistic directional changes would 8                          
+
+> TABLE III QUANTITATIVE COMPARISON OF DIFFERENT METHODS IN TERMS OF MULTIMODAL TRAJECTORY PREDICTION METRICS ON THE NAVI AIS DATASET . T HE BEST RESULT IN EACH COLUMN IS HIGHLIGHTED IN BOLD .Method minADE@3 ↓minFDE@3 ↓minADE@5 ↓minFDE@5 ↓minADE@10 ↓minFDE@10 ↓
+> DI-MTP [6] 1.05 1.52 1.64 2.66 5.56 10.63 PECnet [45] 1.53 2.28 2.33 3.94 4.77 9.59 Ours 0.97 1.43 1.49 2.44 2.61 4.85
+
+still be undesirable in practice. The strong MHE performance of NaviLane therefore provides additional evidence that its predictions are not only accurate but also physically and behaviorally plausible. 
+
+E. Multimodal Comparison Results 
+
+Table III further compares different methods in terms of multimodal forecasting metrics. NaviLane achieves the best re-sults on all listed metrics, including minADE@3, minFDE@3, minADE@5, minFDE@5, minADE@10, and minFDE@10. The improvements are particularly evident at the long horizon, where NaviLane reaches 2.61 on minADE@10 and 4.85 on minFDE@10, substantially outperforming DI-MTP and PEC-Net. These results show that the top-6 candidates generated by NaviLane provide stronger coverage of the true future. The superiority of NaviLane in the multimodal setting suggests that its candidate set is not only diverse, but also well organized. In many multimodal prediction frameworks, diversity is introduced implicitly through latent sampling or endpoint perturbation, which can lead to redundant modes or overly dispersed predictions. In contrast, NaviLane organizes the multimodal space through a discrete macro-action code-book, explicitly partitioning plausible high-level navigational strategies before decoding continuous trajectories. This design makes different modes more interpretable and reduces redun-dant candidates. The refinement and reranking stages further contribute to this advantage. After coarse strategy-level generation, the residual refinement module improves local geometric precision while preserving the global mode structure. The world-model-based counterfactual evaluator then selects candidates not only according to their prior likelihood, but also according to their anticipated interaction consequences. As a result, NaviLane achieves a better balance between diversity and rationality, which is important for maintaining consistency with channel geometry, vessel interaction, and navigational feasibility. It is also worth noting that the multimodal advantage of NaviLane is aligned with the single-modal results. This indicates that the model improves both candidate generation quality and final ranking, rather than merely relying on a large set of candidates. In practical terms, such an informative and well-structured candidate set is more suitable for downstream decision-making and risk analysis. 
+
+F. Qualitative Analysis of Prediction Results 
+
+The qualitative comparisons in Fig. 6 and Fig. 7 provide additional insight into the behavior of different forecasting methods in inland waterways, ports, and coastal areas. Overall, NaviLane aligns more closely with the ground-truth trajectory under the top-1 setting, while under the top-6 setting it covers multiple plausible futures without producing obviously invalid candidates that deviate from the navigable channel structure. This indicates that vectorized lane priors, hierarchical macro-action modeling, and consequence-aware reranking jointly im-prove both the rationality and the selectability of the predicted trajectories. A closer examination of DI-MTP reveals that its multimodal predictions are overly dispersed. Although its candidates cover a large spatial range, many of them are scattered across broad regions and fail to concentrate around high-quality futures. Moreover, several predicted trajectories are visually incon-sistent with the local waterway geometry and are therefore implausible from a navigational perspective. This suggests that DI-MTP suffers from a mismatch between diversity and precision: it can spread predictions across many regions, but lacks an effective mechanism to organize them into a practically useful candidate set. PECNet exhibits the opposite issue. Its multimodal pre-dictions cover only a limited area, and the visual difference between the top-6 output and the single-trajectory prediction is often small. In other words, its multimodal output tends to collapse to a narrow local region, behaving more like slight perturbations of a single prediction than a set of distinct navigation strategies. This weak coverage limits its ability to capture genuinely different futures when the true trajectory deviates from the dominant mode. By contrast, NaviLane produces multimodal candidates that are both diverse and structurally constrained. The pre-dicted trajectories better follow curved channel geometry, remain consistent with the navigable region, and show clearer strategy-level differentiation across modes. This suggests that NaviLane does not simply increase diversity, but instead generates a more meaningful candidate set through the joint effect of lane-aware encoding, macro-action organization, local refinement, and world-model-based consequence evaluation. Another important observation is that the advantage of NaviLane is consistent across different scenario types. In narrow inland channels, it more faithfully follows the corridor-like geometry of the waterway. In ports and coastal areas, it maintains reasonable candidate spread while still respecting local navigational structure. This consistency indicates that the model is not overfitted to a single environment type, but learns a more general forecasting mechanism across different maritime settings. 9             
+
+> (a) (b) (c) (d)
+> (e) (f) (g) (h)
+> (i) (j) (k) (l)
+> (m) (n) (o) (p)
+> Fig. 6. Visualization of trajectory prediction results of different methods in inland waterways. (a), (i): NaviLane (top-1); (b), (j): NaviLane (top-6); (c), (k): DI-MTP (top-1); (d), (l): DI-MTP (top-6); (e), (m): CTRV; (f), (n): LSTM; (g), (o): PECNet (top-1); (h), (p): PECNet (top-6).
+
+G. Ablation Study 
+
+Table IV presents the ablation results of different modules in the proposed framework. Removing the refinement mod-ule leads to the most severe degradation across ADE@10, FDE@10, RMSE, MaxDE, and MHE, confirming its impor-tance for local trajectory correction. Although the macro-action decoder provides reasonable coarse futures, errors in curvature, endpoint location, and motion smoothness still remain. Without refinement, long-horizon prediction quality deteriorates sharply. Removing the world-model-based counterfactual evalua-tor also causes a clear performance drop, indicating that multimodal candidate generation alone is insufficient. The world model helps distinguish scene-consistent candidates by evaluating their anticipated interaction consequences, thereby improving consequence-aware ranking. A similar but slightly smaller degradation is observed when the selector is removed. This suggests that the selector improves the alignment between scene representations and macro-action prototypes, reducing mismatch between the cur-rent context and decoded trajectory modes. Without it, the generated futures become less consistent with the actual scene. Overall, the three modules play complementary roles: the selector improves strategy-level mode matching, the refiner enhances local trajectory accuracy, and the world-model-based evaluator improves consequence-aware candidate ranking. The full model achieves the best performance when all components are jointly enabled. 
+
+H. Hyperparameter Sensitivity Analysis 
+
+Table V reports the sensitivity analysis of several key hy-perparameters, including the macro-action codebook size, the number of attention heads, and the number of network layers. Overall, NaviLane remains reasonably stable across different 10 
+
+(a) (b) (c) (d) (e) (f) (g) (h) 
+
+(i) (j) (k) (l) (m) (n) (o) (p) 
+
+Fig. 7. Visualization of trajectory prediction results of different methods in ports and coastal areas. (a), (i): NaviLane (top-1); (b), (j): NaviLane (top-6); (c), (k): DI-MTP (top-1); (d), (l): DI-MTP (top-6); (e), (m): CTRV; (f), (n): LSTM; (g), (o): PECNet (top-1); (h), (p): PECNet (top-6). 
+
+settings, while the selected default configuration provides the best balance between representation capacity and optimization behavior. For the macro-action codebook size, Kmacro = 128 yields the best overall trade-off. Reducing the codebook to 64 en-tries weakens multimodal performance, suggesting insufficient strategy coverage, while increasing it to 256 introduces redun-dancy and makes prototype matching more difficult. Therefore, 
+
+Kmacro = 128 provides a suitable balance between strategy diversity and learnability. For multi-head attention, using 8 heads produces the best results. With only 4 heads, the model may be limited in cap-turing different aspects of the scene, such as vessel interaction, lane geometry, and local environmental context. Increasing the number of heads to 16 does not bring further gains, indicating that simply increasing architectural complexity does not necessarily improve structured scene encoding. A similar trend is observed in the depth analysis. Using 6 layers achieves the best overall performance, whereas 4 layers are slightly insufficient and 8 layers introduce redundancy or optimization difficulty. Overall, the hyperparameter study shows that the adopted default configuration is empirically well justified. V. C ONCLUSION 
+
+This paper presented NaviAIS, a standardized scenario-level AIS dataset with vectorized lane priors, and NaviLane, a hierarchical macro-action forecasting framework. NaviAIS provides unified trajectory and map representations, while NaviLane integrates trajectory–map encoding, macro-action 
+
+TABLE IV ABLATION STUDY OF DIFFERENT MODULES IN THE PROPOSED MODEL .Setting ADE@10 ↓ FDE@10 ↓ RMSE ↓ MaxDE ↓ MHE ↓                    
+
+> w/o Module Refine 8.07 15.75 9.50 15.84 1.35 w/o Module World-CFR 4.10 8.22 4.84 8.48 0.48 w/o Module Selector 3.97 7.81 4.66 7.99 0.48 All 3.57 7.03 4.23 7.27 0.44
+
+TABLE V HYPERPARAMETER SENSITIVITY ANALYSIS .Hyperparameter Value ADE@10 ↓ FDE@10 ↓ minADE@10 ↓ minFDE@10 ↓ RMSE ↓                                             
+
+> Macro-k
+> 64 3.55 6.89 2.75 5.11 4.18
+> 128 3.57 7.03 2.61 4.85 4.23
+> 256 3.72 7.21 2.88 5.39 4.39 num-heads
+> 43.81 7.44 2.80 5.42 4.49
+> 83.57 7.03 2.61 4.85 4.23
+> 16 3.72 7.27 2.82 5.53 4.38 num-layers
+> 43.64 7.18 2.72 5.24 4.29
+> 63.57 7.03 2.61 4.85 4.23
+> 83.78 7.34 2.66 5.11 4.44
+
+generation, refinement, and consequence-aware ranking. Ex-periments demonstrate its effectiveness in both single-modal and multimodal vessel trajectory prediction. CODE AND DATA AVAILABILITY 
+
+The source code of NaviLane and related configuration files are publicly available for reproducibility at GitHub: https://github.com/guiyuanal/NaviLane. The NaviAIS dataset is publicly available at Hugging Face: https://huggingface.co/ datasets/Guiyuanal/NaviAIS. 11 
+
+REFERENCES [1] C. Jia, J. Ma, X. Yang, and X. Lv, “Ragan: A generative adversarial network for risk-aware trajectory prediction in multi-ship encounter situations,” Ocean Engineering , vol. 289, p. 116188, 2023. [2] H. Li, H. Jiao, and Z. Yang, “Ais data-driven ship trajectory prediction modelling and analysis based on machine learning and deep learning methods,” Transportation Research Part E: Logistics and Transportation Review , vol. 175, p. 103152, 2023. [3] D. Yang, L. Wu, S. Wang, H. Jia, and K. X. Li, “How big data enriches maritime research–a critical review of automatic identification system (ais) data applications,” Transport reviews , vol. 39, no. 6, pp. 755–773, 2019. [4] M. Masek, C. P. Lam, T. Rybicki, J. Snell, D. Wheat, L. Kelly, C. Smith-Gander et al. , “The open maritime traffic analysis dataset,” 2021. [5] R. Meyer, W. Kleynhans, M. Portier, J. Beja, and L. Tyberghein, “Dataset of ocean vessel traffic in the north sea,” Data in brief , vol. 51, p. 109746, 2023. [6] R. Zhang, C. Li, K. Liu, C. Wang, B. Zheng, and H. Jiang, “Unified multimodal vessel trajectory prediction with explainable navigation intention,” IEEE Transactions on Intelligent Transportation Systems ,vol. 27, no. 1, pp. 258–269, 2025. [7] W. Wang, W. Xiong, X. Ouyang, and L. Chen, “Tptrans: Vessel trajectory prediction model based on transformer using ais data,” ISPRS International Journal of Geo-Information , vol. 13, no. 11, p. 400, 2024. [8] M. Svanberg, V. Sant´ en, A. H¨ orteborn, H. Holm, and C. Finnsg˚ ard, “Ais in maritime research,” Marine Policy , vol. 106, p. 103520, 2019. [9] Y. Wada, R. Shibasaki, H. Kosaka, D. Watanabe, H. Ito, K. Tsubota, T. Aratani, T. Izumiyama, and R. Iwasa, “Literature review and future prospects on vessel movement data usage including ais-focusing on logistics, shipping, shipbuilding, environment, and cruise fields,” Journal of the Japan Society of Naval Architects and Ocean Engineers , vol. 34, 2021. [10] Y. Yang, Y. Liu, G. Li, Z. Zhang, and Y. Liu, “Harnessing the power of machine learning for ais data-driven maritime research: A comprehensive review,” Transportation research part E: logistics and transportation review , vol. 183, p. 103426, 2024. [11] I. Slaughter, J. L. Charla, M. Siderius, and J. Lipor, “Vessel trajectory prediction with recurrent neural networks: An evaluation of datasets, features, and architectures,” Journal of Ocean Engineering and Science ,vol. 10, no. 2, pp. 229–238, 2025. [12] F. Huang, Z. Liu, X. Li, F. Mou, P. Li, and Z. Fan, “Vessel trajectory prediction based on ais data: dual-path spatial–temporal attention net-work with multi-attribute information,” Journal of Marine Science and Engineering , vol. 12, no. 11, p. 2031, 2024. [13] H. Xue, S. Wang, M. Xia, and S. Guo, “G-trans: A hierarchical approach to vessel trajectory prediction with gru-based transformer,” 
+
+Ocean Engineering , vol. 300, p. 117431, 2024. [14] S. Kim, H.-g. Chi, H. Lim, K. Ramani, J. Kim, and S. Kim, “Higher-order relational reasoning for pedestrian trajectory prediction,” in Pro-ceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2024, pp. 15 251–15 260. [15] K. Chen, X. Zhao, Y. Huang, G. Fang, X. Song, R. Wang, and Z. Wang, “Socialmoif: Multi-order intention fusion for pedestrian trajectory pre-diction,” in Proceedings of the Computer Vision and Pattern Recognition Conference , 2025, pp. 22 465–22 475. [16] S. Wang, Y. Li, H. Xing, and Z. Zhang, “Vessel trajectory prediction based on spatio-temporal graph convolutional network for complex and crowded sea areas,” Ocean Engineering , vol. 298, p. 117232, 2024. [17] Y. Shin, N. Kim, H. Lee, S. Y. In, M. Hansen, and Y. Yoon, “Deep learning framework for vessel trajectory prediction using auxiliary tasks and convolutional networks,” Engineering Applications of Artificial Intelligence , vol. 132, p. 107936, 2024. [18] S. Ettinger, S. Cheng, B. Caine, C. Liu, H. Zhao, S. Pradhan, Y. Chai, B. Sapp, C. R. Qi, Y. Zhou et al. , “Large scale interactive motion forecasting for autonomous driving: The waymo open motion dataset,” in Proceedings of the IEEE/CVF international conference on computer vision , 2021, pp. 9710–9719. [19] B. Wilson, W. Qi, T. Agarwal, J. Lambert, J. Singh, S. Khandelwal, B. Pan, R. Kumar, A. Hartnett, J. K. Pontes et al. , “Argoverse 2: Next generation datasets for self-driving perception and forecasting,” arXiv preprint arXiv:2301.00493 , 2023. [20] S. Guo, H. Zhang, and Y. Guo, “Toward multimodal vessel trajectory prediction by modeling the distribution of modes,” Ocean Engineering ,vol. 282, p. 115020, 2023. [21] J. Gong, H. Li, H. Jiao, and Z. Yang, “Uncertainty-aware ship trajectory prediction via spatio-temporal graph transformer,” Transportation Re-search Part E: Logistics and Transportation Review , vol. 203, p. 104315, 2025. [22] Z. Guo, H. Qiang, and X. Peng, “Vessel trajectory prediction using vessel influence long short-term memory with uncertainty estimation,” Journal of Marine Science and Engineering , vol. 13, no. 2, p. 353, 2025. [23] P. Last, C. Bahlke, M. Hering-Bertram, and L. Linsen, “Comprehensive analysis of automatic identification system (ais) data in regard to vessel movement prediction,” The Journal of Navigation , vol. 67, no. 5, pp. 791–809, 2014. [24] M. Le Tixerant, D. Le Guyader, F. Gourmelon, and B. Queffelec, “How can automatic identification system (ais) data be used for maritime spatial planning?” Ocean & Coastal Management , vol. 166, pp. 18–30, 2018. [25] J. F. Fisac, E. Bronstein, E. Stefansson, D. Sadigh, S. S. Sastry, and A. D. Dragan, “Hierarchical game-theoretic planning for autonomous vehicles,” in 2019 International conference on robotics and automation (ICRA) . IEEE, 2019, pp. 9590–9596. [26] Z. Huang, H. Liu, and C. Lv, “Gameformer: Game-theoretic modeling and learning of transformer-based interactive prediction and planning for autonomous driving,” in Proceedings of the IEEE/CVF International Conference on Computer Vision , 2023, pp. 3903–3913. [27] J. Lidard, O. So, Y. Zhang, J. DeCastro, X. Cui, X. Huang, Y.-L. Kuo, J. Leonard, A. Balachandran, N. Leonard et al. , “Nashformer: Leveraging local nash equilibria for semantically diverse trajectory prediction,” arXiv preprint arXiv:2305.17600 , 2023. [28] X. Chen, J. Ling, Y. Yang, H. Zheng, P. Xiong, O. Postolache, and Y. Xiong, “Ship trajectory reconstruction from ais sensory data via data quality control and prediction,” Mathematical Problems in Engineering ,vol. 2020, no. 1, p. 7191296, 2020. [29] M. Liang, J. Su, R. W. Liu, and J. S. L. Lam, “Aisclean: Ais data-driven vessel trajectory reconstruction under uncertain conditions,” Ocean Engineering , vol. 306, p. 117987, 2024. [30] L. Zhao, G. Shi, and J. Yang, “Ship trajectories pre-processing based on ais data,” The Journal of Navigation , vol. 71, no. 5, pp. 1210–1230, 2018. [31] Y. Liu, Z. Shi, B. Fu, H. Xu, and H. Wu, “Marine trajectory reconstruc-tion method based on navigation state recognition and bi-directional kinematic interpolation,” Journal of Marine Science and Engineering ,vol. 12, no. 12, p. 2164, 2024. [32] Z. Guo, H. Qiang, S. Xie, and X. Peng, “Unsupervised knowledge discovery framework: From ais data processing to maritime traffic networks generating,” Applied Ocean Research , vol. 146, p. 103924, 2024. [33] Z. Yan, G. Yang, R. He, K. Shi, and H. Yang, “Reconstructing trajec-tories and extracting shipping routes between ports based on ais data,” 
+
+Applied Ocean Research , vol. 161, p. 104709, 2025. [34] M. Liang, B. Yang, R. Hu, Y. Chen, R. Liao, S. Feng, and R. Urtasun, “Learning lane graph representations for motion forecasting,” in Euro-pean Conference on Computer Vision . Springer, 2020, pp. 541–556. [35] J. Gao, C. Sun, H. Zhao, Y. Shen, D. Anguelov, C. Li, and C. Schmid, “Vectornet: Encoding hd maps and agent dynamics from vectorized rep-resentation,” in Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , 2020, pp. 11 525–11 533. [36] C. Xu, T. Li, C. Tang, L. Sun, K. Keutzer, M. Tomizuka, A. Fathi, and W. Zhan, “Pretram: Self-supervised pre-training via connecting trajectory and map,” in European Conference on Computer Vision .Springer, 2022, pp. 34–50. [37] T. Phan-Minh, E. C. Grigore, F. A. Boulton, O. Beijbom, and E. M. Wolff, “Covernet: Multimodal behavior prediction using trajectory sets,” in Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , 2020, pp. 14 074–14 083. [38] H. Zhao, J. Gao, T. Lan, C. Sun, B. Sapp, B. Varadarajan, Y. Shen, Y. Shen, Y. Chai, C. Schmid et al. , “Tnt: Target-driven trajectory prediction,” in Conference on robot learning . PMLR, 2021, pp. 895– 904. [39] A. Graves, “Long short-term memory,” Supervised sequence labelling with recurrent neural networks , pp. 37–45, 2012. [40] R. Schubert, E. Richter, and G. Wanielik, “Comparison and evaluation of advanced motion models for vehicle tracking,” in 2008 11th interna-tional conference on information fusion . IEEE, 2008, pp. 1–6. [41] S. Ammoun and F. Nashashibi, “Real time trajectory prediction for col-lision risk estimation between vehicles,” in 2009 IEEE 5Th international conference on intelligent computer communication and processing .IEEE, 2009, pp. 417–422. 12 
+
+[42] P. Lytrivis, G. Thomaidis, and A. Amditis, “Cooperative path prediction in vehicular environments,” in 2008 11th international IEEE conference on intelligent transportation systems . IEEE, 2008, pp. 803–808. [43] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin, “Attention is all you need,” Advances in neural information processing systems , vol. 30, 2017. [44] D. Nguyen and R. Fablet, “A transformer network with sparse aug-mented data representation and cross entropy loss for ais-based vessel trajectory prediction,” IEEE Access , vol. 12, pp. 21 596–21 609, 2024. [45] K. Mangalam, H. Girase, S. Agarwal, K.-H. Lee, E. Adeli, J. Malik, and A. Gaidon, “It is not the journey but the destination: Endpoint conditioned trajectory prediction,” in European conference on computer vision . Springer, 2020, pp. 759–776. [46] Q. Yu, X. Yin, X. Geng, S. Chen, and J. Yang, “Aisformer for long-term vessel trajectory prediction,” Ocean Engineering , vol. 340, p. 122098, 2025.

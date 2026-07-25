@@ -1,0 +1,962 @@
+Title: Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction
+
+URL Source: https://arxiv.org/pdf/2607.20697v1
+
+Published Time: Fri, 24 Jul 2026 00:13:55 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+> 1
+
+# Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction 
+
+Kyriakos Christodoulides, Kyriakos M. Deliparaschos, Risto Wichman, and Themistoklis Charalambous 
+
+Abstract —Machine-learning-based channel predictors must operate under stringent latency, memory, and computational constraints while remaining robust to noisy and time-varying observations. This paper develops a causal channel-prediction framework based on three single-layer gated recurrent unit variants: an unconstrained lightweight GRU (L-GRU), a stability-aware GRU (SA-GRU) with a spectral bound on the candidate-state recurrent matrix, and a doubly constrained lightweight GRU (DCL-GRU) with additional control of the reset-gate recurrent matrix. A sufficient condition is derived for contraction of the complete candidate-state mapping, while preserving the parameter count and inference-time structure of the baseline architecture. These guarantees apply to the candidate-state map-ping and do not directly imply contraction of the complete GRU hidden-state transition. The models are trained on 2 × 2 MIMO channels generated using the 3GPP CDL-A model, and their hyperparameters are selected through Bayesian optimisation with Optuna’s Tree-structured Parzen Estimator. Across the consid-ered SNR range, the constrained variants retain competitive prediction accuracy and achieve optimisation runtimes close to L-GRU, with speedups of 1.72 × and 1.76 × relative to a five-layer GRU for SA-GRU and DCL-GRU, respectively. All audited constrained runs satisfy the prescribed spectral bounds. Under temporary observation corruption followed by recursive prediction, SA-GRU reduces the mean and peak hidden-state deviations by approximately 15 .3% and 13 .0% , respectively, relative to L-GRU, whereas L-GRU achieves the lowest rollout NMSE. These results highlight an explicit trade-off between prediction accuracy, empirical rollout robustness, and candidate-state stability guarantees. 
+
+Index Terms —Bayesian optimisation, causal channel predic-tion, gated recurrent unit, recurrent stability, time-varying MIMO channels. 
+
+I. I NTRODUCTION 
+
+Wireless channels are inherently time-varying and frequency-selective due to multipath propagation, user 
+
+K. Christodoulides and T. Charalambous are with the Department of Electrical and Computer Engineering, University of Cyprus, 1678 Nicosia, Cyprus. T. Charalambous is also a Visiting Professor with the Department of Electrical Engineering and Automation, School of Electrical Engineering, Aalto University, Espoo, Finland. E-mails: christodoulides.kyriakos@ucy.ac.cy ,
+
+charalambous.themistoklis@ucy.ac.cy 
+
+K. M. Deliparaschos is with the Department of Electrical Engineering, Computer Engineering and Informatics, Cyprus University of Technology, Limassol, Cyprus. E-mail: k.deliparaschos@cut.ac.cy .R. Wichman is with the Department of Information and Communications Engineering, School of Electrical Engineering, Aalto University, Espoo, Finland. E-mail: risto.wichman@aalto.fi .Preliminary results of this paper have been accepted for publication in IEEE CAMAD [1]. The journal version substantially extends the conference paper through a new variant of lightweight GRU, herein called Doubly Constrained Lightweight GRU (DCL-GRU), a more detailed system and channel formulation, an expanded methodological and theoretical treatment, and a broader numerical evaluation across model architectures, optimisation budgets, computational cost, and received SNR. 
+
+mobility, and environmental dynamics [2]. The strong temporal correlation induced by Doppler shifts and multipath fading makes channel estimation and prediction an inherently sequential task, requiring models that can capture time-evolving dependencies across successive channel realisations. Accurate channel estimation and prediction are crucial for coherent demodulation, adaptive modulation, and resource allocation in modern communication systems, particularly in rapidly time-varying or high-mobility scenarios. Time-varying channel estimation and prediction have tra-ditionally relied on model-based approaches grounded in an-alytical Doppler models. In particular, physical-model-based estimators have been proposed in [3], [4], where autoregressive (AR) and ARMA processes are fitted to the classical Jakes Doppler spectrum [5] and embedded into a Kalman filtering framework for channel tracking. Similar methodologies have been extended to long-range channel prediction in [6]–[8], exploiting the fact that the signal bandwidth is typically much larger than the maximum Doppler frequency. Despite their solid theoretical foundation, these approaches are inherently sensitive to model mismatch: practical propagation environ-ments often deviate from the idealised Jakes spectrum, leading to an irreducible error floor in prediction performance [9]. A comprehensive review in [10] shows that AR-based pre-dictors generally outperform sum-of-sinusoids (SoS) methods for short prediction horizons under statistical channel models, whereas SoS predictors achieve longer horizons mainly in synthetic scenarios. To mitigate sensitivity to Doppler model assumptions, Basis Expansion Model (BEM) estimators represent the time-varying channel as a low-dimensional expansion over deterministic basis functions, making them more robust to spectral mis-match [11], [12]. BEM-based estimators have been shown to outperform Doppler-model-based Kalman filters in terms of MSE under mismatch conditions. Several basis choices have been investigated, including discrete prolate spheroidal sequences (DPSS) [13] and discrete cosine transform (DCT) bases [14], [15]. Recursive BEM formulations can be em-bedded into a Kalman filtering framework with time-invariant dynamics, yielding a stationary Kalman gain and significantly reduced computational complexity [3], [4], [16]. While such approaches achieve improved robustness and longer predic-tion horizons compared to AR-based predictors, they remain constrained by the choice of fixed basis functions. Despite their efficiency and interpretability, model-based and BEM-based predictors depend on modeling assumptions, limiting their adaptability in nonlinear, nonstationary, or het-erogeneous propagation environments. As wireless systems evolve toward highly dynamic scenarios with varying mobility, arXiv:2607.20697v1 [eess.SP] 22 Jul 2026 2
+
+traffic patterns, and heterogeneous radio propagation environ-ments, these assumptions become increasingly restrictive. Recent advances in machine learning have led to the emer-gence of Deep Neural Sequence Models (DNSMs) for tempo-ral prediction tasks. DNSMs encompass recurrent architectures such as Recurrent Neural Networks (RNNs) [17], including GRU and LSTM variants, as well as causal convolutional neural networks (CNNs) [18]. RNNs offer a particularly attrac-tive data-driven alternative for channel prediction by learning temporal channel dynamics directly from observations. By maintaining and recursively updating an internal hidden state, RNN-based architectures can capture temporal correlations and adapt to evolving channel statistics without relying on explicit Doppler models or predefined basis expansions. This makes them well suited for nonstationary wireless environ-ments. In contrast, CNN-based approaches primarily exploit spatial or short-range temporal correlations and typically re-quire stacked historical inputs to process sequential data. Such input buffering increases latency and computational overhead, limiting their suitability for real-time PHY-layer deployment where strict causality and low latency are essential. Among recurrent architectures, Gated Recurrent Units (GRUs) [19] provide a favourable balance between modelling capacity and computational efficiency, making them particu-larly well suited for causal PHY-layer channel prediction [20]. GRUs maintain a hidden state that evolves recursively over time, allowing them to capture temporal correlations in the channel coefficients and to adapt to time-varying propagation conditions. Compared to vanilla RNNs, the gating mechanism in GRUs mitigates vanishing and exploding gradient issues, enabling stable learning of both short-term fluctuations and longer-term channel trends. In contrast to Long Short-Term Memory (LSTM) networks [21], GRUs employ a simplified architecture in which the input and forget gates are combined into a single update gate, while a reset gate controls the incor-poration of new information. This reduction in architectural complexity leads to a significantly lower number of trainable parameters and reduced inference latency, while preserving comparable expressive power for modelling temporal dynam-ics. These properties make GRUs particularly attractive for real-time wireless systems, where tight latency, energy, and hardware constraints limit the feasibility of deeper or more complex recurrent models. Despite these advantages, deploying standard GRU archi-tectures at the physical layer remains challenging in highly resource-constrained or latency-sensitive scenarios, such as edge devices, IoT nodes, or FPGA-based implementations. In such settings, even moderate hidden-state dimensions may result in non-negligible computational overhead and memory usage, especially when operating at high symbol rates or under stringent real-time requirements. This motivates the design of lightweight recurrent architectures that preserve the temporal modelling capability of GRUs while further reducing computational and implementation complexity. Furthermore, most existing approaches primarily focus on improving prediction accuracy through architectural complex-ity, optimiser selection, or online adaptation mechanisms, while implicitly assuming that stability emerges from training. In practical wireless systems, however, this assumption is often violated. Channel predictors are deployed in a strictly causal and streaming fashion, operate open-loop for extended horizons, and are subject to non-stationary dynamics induced by mobility, Doppler variations, and abrupt environmental changes. In such regimes, even small modelling errors or distribution shifts may accumulate over time, leading to un-stable hidden-state trajectories, sensitivity to initialisation, and degraded long-term performance. These effects are particularly evident when recurrent models are repeatedly queried without frequent retraining or reset, as is common in low-latency PHY-layer operation. Recent work such as ERSO-GRU [22] addresses part of this challenge by incorporating experience replay and optimiser-driven hyperparameter tuning to improve online adaptation and mitigate error accumulation. While effective in practice, this approach treats stability as an emergent property of data-driven adaptation rather than as a structural property of the recurrent dynamics themselves. As a result, stability is not guaranteed 
+
+a priori and remains sensitive to training conditions, replay buffer composition, and optimiser behaviour. In contrast, stability-by-design learning architectures explicitly embed dy-namical stability constraints into the model structure. This paradigm has gained increasing attention in related domains, including contractive recurrent neural networks [23]–[25] and Lyapunov-stable policies in reinforcement learning [26]. The central idea is to design the model such that its internal state evolution satisfies provable stability properties independently of the specific training data realisation. Motivated by this perspective, we investigate spectral con-trol of selected recurrent pathways in lightweight GRU pre-dictors. We introduce SA-GRU, which bounds the direct recurrent gain entering the candidate state, and DCL-GRU, which additionally constrains the reset-gate recurrent matrix and satisfies a sufficient condition for contraction of the complete candidate-state mapping. These guarantees do not imply contraction of the complete GRU hidden-state transition, which also depends on the update gate and the direct memory pathway. The proposed constraints preserve the inference-time architecture and parameter count of L-GRU while providing explicit control of recurrent gains. Numerical results under noisy 2 × 2 MIMO channels evaluate the resulting trade-offs among one-step prediction accuracy, computational cost, structural guarantees, and empirical perturbation sensitivity. The main contributions of this work are summarised as follows: 
+
+• We formulate a causal channel-prediction pipeline based on single-layer lightweight GRU variants for noisy MIMO channels. 
+
+• We introduce SA-GRU and DCL-GRU and derive spectral conditions that bound the conditional candidate-state path-way and guarantee contraction of the complete candidate-state mapping, respectively. 
+
+• We evaluate the proposed models through Bayesian hyper-parameter optimisation across received SNR, optimisation budget, runtime, and spectral-constraint compliance. 
+
+• We conduct a paired corrupted-rollout experiment that 3
+
+quantifies the trade-off between recursive prediction accu-racy and hidden-state perturbation sensitivity. The remainder of this paper is organised as follows. Sec-tion II introduces the notation and preliminaries. Section III presents the MIMO channel model and data representation. Section IV describes the preprocessing steps. Section V in-troduces the L-GRU, SA-GRU, and DCL-GRU architectures. Section VI presents the Bayesian hyperparameter optimisation framework. Section VII describes the complete prediction pipeline. Section VIII provides the numerical evaluations. Section IX concludes the paper and discusses future directions. II. N OTATION AND PRELIMINARIES 
+
+A. Mathematical Notation 
+
+Scalars are denoted by lowercase letters (e.g., x), vectors by bold lowercase letters (e.g., x), and matrices or higher-order tensors by bold uppercase letters (e.g., X and H). Calligraphic letters (e.g., L) denote loss functions. The operator (·)⊤
+
+denotes the transpose. The Euclidean norm of a vector is denoted by ∥ · ∥ 2, and ⊙ denotes element-wise Hadamard multiplication. The real and imaginary parts of a complex-valued quantity 
+
+x ∈ C are denoted by ℜ{ x} and ℑ{ x}, respectively. The expectation operator is denoted by E[·]. The logistic sigmoid function is written as σ(·), and tanh( ·) denotes the hyperbolic tangent. 
+
+B. Time and Indexing Conventions 
+
+Discrete time is indexed by t ∈ Z≥0 and corresponds to successive channel snapshots (e.g., OFDM symbols or uni-formly sampled channel observations). Delay taps are indexed by ℓ ∈ { 0, 1, . . . , L − 1}, where L denotes the total number of delay bins after discretisation. Subcarriers are indexed by 
+
+k ∈ { 0, 1, . . . , N sc − 1}.Transmit and receive antenna indices are denoted by nt ∈{1, . . . , N tx } and nr ∈ { 1, . . . , N rx }, respectively. Indepen-dent channel realisations generated by the CDL simulator are indexed by b ∈ { 1, . . . , B }, where B also denotes the batch size during training. 
+
+C. Channel Representation 
+
+The wireless channel is modelled as a time-varying, frequency-selective MIMO channel. Its continuous-time base-band impulse response between transmit antenna nt and receive antenna nr is denoted by hnr ,n t (t, τ ), where t rep-resents time and τ denotes propagation delay. For learning and simulation purposes, this impulse response is discretised along the delay axis into L delay taps and sampled uniformly in time, yielding a discrete-time, discrete-delay representation. Unless stated otherwise, the channel coefficients are assumed to be complex-valued and zero-mean, with temporal correla-tion induced by Doppler effects and user mobility. The CDL model introduced in Section III provides a physically grounded mechanism for generating such correlated channel realisations. III. CDL C HANNEL MODELLING AND DATA 
+
+REPRESENTATION 
+
+A transmitted signal reaches the receiver via multiple prop-agation paths, each experiencing different delays, attenuation, phase shifts, and Doppler shifts. Accurately modelling these effects is essential for simulation, channel estimation, and predictive algorithms. Here, we model the MIMO channel using the 3GPP Clustered Delay Line (CDL) model [27]. The baseband-equivalent impulse response between transmit antenna nt and receive antenna nr is expressed as 
+
+hnr ,n t (t, τ ) = 
+
+> K
+
+X
+
+> k=1
+> Mk
+
+X
+
+> m=1
+
+αk,m ej2πν k,m t δ(τ − τk), (1) where K is the number of clusters, Mk is the number of rays in cluster k, τk denotes the mean delay of cluster k, αk,m 
+
+is the complex gain of ray m in cluster k, and νk,m is the associated Doppler shift. To simulate channels in discrete time, the continuous im-pulse response is sampled along the delay axis into a finite number of channel taps , each representing the aggregate contribution of all rays whose delays fall within the corre-sponding delay bin τℓ = ℓT s, ℓ = 0 , 1, . . . , L − 1, where 
+
+Ts is the sampling interval and L is the total number of taps. The discrete tap values h(t, τ ℓ) are complex-valued and vary over time due to Doppler shifts. Each cluster may span multiple taps depending on the discretisation resolution, and each tap may contain contributions from multiple clusters. Conceptually, clusters describe the physical structure of the multipath environment, while taps provide a computationally tractable representation suitable for simulation and neural network input. 
+
+A. Discrete CDL Channel Tensor 
+
+The CDL simulator generates a discrete-time channel tensor encompassing all transmit and receive antennas, time samples, and delay taps. For a batch of B independent channel reali-sations, the tensor is represented as H ∈ C[B, N rx , N tx , T, L ],where Nrx and Ntx are the numbers of receive and transmit antennas, T is the number of time samples (e.g., OFDM symbols or snapshots). The last two dimensions (T, L ) de-scribe the temporal evolution of the channel impulse response over time and delay, while the middle dimensions (Nrx , N tx )
+
+correspond to the spatial domain across the MIMO antenna elements. The first dimension B indexes independent channel realisations generated under different user positions, Doppler conditions, or random seeds. The tensor H thus compactly encapsulates the spatiotemporal structure of a wideband, time-varying MIMO channel. Each complex entry 
+
+H[b, n r , n t, t, ℓ ] ≈ hnr ,n t (t, τ ℓ) (2) represents the small-scale fading gain of the multipath com-ponent arriving at delay τℓ during the t-th time instant for the 
+
+b-th channel realisation. In OFDM systems, data symbols are transmitted simulta-neously over multiple orthogonal subcarriers in the frequency 4
+
+domain. Applying a discrete Fourier transform (DFT) along the delay dimension: 
+
+Hf [b, n r , n t, t, k ] = 
+
+> L−1
+
+X
+
+> ℓ=0
+
+H[b, n r , n t, t, ℓ ] e−j2πkℓ/N FFT , (3) where k ∈ { 0, 1, . . . , N FFT − 1} denotes the subcarrier in-dex and NFFT is the number of FFT points. The resulting frequency-domain tensor 
+
+Hf ∈ C[B, N rx , N tx , T, N sc ] (4) represents the complex channel gain for each subcarrier across time, antennas, and independent realisations, where Nsc ≤
+
+NFFT denotes the number of active subcarriers. As the user or scatterers move, the Doppler effect introduces time variations in Hf , leading to temporal correlation across consecutive OFDM symbols. 
+
+Remark III.1. In practice, only a subset of subcarriers (pilot subcarriers) are known a priori at the receiver. These pilots provide noisy estimates ˜Hf [b, n r , n t, t, k ] of the true channel coefficients, which serve as partial observations of the underlying channel dynamics. Data-driven recurrent models such as the proposed GRU variants can then be trained to exploit the temporal correlation in these pilot-based sequences to predict future channel states or reconstruct unobserved subcarrier coefficients. This frequency-domain representation forms the direct input to neural architectures designed for channel estimation and prediction in OFDM-based commu-nication systems. 
+
+IV. P REPROCESSING CDL O UTPUTS FOR GRU PREDICTION 
+
+Before feeding the CDL tensor into the GRU, several preprocessing steps are required. 
+
+A. Real-Imaginary Separation 
+
+The complex channel coefficients are first separated into their real and imaginary components. Given the frequency-domain channel tensor Hf ∈ C[B, N rx , N tx , T, N sc ], the real and imaginary parts are stacked along a new feature dimension to produce a real-valued tensor X ∈ R[B, T, N rx ×Ntx ×Nsc ×2] ,preserving the full information content of the complex channel coefficients. 
+
+Remark IV.1. When pilot-based channel estimation is con-sidered, the input sequence may include only the subcarriers corresponding to pilot tones. In such cases, the observed pilot coefficients are extracted from Hf before real/imaginary separation and normalisation. The GRU then predicts the full channel or future pilot subcarriers, which can be further interpolated across subcarriers if needed. B. Normalisation 
+
+Prior to processing by the recurrent predictor, the input tensor is standardised using training-set statistics: 
+
+Xnorm = X − μσ , (5) where μ and σ are computed exclusively from the training set and reused without modification during validation and inference. Normalisation improves gradient conditioning, reduces scale imbalance among channel features, and ensures that training and inference operate under consistent input statistics. The spectral conditions developed in Section V concern selected recurrent pathways of the GRU rather than the complete input-to-state transition. Consequently, normalisation should be interpreted as a numerical-conditioning and data-scaling operation, not as a mechanism that independently preserves or guarantees contraction of the complete hidden-state dynamics. From a practical perspective, standardisation prevents fea-tures associated with stronger channel coefficients from dom-inating the optimisation objective and produces more uniform gradient magnitudes across antenna links and temporal sam-ples. 
+
+C. Batching 
+
+After normalisation, the preprocessed channel sequences are divided into smaller temporal segments to form mini-batches suitable for training. Batching serves two purposes: it allows the recurrent predictor to learn from short, overlapping sequences of past channel states, and it enables efficient parallel computation on GPUs. Given a long time series of preprocessed channel features 
+
+{X1, X2, . . . , XTtotal }, a sliding window of fixed length Tseq is applied to extract shorter subsequences for prediction. Each subsequence of Tseq consecutive time steps serves as one training input, and the immediate next sample forms the corresponding target: 
+
+(Xt:t+Tseq −1, Xt+Tseq ) Ttotal −Tseq  
+
+> t=1
+
+. (6) The resulting input sequences are grouped into batches of size 
+
+B, producing the training tensor 
+
+Xbatch ∈ R[B, T seq , F ], (7) where F = Nrx × Ntx × Nsc × 2 denotes the feature dimension. Each batch contains B temporal windows, enabling efficient gradient updates and data-parallel training. 
+
+D. Regularisation 
+
+Although the proposed recurrent models use a single re-current layer, the hidden-state dimension selected through Bayesian optimisation may still provide substantial modelling capacity. This creates a risk of overfitting when the models are trained on strongly correlated CDL-generated channel sequences. Regularisation is therefore used to prevent the predictor from memorising individual channel trajectories and to encourage generalisation to unseen channel realisations. The dropout probability p controls the strength of regulari-sation by stochastically masking a subset of the non-recurrent activations during training. In recurrent architectures, applying dropout requires particular care, as indiscriminate masking of recurrent connections can disrupt the temporal continuity that these models are designed to capture. Dropout is therefore 5
+
+applied exclusively to the non-recurrent affine transformations, i.e., the input-to-hidden projections (and inter-layer projections in multi-layer configurations). This preserves the integrity of the recurrent pathway while still providing effective regulari-sation, forcing the network to develop more robust, distributed representations that do not depend on isolated input features or specific structural patterns present in the CDL-generated channel sequences. Specifically, before the input at time step t is processed by the GRU gates, it is passed through a dropout layer: 
+
+˜Xbatch = Mbatch ⊙ Xbatch , (8) where 
+
+Mbatch ∈
+
+
+
+0, 11 − p
+
+B×Tseq ×F
+
+(9) is a binary mask whose entries are sampled i.i.d. from 
+
+m(i) 
+
+> b,t
+
+=
+
+
+
+0, with probability p, 
+
+11 − p , with probability 1 − p, (10) for every batch index b ∈ {1, . . . , B }, time index t ∈{1, . . . , T seq }, and feature index i ∈ { 1, . . . , F }. This oper-ation randomly masks individual input features but does not remove entire samples or time steps, ensuring that the temporal continuity of each sequence is preserved. The rescaling by 
+
+1/(1 − p) maintains the expected value of the activations and stabilises training. 
+
+Remark IV.2. The optimal value of p depends on several interacting factors, including H, the temporal variability of the channel (e.g., Doppler spread), and the diversity of the generated channel realisations, making it unsuitable to fix by heuristic rules. For this reason, p is incorporated into the Bayesian hyperparameter optimisation loop (see Section VI), allowing the model to automatically identify the level of regularisation that best balances capacity and generalisation across a wide range of channel conditions. 
+
+V. P ROPOSED GRU A RCHITECTURE FOR CAUSAL 
+
+CHANNEL PREDICTION 
+
+After preprocessing the CDL channel outputs into sequen-tial, real-valued input tensors, a lightweight GRU is employed to model the temporal evolution of the wireless channel and perform causal prediction. Each training sample consists of a window of Tseq consecutive time snapshots of the preprocessed channel, used to predict the channel at the next time step. Before entering the recurrent cell, the input features undergo dropout-based regularisation as described in Section IV-D, yielding the masked input vectors ˜Xt ∈ RF .
+
+A. Typical Lightweight GRU Architecture 
+
+A lightweight GRU maintains a hidden state ht ∈ RH that evolves with the input sequence and encodes the temporal context of the channel. The evolution of the hidden state is governed by the standard GRU update equations: 
+
+zt = σ
+
+
+
+Wz ˜Xt + Uz ht−1 + bz
+
+
+
+, (11a) 
+
+rt = σ
+
+
+
+Wr ˜Xt + Ur ht−1 + br
+
+
+
+, (11b) 
+
+˜ht = tanh 
+
+
+
+Wh ˜Xt + Uh (rt ⊙ ht−1) + bh
+
+
+
+, (11c) 
+
+ht = ( 1 − zt) ⊙ ht−1 + zt ⊙ ˜ht, (11d) where zt and rt are the update and reset gates, respectively, ˜ht
+
+is the candidate hidden state, σ(·) denotes the logistic sigmoid, and Wκ , Uκ , bκ for κ ∈ { z, r, h } are trainable parameters. 
+
+Remark V.1. The model defined by the GRU update equations in (11) and the readout in (13) corresponds to the uncon-strained lightweight GRU, denoted L-GRU. SA-GRU extends this architecture by imposing the spectral bound in (14) on 
+
+Uh, whereas DCL-GRU additionally constrains Ur through (16)–(20). 
+
+Remark V.2. The term lightweight refers primarily to the single-layer recurrent structure, the absence of a separate LSTM-style memory cell, and the compact channel-feature representation. The hidden dimension is selected through Bayesian optimisation and is not restricted to the interval 
+
+[16 , 64] . For the GRU update equations in (11) and the linear readout in (13), the parameter count is 
+
+Npar = 3 HF + 3 H2 + 3 H + F H + F. (12) 
+
+For F = 4 and H = 64 , this gives 13 ,508 parameters, whereas the H = 240 model used in the corrupted-rollout experi-ment contains 177 ,364 parameters. Despite the larger hidden dimension in the latter experiment, the architecture remains single-layer and retains a substantially lower recurrent depth than the GRU-5L baseline. 
+
+The proposed L-GRU operates in a strictly causal manner: at each time instant t, the hidden state ht depends exclusively on the current input and on past observations, with no access to future information. After updating the hidden state, a one-step-ahead channel prediction is obtained through a linear readout: 
+
+ˆXt+1 = Woht + bo, (13) where Wo ∈ RF ×H and bo ∈ RF are the trainable output weight matrix and bias vector. 
+
+B. Stability-Aware GRU with Spectral Projection (SA-GRU) 
+
+While the lightweight GRU in (11) provides an efficient architecture for real-time channel prediction, its stability prop-erties are not explicitly controlled. In wireless applications, the predictor operates recursively over long horizons under poten-tially non-stationary conditions, where uncontrolled recurrent dynamics may amplify perturbations or accumulate numerical errors. To address this, we introduce SA-GRU, a stability-aware variant in which a spectral constraint is imposed on the recurrent matrix Uh associated with the candidate hidden state. Specifically, we require 
+
+∥Uh∥2 ≤ ρh, (14) 6
+
+where ∥ · ∥ 2 denotes the spectral norm and ρh ∈ (0 , 1) is a user-defined margin controlling the maximum admissible gain of the candidate-state recurrent operator. All remaining parameters and gating equations in (11) are left unchanged. This constraint directly limits the amplification introduced by 
+
+Uh along the recurrent pathway entering the candidate hidden state. In particular, for a fixed realisation of the reset gate rt,the mapping from ht−1 to the candidate state has a Lipschitz constant no greater than ∥Uh∥2, since tanh( ·) is globally 1-Lipschitz and the entries of rt lie in (0 , 1) . Thus, (14) guar-antees contraction of this conditional candidate-state pathway with margin 1 − ρh.To enforce (14), we apply a one-time post-training spectral projection to Uh. Let bUh denote the unconstrained matrix ob-tained through standard stochastic gradient-based optimisation. After convergence, the deployed recurrent matrix is defined as 
+
+Uh = ρh
+
+max 
+
+ bUh 2
+
+, ρ h
+
+ b Uh. (15) This projection leaves bUh unchanged whenever it already satisfies (14); otherwise, it rescales the matrix so that ∥Uh∥2 =
+
+ρh.The training procedure remains unchanged: all parameters are first learned using a standard optimiser (e.g., Adam [28]), and the spectral projection is applied only after convergence. The proposed modification therefore does not alter the back-propagation procedure, introduce additional trainable param-eters, or add gates, hidden states, or matrix multiplications during inference. Its contribution is instead to provide asimple, deployment-stage mechanism for explicitly controlling the spectral gain of the candidate-state recurrent operator while preserving the architecture and per-step computational structure of the original lightweight GRU. Accordingly, SA-GRU is referred to as stability-aware rather than globally contractive by construction. 
+
+Proposition V.3 (Spectral-gain bound of SA-GRU) . Consider the candidate-state update of SA-GRU in (11c) . Suppose that the post-training projection enforces ∥Uh∥2 ≤ ρh with 
+
+ρh ∈ (0 , 1) . Then, for any fixed input xt and fixed reset-gate realisation rt, the candidate-state mapping is Lipschitz continuous with respect to ht−1 with Lipschitz constant at most ρh. Therefore, the proposed projection bounds the direct recurrent gain of the candidate-state pathway by ρh without changing the inference-time architecture of the lightweight GRU. Proof. See Appendix A. The proposed projection introduces an explicit structural bound on one of the principal recurrent pathways. Stronger guarantees for the complete candidate-state and hidden-state mappings require additional conditions on the reset- and update-gate recurrent matrices, as discussed next. 
+
+C. Doubly Constrained Lightweight GRU (DCL-GRU) 
+
+In a standard GRU, rt depends on ht−1 through (11b). Consequently, the constraint on Uh controls only the direct recurrent gain of the candidate-state branch, rather than pro-viding a stand-alone guarantee of contraction of the complete mapping ht−1 7 → eht. Contraction of the complete hidden-state transition additionally depends on the update-gate dynamics, and the dependence of the reset gate on ht−1 introduces an additional term involving Ur .To obtain a sufficient condition for contraction of the complete candidate-state mapping, we enforce spectral-norm bounds on both Uh and Ur :
+
+∥Uh∥2 ≤ ρh, (16) 
+
+∥Ur ∥2 ≤ ρr , (17) where ρh > 0 and ρr ≥ 0. These constraints are imposed after training through spectral projections. Let bUh and bUr denote the matrices obtained through unconstrained optimisation. The deployed matrices are defined as 
+
+Uh = ρh
+
+max 
+
+ bUh 2 , ρ h
+
+ b Uh, (18) 
+
+Ur = ρr
+
+max 
+
+ bUr 2
+
+, ρ r
+
+ b Ur . (19) 
+
+Proposition V.4 (Contraction of the complete candidate-state mapping) . Consider the GRU candidate-state mapping (11c) ,where rt is given by (11b) . Assume that ∥ht−1∥∞ ≤ 1 and that the deployed recurrent matrices satisfy ∥Uh∥2 ≤ ρh and 
+
+∥Ur ∥2 ≤ ρr . If, for some δ ∈ (0 , 1) ,
+
+ρh
+
+
+
+1 + ρr
+
+4
+
+
+
+≤ 1 − δ, (20) 
+
+then, for every fixed input xt, the complete candidate-state mapping ht−1 7 → eht is contractive in the Euclidean norm with contraction factor at most 1 − δ. The post-training projections in (18) and (19) enforce the required spectral-norm bounds without modifying the inference-time architecture. Proof. See Appendix B. The condition in Proposition V.4 is sufficient but is not claimed to be necessary. Consequently, candidate-state con-traction may still arise for parameter configurations that do not satisfy (20). Characterising the tightness of the bound and deriving less conservative contraction conditions remain important directions for future research. 
+
+Remark V.5. Proposition V.4 establishes contraction of the complete candidate-state mapping, including the dependence of the reset gate on the previous hidden state. It does not, by itself, establish contraction of the complete GRU hidden-state transition, because the latter additionally involves the update gate zt, its recurrent matrix Uz , and the direct memory pathway through ht−1.
+
+Consequently, empirical evaluation remains necessary to assess the practical impact of the proposed constraints on recursive prediction behaviour. 
+
+1) Computational Considerations: DCL-GRU preserves the inference-time computational structure of L-GRU. For the main experiments, the only additional deployment-stage operations are the spectral projections of Uh and Ur in 7
+
+(18) and (19), respectively. These projections are performed outside the inference loop and introduce no additional trainable parameters, recurrent states, gates, or per-step matrix multipli-cations. Consequently, the parameter count and inference-time arithmetic complexity remain identical to those of L-GRU with the same hidden dimension. 
+
+Remark V.6. SA-GRU and DCL-GRU provide explicit struc-tural control of selected candidate-state recurrent path-ways without modifying the inference-time architecture. SA-GRU bounds the conditional candidate-state recurrent gain, whereas DCL-GRU satisfies a sufficient condition for con-traction of the complete candidate-state mapping. Neither condition alone establishes contraction of the complete GRU hidden-state transition. D. Training Objective and Constraint Enforcement 
+
+The recurrent models are trained to predict the next nor-malised noisy channel observation from a window of preced-ing noisy observations. Let yt denote the normalised observed feature vector. The training objective is 
+
+L(θ) = 1
+
+T
+
+> T
+
+X
+
+> t=1
+
+∥byt − yt∥22 , (21) where θ collects the trainable recurrent and output-layer parameters. For the main one-step prediction and Bayesian-optimisation experiments, all recurrent parameters are first learned using unconstrained stochastic gradient-based optimisation, such as Adam [28]. After training has converged, SA-GRU is ob-tained by projecting the candidate-state recurrent matrix Uh
+
+onto the spectral-norm constraint set defined in (15). DCL-GRU additionally projects Uh and the reset-gate recurrent matrix Ur using the projections in (18) and (19), respectively. These operations ensure that SA-GRU satisfies its candidate recurrent-gain bound and that DCL-GRU satisfies the suffi-cient candidate-state contraction condition in (20). Because the projections are performed after unconstrained training and outside the inference loop, they introduce no additional back-propagation cost, trainable parameters, recurrent operations, or per-step inference overhead. A different constraint-enforcement protocol is used only in the corrupted recursive-rollout experiment of Section VIII-G. In that experiment, all three variants are initialised from the same pretrained L-GRU parameters to provide a con-trolled comparison. The SA-GRU and DCL-GRU copies are first projected onto their respective constraint sets and are subsequently fine-tuned using a reduced learning rate. The relevant projection is reapplied after every optimiser update, allowing the remaining model parameters to adapt to the constrained recurrent matrices while continuously maintaining the prescribed spectral bounds. This experiment-specific fine-tuning procedure is not used in the main one-step prediction or Bayesian-optimisation experiments. 
+
+E. Comparison to CNN and LSTM Architectures 
+
+CNNs, LSTMs, and GRUs represent three distinct mod-elling paradigms with different inductive biases and compu-tational characteristics. CNNs are effective at extracting local feature patterns but lack an intrinsic recurrent state for causal channel prediction unless multiple temporal observations are explicitly stacked at the input. LSTMs provide strong sequen-tial modelling capacity but incur higher parameter, memory, and computational costs because of their multiple gates and separate cell state. GRUs provide an intermediate design by retaining recurrent temporal memory while using a simpler gated architecture. The proposed L-GRU, SA-GRU, and DCL-GRU variants further retain a single recurrent layer and intro-duce no additional inference-time gates or states, making them suitable for low-latency and hardware-constrained physical-layer prediction. VI. B AYESIAN HYPERPARAMETER OPTIMISATION 
+
+In addition to the trainable parameters θ learned by gradient descent, the performance of the GRU-based channel predictor depends critically on a set of hyperparameters ϕ that define both the model architecture and the training procedure: 
+
+ϕ = {H, η, p, B, T seq }, (22) where H is the hidden-state dimension, η is the learning rate, 
+
+p is the dropout probability, B is the batch size, and Tseq is the sequence length. Unlike θ, these hyperparameters are not optimised directly through backpropagation; instead, they are selected externally by minimising the validation NMSE. The recurrent depth is fixed by design in order to isolate the effect of the proposed lightweight and constrained recurrent cells. The lightweight recurrent variants, the LSTM baseline, and the single-layer GRU reference use one recurrent layer, while a 5-layer GRU is included as a deeper high-capacity baseline. The remaining hyperparameters, including hidden dimension, learning rate, dropout probability, batch size, and sequence length, are selected by Bayesian optimisation. Hyperparameter optimisation is inherently computationally intensive, requiring repeated training–evaluation cycles that can take hours or days for deep architectures. Exhaustive grid or random search strategies therefore rapidly become infeasible in high-dimensional hyperparameter spaces. 
+
+A. Bayesian Optimisation Framework 
+
+Bayesian Optimisation (BO) provides a data-efficient frame-work for finding the optimal configuration ϕ∗ that minimises a validation loss J (ϕ).1 The function J (ϕ) is treated as a black-box, expensive-to-evaluate objective, and Bayesian op-timisation seeks to minimise it by systematically incorporating information from past evaluations. BO is typically realised by Sequential Model-Based Optimi-sation (SMBO) methods. At each iteration, a surrogate model (described in Section VI-B) is updated using the most recent data, and an acquisition function (described in Section VI-C) is optimised to balance exploration of uncertain regions with exploitation of known high-performing configurations. This                                          
+
+> 1The validation loss measures how accurately the GRU predicts unseen channel sequences. A lower validation loss indicates better generalisation, meaning the model can reliably forecast future channel conditions it has not encountered during training. 8
+> TABLE I QUALITATIVE COMPARISON OF THE CONSIDERED CHANNEL -PREDICTION ARCHITECTURES .
+> Property CNN LSTM L-GRU SA-GRU DCL-GRU Intrinsic temporal state No Cell and hidden Hidden Hidden Hidden Streaming suitability Moderate Moderate High High High Recurrent depth used –1111Explicit recurrent spectral bound No No No UhUh,Ur
+> Candidate-state guarantee No No No Conditional pathway bound Complete mapping contraction Complete hidden-state contraction No No No No No Inference overhead from constraint –––None None
+
+process continues until the predefined trial budget is exhausted, yielding the best observed hyperparameter configuration under the available computational budget. 
+
+B. Surrogate Probability Model of the Objective Function 
+
+Rather than treating each hyperparameter configuration in-dependently, BO constructs a probabilistic surrogate model 
+
+that captures the relationship between hyperparameters and corresponding objective function values: 
+
+p(score | hyperparameters ). (23) By explicitly modelling uncertainty, the surrogate guides the search toward regions of the hyperparameter space likely to yield improved performance, while avoiding unnecessary evaluations in less promising areas. Let Dt = {(ϕi, J (ϕi)) }ti=1 denote the set of t evaluated configurations and their corresponding validation losses. A classical choice for the surrogate model is a Gaussian Process 
+
+(GP), which defines a distribution over functions, J (ϕ) ∼GP  m(ϕ), k (ϕ, ϕ′), where m(·) is the mean function and 
+
+k(·, ·) is a covariance kernel. Conditioning on Dt, the GP yields a posterior predictive distribution for any candidate 
+
+ϕ∗, i.e., p J (ϕ∗) | Dt
+
+ = N μt(ϕ∗), σ 2 
+
+> t
+
+(ϕ∗), where 
+
+μt(ϕ∗) is the predicted validation loss and σ2 
+
+> t
+
+(ϕ∗) quantifies the associated uncertainty. This probabilistic representation enables BO to balance exploration (sampling in regions of high uncertainty) and exploitation (refining the search around configurations predicted to yield low validation loss). 
+
+C. Acquisition Function, Surrogate Update, and Optuna TPE Implementation 
+
+While GP-based BO provides a convenient theoretical framework, its computational complexity scales cubically with the number of observations, which can become prohibitive as the number of trials grows. In this work, BO is im-plemented using the Optuna framework [29], which adopts the Tree-structured Parzen Estimator (TPE) as its default surrogate model. Instead of modelling the objective function directly, TPE models the inverse conditional density p(ϕ|J )
+
+by constructing two density estimators: one for configurations associated with low objective values and one for the remainder. Specifically, given a threshold γ, TPE partitions the observa-tions into p(ϕ|J < γ ) and p(ϕ|J ≥ γ), and selects new candidates by maximising the ratio between these densities. This formulation is closely related to maximising Expected Improvement, while enabling efficient handling of mixed, conditional, and high-dimensional hyperparameter spaces. At each optimisation trial, Optuna proposes a new hyperpa-rameter configuration ϕt+1 based on the TPE surrogate and the accumulated dataset Dt. The GRU model is then trained with 
+
+ϕt+1 , and the resulting validation loss J (ϕt+1 ) is observed. This new observation is appended to the dataset, yielding 
+
+Dt+1 , and the surrogate densities are updated accordingly to guide subsequent trials. 
+
+Remark VI.1. A key motivation for adopting BO with a TPE surrogate is the high computational cost of each objective function evaluation: training a GRU-based channel predictor over multiple epochs, with complexity scaling with the hidden-state dimension, sequence length, and number of training samples. By concentrating subsequent evaluations in regions associated with favourable validation losses, the Optuna–TPE framework reduces the need for exhaustive enumeration of the hyperparameter space, enabling efficient tuning under strict time and resource constraints. 
+
+VII. P ROPOSED PIPELINE 
+
+This section outlines the proposed pipeline for causal chan-nel prediction. The complete workflow, illustrated in Fig. 1, encompasses (i) channel data generation using the CDL simu-lator, (ii) data preprocessing, (iii) model training with stochas-tic gradient optimisation, and (iv) Bayesian hyperparameter tuning via the TPE implemented in Optuna [29]. Each stage is designed to ensure efficient, robust, and adaptive prediction of time-varying wireless channels. 1) The pipeline begins with the generation of complex-valued, time-varying channel coefficients using the 3GPP-compliant CDL model. 2) These coefficients are transformed into frequency-domain representations and preprocessed into real-valued tensors, which are then batched for neural net-work input. 3) The selected single-layer recurrent predictor operates causally and recursively to forecast the next noisy chan-nel observation. Model training follows the objective defined in (21). 4) Bayesian Optimisation with Optuna’s TPE models two probability densities, l(ϕ) = p(ϕ|J (ϕ) < J ∗) and 
+
+g(ϕ) = p(ϕ|J (ϕ) ≥ J ∗), where J ∗ is a loss quantile. The next candidate configuration is selected by max-imising the likelihood ratio: 
+
+ϕt+1 = arg max 
+
+> ϕ
+
+l(ϕ)
+
+g(ϕ) . (24) 9Transmit Pilots/Symbols Preprocessing DNSM SGD Hyperparameter Optimisation 
+
+> Sampling
+
+## RX 
+
+## TX  
+
+> Fig. 1. Block diagram of the channel prediction pipeline.
+
+This approach balances exploration and exploitation while supporting efficient sequential or parallel hyper-parameter evaluation. The integration of the L-GRU predictor with Bayesian optimisation provides an automated, adaptive learning process that jointly enhances prediction accuracy and model efficiency. Using a single-layer L-GRU reduces inference latency and memory consumption, making the model suitable for real-time and embedded deployments. The TPE-guided search reduces the need for exhaustive grid evaluation by allocating more trials to promising regions of the hyperparameter space. Overall, the proposed pipeline enables: 
+
+• Causal, real-time prediction: The L-GRU updates its hidden state sequentially, allowing sample-by-sample pre-diction with no access to future observations. 
+
+• Efficient optimisation: Bayesian methods minimise train-ing trials while maintaining high predictive performance. 
+
+• Scalability and deployability: The lightweight design supports implementation on GPUs, FPGAs, or embedded devices. VIII. N UMERICAL EVALUATIONS 
+
+A. System Model and Simulation Parameters 
+
+Time-varying wireless channels are generated using the 3GPP TR 38.901 CDL model. The resulting channel traces are processed into supervised learning sequences using a sliding window of length Tseq , and each recurrent model is trained to perform one-step-ahead prediction of the channel magnitude. Table II lists the key simulation parameters 2                                    
+
+> TABLE II SIMULATION PARAMETERS FOR THE MAIN ONE -STEP PREDICTION AND
+> BAYESIAN -OPTIMISATION EXPERIMENTS . T HE CORRUPTED RECURSIVE -ROLLOUT CONFIGURATION IS DESCRIBED SEPARATELY IN
+> SECTION VIII-G.
+> Parameter Value
+> Channel model 3GPP TR 38.901 CDL-A Carrier frequency fc3.5 GHz Delay spread 100 ns User velocity 30 m/s Sampling frequency 15 kHz Transmission mode Downlink Antenna configuration 2×2MIMO, omnidirectional Noise model AWGN Received SNR [−15 ,20] dB; 10 dB for BO convergence Total time samples Ttotal 100 Sequence length Tseq Optimised (BO) Batch size BOptimised (BO) Recurrent layers 1∀models except for GRU-5L Hidden dimension HOptimised (BO) Dropout probability pOptimised (BO) Optimiser Adam Training/validation obj. Normalised Mean Squared Error (NMSE) Hyperparameter search Optuna (TPE, default settings) BO trials 100 for SNR sweep; 200 for convergence
+
+Omnidirectional antenna elements are adopted to isolate the temporal prediction behaviour from beam-pattern and beam-alignment effects, allowing the evaluation to focus on the recurrent predictor’s ability to learn mobility- and Doppler-induced temporal channel variations under noisy 2 × 2 MIMO conditions. 
+
+B. Prediction Target and Time-Scale Interpretation 
+
+Although the general preprocessing pipeline supports real– imaginary frequency-domain channel features, the numerical evaluation focuses on a narrowband 2 × 2 MIMO magnitude-prediction setting. Let H(t) ∈ C2×2 denote the underlying MIMO channel matrix and let 
+
+eH(t) = H(t) + N(t) (25) denote its noisy observation at the received SNR associated with the experiment. The observed feature vector is formed by stacking the magnitudes of the four transmit–receive coef-ficients: 
+
+yt =
+
+h eH1,1(t) , eH1,2(t) , eH2,1(t) , eH2,2(t)
+
+i⊤
+
+∈ R4.
+
+(26) The predictor performs one-step-ahead prediction of the next noisy channel-magnitude observation: 
+
+byt+1 = fθ
+
+ yt−Tseq +1 , . . . , yt
+
+ . (27) For the received-SNR sweep, the observation SNR varies from 
+
+−15 to 20 dB, whereas 10 dB is used for the fixed-SNR Bayesian-optimisation convergence study.         
+
+> 2To support reproducibility, the core project code is publicly available at https://github.com/themistos/ChannelSeeksG. 10 −15 −10 −5 0510 15 20
+> SNR (dB)
+> 10 −1
+> 10 0
+> Best validation NMSE
+> NMSE versus SNR
+> CNN
+> GRU-5L
+> LSTM-1L
+> GRU-1L
+> L-GRU
+> SA-GRU
+> DCL-GRU
+> Fig. 2. Best validation NMSE versus received SNR for all considered archi-tectures. Each curve is averaged over 50 independent Bayesian-optimisation runs; shaded regions indicate 95% confidence intervals.
+
+The CDL traces are sampled at fs = 15 kHz (numerology 
+
+μ = 0 in 5G NR), corresponding to a temporal spacing of 
+
+Ts ≈ 66 .7 μs between consecutive channel snapshots. With carrier frequency fc = 3 .5 GHz and user velocity v = 30 m/s, the maximum Doppler frequency is 
+
+fD = vf c
+
+c ≈ 350 Hz , (28) where c is the speed of light. The corresponding channel coherence time is approximately 
+
+Tc ≈ 0.423 
+
+fD
+
+≈ 1.2 ms , (29) spanning approximately Tc/T s ≈ 18 sampled channel snap-shots. This confirms that the sequence-length range explored in Bayesian optimisation is physically meaningful, covering a substantial fraction of the channel coherence interval under the considered mobility conditions. The slot duration under 
+
+μ = 0 is 1 ms, which is comparable to the estimated coherence time, so the channel may vary significantly between consec-utive slots, making predictive channel tracking beneficial for adaptive transmission schemes. 
+
+C. Prediction Accuracy versus SNR 
+
+We first evaluate the prediction accuracy of all architectures over a wide range of received SNR values. For each received-SNR value, 50 independent Bayesian-optimisation runs are performed using a budget of 100 trials per run. The best validation NMSE from each run is retained, and the reported curves show the sample mean and 95% confidence interval of these 50 best-run values. Fig. 2 shows that the NMSE decreases consistently as the received SNR increases, confirming that all models exploit the improved channel observation quality. In the low-SNR regime, the curves are close because the prediction task is noise limited. As the SNR increases, architectural differences                                          
+
+> TABLE III BEST VALIDATION NMSE AT SELECTED RECEIVED -SNR VALUES ,
+> REPORTED AS SAMPLE MEAN ±95% CONFIDENCE -INTERVAL HALF -WIDTH OVER 50 INDEPENDENT BAYESIAN -OPTIMISATION RUNS .Model -15 dB 0 dB 10 dB 20 dB CNN 0.8205 ± 0.023 0.7912 ± 0.02 0.368 ± 0.015 0.07288 ± 0.0034 GRU-5L 0.8488 ± 0.027 0.7252 ± 0.021 0.3264 ± 0.013 0.06099 ± 0.0033 LSTM-1L 0.8924 ± 0.017 0.726 ± 0.024 0.3183 ± 0.013 0.05826 ± 0.0028 GRU-1L 0.8587 ± 0.027 0.7493 ± 0.024 0.3361 ± 0.012 0.06138 ± 0.003 L-GRU 0.8552 ± 0.02 0.7397 ± 0.023 0.3189 ± 0.011 0.06029 ± 0.003 SA-GRU 0.8339 ± 0.019 0.7725 ± 0.022 0.3338 ± 0.012 0.07803 ± 0.0041 DCL-GRU 0.8277 ± 0.019 0.7417 ± 0.022 0.3509 ± 0.011 0.08385 ± 0.0037
+
+become more visible: the unconstrained recurrent baselines— particularly LSTM, GRU-5L, and the unconstrained L-GRU— achieve the lowest NMSE at high SNR. The proposed SA-GRU and DCL-GRU remain competitive across the consid-ered SNR range, although the imposed spectral constraints introduce a measurable accuracy penalty in the high-SNR regime. This reflects the intended accuracy–stability trade-off: the constrained variants sacrifice prediction accuracy in exchange for explicit control of the recurrent dynamics. At high received SNR, the observations contain less noise and the unconstrained recurrent models can exploit finer temporal variations through larger effective recurrent gains. The spectral bounds restrict this flexibility, so their accuracy cost becomes more visible once observation noise is no longer the dominant source of prediction error; at low SNR, this difference is largely masked by the noise-limited regime. Table III reports representative numerical values from the SNR sweep. At 10 dB, the proposed constrained variants remain within the same NMSE range as the lightweight and recurrent baselines. At 20 dB, the accuracy gap between the constrained and unconstrained models becomes clearer, indicating that the spectral constraints primarily affect perfor-mance in the high-SNR regime where observation noise is no longer the dominant limitation. 
+
+D. Bayesian-Optimisation Convergence 
+
+We next evaluate how the Optuna trial budget affects the best validation NMSE. At a fixed received SNR of 10 dB, 
+
+100 independent Bayesian-optimisation runs are executed for 
+
+200 trials each. For every run, the best-so-far validation NMSE is recorded at trial budgets of 50 , 100 , 150 , and 200 .Fig. 3 shows that increasing the trial budget improves the best validation NMSE for all architectures. Most of the im-provement occurs between 50 and 150 trials, after which gains become more gradual. The constrained SA-GRU and DCL-GRU exhibit smooth best-so-far convergence trends compara-ble to those of the unconstrained lightweight recurrent models. L-GRU obtains the lowest final NMSE in this fixed-SNR experiment, while DCL-GRU provides the strongest structural guarantee among the lightweight variants. 
+
+E. Computational Runtime 
+
+In addition to prediction accuracy, computational cost is a key metric for real-time PHY-layer deployment. We compare the cumulative optimisation time as a function of the BO trial budget and the average wall-clock time per SNR-sweep run. 11 50 100 150 200 
+
+> Optuna trial budget
+> 3 × 10 −1
+> 4 × 10 −1
+> Best validation NMSE
+> Bayesian optimization convergence
+> CNN
+> GRU-5L
+> LSTM-1L
+> GRU-1L
+> L-GRU
+> SA-GRU
+> DCL-GRU
+
+Fig. 3. Bayesian-optimisation convergence at 10 dB. Each point shows the mean best-so-far validation NMSE over 100 independent runs, and the shaded region denotes the corresponding 95% confidence interval. 0 50 100 150 200 
+
+> Optuna trial budget
+> 0.0
+> 0.5
+> 1.0
+> 1.5
+> 2.0
+> 2.5
+> Cumulative optimization time (min)
+> Optimization runtime versus trial budget
+> CNN
+> GRU-5L
+> LSTM-1L
+> GRU-1L
+> L-GRU
+> SA-GRU
+> DCL-GRU
+
+Fig. 4. Cumulative optimisation time versus Optuna trial budget. Lightweight recurrent variants require substantially less optimisation time than the deeper GRU baseline. 
+
+Fig. 4 shows that optimisation time grows approximately linearly with the number of Optuna trials, as expected since each trial requires a complete training and validation cycle. The GRU-5L baseline is the most computationally expensive architecture, whereas the lightweight recurrent variants exhibit substantially lower cumulative optimisation time. Fig. 5 and Table IV confirm that the proposed SA-GRU and DCL-GRU have runtimes close to the unconstrained L-GRU. The stability-aware and candidate-state contractive projections therefore introduce no meaningful optimisation-time penalty; the runtime of the constrained variants is dominated by the underlying recurrent training loop rather than by the one-time spectral projection. 0.0 0.2 0.4 0.6 0.8 1.0 1.2 
+
+> Average wall time per SNR-sweep run (min)
+> CNN
+> GRU-5L
+> LSTM-1L
+> GRU-1L
+> L-GRU
+> SA-GRU
+> DCL-GRU
+> Average optimization runtime by architecture
+
+Fig. 5. Average wall-clock optimisation time per SNR-sweep run for each architecture. The proposed constrained variants retain a runtime close to the unconstrained lightweight GRU, confirming that the post-training spectral projections introduce negligible overhead. TABLE IV AVERAGE OPTIMISATION RUNTIME BY ARCHITECTURE , REPORTED AS SAMPLE MEAN ± 95% CONFIDENCE -INTERVAL HALF -WIDTH OVER 400 
+
+> MODEL
+
+–SNR OPTIMISATION RUNS . S PEEDUP IS MEASURED RELATIVE TO 
+
+GRU-5L.                                       
+
+> Model Runs Mean time (min) Speedup CNN 400 0.389 ±0.0015 3.00 ×
+> GRU-5L 400 1.169 ±0.0307 1.00 ×
+> LSTM-1L 400 0.677 ±0.0132 1.73 ×
+> GRU-1L 400 0.554 ±0.0055 2.11 ×
+> L-GRU 400 0.667 ±0.0082 1.75 ×
+> SA-GRU 400 0.678 ±0.0082 1.72 ×
+> DCL-GRU 400 0.662 ±0.0088 1.76 ×
+
+F. Projection and Contraction Audit 
+
+We verify that the empirical results correspond to the deployed constrained models. For SA-GRU, the audit checks whether the projected candidate recurrent matrix satisfies 
+
+∥Uh∥2 ≤ ρh. For DCL-GRU, the audit additionally checks 
+
+∥Ur ∥2 ≤ ρr and the sufficient candidate-state contraction condition 
+
+ρh
+
+
+
+1 + ρr
+
+4
+
+
+
+≤ 1 − δ. (30) Table V shows that all audited constrained runs satisfy the required spectral-norm bounds, with zero violations. In particular, DCL-GRU satisfies the sufficient candidate-state contraction condition in every audited run. This confirms that the reported accuracy and runtime results correspond to models whose deployed recurrent matrices obey the intended structural constraints. 
+
+G. Empirical Stability Under Corrupted Recursive Rollouts 
+
+The one-step prediction results reported previously quantify model accuracy when predictions are formed from observed channel samples. However, one-step metrics do not fully reveal how recurrent predictors respond to temporarily corrupted ob-servations or how the resulting perturbations propagate when predictions are recursively fed back over multiple time steps. To investigate this behaviour, we compare the unconstrained L-GRU with the SA-GRU and DCL-GRU variants under 12                                           
+
+> TABLE V PROJECTION AND CONTRACTION AUDIT FOR THE PROPOSED CONSTRAINED VARIANTS . T HE TABLE VERIFIES THAT ALL DEPLOYED CONSTRAINED MODELS SATISFY THE REQUIRED SPECTRAL -NORM BOUNDS AND ,FOR DCL-GRU, THE SUFFICIENT CANDIDATE -STATE CONTRACTION CONDITION .
+> Experiment Model Uhchecks max norm / bound for UhUrchecks max norm / bound for UrCondition checks Violations Convergence DCL-GRU 20000 0.84 /0.84 20000 0.50 /0.50 20000 0Convergence SA-GRU 20000 0.90 /0.90 –––0SNR sweep DCL-GRU 40000 0.84 /0.84 40000 0.50 /0.50 40000 0SNR sweep SA-GRU 40000 0.90 /0.90 –––0
+
+a temporary observation corruption followed by open-loop recursive prediction. The purpose of this experiment is not to claim contraction of the complete GRU hidden-state transition. Instead, it evaluates whether the spectral constraints imposed on the candidate-state recurrent pathways reduce the empirical sensitivity of the recurrent state to corrupted inputs and quantifies the corresponding effect on recursive prediction accuracy. 
+
+1) Evaluation Protocol: All three variants are initialised from the same pretrained L-GRU parameters. A common base model is first trained for 15 epochs using 50 independent trajectories of 250 samples each. The trained model is then copied to form the L-GRU, SA-GRU, and DCL-GRU variants, and each copy is fine-tuned for 10 additional epochs using one tenth of the original learning rate. For SA-GRU and DCL-GRU, the corresponding spectral projection is applied before fine-tuning and reapplied after every optimiser update. This procedure allows the constrained models to adapt to the projected recurrent dynamics while continuously satisfying the prescribed bounds. The shared architecture uses hidden-state dimension H =240 , sequence length Tseq = 13 , batch size 16, dropout probability 0.4787 , and initial learning rate 4.456 × 10 −3.The SA-GRU constraint is ρh = 0 .90 . For DCL-GRU, the constraint parameters are ρh = 0 .84 , ρr = 0 .50 , and δ = 0 .05 ,which satisfy 
+
+ρh
+
+
+
+1 + ρr
+
+4
+
+
+
+= 0 .945 ≤ 1 − δ = 0 .95 . (31) For each test run, a clean trajectory of Ttest = 200 channel snapshots is generated using the same 2 × 2 MIMO CDL-A configuration described in Section VIII. Let xt ∈ RF , with 
+
+F = 4 , denote the underlying clean channel-magnitude feature vector at time index t.A baseline noisy observation sequence is generated accord-ing to 
+
+yt = xt + wt, (32) where wt denotes additive observation noise corresponding to an SNR of γo = 10 dB, matching the observation condition used during training. An additional temporary feature-domain corruption is ap-plied to the baseline noisy observations according to 
+
+eyt =
+
+(yt + nt, tc ≤ t < t 0,
+
+yt, otherwise , (33) where t0 = tc +Lc, with tc = 40 and Lc = 10 . The additional corruption vector is generated as 
+
+nt ∼ N  0, σ 2c IF
+
+ , σ2c = Pc10 −γc/10 , (34) where 
+
+Pc = 1
+
+F L c
+
+> t0−1
+
+X
+
+> t=tc
+
+∥xt∥22 (35) is the average clean feature power over the corrupted interval and γc = 0 dB is the additional corruption SNR. The clean-control and corrupted observation sequences are defined as u(clean)  
+
+> t
+
+= yt and u(corr)  
+
+> t
+
+= eyt, respectively. Both evaluations therefore contain the same baseline ob-servation noise, while only the corrupted evaluation contains the additional temporary burst. The same underlying channel trajectory, baseline-noise realisation, and corruption realisation are used for all three models. Both observation sequences are transformed using the same normalisation parameters computed from the training set. Recursive feedback is performed in the normalised feature domain used during training, while predictions are transformed back to the original feature domain before the reported metrics are calculated. Let q ∈ { clean , corr } denote the clean-control and cor-rupted evaluations, respectively. For model m, the observation prefix is processed sequentially according to 
+
+s(m,q ) 
+
+> t
+
+= Gθm
+
+
+
+u(q) 
+
+> t
+
+, s(m,q )
+
+> t−1
+
+
+
+, t < t 0, (36) where Gθm denotes the recurrent state-update map. The two evaluations use the same zero-state initialisation, but their hidden states can differ after the corrupted interval has been processed. At t0 = 50 , external observations are removed and each model is operated recursively for Hroll = 50 steps. For k =0, . . . , H roll − 1, the model output is generated as 
+
+bx(m,q ) 
+
+> t0+k
+
+= Rθm
+
+
+
+s(m,q )
+
+> t0+k−1
+
+
+
+, (37) where Rθm denotes the output readout. The recurrent state is subsequently updated according to 
+
+s(m,q ) 
+
+> t0+k
+
+= Gθm
+
+bx(m,q ) 
+
+> t0+k
+
+, s(m,q )
+
+> t0+k−1
+
+
+
+. (38) Hence, after t0, each prediction is used as the next model input while the recurrent hidden state is propagated continu-ously. The instantaneous normalised squared prediction error of the corrupted rollout is defined as 
+
+Em(k) = 
+
+bx(m, corr)  
+
+> t0+k
+
+− xt0+k
+
+> 22
+
+∥xt0+k∥22 + εE
+
+. (39) 13 0 10 20 30 40 50                  
+
+> Recursive rollout step
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> Feature 0 magnitude
+> (a) Representative rollout (run 90)
+> 010 20 30 40 50
+> Recursive rollout step
+> 10 1
+> 2 × 10 1
+> 3 × 10 1
+> 4 × 10 1
+> Instantaneous normalized error
+> (b) Mean rollout error
+> 010 20 30 40 50
+> Recursive rollout step
+> 0.08
+> 0.10
+> 0.12
+> 0.14
+> 0.16
+> 0.18
+> Normalized hidden-state deviation
+> (c) Hidden-state perturbation
+> True channel L-GRU SA-GRU DCL-GRU
+
+Fig. 6. Empirical stability under an additional temporary observation corruption. Left: representative 50 -step corrupted recursive rollout. Centre: mean instantaneous normalised prediction error with 95% confidence intervals over 100 paired test trajectories. Right: normalised deviation between the hidden states generated by the corrupted and clean-control observation sequences. All models are evaluated using the same underlying channel trajectories, baseline-noise realisations, and corruption realisations. 
+
+The aggregate rollout NMSE is defined as 
+
+NMSE roll  
+
+> m
+
+=
+
+> Hroll −1
+
+X
+
+> k=0
+
+bx(m, corr)  
+
+> t0+k
+
+− xt0+k
+
+> 22
+> Hroll −1
+
+X
+
+> k=0
+
+∥xt0+k∥22 + εE
+
+. (40) To isolate the effect of the additional corruption from ordi-nary multi-step prediction error, the output deviation between the corrupted and clean-control rollouts is defined as 
+
+Dm(k) = 
+
+bx(m, corr)  
+
+> t0+k
+
+− bx(m, clean)  
+
+> t0+k2
+
+∥xt0+k∥2 + εD
+
+. (41) The common ground-truth denominator permits direct com-parison across models and avoids artificial amplification when the magnitude of a clean-control prediction approaches zero. The normalised hidden-state deviation is defined as 
+
+∆m(k) = 
+
+s(m, corr)  
+
+> t0+k
+
+− s(m, clean)  
+
+> t0+k2
+
+√Hm
+
+, (42) where Hm is the hidden-state dimension of model m.In addition to the peak and terminal hidden-state deviations, the average hidden-state deviation is reported as 
+
+∆m = 1
+
+Hroll 
+
+> Hroll −1
+
+X
+
+> k=0
+
+∆m(k). (43) For a quantity z evaluated over Nrun = 100 paired test trajectories, the reported 95% confidence interval is 
+
+CI 95% (z) = z ± t0.975 ,N run −1
+
+sz
+
+√Nrun 
+
+, (44) where z and sz are the sample mean and sample standard deviation, respectively. These confidence intervals quantify variability across chan-nel trajectories, baseline-noise realisations, and corruption realisations conditional on the fixed trained models. They do not quantify variability across independent model-training repetitions. 
+
+2) Results: Figure 6 shows that the unconstrained L-GRU maintains the lowest instantaneous normalised prediction error over most of the recursive horizon. Consistently, Table VI reports an aggregate rollout NMSE of 0.2415 ± 0.0180 for L-GRU, compared with 0.3141 ± 0.0310 for SA-GRU and 
+
+0.3225 ± 0.0331 for DCL-GRU. Thus, the spectral constraints do not improve open-loop recursive prediction accuracy in this setting. Relative to L-GRU, the rollout NMSE increases by approximately 30 .0% for SA-GRU and 33 .5% for DCL-GRU. In contrast, the constrained variants exhibit reduced prop-agation of the observation perturbation through their re-current states. SA-GRU exhibits a numerically lower mean hidden-state deviation, decreasing from 0.1094 ± 0.0083 to 
+
+0.0927 ± 0.0086 , corresponding to a reduction of approxi-mately 15 .3% . Its peak hidden-state deviation decreases from 
+
+0.1706 ± 0.0084 to 0.1484 ± 0.0088 , corresponding to a reduction of approximately 13 .0% . DCL-GRU also exhibits numerically lower mean and peak hidden-state deviations by approximately 10 .9% and 11 .0% , respectively, relative to L-GRU. SA-GRU also obtains the smallest peak output deviation, namely 0.3535 ± 0.0294 , which represents a numerical reduc-tion of approximately 4.7% relative to L-GRU. Nevertheless, L-GRU achieves the smallest terminal output deviation, while the confidence intervals of the terminal hidden-state deviations overlap substantially across the three models. The terminal metrics should therefore not be interpreted as evidence of a clear ordering among the models without an additional paired statistical test. Overall, the experiment reveals a stability–accuracy trade-off. Constraining the candidate-state recurrent pathways re-duces the sensitivity of the internal recurrent state to a tem-porary observation corruption, but this improved state robust-ness is accompanied by higher recursive prediction NMSE. Under the considered configuration, SA-GRU provides the strongest empirical suppression of the hidden-state perturba-tion, whereas L-GRU preserves the highest open-loop pre-diction accuracy. DCL-GRU satisfies the sufficient candidate-state contraction condition, but its stronger constraint does not provide an additional empirical advantage over SA-GRU in 14                                                                 
+
+> TABLE VI SUMMARY OF THE CORRUPTED RECURSIVE -ROLLOUT EXPERIMENT . V ALUES ARE REPORTED AS THE SAMPLE MEAN AND 95% CONFIDENCE -INTERVAL HALF -WIDTH OVER 100 PAIRED TEST TRAJECTORIES . B OLD VALUES INDICATE THE SMALLEST NUMERICAL MEAN FOR EACH METRIC .
+> Model Rollout NMSE Peak output dev. Terminal output dev. Mean hidden dev. Peak hidden dev. Terminal hidden dev. L-GRU 0.2415 ±0.0180 0.3711 ±0.0353 0.2172 ±0.0364 0.1094 ±0.0083 0.1706 ±0.0084 0.0902 ±0.0105
+> SA-GRU 0.3141 ±0.0310 0.3535 ±0.0294 0.2310 ±0.0313 0.0927 ±0.0086 0.1484 ±0.0088 0.0834 ±0.0111
+> DCL-GRU 0.3225 ±0.0331 0.3813 ±0.0335 0.2567 ±0.0367 0.0975 ±0.0089 0.1518 ±0.0092 0.0918 ±0.0124
+
+this rollout experiment. 
+
+H. Discussion 
+
+The results show that the proposed SA-GRU and DCL-GRU preserve competitive channel-prediction accuracy while intro-ducing explicit spectral constraints on the recurrent dynamics. The unconstrained baselines achieve slightly lower NMSE in some high-SNR regimes, but they do not provide stability-aware or candidate-state contraction guarantees. In contrast, SA-GRU and DCL-GRU provide explicit structural guarantees on selected recurrent pathways, with DCL-GRU additionally satisfying the sufficient candidate-state contraction condition in all audited runs while maintaining a runtime close to the unconstrained lightweight GRU. The proposed constrained variants therefore offer a practical trade-off between prediction accuracy, computational efficiency, and theoretically controlled recurrent dynamics. Interestingly, the stronger theoretical guarantee provided by DCL-GRU does not necessarily translate into superior empir-ical performance under the considered rollout configuration, illustrating that sufficient contraction guarantees and empirical rollout robustness need not coincide. This observation suggests that stronger structural constraints may introduce additional conservatism, highlighting a trade-off between theoretical guarantees and practical performance. A possible mechanism is that the additional bound on the reset-gate recurrent matrix in DCL-GRU limits how strongly the reset gate can adapt the candidate-state update to the recent hidden-state trajectory. Although this restriction is required by the sufficient con-traction condition, it may also reduce the model’s ability to apply trajectory-specific corrections after a corruption burst, explaining why the stronger DCL-GRU guarantee does not translate into lower empirical rollout error than SA-GRU. The corrupted-rollout analysis was conducted under a single perturbation configuration, and a broader sensitivity analysis across multiple corruption scenarios, observation conditions, and contraction margins is left for future work. IX. C ONCLUSIONS AND FUTURE DIRECTIONS 
+
+A. Conclusions 
+
+This paper presented a framework for causal one-step-ahead channel prediction using lightweight GRU-based recurrent architectures under noisy 2 × 2 MIMO CDL channels. In addition to the unconstrained lightweight GRU baseline, two constrained variants were investigated. The first, SA-GRU, imposes a post-training spectral constraint on the candidate-state recurrent matrix, bounding the direct candidate recurrent gain. The second, DCL-GRU, additionally constrains the reset-gate recurrent matrix and satisfies a sufficient condition for contraction of the complete candidate-state mapping. The numerical results show that the proposed constrained variants remain competitive with conventional CNN, GRU, LSTM, and lightweight recurrent baselines across a broad SNR range. The unconstrained models can achieve lower NMSE in some high-SNR settings, but the constrained variants provide explicit structural guarantees that the baselines lack. Runtime measurements further confirm that the post-training projections introduce negligible overhead relative to the uncon-strained lightweight GRU, and that the lightweight recurrent variants are substantially faster to optimise than the deeper GRU baseline. The projection audit confirms that the required spectral constraints and candidate-state contraction condition are satisfied in all completed constrained runs. The corrupted recursive-rollout experiment further demon-strated that the spectral constraints reduce the empirical propa-gation of observation perturbations through the recurrent state. SA-GRU exhibited mean and peak hidden-state deviations approximately 15 .3% and 13 .0% below those of L-GRU, respectively. This improved state robustness was accompanied by higher recursive rollout NMSE, demonstrating that the proposed spectral constraints introduce a measurable stability– accuracy trade-off rather than an across-the-board improve-ment in prediction performance. 
+
+B. Future Directions 
+
+Several natural extensions are identified. First, future work will consider wideband OFDM channels with multiple subcar-riers, realistic pilot placement, and DMRS-based channel ob-servations. Second, online and continual learning mechanisms may be combined with the proposed spectrally constrained recurrent structure to improve adaptation under long-term distribution shift while preserving the projected recurrent con-straints. Third, model compression techniques such as pruning, low-precision quantisation, and FPGA-oriented implementa-tion can be explored to further reduce memory footprint and inference latency. Finally, integrating the predictor into link adaptation, scheduling, or goal-oriented communication loops would enable evaluation of the system-level impact of stable channel prediction. APPENDIX APROOF OF PROPOSITION V.3 The hyperbolic tangent is globally 1-Lipschitz. For any scalar a ∈ R,
+
+dda tanh( a) = 1 − tanh 2(a). (45) 15 
+
+Since | tanh( a)| < 1 for all finite a, we have 0 < 1 −
+
+tanh 2(a) ≤ 1. By the mean-value theorem, for any a, b ∈ R,
+
+| tanh( a) − tanh( b)| ≤ | a − b|. (46) When tanh( ·) is applied element-wise to vectors a, b ∈ RH ,
+
+∥tanh( a) − tanh( b)∥22 =
+
+> H
+
+X
+
+> i=1
+
+| tanh( ai) − tanh( bi)|2
+
+≤ ∥ a − b∥22, (47) so the element-wise hyperbolic tangent is globally 1-Lipschitz in the Euclidean norm. For a fixed input xt and a fixed reset-gate realisation rt ∈
+
+(0 , 1) H , the conditional candidate-state mapping is 
+
+Ft(h) = tanh( Whxt + Uh diag( rt)h + bh) . (48) By the chain rule and the submultiplicative property of the spectral norm, 
+
+∂eht
+
+∂ht−1 2
+
+≤ ∥ Dh,t ∥2
+
+| {z } 
+
+> ≤1
+
+·∥ Uh∥2 · ∥ diag( rt)∥2
+
+| {z } 
+
+> ≤1
+
+≤ ∥ Uh∥2, (49) where Dh,t = diag( 1 − eht ⊙ eht). Both bounding factors are at most 1 because |eht,i | < 1 and |rt,i | < 1 for all i. Therefore, enforcing ∥Uh∥2 ≤ ρh via the projection in (15) guarantees that the Lipschitz constant of the conditional candidate-state mapping with respect to ht−1 is at most ρh.APPENDIX BPROOF OF PROPOSITION V.4 
+
+Boundedness of the hidden state. Assume that the recurrent state is initialised such that ∥h0∥∞ ≤ 1, as satisfied by the zero initialisation used in the experiments. Since the hyperbolic tangent is applied element-wise, every component of the candidate state satisfies |eht,i | < 1, so ∥eht∥∞ ≤ 1. The complete GRU hidden-state update is 
+
+ht = ( 1 − zt) ⊙ ht−1 + zt ⊙ eht, (50) where 0 < z t,i < 1 for every i, so each component ht,i is a convex combination of ht−1,i and eht,i . By induction, ∥ht∥∞ ≤
+
+1 for all t ≥ 0.
+
+Jacobian of the complete candidate-state mapping. Defining the reset-gate pre-activation ar,t = Wr xt + Ur ht−1 + br and 
+
+rt = σ(ar,t ), the chain rule gives 
+
+∂rt
+
+∂ht−1
+
+= Dr,t Ur , (51) where Dr,t = diag( rt ⊙(1−rt)) . Since the sigmoid derivative satisfies 0 < σ ′(a) ≤ 14 , we have ∥Dr,t ∥2 ≤ 14 . The partial derivative of the gated term rt ⊙ ht−1 with respect to ht−1 is 
+
+∂(rt ⊙ ht−1)
+
+∂ht−1
+
+= diag( rt) + diag( ht−1)Dr,t Ur . (52) Applying the chain rule to the candidate-state mapping and taking spectral norms yields 
+
+Jeh,t 2
+
+≤∥ Dh,t ∥2 ∥Uh∥2
+
+∥ diag( rt)∥2
+
++ ∥ diag( ht−1)∥2 ∥Dr,t ∥2 ∥Ur ∥2
+
+ (53) 
+
+≤∥ Uh∥2
+
+ 1 + 14 ∥Ur ∥2
+
+ ≤ ρh
+
+ 1 + ρr
+
+> 4
+
+ ≤ 1 − δ < 1,
+
+where we used ∥Dh,t ∥2 ≤ 1, ∥ diag( rt)∥2 ≤ 1,
+
+∥ diag( ht−1)∥2 ≤ 1, and the assumed spectral-norm bounds and contraction condition (20). Hence, the candidate-state mapping is globally contractive on {h : ∥h∥∞ ≤ 1} with contraction factor at most 1 − δ.REFERENCES [1] K. Christodoulides, T. Charalambous, K. M. Deliparaschos, and R. Wichman, “A lightweight stability-aware GRU for real-time MIMO channel prediction,” in Proceedings of the IEEE International Workshop on Computer Aided Modelling and Design of Communication Links and Networks (CAMAD) , 2026. [2] F. Hlawatsch and G. Matz, Wireless communications over rapidly time-varying channels . Academic Press, 2011. [3] L. Lindbom, “Simplified Kalman estimation of fading mobile radio channels: high performance at LMS computational load,” in Proceed-ings IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP) , vol. 3, Apr 1993, pp. 352–355. [4] R. Bosisio, M. Nicoli, and U. Spagnolini, “Kalman filter of channel modes in time-varying wireless systems,” in Proceedings IEEE In-ternational Conference on Acoustics, Speech, and Signal Processing (ICASSP) , vol. 3, 2005, pp. iii/785–iii/788 Vol. 3. [5] W. Jakes, Microwave Mobile Communications . New York: Wiley, 1974. [6] T. Ekman, “Prediction of mobile radio channels,” Ph.D. dissertation, Signals and Systems, Uppsala University, Uppsala, Sweden, 2002. [7] T. Ekman, M. Sternad, and A. Ahlen, “Unbiased power prediction of Rayleigh fading channels,” in Proceedings IEEE 56th Vehicular Technology Conference Fall , vol. 1, 2002, pp. 280–284. [8] M. Sternad and D. Aronsson, “Channel estimation and prediction for adaptive OFDM downlinks,” in IEEE 58th Vehicular Technology Conference. VTC 2003-Fall , vol. 2, 2003, pp. 1283–1287. [9] X. Zhao, J. Kivinen, P. Vainikainen, and K. Skog, “Characterization of Doppler spectra for mobile communications at 5.3 ghz,” IEEE Trans. Veh. Technol. , vol. 52, no. 1, pp. 14–23, Jan 2003. [10] A. Duel-Hallen, “Fading channel prediction for mobile radio adaptive transmission systems,” Proceedings of the IEEE , vol. 95, no. 12, pp. 2299–2313, Dec. 2007. [11] M. Niedzwiecki, Identification of Time-Varying Processes . New York: Wiley, 2000. [12] M. Tsatsanis and G. Giannakis, “Modeling and equalization of rapidly fading channels,” in Int. J. Adaptive Control Signal Processing , vol. 10, no. 2/3, Mar 1996, pp. 159–176. [13] T. Zemen and C. Mecklenbrauker, “Time-variant channel estimation using discrete prolate spheroidal sequences,” IEEE Trans. Signal Pro-cessing , vol. 53, no. 9, pp. 3597–3607, Sept. 2005. [14] J. F. Schmidt, J. E. Cousseau, R. Wichman, and S. Werner, “Low-complexity channel prediction using approximated recursive DCT,” 
+
+IEEE Transactions on Circuits and Systems I: Regular Papers , vol. 58, no. 10, pp. 2520–2530, 2011. [15] Z. Tang, R. Cannizzaro, G. Leus, and P. Banelli, “Pilot-assisted time-varying channel estimation for OFDM systems,” IEEE Trans. Signal Processing , vol. 55, no. 5, pp. 2226–2238, May 2007. [16] K. Muralidhar and K. H. Li, “A low-complexity Kalman approach for channel estimation in doubly-selective OFDM systems,” IEEE Signal Processing Lett. , vol. 16, no. 7, pp. 632–635, July 2009. [17] I. D. Mienye, T. G. Swart, and G. Obaido, “Recurrent Neural Networks: A Comprehensive Review of Architectures, Variants, and Applications,” 
+
+Information , vol. 15, no. 9, 2024. [18] Z. Li, F. Liu, W. Yang, S. Peng, and J. Zhou, “A Survey of Convolu-tional Neural Networks: Analysis, Applications, and Prospects,” IEEE Transactions on Neural Networks and Learning Systems , vol. 33, no. 12, pp. 6999–7019, 2022. [19] K. Cho, B. van Merri¨ enboer, D. Bahdanau, and Y. Bengio, “On the Prop-erties of Neural Machine Translation: Encoder–Decoder Approaches,” in Proceedings of SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation , D. Wu, M. Carpuat, X. Carreras, and E. M. Vecchi, Eds. Doha, Qatar: Association for Computational Linguistics, Oct. 2014, pp. 103–111. [20] F. M. Salem, Gated RNN: The Gated Recurrent Unit (GRU) RNN .Cham: Springer International Publishing, 2022, pp. 85–100. [21] A. Sherstinsky, “Fundamentals of Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) network,” Physica D: Nonlinear Phenomena , vol. 404, p. 132306, 2020. 16 
+
+[22] Q. Liu, P. Wang, J. Sun, R. Li, and Y. Li, “Wireless channel prediction of gru based on experience replay and snake optimizer,” Sensors , vol. 23, no. 14, 2023. [23] S. Jafarpour, A. Davydov, A. Proskurnikov, and F. Bullo, “Robust Implicit Networks via Non-Euclidean Contractions,” in Advances in Neural Information Processing Systems , M. Ranzato, A. Beygelzimer, Y. Dauphin, P. Liang, and J. W. Vaughan, Eds., vol. 34. Curran Associates, Inc., 2021, pp. 9857–9868. [24] A. Davydov, A. V. Proskurnikov, and F. Bullo, “Non-Euclidean Contrac-tivity of Recurrent Neural Networks,” in American Control Conference (ACC) , 2022, pp. 1527–1534. [25] ——, “Non-Euclidean Contraction Analysis of Continuous-Time Neural Networks,” IEEE Transactions on Automatic Control , vol. 70, no. 1, pp. 235–250, 2025. [26] K. Long, J. Cort´ es, and N. Atanasov, “Certifying Stability of Rein-forcement Learning Policies using Generalized Lyapunov Functions,” in 
+
+The Thirty-ninth Annual Conference on Neural Information Processing Systems , 2026. [27] 3GPP, “Study on channel model for frequencies from 0.5 to 100 ghz,” 3rd Generation Partnership Project (3GPP), Tech. Rep. (TR) 38.901, 2017. [28] J. B. Diederik P. Kingma, “Adam: A Method for Stochastic Optimiza-tion,” International Conference for Learning Representations , 2015. [29] T. Akiba, S. Sano, T. Yanase, T. Ohta, and M. Koyama, “Optuna: A Next-generation Hyperparameter Optimization Framework,” in Proceed-ings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining , 2019. 
+
+Kyriakos Christodoulides is currently pursuing the B.Sc. degree in Electrical and Computer Engineering with the University of Cyprus, Nicosia, Cyprus. He is a Research Assistant with the Distributed and Networked Control Systems (DNCS) Group, Department of Electrical and Computer Engineer-ing, University of Cyprus. He previously worked as a Research Assistant with the IRIDA Research Centre, University of Cyprus, during 2025–2026. His research interests include wireless communi-cations, channel prediction, machine learning for communication systems, recurrent neural networks, reconfigurable intelligent surfaces, and physical-layer signal processing. His current research focuses on lightweight and stability-aware recurrent neural networks for real-time channel prediction in time-varying MIMO wireless channels. 
+
+Kyriakos M. Deliparaschos (Senior Member, IEEE) received his B.Eng. (Hons) in Electronics Engineering and M.Sc. in Mechatronics from De Montfort University, UK, and the National Technical University of Athens (NTUA), Greece. He earned his Ph.D. from the Department of Signals, Control and Robotics, School of Electrical and Computer Engi-neering, NTUA. He is currently a Special Teaching Staff member in the Department of Electrical and Computer Engineering and Informatics at the Cyprus University of Technology (CUT). He has held aca-demic and research positions at New York College and IST College (Athens), NTUA, CUT, Trinity College Dublin, and Cranfield University. His research interests include embedded systems, reconfigurable hardware acceleration, sensor fusion, resilient cyber-physical systems, intelligent control, real-time robotic navigation, and medical robotics for minimally invasive surgery. 
+
+Risto Wichman (Fellow, IEEE) received his M.Sc. and D.Sc. (Tech) degrees in digital signal processing from Tampere University of Technology, Finland, in 1990 and 1995, respectively. Following his doctoral studies, he joined Nokia Research Center, where he worked from 1995 to 2001 as a Senior Research Engineer. During this period, he gained substantial industrial research experience in the development of advanced signal processing techniques for wire-less communication systems In 2002, he joined the Department of Information and Communications Engineering at the Aalto University School of Electrical Engineering, Finland. Since 2008, he was appointed as a Full Professor. His research interests are in signal processing for wireless communication systems. His work builds on tools from communication theory, detection and estimation theory, stochastic geometry, random matrix theory, linear algebra, and large-system analysis. 
+
+Themistoklis Charalambous (Senior Member, IEEE) received the BA (First Class Honours) and M.Eng. (Distinction) degrees in Electrical and Infor-mation Sciences from Trinity College, University of Cambridge, and the Ph.D. degree from the Control Laboratory, Department of Engineering, University of Cambridge. Following his PhD, he held research and teaching positions at Imperial College London, the University of Cyprus, KTH Royal Institute of Technology, and Chalmers University of Technol-ogy. In 2017, he joined the Department of Electrical Engineering and Automation, School of Electrical Engineering, Aalto Univer-sity, as an Assistant Professor; he was awarded the title of Academy Research Fellow by the Academy of Finland in 2018 and was promoted to Associate Professor in 2020. In September 2021, he joined the Department of Electrical and Computer Engineering, University of Cyprus, as a tenure-track Assistant Professor. Since May 2026, he has been a tenured Associate Professor at the University of Cyprus. He is also a Visiting Professor at Aalto University and, since April 2023, at the FinEst Centre for Smart Cities.

@@ -1,0 +1,526 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-25T20:23:55.650075+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 8,
+    "quick_skim_target": 11,
+    "quick_selected": 8
+  },
+  "deep_dive": [
+    {
+      "id": "2607.20697v1",
+      "source": "arxiv",
+      "title": "Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction",
+      "abstract": "Machine-learning-based channel predictors must operate under stringent latency, memory, and computational constraints while remaining robust to noisy and time-varying observations. This paper develops a causal channel-prediction framework based on three single-layer gated recurrent unit variants: an unconstrained lightweight GRU (L-GRU), a stability-aware GRU (SA-GRU) with a spectral bound on the candidate-state recurrent matrix, and a doubly constrained lightweight GRU (DCL-GRU) with additional control of the reset-gate recurrent matrix. A sufficient condition is derived for contraction of the complete candidate-state mapping, while preserving the parameter count and inference-time structure of the baseline architecture. These guarantees apply to the candidate-state mapping and do not directly imply contraction of the complete GRU hidden-state transition. The models are trained on 2x2 MIMO channels generated using the 3GPP CDL-A model, and their hyperparameters are selected through Bayesian optimisation with Optuna's Tree-structured Parzen Estimator. Across the considered SNR range, the constrained variants retain competitive prediction accuracy and achieve optimisation runtimes close to L-GRU, with speedups of 1.72x and 1.76x relative to a five-layer GRU for SA-GRU and DCL-GRU, respectively. All audited constrained runs satisfy the prescribed spectral bounds. Under temporary observation corruption followed by recursive prediction, SA-GRU reduces the mean and peak hidden-state deviations by approximately 15.3% and 13.0%, respectively, relative to L-GRU, whereas L-GRU achieves the lowest rollout NMSE. These results highlight an explicit trade-off between prediction accuracy, empirical rollout robustness, and candidate-state stability guarantees.",
+      "authors": [
+        "Kyriakos Christodoulides",
+        "Kyriakos M. Deliparaschos",
+        "Risto Wichman",
+        "Themistoklis Charalambous"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-07-22T20:06:00+00:00",
+      "link": "https://arxiv.org/pdf/2607.20697v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Lightweight GRU for real-time time series prediction",
+      "llm_evidence_cn": "轻量级GRU用于实时时间序列预测",
+      "llm_evidence": "轻量级GRU用于实时时间序列预测",
+      "canonical_evidence": "轻量级GRU用于实时时间序列预测",
+      "llm_tldr_en": "Develops three lightweight GRU variants for real-time channel prediction with stability guarantees.",
+      "llm_tldr_cn": "针对实时信道预测的延迟和资源约束，提出了三种轻量级门控循环单元变体，包括稳定性感知和双重约束版本。理论推导了状态压缩的充分条件，在保持参数效率的同时确保预测稳定性，适用于资源受限的实时预测场景。",
+      "llm_tldr": "针对实时信道预测的延迟和资源约束，提出了三种轻量级门控循环单元变体，包括稳定性感知和双重约束版本。理论推导了状态压缩的充分条件，在保持参数效率的同时确保预测稳定性，适用于资源受限的实时预测场景。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.19659v1",
+      "source": "arxiv",
+      "title": "Expert-Guided Forecast Editing for Time-Series Foundation Models",
+      "abstract": "Time-series foundation models can forecast across heterogeneous domains without task-specific training, but their forecasts are fixed once produced and cannot directly incorporate task-specific expert feedback. We study expert-guided forecast editing: a frozen foundation model generates candidate future trajectories, and an expensive expert evaluator scores them to guide forecast revision. Under a tight query budget, two natural strategies sit at opposite ends: best-of-$N$ purely exploits the foundation model's predictive distribution, while optimization approaches mostly explore the forecast horizon as an unstructured high-dimensional vector. Each extreme is individually sub-optimal. We introduce \\textbf{DEFT}, an expert-guided forecast editing framework that balances the two by first exploiting the foundation model's predictive samples in a decomposed trend--seasonal space, then exploring around them via component-wise refinement. DEFT queries the expert only on complete trajectories, then reuses scores for the trend and seasonal components that appeared in the queried recombinations. This lets each expert query provide structured component-level feedback while keeping the foundation model frozen. We compare DEFT against direct search approaches, including best-of-$N$, cross-entropy methods, and Bayesian optimization, under matched expert-query budgets. Across two forecasting benchmarks consisting of 78 datasets, three time-series foundation models, four feedback types, and seven query budgets, DEFT consistently improves the effectiveness of expert guidance. A molecular-dynamics case study further suggests that the same principle extends to more physically grounded feedback, supporting the hypothesis that sparse test-time guidance should be spent balancing prior exploitation with structured exploration.",
+      "authors": [
+        "Hung Le",
+        "Minh Hoang Nguyen",
+        "Manh Nguyen",
+        "Huu Hiep Nguyen",
+        "Dai Do"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-22T01:49:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.19659v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "expert-guided editing for time-series foundation model forecasts",
+      "llm_evidence_cn": "面向时间序列基础模型的专家引导预测编辑",
+      "llm_evidence": "面向时间序列基础模型的专家引导预测编辑",
+      "canonical_evidence": "面向时间序列基础模型的专家引导预测编辑",
+      "llm_tldr_en": "Introduces DEFT, an expert-guided forecast editing framework that combines best-of-N sampling and optimization to improve time-series foundation model forecasts under query budget.",
+      "llm_tldr_cn": "该论文研究时间序列基础模型的专家引导预测编辑问题：冻结的基础模型生成候选轨迹，昂贵的专家评估器打分指导修正。提出DEFT框架，结合最佳N采样和优化策略，在有限查询预算下有效改进预测。为时间序列预测提供了新的人机协作范式。",
+      "llm_tldr": "该论文研究时间序列基础模型的专家引导预测编辑问题：冻结的基础模型生成候选轨迹，昂贵的专家评估器打分指导修正。提出DEFT框架，结合最佳N采样和优化策略，在有限查询预算下有效改进预测。为时间序列预测提供了新的人机协作范式。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20002v1",
+      "source": "arxiv",
+      "title": "Post-Training in Time Series Foundation Models: A Unifying Framework",
+      "abstract": "Time series foundation models (TSFMs) have emerged as general-purpose models for time series analysis, but pretraining alone is often insufficient for reliable downstream deployment. Bridging this gap requires further intervention to handle domain shift, task heterogeneity, limited supervision, and computational constraints, which motivates post-training as a broad class of methods to adapt, augment, compose, calibrate, or specialize pretrained TSFMs for downstream tasks. In this work, we analyze TSFM post-training methods based on their locus of intervention in the prediction pipeline, yielding five categories: parameter adaptation, context augmentation, model composition, output processing and uncertainty control, and compression and specialization. Within each category, we study main representative methods and discuss their current limitations. We further identify future directions toward controlled adaptation, reliable context construction, uncertainty-aware model composition, calibrated output processing, and deployment-aware specialization. Overall, by providing a unifying framework for the emerging TSFM post-training landscape, this work aims to support future research to navigate the design space between a pretrained TSFM and its reliable downstream deployment.",
+      "authors": [
+        "Shifeng Xie",
+        "Ambroise Odonnat",
+        "Zehao Xiao",
+        "Lei Zan",
+        "Malik Tiomoko",
+        "Lujia Pan",
+        "Themis Palpanas",
+        "Boris N. Oreshkin",
+        "Chenghao Liu",
+        "Keli Zhang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-22T10:37:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.20002v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "framework for post-training time series foundation models",
+      "llm_evidence_cn": "时间序列基础模型后训练框架",
+      "llm_evidence": "时间序列基础模型后训练框架",
+      "canonical_evidence": "时间序列基础模型后训练框架",
+      "llm_tldr_en": "This paper provides a unifying framework for post-training methods in time series foundation models, categorizing approaches into five groups and enabling better adaptation to downstream tasks.",
+      "llm_tldr_cn": "该论文提出了时间序列基础模型后训练方法的统一框架，将其分为参数适应、上下文增强、模型组合、输出处理与不确定性控制以及压缩与专门化五类。该框架有助于解决领域漂移、任务异质性等问题，提升基础模型在下游预测任务中的表现，为时间序列预测研究提供了系统化的指导。",
+      "llm_tldr": "该论文提出了时间序列基础模型后训练方法的统一框架，将其分为参数适应、上下文增强、模型组合、输出处理与不确定性控制以及压缩与专门化五类。该框架有助于解决领域漂移、任务异质性等问题，提升基础模型在下游预测任务中的表现，为时间序列预测研究提供了系统化的指导。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20587v1",
+      "source": "arxiv",
+      "title": "SPECTRA: State-Space Exogenous Context and Temporal-Frequency Resolution Architecture for Probabilistic Energy Forecasting",
+      "abstract": "Modern power systems increasingly require probabilistic forecasts amid interacting uncertainties from renewable intermittency, flexible demand, market volatility, and weather-dependent generation. However, existing methods often treat multi-scale decomposition, exogenous-variable alignment, and probabilistic output as separate steps, obscuring how predictable structures and uncertainty-bearing fluctuations jointly shape the forecast distribution. This paper proposes a state-space exogenous-context and temporal-frequency resolution architecture for general probabilistic energy forecasting. Its central premise is that trend-periodic components primarily determine the baseline trajectory, whereas high-frequency residuals and external perturbations govern the spread and asymmetry of forecast uncertainty. Accordingly, the architecture adaptively separates deterministic and residual streams, aligns exogenous context with both, refines the deterministic backbone through multi-resolution spectral-temporal state-space modeling, and estimates ordered quantile boundaries from their complementary representations. Experiments on load, price, solar, and wind forecasting achieve the best continuous ranked probability score in 14 of 18 settings, reducing average CRPS by 5.74\\% and upper-tail quantile risk by 7.27\\% over the strongest baselines. These results support deterministic-stochastic separation as an effective design principle for general probabilistic energy forecasting.",
+      "authors": [
+        "Hang Ye",
+        "Xinyan Jiang",
+        "Yuedong Shi",
+        "Yangxin Zhu",
+        "Jianming Wei",
+        "Tian Zheng",
+        "Xiaoying Zheng",
+        "Yongxin Zhu"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "published": "2026-07-22T13:58:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.20587v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "probabilistic time series forecasting architecture with state-space and frequency decomposition",
+      "llm_evidence_cn": "结合状态空间和频率分解的概率时间序列预测架构",
+      "llm_evidence": "结合状态空间和频率分解的概率时间序列预测架构",
+      "canonical_evidence": "结合状态空间和频率分解的概率时间序列预测架构",
+      "llm_tldr_en": "SPECTRA proposes a state-space exogenous-context and temporal-frequency resolution architecture for probabilistic energy forecasting, unifying multi-scale decomposition and uncertainty quantification.",
+      "llm_tldr_cn": "该论文提出SPECTRA架构，用于概率性能源预测，通过状态空间外生情境考虑多尺度分解和外生变量对齐，并输出概率分布。其核心思想是将趋势周期成分与高频波动分开建模，从而同时捕捉可预测结构和不确定性。在能源预测场景中验证了有效性，方法可推广至其他时间序列预测任务。",
+      "llm_tldr": "该论文提出SPECTRA架构，用于概率性能源预测，通过状态空间外生情境考虑多尺度分解和外生变量对齐，并输出概率分布。其核心思想是将趋势周期成分与高频波动分开建模，从而同时捕捉可预测结构和不确定性。在能源预测场景中验证了有效性，方法可推广至其他时间序列预测任务。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20716v1",
+      "source": "arxiv",
+      "title": "Spatial Generalization Tests for Machine Learning-based Weather Models to Assess Physical Consistency",
+      "abstract": "Machine learning-based weather prediction is revolutionizing weather forecasting by learning from weather data in present-day climate. However, generalization to other climates remains a major challenge. With melting sea ice, land-use change, and increasing ocean temperatures, boundary conditions are changing. Therefore, generalization in time depends on generalization in space. Here, we present three test cases to evaluate whether machine learning-based weather and climate models generalize in space and apply them to GraphCast and NeuralGCM. We reverse or rotate the planet in longitude or latitude under the model's coordinate system and adapt all boundary conditions and forcings accordingly. Physics-based general circulation models simulate a rotated/reversed planet with only rounding errors, but GraphCast and NeuralGCM fail these tests. The analyses furthermore revealed unphysical variable mappings based on correlation rather than causation. We argue that machine learning-based climate models should be designed to pass generalization tests to prevent overfitting on present-day regional climate.",
+      "authors": [
+        "Maren Höver",
+        "Milan Klöwer",
+        "Christian Schroeder de Witt",
+        "Hannah M. Christensen"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "published": "2026-07-22T20:32:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.20716v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Machine learning weather prediction test",
+      "llm_evidence_cn": "机器学习天气预报空间泛化测试",
+      "llm_evidence": "机器学习天气预报空间泛化测试",
+      "canonical_evidence": "机器学习天气预报空间泛化测试",
+      "llm_tldr_en": "Presents three test cases to evaluate spatial generalization of ML-based weather models, applied to GraphCast and NeuralGCM.",
+      "llm_tldr_cn": "针对基于机器学习的天气模型的空间泛化能力，提出了三种测试案例，包括反转旋转地球坐标等，并应用于GraphCast和NeuralGCM。这些测试揭示了模型在不同气候下的物理一致性，为评估和提升天气预报模型的鲁棒性提供了工具。",
+      "llm_tldr": "针对基于机器学习的天气模型的空间泛化能力，提出了三种测试案例，包括反转旋转地球坐标等，并应用于GraphCast和NeuralGCM。这些测试揭示了模型在不同气候下的物理一致性，为评估和提升天气预报模型的鲁棒性提供了工具。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.16976v1",
+      "source": "arxiv",
+      "title": "Adaptive Ridge-Regularized Hotelling Change-Point Tests for Functional Data",
+      "abstract": "We propose a unified ridge-regularized Hotelling framework for detecting and locating mean changes in functional time series. A growing basis expansion converts the functional observations into high-dimensional score vectors. Their long-run covariance is estimated by an edge-corrected difference-based procedure. Ridge regularization stabilizes inference under spectral decay. An explicit local-power formula shows that the power-maximizing ridge depends on the unknown spectral orientation of the change. We therefore combine a family of ridge CUSUM statistics by a Cauchy transform and calibrate the aggregate directly from their joint weighted-bridge limit. For multiple changes, we embed local maximum-ridge statistics in a wild binary segmentation procedure, followed by local refinement. Under mild conditions, we establish the validity, local power, consistency, and localization properties of the proposed tests. In the multiple-change setting, the procedure consistently recovers the number of changes and uniformly estimates their locations. The framework accommodates weak dependence and non-Gaussian functional errors. Simulations and two empirical applications demonstrate the favorable finite-sample performance of the proposed methods.",
+      "authors": [
+        "Ping Zhao",
+        "Long Feng"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME"
+      ],
+      "published": "2026-07-18T22:02:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.16976v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "change-point detection in functional time series",
+      "llm_evidence_cn": "功能时间序列变点检测方法",
+      "llm_evidence": "功能时间序列变点检测方法",
+      "canonical_evidence": "功能时间序列变点检测方法",
+      "llm_tldr_en": "Proposes ridge-regularized Hotelling tests for change-point detection in functional time series, offering a rigorous statistical tool that can improve time series prediction models by identifying regime shifts.",
+      "llm_tldr_cn": "本文针对功能时间序列中的均值变点检测问题，提出了一种岭正则化的Hotelling检验框架。通过基展开将功能数据转换为高维得分向量，并采用边缘校正差分程序估计长程协方差，利用岭正则化稳定谱衰减下的推断。该方法结合岭CUSUM统计量和Cauchy变换实现精确校准，并嵌入到wild binary segmentation中处理多变点。实验表明该方法在变点定位和检验功效上具有优势，为时间序列预测中的结构变化识别提供了可靠工具。",
+      "llm_tldr": "本文针对功能时间序列中的均值变点检测问题，提出了一种岭正则化的Hotelling检验框架。通过基展开将功能数据转换为高维得分向量，并采用边缘校正差分程序估计长程协方差，利用岭正则化稳定谱衰减下的推断。该方法结合岭CUSUM统计量和Cauchy变换实现精确校准，并嵌入到wild binary segmentation中处理多变点。实验表明该方法在变点定位和检验功效上具有优势，为时间序列预测中的结构变化识别提供了可靠工具。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17178v1",
+      "source": "arxiv",
+      "title": "DADIR: Density-Aware Data-level Imbalanced Regression Framework",
+      "abstract": "Imbalanced learning addresses predictive modeling problems with underrepresented regions of the data distribution. Although widely studied in classification, imbalanced regression remains challenging because of continuous target variables and heterogeneous density distributions. Existing data-level methods often rely on fixed target partitioning or synthetic sample generation without jointly considering density variations and local feature-space structure. We propose DADIR, a Density-Aware Data-level Imbalanced Regression framework that exploits density information throughout the balancing process. DADIR comprises three components: (1) Density-Aware Adaptive Partitioning (DAAP), which recursively partitions the target space according to density variations; (2) a Density-Regularized Conditional Variational Autoencoder (DR-CVAE), which preserves sparse-region representations while learning latent features; and (3) latent-space data balancing, which combines feature-level clustering with oversampling to generate structurally consistent synthetic samples. Together, these components identify minority regions more effectively, preserve sparse-region information, and generate realistic synthetic data. The resulting balanced dataset can be used directly with existing regression models without modifying their architecture or learning objective. Experiments on diverse imbalanced regression datasets demonstrate consistent improvements in predictive performance, particularly in underrepresented regions, while also improving overall accuracy.",
+      "authors": [
+        "Shermin Shahbazi",
+        "Hossein Mohammadi",
+        "Mohsen Afsharchi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-19T10:23:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.17178v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "imbalanced regression framework applicable to time series",
+      "llm_evidence_cn": "适用于时间序列的不平衡回归框架",
+      "llm_evidence": "适用于时间序列的不平衡回归框架",
+      "canonical_evidence": "适用于时间序列的不平衡回归框架",
+      "llm_tldr_en": "DADIR proposes a density-aware data-level framework for imbalanced regression, using adaptive partitioning and feature-space structure for better handling of continuous targets, applicable to time series.",
+      "llm_tldr_cn": "该论文提出DADIR，一种密度感知的数据级不平衡回归框架，通过自适应目标空间划分和局部特征空间结构挖掘，解决回归中连续目标变量密度分布不均匀的问题。在多个回归基准上提升了对尾部区域的预测性能。该方法可应用于时间序列预测中的不平衡问题，例如水文极端事件预测。",
+      "llm_tldr": "该论文提出DADIR，一种密度感知的数据级不平衡回归框架，通过自适应目标空间划分和局部特征空间结构挖掘，解决回归中连续目标变量密度分布不均匀的问题。在多个回归基准上提升了对尾部区域的预测性能。该方法可应用于时间序列预测中的不平衡问题，例如水文极端事件预测。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.17661v1",
+      "source": "arxiv",
+      "title": "Early Yield Prediction for Sugar Beet Fields using Satellite Data -- Learnings from Specialized Vision Transformers",
+      "abstract": "Remote sensing has become an increasingly valuable tool for agricultural monitoring, particularly through the use of publicly available satellite imagery. However, effectively integrating domain knowledge into machine learning methods remains challenging. This study presents a real-world example of early sugar beet harvest yield forecasting from purely optical Sentinel-2 imagery, demonstrating how a tight integration of domain knowledge and machine learning can lead to synergistic gains. We empirically find that using very small vision transformer patch sizes and all available Sentinel-2 spectral bands improves our model despite being uncommon design choices in the domain. As a practical contribution, we were able to identify a large fraction of low-yield fields in a different year early on in the growth cycle through a modified training setup and a ranking-based detection of underperforming fields.",
+      "authors": [
+        "Philipp Vaeth",
+        "Bhumika Laxman Sadbhave",
+        "Denise Dejon",
+        "Gunther Schorcht",
+        "Magda Gregorova"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-20T08:11:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.17661v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "time series forecasting for yield prediction using satellite data",
+      "llm_evidence_cn": "利用卫星数据进行时间序列产量预测",
+      "llm_evidence": "利用卫星数据进行时间序列产量预测",
+      "canonical_evidence": "利用卫星数据进行时间序列产量预测",
+      "llm_tldr_en": "This paper applies vision transformers to early sugar beet yield forecasting from Sentinel-2 time series data, showing that small patch sizes and full spectral bands improve performance.",
+      "llm_tldr_cn": "针对早期甜菜产量预测任务，该论文利用Sentinel-2卫星影像时间序列数据，采用视觉Transformer模型进行预测。研究发现，使用非常小的补丁大小和所有可用光谱波段能够提升模型性能，尽管这在领域内并不常见。该工作展示了领域知识与机器学习紧密结合的协同增益，为农业时间序列预测提供了实践指导。",
+      "llm_tldr": "针对早期甜菜产量预测任务，该论文利用Sentinel-2卫星影像时间序列数据，采用视觉Transformer模型进行预测。研究发现，使用非常小的补丁大小和所有可用光谱波段能够提升模型性能，尽管这在领域内并不常见。该工作展示了领域知识与机器学习紧密结合的协同增益，为农业时间序列预测提供了实践指导。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.20592v1",
+      "source": "arxiv",
+      "title": "STeMP: Spatio-Temporal Modelling Protocol",
+      "abstract": "Spatio-temporal machine-learning modelling is an important tool in environmental research. However, machine-learning models are highly sensitive to both the characteristics of the training data, such as its distribution, and methodological choices, including the cross-validation strategy. Each decision has impact and implications on the model itself as well as the estimation of the model quality and applicability for certain purposes. Taking into account the large role of machine-learning based maps of the environment in science and their transfer into practice, transparent reporting of spatio-temporal models, ideally using standardized model protocols, is essential to enable trust, transparency and comparability. However, such protocols are currently lacking for spatio-temporal modelling.   We propose STeMP (Spatio-Temporal Modelling Protocol) to fill this gap by serving two purposes: standardized reporting to understand the model functioning as well as providing guidance during the modelling process by pointing at critical decisions and parameters. The protocol is structured in three sections: Overview, Model and Prediction. The Overview section contains metadata, while the Model and Prediction sections go into detail, describing predictors, evaluation and software, and further relevant elements of the modelling workflow.   The protocol definition is hosted on GitHub and accompanied by an R-package (https://github.com/LOEK-RS/STeMP). The R-package contains a web application that can be used to fill the protocol either manually or in a semi-automated way from provided modelling objects. Warnings are returned from the protocol when common pitfalls are encountered, which may help authors as a guide through the modelling process but also support reviewers in the assessment of modelling studies. Via GitHub, incorporation of contributions and feedback from the community is encouraged.",
+      "authors": [
+        "Jan Linnenbrink",
+        "Jakub Nowosad",
+        "Marvin Ludwig",
+        "Anna Frederike Jablotschkin",
+        "Fabian Schumacher",
+        "Teja Kattenborn",
+        "Hanna Meyer"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-22T15:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.20592v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "protocol for spatio-temporal modelling in environmental research",
+      "llm_evidence_cn": "环境研究中的时空建模协议",
+      "llm_evidence": "环境研究中的时空建模协议",
+      "canonical_evidence": "环境研究中的时空建模协议",
+      "llm_tldr_en": "STeMP proposes a standardized protocol for reporting spatio-temporal machine learning models, improving transparency and comparability in environmental mapping.",
+      "llm_tldr_cn": "STeMP提出了一套时空机器学习建模的标准化报告协议。环境研究中时空模型高度依赖于训练数据分布和方法选择（如交叉验证策略），但缺乏统一的报告标准。该协议涵盖数据描述、建模步骤、验证策略和不确定性量化等要素，旨在提升模型的可信度与可复现性。对于水文水质时空预测领域，该协议有助于规范建模实践，尽管其本身不提出新预测方法。",
+      "llm_tldr": "STeMP提出了一套时空机器学习建模的标准化报告协议。环境研究中时空模型高度依赖于训练数据分布和方法选择（如交叉验证策略），但缺乏统一的报告标准。该协议涵盖数据描述、建模步骤、验证策略和不确定性量化等要素，旨在提升模型的可信度与可复现性。对于水文水质时空预测领域，该协议有助于规范建模实践，尽管其本身不提出新预测方法。",
+      "llm_tags": [
+        "query:ts-wq:composite"
+      ],
+      "matched_query_tag": "query:ts-wq:composite",
+      "matched_query_text": "Papers central to 请帮我查找时间序列预测和水文水质预测的内容, especially work that connects or combines: time series prediction; water quality prediction; hydrological prediction; time series forecasting; time series forecasting methods for water quality; hydrological water quality prediction using deep learning; temporal prediction models for water quality.",
+      "matched_requirement_id": "req-composite-ts-wq",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.18887v1",
+      "source": "arxiv",
+      "title": "NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset withVectorized Lane Priors and the NaviLane Forecasting Framework",
+      "abstract": "Vessel trajectory prediction in complex maritime environments is essential for traffic management, collision warning, route planning, and autonomous navigation. Although AIS-based learning methods have progressed rapidly, existing datasets are often released as raw message streams or irregular time series, with inconsistent sampling rates, noisy observations, heterogeneous coordinate systems, and non-unified scenario protocols. Most public AIS resources also lack structured representations of navigational lanes, waterway geometry, and navigable-region constraints, limiting reproducible, environment-aware forecasting. To address this, we introduce NaviAIS, a standardized scenario-level AIS dataset for vessel trajectory prediction. It organizes multi-vessel historical-future trajectories within unified temporal windows and local coordinate systems, and provides rasterized navigable maps, vectorized lane priors, lane graphs, and structured map representations. Compared with existing datasets, it jointly supports vectorized lanes, multi-scenario coverage, vectorized maps, open accessibility, and processed trajectories. Built on this dataset, we propose NaviLane, a hierarchical macro-action framework for map-aware prediction. NaviLane first performs trajectory-map joint encoding for a unified scene representation, then uses a discrete macro-action codebook to generate multimodal candidates coarse-to-refined. A residual refinement module improves local geometric and dynamical consistency, and a world-model-based consequence-aware evaluator ranks candidates by interaction risk and environmental feasibility. Experiments show NaviLane outperforms representative baselines in both single-modal and multimodal settings, confirming the value of structured navigational priors, hierarchical multimodal generation, and consequence-aware evaluation.",
+      "authors": [
+        "Yuan Gui",
+        "Hongchen Luo",
+        "Liqi Qu",
+        "Longyue Fu",
+        "Jiao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-21T09:15:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.18887v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "vessel trajectory prediction dataset and forecasting framework",
+      "llm_evidence_cn": "船舶轨迹预测数据集与预测框架",
+      "llm_evidence": "船舶轨迹预测数据集与预测框架",
+      "canonical_evidence": "船舶轨迹预测数据集与预测框架",
+      "llm_tldr_en": "NaviAIS provides a standardized vessel trajectory prediction dataset with lane priors and a NaviLane forecasting framework, enabling reproducible environment-aware time series forecasting.",
+      "llm_tldr_cn": "该论文提出NaviAIS数据集和NaviLane预测框架，用于解决船舶轨迹预测中数据不统一、缺乏结构化环境信息的问题。该数据集提供了标准化的场景级AIS数据和高斯矢量化航道先验，NaviLane框架利用这些先验进行环境感知预测。实验显示，引入航道先验可显著提升轨迹预测精度。该工作推动了时间序列预测在智能航运中的应用，其框架可类比用于水文轨迹预测。",
+      "llm_tldr": "该论文提出NaviAIS数据集和NaviLane预测框架，用于解决船舶轨迹预测中数据不统一、缺乏结构化环境信息的问题。该数据集提供了标准化的场景级AIS数据和高斯矢量化航道先验，NaviLane框架利用这些先验进行环境感知预测。实验显示，引入航道先验可显著提升轨迹预测精度。该工作推动了时间序列预测在智能航运中的应用，其框架可类比用于水文轨迹预测。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.20970v1",
+      "source": "arxiv",
+      "title": "From Scalars to Time Series: Rethinking Implicit Neural Representations for Time-Varying Volumetric Data",
+      "abstract": "Implicit neural representations (INRs) for time-varying volumetric data are typically trained using dense sampling over spatiotemporal coordinates, where each observation corresponds to a single point in space and time. This coordinate-wise formulation requires extensive sampling during optimization, leading to high computational cost and inefficient use of temporal structure. In this work, we revisit this design choice and show that dense spatiotemporal sampling is not necessary for learning time-varying fields. Instead, we represent the data as a collection of spatially indexed time series and train INRs using sequence-level supervision over each spatial location, rather than coordinate-wise scalar samples. This reformulation eliminates the need for dense spatiotemporal sampling and instead learns each spatial location from its full temporal evolution in a structured manner. We demonstrate that this representation is compatible with a range of existing INR architectures and consistently improves reconstruction quality, while significantly reducing training cost. Furthermore, we show that this formulation can be combined with mixture-of-experts architectures, and that our MoE instantiation further improves reconstruction quality compared to both the base reformulation and existing MoE-based INR methods, providing a stronger capacity allocation under heterogeneous temporal dynamics.",
+      "authors": [
+        "Weihan Zhang",
+        "Xuan Zhao",
+        "Yenwen Peng",
+        "Yuqi Chen",
+        "Jun Tao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-23T06:46:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.20970v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "rethinking implicit neural representations for time series data",
+      "llm_evidence_cn": "重新思考隐式神经表示在时间序列数据上的应用",
+      "llm_evidence": "重新思考隐式神经表示在时间序列数据上的应用",
+      "canonical_evidence": "重新思考隐式神经表示在时间序列数据上的应用",
+      "llm_tldr_en": "This paper proposes to train implicit neural representations on time-varying volumetric data using sequence-level supervision over spatially indexed time series, avoiding dense sampling.",
+      "llm_tldr_cn": "针对时变体数据隐式神经表示训练中需要密集时空采样导致计算成本高的问题，该论文提出将数据表示为空间索引的时间序列集合，并采用序列级监督而非逐点标量监督。该方法减少了对密集采样的依赖，更有效地利用了时间结构，为时间序列的隐式表示学习提供了新思路。",
+      "llm_tldr": "针对时变体数据隐式神经表示训练中需要密集时空采样导致计算成本高的问题，该论文提出将数据表示为空间索引的时间序列集合，并采用序列级监督而非逐点标量监督。该方法减少了对密集采样的依赖，更有效地利用了时间结构，为时间序列的隐式表示学习提供了新思路。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.19961v1",
+      "source": "arxiv",
+      "title": "focus and focus-cpt: Fast Online Changepoint Detection in R and Python",
+      "abstract": "We present an R and Python package for fast online changepoint detection in univariate and multivariate data streams for a variety of models. The package implements the focus family of algorithms, which compute the Generalised Likelihood Ratio test for a single changepoint exactly and efficiently, with a per-iteration cost of approximately $\\log(n)^d$ for a d-dimensional sequence, without introducing approximations. This is achieved by exploiting a connection between the location of the changepoint candidates and the geometry of the data. The package supports a broad range of models from the natural exponential family, including Gaussian, Poisson, Binomial, Exponential and Gamma distributions, as well as a non-parametric detector based on the empirical cumulative distribution function and a detector for autoregressive data.",
+      "authors": [
+        "Gaetano Romano",
+        "Kes Ward",
+        "Yuntang Fan",
+        "Guillem Rigaill",
+        "Vincent Runge",
+        "Idris A. Eckley",
+        "Paul Fearnhead"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME"
+      ],
+      "published": "2026-07-22T09:40:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.19961v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "fast online changepoint detection package for time series",
+      "llm_evidence_cn": "时间序列快速在线变点检测工具包",
+      "llm_evidence": "时间序列快速在线变点检测工具包",
+      "canonical_evidence": "时间序列快速在线变点检测工具包",
+      "llm_tldr_en": "focus and focus-cpt are R and Python packages for fast online changepoint detection in univariate and multivariate data streams, supporting exponential family models and a non-parametric detector.",
+      "llm_tldr_cn": "本文介绍了R和Python包focus和focus-cpt，用于实现快速在线变点检测。该包利用数据几何与变点候选位置之间的关系，以每迭代约log(n)^d的复杂度精确计算广义似然比检验，无需近似。支持多种指数族分布（如高斯、泊松、二项等）及非参数检测器。该工具可直接应用于时间序列预测前的结构变化监测，提高预测鲁棒性。",
+      "llm_tldr": "本文介绍了R和Python包focus和focus-cpt，用于实现快速在线变点检测。该包利用数据几何与变点候选位置之间的关系，以每迭代约log(n)^d的复杂度精确计算广义似然比检验，无需近似。支持多种指数族分布（如高斯、泊松、二项等）及非参数检测器。该工具可直接应用于时间序列预测前的结构变化监测，提高预测鲁棒性。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.20696v1",
+      "source": "arxiv",
+      "title": "CEDAR: Causal Edge Discovery for Autoregressive Processes",
+      "abstract": "We propose CEDAR (Causal Edge Discovery for Autoregressive Processes), a constraint-based method for lagged causal edge discovery in sparse autoregressive time series. CEDAR screens candidate cross-variable lags using AR(1)-residualized, U-centered distance correlation, then applies two targeted conditional-independence tests per significant cross-variable lag candidate and accepts at most one lag per ordered pair. A stable MCI pruning step removes indirect edges, and optional deterministic C-nodes adjust for specified trend-like nonstationarity. In sparse regimes where few lags survive screening, CEDAR requires $O(d^2)$ CI tests after screening while retaining edge-level interpretability. CEDAR is most effective when data are scarce and variables exhibit lag-1 self-dynamics; methods with richer conditioning sets become preferable as $T$ grows or when higher-order autoregressive or simultaneous multi-lag effects are common.",
+      "authors": [
+        "Mohammad Fesanghary"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "stat.ME"
+      ],
+      "published": "2026-07-22T20:01:44+00:00",
+      "link": "https://arxiv.org/pdf/2607.20696v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Causal edge discovery in autoregressive time series",
+      "llm_evidence_cn": "自回归过程中的因果边发现",
+      "llm_evidence": "自回归过程中的因果边发现",
+      "canonical_evidence": "自回归过程中的因果边发现",
+      "llm_tldr_en": "Proposes CEDAR for lagged causal edge discovery in sparse autoregressive time series, improving interpretability.",
+      "llm_tldr_cn": "针对稀疏自回归时间序列中的因果边发现，提出了CEDAR方法，通过筛选重要滞后变量并进行条件独立性检验，在数据有限时高效推断因果关系。该方法有助于识别时间序列预测中的关键变量，提升模型的可解释性和准确性。",
+      "llm_tldr": "针对稀疏自回归时间序列中的因果边发现，提出了CEDAR方法，通过筛选重要滞后变量并进行条件独立性检验，在数据有限时高效推断因果关系。该方法有助于识别时间序列预测中的关键变量，提升模型的可解释性和准确性。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

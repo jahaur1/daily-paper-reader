@@ -1,0 +1,217 @@
+{
+  "date": "20260725",
+  "date_label": "",
+  "generated_at": "2026-07-25 20:34:49 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.20697v1",
+      "route": "202607/25/2607.20697v1-lightweight-gated-recurrent-unit-variants-for-real-time-channel-prediction",
+      "title": "Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "轻量级GRU用于实时时间序列预测",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.19659v1",
+      "route": "202607/25/2607.19659v1-expert-guided-forecast-editing-for-time-series-foundation-models",
+      "title": "Expert-Guided Forecast Editing for Time-Series Foundation Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向时间序列基础模型的专家引导预测编辑",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20002v1",
+      "route": "202607/25/2607.20002v1-post-training-in-time-series-foundation-models-a-unifying-framework",
+      "title": "Post-Training in Time Series Foundation Models: A Unifying Framework",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "时间序列基础模型后训练框架",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20587v1",
+      "route": "202607/25/2607.20587v1-spectra-state-space-exogenous-context-and-temporal-frequency-resolution-architecture-for-probabilistic-energy-forecasting",
+      "title": "SPECTRA: State-Space Exogenous Context and Temporal-Frequency Resolution Architecture for Probabilistic Energy Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "结合状态空间和频率分解的概率时间序列预测架构",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20716v1",
+      "route": "202607/25/2607.20716v1-spatial-generalization-tests-for-machine-learning-based-weather-models-to-assess-physical-consistency",
+      "title": "Spatial Generalization Tests for Machine Learning-based Weather Models to Assess Physical Consistency",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "机器学习天气预报空间泛化测试",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.16976v1",
+      "route": "202607/25/2607.16976v1-adaptive-ridge-regularized-hotelling-change-point-tests-for-functional-data",
+      "title": "Adaptive Ridge-Regularized Hotelling Change-Point Tests for Functional Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "功能时间序列变点检测方法",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.17661v1",
+      "route": "202607/25/2607.17661v1-early-yield-prediction-for-sugar-beet-fields-using-satellite-data----learnings-from-specialized-vision-transformers",
+      "title": "Early Yield Prediction for Sugar Beet Fields using Satellite Data -- Learnings from Specialized Vision Transformers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用卫星数据进行时间序列产量预测",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.18887v1",
+      "route": "202607/25/2607.18887v1-naviais-a-scenario-level-vessel-trajectory-prediction-dataset-withvectorized-lane-priors-and-the-navilane-forecasting-framework",
+      "title": "NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset withVectorized Lane Priors and the NaviLane Forecasting Framework",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "船舶轨迹预测数据集与预测框架",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.19961v1",
+      "route": "202607/25/2607.19961v1-focus-and-focus-cpt-fast-online-changepoint-detection-in-r-and-python",
+      "title": "focus and focus-cpt: Fast Online Changepoint Detection in R and Python",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "时间序列快速在线变点检测工具包",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20696v1",
+      "route": "202607/25/2607.20696v1-cedar-causal-edge-discovery-for-autoregressive-processes",
+      "title": "CEDAR: Causal Edge Discovery for Autoregressive Processes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "自回归过程中的因果边发现",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.17178v1",
+      "route": "202607/25/2607.17178v1-dadir-density-aware-data-level-imbalanced-regression-framework",
+      "title": "DADIR: Density-Aware Data-level Imbalanced Regression Framework",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "适用于时间序列的不平衡回归框架",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20592v1",
+      "route": "202607/25/2607.20592v1-stemp-spatio-temporal-modelling-protocol",
+      "title": "STeMP: Spatio-Temporal Modelling Protocol",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "环境研究中的时空建模协议",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    },
+    {
+      "paper_id": "2607.20970v1",
+      "route": "202607/25/2607.20970v1-from-scalars-to-time-series-rethinking-implicit-neural-representations-for-time-varying-volumetric-data",
+      "title": "From Scalars to Time Series: Rethinking Implicit Neural Representations for Time-Varying Volumetric Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "重新思考隐式神经表示在时间序列数据上的应用",
+      "first_seen_at": "2026-07-25 20:34:49 UTC",
+      "updated_at": "2026-07-25 20:34:49 UTC"
+    }
+  ]
+}
