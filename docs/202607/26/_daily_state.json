@@ -1,0 +1,169 @@
+{
+  "date": "20260726",
+  "date_label": "",
+  "generated_at": "2026-07-26 20:41:29 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.21232v1",
+      "route": "202607/26/2607.21232v1-driven-criticality-links-universal-computation-and-optimal-representations",
+      "title": "Driven criticality links universal computation and optimal representations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "储层计算用于混沌时间序列预测与邻域可分离性",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.21460v1",
+      "route": "202607/26/2607.21460v1-diffusion-posterior-sampling-enables-zero-shot-kilometre-scale-wind-forecasting-over-complex-terrain",
+      "title": "Diffusion posterior sampling enables zero shot kilometre scale wind forecasting over complex terrain",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用扩散后验采样进行风预测",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.16493v1",
+      "route": "202607/26/2607.16493v1-leakage-robust-evaluation-and-data-scale-sensitivity-of-attention-enhanced-multi-task-learning-for-joint-fault-diagnosis-and-remaining-useful-life-estimation",
+      "title": "Leakage-Robust Evaluation and Data-Scale Sensitivity of Attention-Enhanced Multi-Task Learning for Joint Fault Diagnosis and Remaining Useful Life Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多任务学习用于时间序列预测（剩余寿命估计）",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.20239v1",
+      "route": "202607/26/2607.20239v1-adaptive-bayesian-online-learning-via-expert-aggregation",
+      "title": "Adaptive Bayesian Online Learning via Expert Aggregation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于时间序列流的在线贝叶斯学习",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.20592v1",
+      "route": "202607/26/2607.20592v1-stemp-spatio-temporal-modelling-protocol",
+      "title": "STeMP: Spatio-Temporal Modelling Protocol",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于环境建模的时空机器学习协议",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.20778v1",
+      "route": "202607/26/2607.20778v1-toward-mechanistic-interpretability-of-an-ai-foundation-model-fine-tuned-for-atmospheric-chemistry",
+      "title": "Toward Mechanistic Interpretability of an AI Foundation Model Fine-Tuned for Atmospheric Chemistry",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用AI基础模型进行大气质量预测，与水质预测类似",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.17095v1",
+      "route": "202607/26/2607.17095v1-fourier-geometric-wind-power-forecasting-with-numerical-weather-prediction",
+      "title": "Fourier Geometric Wind Power Forecasting with Numerical Weather Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合数值天气预报的时间序列风电预测",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.17614v1",
+      "route": "202607/26/2607.17614v1-online-learning-of-neural-state-space-models",
+      "title": "Online learning of neural state-space models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时间序列神经状态空间模型的在线学习",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.20027v1",
+      "route": "202607/26/2607.20027v1-zero-shot-heart-rate-variability-forecasting-from-consumer-wearables-using-time-series-foundation-models",
+      "title": "Zero-Shot Heart Rate Variability Forecasting from Consumer Wearables Using Time Series Foundation Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时间序列基础模型用于预测",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    },
+    {
+      "paper_id": "2607.21382v1",
+      "route": "202607/26/2607.21382v1-flexible-generation-of-daily-earth-system-model-projections-across-radiative-forcing-scenarios",
+      "title": "Flexible generation of daily Earth system model projections across radiative forcing scenarios",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "日尺度地球系统模式投影用于气候和水文",
+      "first_seen_at": "2026-07-26 20:41:29 UTC",
+      "updated_at": "2026-07-26 20:41:29 UTC"
+    }
+  ]
+}

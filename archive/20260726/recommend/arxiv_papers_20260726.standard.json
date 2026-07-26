@@ -1,0 +1,416 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-26T20:33:48.491953+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 8,
+    "quick_skim_target": 11,
+    "quick_selected": 8
+  },
+  "deep_dive": [
+    {
+      "id": "2607.21232v1",
+      "source": "arxiv",
+      "title": "Driven criticality links universal computation and optimal representations",
+      "abstract": "Near-critical dynamics are often linked to enhanced computation, but the underlying mechanism remains unclear. We address this question in reservoir computing, where a fixed recurrent network maps input sequences into high-dimensional states and only a simple readout is trained. We extend fixed-reservoir universality results to discrete-time input-driven reservoirs and connect their key geometric condition, neighborhood separation, to dynamics. To this end, we introduce a finite-resolution neighborhood separability index and an input-conditioned maximal Lyapunov exponent. We find that neighborhood separability, chaotic time-series prediction, and smooth high-dimensional representation geometry are optimized in the same narrow window of marginal driven stability. In this regime, the covariance spectrum approaches the power-law scaling expected for near-optimal smooth representations. Our results link edge-of-instability computation, universality, readout performance, and optimal representation geometry within a common dynamical framework.",
+      "authors": [
+        "Adrián Roig",
+        "Miguel A. Muñoz",
+        "Guillermo B. Morales"
+      ],
+      "primary_category": "cond-mat.dis-nn",
+      "categories": [
+        "cond-mat.dis-nn",
+        "nlin.CD"
+      ],
+      "published": "2026-07-23T11:46:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.21232v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reservoir computing for chaotic time-series prediction and neighborhood separability",
+      "llm_evidence_cn": "储层计算用于混沌时间序列预测与邻域可分离性",
+      "llm_evidence": "储层计算用于混沌时间序列预测与邻域可分离性",
+      "canonical_evidence": "储层计算用于混沌时间序列预测与邻域可分离性",
+      "llm_tldr_en": "Shows that neighborhood separability, chaotic time-series prediction, and smooth representation geometry are optimized at the same critical regime in reservoir computing.",
+      "llm_tldr_cn": "该论文在储层计算中研究驱动临界性与优化计算的关系，将固定储层的普适性结果扩展到离散时间输入驱动储层，并引入有限分辨率邻域可分离性指数和输入条件最大李雅普诺夫指数。发现邻域可分离性、混沌时间序列预测和平滑高维表示几何在同样的边缘驱动窗口内达到最优。这为时间序列预测中储层计算的临界调优提供了理论依据。",
+      "llm_tldr": "该论文在储层计算中研究驱动临界性与优化计算的关系，将固定储层的普适性结果扩展到离散时间输入驱动储层，并引入有限分辨率邻域可分离性指数和输入条件最大李雅普诺夫指数。发现邻域可分离性、混沌时间序列预测和平滑高维表示几何在同样的边缘驱动窗口内达到最优。这为时间序列预测中储层计算的临界调优提供了理论依据。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21460v1",
+      "source": "arxiv",
+      "title": "Diffusion posterior sampling enables zero shot kilometre scale wind forecasting over complex terrain",
+      "abstract": "Reliable prediction of near surface wind over complex terrain is limited by the mismatch between the spatial resolution of operational forecasts and terrain controlled local wind variability. Here, we develop KiloGen, a diffusion posterior sampling framework for kilometre scale wind forecast enhancement. KiloGen learns a high resolution vector wind prior from Weather Research and Forecasting (WRF) model simulations and constrains posterior sampling with 25 km forecasts from the European Centre for Medium Range Weather Forecasts (ECMWF) at inference time. This formulation avoids paired ECMWF and WRF training samples and an explicitly learned mapping from coarse to fine resolution. Applied over Shanxi, China, a region with complex mountainous terrain, KiloGen reconstructs terrain organized wind structures and restores high wavenumber variability while retaining the large scale evolution of the operational forecast. Station verification shows that KiloGen achieves the lowest overall wind speed root mean square error (RMSE) among the evaluated products, with larger benefits at elevated and topographically complex sites. The improvement is strongest under strong wind conditions, reducing RMSE by approximately 10% for observed winds above 20 m s^-1. Across 13 distinct strong wind events, KiloGen improves upon the 0.25 degree ECMWF forecast in all cases and outperforms the 0.1 degree ECMWF forecast in most cases. These results show that diffusion posterior sampling provides an effective approach for terrain aware kilometre scale wind forecast enhancement.",
+      "authors": [
+        "Yujiang Cai",
+        "Ya Wang",
+        "Shuanglei Feng",
+        "Bo Wang",
+        "Yiming Liu",
+        "Hui Yuan",
+        "Xinyi Sun",
+        "Haijie Li",
+        "Shenming Fu"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "published": "2026-07-23T16:04:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.21460v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "wind forecasting using diffusion posterior sampling",
+      "llm_evidence_cn": "利用扩散后验采样进行风预测",
+      "llm_evidence": "利用扩散后验采样进行风预测",
+      "canonical_evidence": "利用扩散后验采样进行风预测",
+      "llm_tldr_en": "Introduces KiloGen, a diffusion posterior sampling framework for zero-shot kilometer-scale wind forecasting over complex terrain, improving spatial resolution.",
+      "llm_tldr_cn": "复杂地形下近地面风预测受限于分辨率不匹配。本文提出KiloGen框架，利用扩散后验采样学习高分辨率风场先验，结合低分辨率预报进行零样本增强。在中国山西地区的实验表明，该方法能有效提升风场空间分辨率，为高分辨率气象预测提供新途径。",
+      "llm_tldr": "复杂地形下近地面风预测受限于分辨率不匹配。本文提出KiloGen框架，利用扩散后验采样学习高分辨率风场先验，结合低分辨率预报进行零样本增强。在中国山西地区的实验表明，该方法能有效提升风场空间分辨率，为高分辨率气象预测提供新途径。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.16493v1",
+      "source": "arxiv",
+      "title": "Leakage-Robust Evaluation and Data-Scale Sensitivity of Attention-Enhanced Multi-Task Learning for Joint Fault Diagnosis and Remaining Useful Life Estimation",
+      "abstract": "Multi-task deep learning models that jointly perform fault classification and remaining useful life (RUL) regression are increasingly used in predictive maintenance, yet reported performance can be strongly affected by how sliding-window sequences are split into training and test sets. We investigate this issue using AMTLNet, an attention-enhanced multi-task architecture, on three public benchmarks: NASA C-MAPSS, NASA IMS, and the UCI Hydraulic System dataset. We show that naive splitting can inflate classification accuracy from a genuine 20-60 percent to 99.9 percent, or reduce it to 0 percent through degenerate class representation. To address this, we introduce a chunk-based, leakage-audited splitting protocol and evaluate all models using five seeds, one-way ANOVA, and Tukey HSD tests. On C-MAPSS, with 19,976 leakage-free training windows, AMTLNet matches a single-task CNN-LSTM baseline in classification, achieving 84.12 +/- 0.96 percent accuracy with Tukey p = 1.0, and reaches an R2 of 0.86 +/- 0.01 while significantly outperforming a naive multi-task baseline. On the smaller Bearing and Hydraulic datasets, multi-task training is unstable, but the failure mode differs: classification degrades for Bearing, whereas regression degrades for Hydraulic. We relate this asymmetry to label provenance and propose a practical framework for deciding when joint training is appropriate under data scarcity. Ablation results show that the multi-head attention branch is the main contributor to regression stability. Removing it reduces R2 from 0.861 to 0.766 and more than doubles classification variance, whereas the convolutional branch contributes little to regression despite using about one-third of the parameters. This study contributes a reusable leakage-audit protocol, seed-transparent evaluation, and evidence that task-specific stability depends more on label provenance than on task type.",
+      "authors": [
+        "Md Mahamudur Rahaman Shamim",
+        "Md. Nuruzzaman",
+        "Zannatul Ferdus",
+        "Md Rajib Ahmed",
+        "Abieer Nwshad Anward",
+        "Mohammad Tooneer",
+        "Johir Uddin Khan",
+        "Khalid Hossen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-17T20:33:36+00:00",
+      "link": "https://arxiv.org/pdf/2607.16493v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-task learning for time series forecasting (RUL estimation)",
+      "llm_evidence_cn": "多任务学习用于时间序列预测（剩余寿命估计）",
+      "llm_evidence": "多任务学习用于时间序列预测（剩余寿命估计）",
+      "canonical_evidence": "多任务学习用于时间序列预测（剩余寿命估计）",
+      "llm_tldr_en": "Investigates data leakage in multi-task fault diagnosis and RUL forecasting, introduces robust evaluation protocols.",
+      "llm_tldr_cn": "多任务深度学习在预测维护中广泛应用，但数据划分泄漏可导致性能假象。本文以AMTLNet为例，揭示滑动窗口划分泄漏问题，并提出防泄漏评估协议。在C-MAPSS等基准上验证了泄漏的严重性，为时间序列预测任务的数据划分提供指导。",
+      "llm_tldr": "多任务深度学习在预测维护中广泛应用，但数据划分泄漏可导致性能假象。本文以AMTLNet为例，揭示滑动窗口划分泄漏问题，并提出防泄漏评估协议。在C-MAPSS等基准上验证了泄漏的严重性，为时间序列预测任务的数据划分提供指导。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17095v1",
+      "source": "arxiv",
+      "title": "Fourier Geometric Wind Power Forecasting with Numerical Weather Prediction",
+      "abstract": "Accurate short-term wind power forecasting is essential for grid stability and operational planning, yet remains challenging due to the complex interactions between atmospheric conditions and turbine dynamics. However, existing methods fail to effectively incorporate weather forecasting with wind turbine data (i.e., SCADA), leading to suboptimal solutions. To address this, we introduce a multimodal framework that integrates historical point-based SCADA data with grid-based Numerical Weather Prediction (NWP) forecasts, which is challenging due to heterogeneous input and the complex physical wind-turbine interactions. Our approach first explicitly decomposes inputs into scalar and vector features to better capture both site-specific and geometric dependencies and then incorporates a geometric encoder to extract rotation-invariant features from wind vectors. We further leverages a Fourier Neural Operator (FNO) architecture, which performs global convolutions in the frequency domain to efficiently model long-range spatiotemporal relationships. Extensive experiments on three real-world wind farms, with weather forecasting data, demonstrate that our model consistently outperforms state-of-the-art baselines, highlighting the effectiveness of its physically-informed design. The core implementation of our method is publicly available at: https://github.com/shawn-sypiao/GWPF.",
+      "authors": [
+        "Shiyuan Piao",
+        "Fan Zehui",
+        "Yang Liu",
+        "Hong Cheng",
+        "Juepeng Zheng",
+        "Jie Zhou",
+        "Fugee Tsung"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-19T06:28:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.17095v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "wind power forecasting using NWP and time series",
+      "llm_evidence_cn": "结合数值天气预报的时间序列风电预测",
+      "llm_evidence": "结合数值天气预报的时间序列风电预测",
+      "canonical_evidence": "结合数值天气预报的时间序列风电预测",
+      "llm_tldr_en": "Integrates historical SCADA data with Numerical Weather Prediction in a multimodal framework for short-term wind power forecasting, using Fourier features to handle heterogeneous inputs.",
+      "llm_tldr_cn": "本文提出多模态框架融合历史点状SCADA数据和网格化数值天气预报进行短期风电预测。通过将输入分解为标量和向量特征并采用傅里叶表示，有效处理了异构数据。该工作属于能源预测，但其方法结合了时间序列和气象预报，对水文预测中融合NCEP数据有参考价值。",
+      "llm_tldr": "本文提出多模态框架融合历史点状SCADA数据和网格化数值天气预报进行短期风电预测。通过将输入分解为标量和向量特征并采用傅里叶表示，有效处理了异构数据。该工作属于能源预测，但其方法结合了时间序列和气象预报，对水文预测中融合NCEP数据有参考价值。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.20239v1",
+      "source": "arxiv",
+      "title": "Adaptive Bayesian Online Learning via Expert Aggregation",
+      "abstract": "Bayesian online learning promises uncertainty-aware prediction on data streams, but its performance hinges on inferential choices, including learning rates, prior distributions and variational families, which are usually fixed before seeing the stream. We address this by treating Bayesian update rules as experts and aggregating the Bayesian experts according to sequential predictive losses. We prove that the resulting aggregate competes with the best expert in hindsight at an aggregation cost determined by how each expert's per-round performance is evaluated. We instantiate the framework in online conformal inference and Gaussian process regression. The conformal inference application yields a smoothed Bayesian counterpart of adaptive conformal inference with long-run randomized coverage, while the Gaussian process application gives an oracle inequality in cumulative predictive Kullback-Leibler risk and adaptation to unknown Hölder smoothness up to logarithmic factors. Experiments show that the aggregate tracks strong experts without oracle expert selection.",
+      "authors": [
+        "Jungbin Jun",
+        "Ilsang Ohn"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "published": "2026-07-22T14:59:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.20239v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "online Bayesian learning for time series streams",
+      "llm_evidence_cn": "用于时间序列流的在线贝叶斯学习",
+      "llm_evidence": "用于时间序列流的在线贝叶斯学习",
+      "canonical_evidence": "用于时间序列流的在线贝叶斯学习",
+      "llm_tldr_en": "Proposes adaptive Bayesian online learning via expert aggregation, with applications to conformal inference and Gaussian processes, achieving competitive performance.",
+      "llm_tldr_cn": "为了解决贝叶斯在线学习对学习率、先验等超参数敏感的问题，本文提出将贝叶斯更新规则视为专家，根据序列预测损失进行聚合。证明了聚合算法与最佳专家竞争，并在在线共形推断和高斯过程回归中验证。该方法适用于时间序列流（如水文水质监测）的不确定性量化，具有方法论价值。",
+      "llm_tldr": "为了解决贝叶斯在线学习对学习率、先验等超参数敏感的问题，本文提出将贝叶斯更新规则视为专家，根据序列预测损失进行聚合。证明了聚合算法与最佳专家竞争，并在在线共形推断和高斯过程回归中验证。该方法适用于时间序列流（如水文水质监测）的不确定性量化，具有方法论价值。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.17614v1",
+      "source": "arxiv",
+      "title": "Online learning of neural state-space models",
+      "abstract": "Recent advances in deep-learning-based nonlinear system identification have led to encoder-based estimation of neural state-space (ANN-SS) models that achieve state-of-the-art performance in offline settings by estimating initial model states from past input-output data. These methods are typically used in multiple-shooting-based offline identification, and online learning of these models remains largely unexplored. This paper presents a batch-wise learning pipeline and a direct recursive identification algorithm for subspace encoder-based ANN-SS models. We provide convergence analysis of the recursive formulation and validate its performance through extensive simulation studies. The results demonstrate that the proposed approach enables computationally efficient online adaptation with high model accuracy.",
+      "authors": [
+        "Bendegúz Györök",
+        "Tamás Péni",
+        "Maarten Schoukens",
+        "Roland Tóth"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY",
+        "cs.LG"
+      ],
+      "published": "2026-07-20T07:04:15+00:00",
+      "link": "https://arxiv.org/pdf/2607.17614v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "online learning of neural state-space models for time series",
+      "llm_evidence_cn": "时间序列神经状态空间模型的在线学习",
+      "llm_evidence": "时间序列神经状态空间模型的在线学习",
+      "canonical_evidence": "时间序列神经状态空间模型的在线学习",
+      "llm_tldr_en": "Presents a batch-wise online learning pipeline and recursive identification algorithm for neural state-space models, enabling computationally efficient adaptation for time series modeling.",
+      "llm_tldr_cn": "传统神经状态空间模型多用于离线系统辨识，在线学习尚未充分探索。本文提出批量在线学习框架与递归辨识算法，能实时更新模型以适应时间序列的非平稳特性。该技术可直接用于水质时间序列预测中的在线模型适应。",
+      "llm_tldr": "传统神经状态空间模型多用于离线系统辨识，在线学习尚未充分探索。本文提出批量在线学习框架与递归辨识算法，能实时更新模型以适应时间序列的非平稳特性。该技术可直接用于水质时间序列预测中的在线模型适应。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.20592v1",
+      "source": "arxiv",
+      "title": "STeMP: Spatio-Temporal Modelling Protocol",
+      "abstract": "Spatio-temporal machine-learning modelling is an important tool in environmental research. However, machine-learning models are highly sensitive to both the characteristics of the training data, such as its distribution, and methodological choices, including the cross-validation strategy. Each decision has impact and implications on the model itself as well as the estimation of the model quality and applicability for certain purposes. Taking into account the large role of machine-learning based maps of the environment in science and their transfer into practice, transparent reporting of spatio-temporal models, ideally using standardized model protocols, is essential to enable trust, transparency and comparability. However, such protocols are currently lacking for spatio-temporal modelling.   We propose STeMP (Spatio-Temporal Modelling Protocol) to fill this gap by serving two purposes: standardized reporting to understand the model functioning as well as providing guidance during the modelling process by pointing at critical decisions and parameters. The protocol is structured in three sections: Overview, Model and Prediction. The Overview section contains metadata, while the Model and Prediction sections go into detail, describing predictors, evaluation and software, and further relevant elements of the modelling workflow.   The protocol definition is hosted on GitHub and accompanied by an R-package (https://github.com/LOEK-RS/STeMP). The R-package contains a web application that can be used to fill the protocol either manually or in a semi-automated way from provided modelling objects. Warnings are returned from the protocol when common pitfalls are encountered, which may help authors as a guide through the modelling process but also support reviewers in the assessment of modelling studies. Via GitHub, incorporation of contributions and feedback from the community is encouraged.",
+      "authors": [
+        "Jan Linnenbrink",
+        "Jakub Nowosad",
+        "Marvin Ludwig",
+        "Anna Frederike Jablotschkin",
+        "Fabian Schumacher",
+        "Teja Kattenborn",
+        "Hanna Meyer"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-22T15:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.20592v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "spatio-temporal ML protocol for environmental modeling",
+      "llm_evidence_cn": "用于环境建模的时空机器学习协议",
+      "llm_evidence": "用于环境建模的时空机器学习协议",
+      "canonical_evidence": "用于环境建模的时空机器学习协议",
+      "llm_tldr_en": "STeMP proposes a standardized protocol for reporting spatio-temporal machine learning models in environmental research, addressing data and methodological sensitivity.",
+      "llm_tldr_cn": "针对环境研究中时空机器学习模型报告缺乏标准化的问题，本文提出了STeMP协议，用于规范训练数据特征和交叉验证策略等关键决策的报告。通过透明化建模流程，该协议提升了模型的可信度、可比性和可迁移性，为水文水质等环境领域的时间序列预测提供了重要的方法论支撑。",
+      "llm_tldr": "针对环境研究中时空机器学习模型报告缺乏标准化的问题，本文提出了STeMP协议，用于规范训练数据特征和交叉验证策略等关键决策的报告。通过透明化建模流程，该协议提升了模型的可信度、可比性和可迁移性，为水文水质等环境领域的时间序列预测提供了重要的方法论支撑。",
+      "llm_tags": [
+        "query:ts-wq:composite"
+      ],
+      "matched_query_tag": "query:ts-wq:composite",
+      "matched_query_text": "Papers central to 请帮我查找时间序列预测和水文水质预测的内容, especially work that connects or combines: time series prediction; water quality prediction; hydrological prediction; time series forecasting; time series forecasting methods for water quality; hydrological water quality prediction using deep learning; temporal prediction models for water quality.",
+      "matched_requirement_id": "req-composite-ts-wq",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.20027v1",
+      "source": "arxiv",
+      "title": "Zero-Shot Heart Rate Variability Forecasting from Consumer Wearables Using Time Series Foundation Models",
+      "abstract": "Short-term Heart Rate Variability (HRV) forecasting could provide clinicians with actionable lead time for detecting autonomic dysfunction and adverse cardiac events. Consumer wearable devices generate fragmented, artifact-rich HRV signals that challenge conventional forecasting approaches. In this study, we evaluated the forecasting ability of three Time Series Foundation Models (TSFMs), TimesFM, Chronos, and MOIRAI, against traditional baselines (Mean, Exponential Smoothing, and Exponentially Weighted Moving Average) on real-world wearable data collected from 49 healthy individuals. To address data fragmentation, we introduce a variability-preserving imputation method that augments linear interpolation with locally adaptive stochastic noise, retaining physiological dynamics essential for accurate forecasting. The results show that TSFMs outperformed all baselines without fine-tuning, achieving average Mean Absolute Scaled Error (MASE) between 0.81 and 0.87 across TSFMs and both context lengths (32 and 64 time steps), with Chronos and TimesFM as the top models, though MOIRAI showed limited gains over baselines. With up to a 2-hour forecast horizon, the results establish a baseline for TSFMs' performance on a real-world dataset, highlighting domain-specific fine-tuning as a promising direction for clinical deployment.",
+      "authors": [
+        "Luukas Peräkylä",
+        "Fahad Sohrab",
+        "Ville Hautamäki",
+        "Merja Heinäniemi",
+        "Sui Huang",
+        "Pekka Abrahamsson"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-22T11:12:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.20027v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "time series foundation models for forecasting",
+      "llm_evidence_cn": "时间序列基础模型用于预测",
+      "llm_evidence": "时间序列基础模型用于预测",
+      "canonical_evidence": "时间序列基础模型用于预测",
+      "llm_tldr_en": "Evaluates three time series foundation models (TimesFM, Chronos, MOIRAI) for zero-shot HRV forecasting from wearables, introducing a variability-preserving imputation method.",
+      "llm_tldr_cn": "本文在可穿戴设备HRV数据上评估了三种时间序列基础模型（TimesFM、Chronos、MOIRAI）的零样本预测能力。针对数据碎片化问题，提出了保留变异性的插值方法。结果显示基础模型优于传统基线。这些模型可迁移至其他时间序列预测任务，如水文水质预测，但领域差异较大。",
+      "llm_tldr": "本文在可穿戴设备HRV数据上评估了三种时间序列基础模型（TimesFM、Chronos、MOIRAI）的零样本预测能力。针对数据碎片化问题，提出了保留变异性的插值方法。结果显示基础模型优于传统基线。这些模型可迁移至其他时间序列预测任务，如水文水质预测，但领域差异较大。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.20778v1",
+      "source": "arxiv",
+      "title": "Toward Mechanistic Interpretability of an AI Foundation Model Fine-Tuned for Atmospheric Chemistry",
+      "abstract": "Weather forecasting foundation models (FMs) are increasingly fine-tuned to predict air quality, offering fast global pollution forecasts at lower computational cost than conventional chemical transport models. These FMs are typically trained on reanalysis data and generate forecasts through autoregressive rollout. They do not explicitly represent governing physical or chemical processes. Therefore, high forecast skill does not reveal whether a model has learned physical mechanisms or exploits statistical regularities in its training data. Here, we present the first study of what a FM fine-tuned for atmospheric chemistry has learned by examining Microsoft's Aurora model. We impose controlled chemical perturbations on its forecasts and test them against known photochemical relationships. We then examine the internal representations that generate these forecasts. We find that Aurora captures a first-order ozone response to reactive nitrogen but does not enforce the chemical constraints that a process-based model encodes. It generates chemically inconsistent combinations of related species and relaxes localized emission features such as wildfire plumes toward background. Internally, its representations remain largely organized around the meteorology inherited during pretraining, with little structure specific to chemistry. Using sparse autoencoders, we identify internal components that causally control the chemical forecast but do not map cleanly onto individual atmospheric processes. This work provides a framework for testing whether AI forecasting systems learn atmospheric chemistry from reanalysis data. As these models are increasingly positioned to inform environmental policy decisions, we argue that composition forecasts should also be judged by their internal mechanisms rather than by benchmark skill alone.",
+      "authors": [
+        "Jason Y. Hu",
+        "Ivan Higuera-Mendieta",
+        "Patrick Obin Sturm",
+        "Makoto M. Kelp"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "physics.ao-ph"
+      ],
+      "published": "2026-07-22T23:00:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.20778v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "uses AI foundation models for air quality prediction, similar to water quality prediction",
+      "llm_evidence_cn": "利用AI基础模型进行大气质量预测，与水质预测类似",
+      "llm_evidence": "利用AI基础模型进行大气质量预测，与水质预测类似",
+      "canonical_evidence": "利用AI基础模型进行大气质量预测，与水质预测类似",
+      "llm_tldr_en": "Examines mechanistic interpretability of a weather foundation model fine-tuned for atmospheric chemistry, finding it may not learn true physical mechanisms.",
+      "llm_tldr_cn": "天气预报基础模型被微调用于空气质量预测，但其是否学到了物理机制未知。本研究对微软Aurora模型施加化学扰动，发现模型高度依赖统计规律而非物理机制。这提示在水质预测中使用基础模型时需谨慎，但方法本身为模型解释提供了借鉴。",
+      "llm_tldr": "天气预报基础模型被微调用于空气质量预测，但其是否学到了物理机制未知。本研究对微软Aurora模型施加化学扰动，发现模型高度依赖统计规律而非物理机制。这提示在水质预测中使用基础模型时需谨慎，但方法本身为模型解释提供了借鉴。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "water quality prediction",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.21382v1",
+      "source": "arxiv",
+      "title": "Flexible generation of daily Earth system model projections across radiative forcing scenarios",
+      "abstract": "Earth system model (ESM) projections of the climate system's response to anthropogenic forcing are central to assess the impacts of climate change and inform adaptation and mitigation policies. However, given their high computational cost, projections are only made for a limited set of standardized forcing scenarios with limited temporal extent, such as the Shared Socioeconomic Pathways (SSPs), the spatiotemporal resolution remains too low for direct impact assessments, and uncertainties cannot be comprehensively quantified. Recent data-driven models offer efficient and accurate high-resolution simulations for weather prediction, but cannot extrapolate to future greenhouse gas concentrations because they cannot capture the responses to unprecedented forcing, limiting their value for climate change projections. Here, we combine response theory with a tailored generative machine learning framework to address this challenge. Our approach extracts the physical forced response to radiative forcing from monthly low-resolution ESM fields, and uses this response to guide a generative model to infer consistent daily global high-resolution temperature and precipitation projections. Our probabilistic approach generalizes across ESMs and provides long-term, bias-corrected responses to radiative forcing at high spatiotemporal resolution. It efficiently generates large ensembles needed for uncertainty quantification, effectively fills the gaps between existing SSPs, and readily extends climate projections to 2300 and beyond. Our framework hence complements ESM projections by providing efficient, stable, and high spatiotemporal resolution long-term climate projection ensembles across emission scenarios, enabling detailed impact assessment and exploration of long-term climate commitment.",
+      "authors": [
+        "Yu Huang",
+        "Sebastian Bathiany",
+        "Shangshang Yang",
+        "Philipp Hess",
+        "Michael Aich",
+        "Niklas Boers"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "published": "2026-07-23T14:45:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.21382v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "daily Earth system model projections for climate and hydrology",
+      "llm_evidence_cn": "日尺度地球系统模式投影用于气候和水文",
+      "llm_evidence": "日尺度地球系统模式投影用于气候和水文",
+      "canonical_evidence": "日尺度地球系统模式投影用于气候和水文",
+      "llm_tldr_en": "Proposes a data-driven model to generate daily ESM projections across multiple radiative forcing scenarios, enhancing resolution and scenario coverage.",
+      "llm_tldr_cn": "地球系统模式投影因计算成本高而时空分辨率有限，难以直接用于影响评估。本文提出数据驱动方法，生成多辐射强迫情景下的日尺度投影，显著提升分辨率和情景覆盖。该方法能有效补充传统模式输出，为水文和气候影响评估提供高分辨率数据。",
+      "llm_tldr": "地球系统模式投影因计算成本高而时空分辨率有限，难以直接用于影响评估。本文提出数据驱动方法，生成多辐射强迫情景下的日尺度投影，显著提升分辨率和情景覆盖。该方法能有效补充传统模式输出，为水文和气候影响评估提供高分辨率数据。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "hydrological prediction",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

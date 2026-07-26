@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-07-25</span>
+      <span class="dpr-home-dashboard-kicker">2026-07-26</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 13 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>8</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-07-25 20:34:49 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-07-26 20:41:29 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共处理13篇论文（精读5篇，速读8篇），重点关注实时预测与时间序列模型。最推荐两篇高分精读：轻量级GRU变体用于实时信道预测，以及专家引导的时序基础模型编辑。建议优先掌握轻量级GRU在实时场景的应用，再结合专家编辑方法提升模型可解释性。</p>
+<p>今日精选10篇论文，精读2篇高分工作，重点聚焦临界计算理论与零样本复杂地形风预报。最值得关注的是《Driven criticality》揭示通用计算与最优表示的底层联系，以及《Diffusion posterior sampling》实现无训练数据依赖的公里级风速预测。建议优先精读这两篇，理解其方法对各自领域的突破性贡献。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction">Lightweight Gated Recurrent Unit Variants for Real-Time Channel Prediction</span></li><li><span class="dpr-home-dashboard-paper-title" title="Expert-Guided Forecast Editing for Time-Series Foundation Models">Expert-Guided Forecast Editing for Time-Series Foundation Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Post-Training in Time Series Foundation Models: A Unifying Framework">Post-Training in Time Series Foundation Models: A Unifying Framework</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Driven criticality links universal computation and optimal representations">Driven criticality links universal computation and optimal representations</span></li><li><span class="dpr-home-dashboard-paper-title" title="Diffusion posterior sampling enables zero shot kilometre scale wind forecasting over complex terrain">Diffusion posterior sampling enables zero shot kilometre scale wind forecasting over complex terrain</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,7 +87,7 @@
     <strong class="dpr-home-dashboard-count">8 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Ridge-Regularized Hotelling Change-Point Tests for Functional Data">Adaptive Ridge-Regularized Hotelling Change-Point Tests for Functional Data</span></li><li><span class="dpr-home-dashboard-paper-title" title="Early Yield Prediction for Sugar Beet Fields using Satellite Data -- Learnings from Specialized Vision Transformers">Early Yield Prediction for Sugar Beet Fields using Satellite Data -- Learnings from Specialized Vision Transformers</span></li><li><span class="dpr-home-dashboard-paper-title" title="NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset withVectorized Lane Priors and the NaviLane Forecasting Framework">NaviAIS: A Scenario-Level Vessel Trajectory Prediction Dataset withVectorized Lane Priors and the NaviLane Forecasting Framework</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Leakage-Robust Evaluation and Data-Scale Sensitivity of Attention-Enhanced Multi-Task Learning for Joint Fault Diagnosis and Remaining Useful Life Estimation">Leakage-Robust Evaluation and Data-Scale Sensitivity of Attention-Enhanced Multi-Task Learning for Joint Fault Diagnosis and Remaining Useful Life Estimation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Bayesian Online Learning via Expert Aggregation">Adaptive Bayesian Online Learning via Expert Aggregation</span></li><li><span class="dpr-home-dashboard-paper-title" title="STeMP: Spatio-Temporal Modelling Protocol">STeMP: Spatio-Temporal Modelling Protocol</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>8</strong></span></div>
 </section>
