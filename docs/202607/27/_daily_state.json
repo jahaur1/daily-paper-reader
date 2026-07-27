@@ -1,0 +1,233 @@
+{
+  "date": "20260727",
+  "date_label": "",
+  "generated_at": "2026-07-27 21:15:36 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.21681v1",
+      "route": "202607/27/2607.21681v1-carnet-cycle-conditioned-core-aggregation-and-redistribution-for-multivariate-time-series-forecasting",
+      "title": "CARNet Cycle-Conditioned Core Aggregation and Redistribution for Multivariate Time Series Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "新的多元时间序列预测方法CARNet",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.22299v1",
+      "route": "202607/27/2607.22299v1-hopformer-homogeneity-pursuit-transformer-for-time-series-forecasting",
+      "title": "Hopformer: Homogeneity-Pursuit Transformer for Time Series Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多时间序列预测的Hopformer，具有理论保证",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.22421v1",
+      "route": "202607/27/2607.22421v1-stateformer-a-multivariate-transformer-for-learning-history-dependent-battery-state-dynamics-and-long-horizon-health-forecasting",
+      "title": "StateFormer: A Multivariate Transformer for Learning History-Dependent Battery State Dynamics and Long-Horizon Health Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多变量Transformer用于电池状态长期预测",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.19689v1",
+      "route": "202607/27/2607.19689v1-optimal-recalibration-of-an-online-predictor",
+      "title": "Optimal Recalibration of an Online Predictor",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在线预测器最优再校准方法，提升时间序列预测性能",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.21922v1",
+      "route": "202607/27/2607.21922v1-misshyper-restoring-clinical-synchronicity-in-missingness-guided-hypergraph-forecasting",
+      "title": "MissHyper: Restoring Clinical Synchronicity in Missingness-Guided Hypergraph Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "缺失引导超图预测用于不规则多元时间序列",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.19054v1",
+      "route": "202607/27/2607.19054v1-probabilistic-physics-aware-machine-learning-predictions-of-electric-truck-energy-consumption-with-field-data",
+      "title": "Probabilistic Physics-Aware Machine Learning Predictions of Electric Truck Energy Consumption with Field Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "使用物理感知机器学习进行时间序列预测",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.21916v1",
+      "route": "202607/27/2607.21916v1-estimating-dynamic-models-by-matching-random-features",
+      "title": "Estimating dynamic models by matching random features",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "使用随机特征匹配估计动态模型参数",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.22268v1",
+      "route": "202607/27/2607.22268v1-general-value-functions-for-remaining-useful-life-and-failure-mode-prediction",
+      "title": "General Value Functions for Remaining Useful Life and Failure-Mode Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于通用值函数的剩余寿命时序预测",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.22491v1",
+      "route": "202607/27/2607.22491v1-susceptible-reservoir-architectures-for-regime-conditional-volatility-forecasting",
+      "title": "Susceptible Reservoir Architectures for Regime-Conditional Volatility Forecasting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "使用储层架构进行时间序列预测",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.19522v1",
+      "route": "202607/27/2607.19522v1-geospatial-diffusion-based-evolution-synthesis-geodes-for-storm-centered-weather-augmentation",
+      "title": "Geospatial Diffusion-based Evolution Synthesis (GeoDES) for Storm-Centered Weather Augmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用于训练预测模型的天气数据增强",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.20309v1",
+      "route": "202607/27/2607.20309v1-adaptive-deep-nonparametric-regression-from-dependent-data-under-covariate-shift",
+      "title": "Adaptive deep nonparametric regression from dependent data under covariate shift",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "依赖数据协变量偏移下的深度回归方法，可用于时间序列预测自适应",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.21131v1",
+      "route": "202607/27/2607.21131v1-demographically-informed-heat-mortality-risk-curves-via-risk-graph-neural-networks",
+      "title": "Demographically-Informed Heat-Mortality Risk Curves via Risk Graph Neural Networks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "使用图神经网络进行热-死亡率风险的时间序列预测",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.21785v1",
+      "route": "202607/27/2607.21785v1-from-seasonality-to-semantics-benchmarking-a-hybrid-probabilistic-forecasting-system-for-roadblocks-in-bolivia",
+      "title": "From Seasonality to Semantics: Benchmarking a Hybrid Probabilistic Forecasting System for Roadblocks in Bolivia",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合时间序列和NLP的混合预测系统",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    },
+    {
+      "paper_id": "2607.21917v1",
+      "route": "202607/27/2607.21917v1-mapcast-a-convection-allowing-mpas-emulator-for-ensemble-based-background-error-covariance-estimation-toward-multi-scale-data-assimilation",
+      "title": "MAPCast: A Convection Allowing MPAS Emulator for Ensemble-based Background Error Covariance Estimation Toward Multi-Scale Data Assimilation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用于天气预报中集合背景误差协方差估计的对流许可仿真器",
+      "first_seen_at": "2026-07-27 21:15:36 UTC",
+      "updated_at": "2026-07-27 21:15:36 UTC"
+    }
+  ]
+}

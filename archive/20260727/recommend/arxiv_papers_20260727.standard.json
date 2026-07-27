@@ -1,0 +1,549 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-27T21:02:15.281424+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 5,
+    "deep_cap": 6,
+    "deep_selected": 5,
+    "quick_candidates": 9,
+    "quick_skim_target": 11,
+    "quick_selected": 9
+  },
+  "deep_dive": [
+    {
+      "id": "2607.21681v1",
+      "source": "arxiv",
+      "title": "CARNet Cycle-Conditioned Core Aggregation and Redistribution for Multivariate Time Series Forecasting",
+      "abstract": "Accurately modeling cross-variate dependencies remains a key challenge in multivariate time series forecasting, particularly in the presence of strong periodic patterns. Many existing approaches rely on attention-based mechanisms that incur quadratic complexity and scale poorly with increasing numbers of variates. Recent attention-free aggregation models address this issue through linear-complexity core-based interactions, but they do not explicitly leverage the global periodic structure present in the data. To overcome this limitation, we propose CARNet, a Cycle-Conditioned Core Aggregation and Redistribution framework that integrates global recurrent cycle information into efficient core based interaction modeling via Multihead Core Aggregation. Extensive experiments on multiple real-world multivariate forecasting benchmarks demonstrate that CARNet consistently outperforms strong transformer and non-attention baselines across diverse prediction horizons while preserving linear-complexity modeling of cross-variate dependencies.",
+      "authors": [
+        "Awsaf Tausif Adib",
+        "Md. Shahria Sarker Shuvo",
+        "Md. Estehaar Ahmed Emon",
+        "Mustafa Kamal",
+        "Fuad Rahman",
+        "Shafin Rahman",
+        "Nabeel Mohammed"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-23T13:47:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.21681v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "New multivariate time series forecasting method CARNet",
+      "llm_evidence_cn": "新的多元时间序列预测方法CARNet",
+      "llm_evidence": "新的多元时间序列预测方法CARNet",
+      "canonical_evidence": "新的多元时间序列预测方法CARNet",
+      "llm_tldr_en": "Proposes CARNet, a cycle-conditioned core aggregation framework for multivariate time series forecasting that leverages global periodic structure with linear complexity.",
+      "llm_tldr_cn": "该论文针对多元时间序列预测中跨变量依赖建模和周期模式利用的挑战，提出CARNet框架。通过将全局循环周期信息集成到高效的基于核的交互建模中，避免了注意力的二次复杂度。实验表明CARNet在多个基准数据集上达到最先进性能。",
+      "llm_tldr": "该论文针对多元时间序列预测中跨变量依赖建模和周期模式利用的挑战，提出CARNet框架。通过将全局循环周期信息集成到高效的基于核的交互建模中，避免了注意力的二次复杂度。实验表明CARNet在多个基准数据集上达到最先进性能。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.22299v1",
+      "source": "arxiv",
+      "title": "Hopformer: Homogeneity-Pursuit Transformer for Time Series Forecasting",
+      "abstract": "Forecasting multiple time-series with high-dimensional covariates presents a core challenge: unifying common temporal patterns while retaining meaningful series-specific information. We introduce Hopformer (Homogeneity-Pursuit Transformer), a two-stage framework that addresses this challenge. In the first stage, we perform a Sparsity Pattern Aggregation (SPA) scheme extracting a common low-variance trend that incorporates the covariates. This acts as a homogenization layer. In the second stage, a LoRA-fine-tuned Transformer models the remaining complex dependencies in the residual. Our method is theoretically grounded. We prove that SPA achieves a near-optimal bias-variance trade-off via an oracle inequality. We also provide generalization bounds for the second stage under dependent time series data. Hopformer sets a new state of the art, improving MASE by an average of 6.56% across synthetic and real-world forecasting benchmarks.",
+      "authors": [
+        "Wan Zhang",
+        "Qinjie Lin",
+        "Chan Lee",
+        "Weijian Li",
+        "Han Liu",
+        "Kai Zhang"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "published": "2026-07-24T13:44:36+00:00",
+      "link": "https://arxiv.org/pdf/2607.22299v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Hopformer for multi-time-series forecasting with theoretical guarantees",
+      "llm_evidence_cn": "面向多时间序列预测的Hopformer，具有理论保证",
+      "llm_evidence": "面向多时间序列预测的Hopformer，具有理论保证",
+      "canonical_evidence": "面向多时间序列预测的Hopformer，具有理论保证",
+      "llm_tldr_en": "Proposes Hopformer, a Transformer for multi-time-series forecasting with two-stage framework to extract common trends and model residuals, theoretically grounded with near-optimal bias-variance trade-off.",
+      "llm_tldr_cn": "本论文针对多变量时间序列预测中统一共同模式与保留序列特异性信息的挑战，提出Hopformer（同质性追求Transformer）。该方法第一阶段通过稀疏模式聚合提取低方差共同趋势，第二阶段使用LoRA微调Transformer建模残差复杂依赖。理论证明SPA实现了近似最优的偏差-方差平衡，并提供泛化界。实验表明在多个时间序列数据集上优于基线。",
+      "llm_tldr": "本论文针对多变量时间序列预测中统一共同模式与保留序列特异性信息的挑战，提出Hopformer（同质性追求Transformer）。该方法第一阶段通过稀疏模式聚合提取低方差共同趋势，第二阶段使用LoRA微调Transformer建模残差复杂依赖。理论证明SPA实现了近似最优的偏差-方差平衡，并提供泛化界。实验表明在多个时间序列数据集上优于基线。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series forecasting",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.22421v1",
+      "source": "arxiv",
+      "title": "StateFormer: A Multivariate Transformer for Learning History-Dependent Battery State Dynamics and Long-Horizon Health Forecasting",
+      "abstract": "This paper introduces a novel multivariate Transformer \\emph{StateFormer} that forecasts degradation dynamics of large-scale battery systems. The model learns across time scales, from short-term thermal fluctuations to long-term aging trajectories, enabling accurate prediction of battery states including state of charge (SOC), state of health (SOH), or battery temperature. By capturing long-range dependencies and identifying the operating conditions that drive future degradation, the model simultaneously represents fast electrochemical and thermal processes and slow aging mechanisms within a unified framework. \\emph{StateFormer} achieves robust and accurate predictions of battery state estimation across both synthetic and real-world datasets. It maintains high predictive performance under additive current/voltage noise levels ranging from $1\\%$ to $10\\%$ and a wide range of ambient temperatures in a synthetic battery fleet accommodating different types of electrode chemistry and manufacturing, as well as five years of field data collected from residential utility battery systems. The resulting model bridges the laboratory-to-field gap and provides predictive intelligence for maintenance planning, operational optimization, and economic decision-making.",
+      "authors": [
+        "Zhe Bai",
+        "Stephen Harris"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-07-24T15:40:33+00:00",
+      "link": "https://arxiv.org/pdf/2607.22421v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multivariate Transformer for long-horizon battery state forecasting",
+      "llm_evidence_cn": "多变量Transformer用于电池状态长期预测",
+      "llm_evidence": "多变量Transformer用于电池状态长期预测",
+      "canonical_evidence": "多变量Transformer用于电池状态长期预测",
+      "llm_tldr_en": "A multivariate Transformer StateFormer that predicts battery degradation dynamics across time scales, achieving accurate long-horizon forecasts of SOC, SOH, and temperature.",
+      "llm_tldr_cn": "电池状态预测面临多时间尺度挑战，该文提出StateFormer多变量Transformer，通过捕获长程依赖和运行条件，同时表征快速电化学/热过程与慢速老化机制，在充电状态、健康状态和温度预测上实现鲁棒准确的长期预测，展示了Transformer架构在时间序列预测中的强大能力。",
+      "llm_tldr": "电池状态预测面临多时间尺度挑战，该文提出StateFormer多变量Transformer，通过捕获长程依赖和运行条件，同时表征快速电化学/热过程与慢速老化机制，在充电状态、健康状态和温度预测上实现鲁棒准确的长期预测，展示了Transformer架构在时间序列预测中的强大能力。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.19689v1",
+      "source": "arxiv",
+      "title": "Optimal Recalibration of an Online Predictor",
+      "abstract": "We study the problem of recalibrating an online predictor [KE17, OKS24]: given an arbitrary \"hint\" sequence of forecasts, the learner must output new predictions that are calibrated while incurring small excess error relative to the original forecasts, under a proper loss. We give an online algorithm that achieves $(\\varepsilon, \\varepsilon^2)$-recalibration for Lipschitz proper losses in   $T \\approx \\varepsilon^{-3}$ rounds, using an imbalanced extension of the recent simultaneous Blackwell approachability reduction framework of [HTY26]. We show that this tradeoff is optimal by proving a matching lower bound for recalibrating against the squared loss. We also prove a companion $\\mathcal{K}_2$-recalibration theorem that obtains the same tradeoffs up to a logarithmic factor.   As our main application, we show how our recalibration algorithms can be combined with the online refinement method of [FH23] to obtain simultaneous $\\varepsilon$-calibration and $\\varepsilon^2$-calibeating for smooth proper losses at the same asymptotic rate, improving upon prior works that achieved these properties separately or with a worse $\\varepsilon$ dependence. In particular, the $\\mathcal{K}_2$ variant answers a question of [CHJL26] on simultaneously achieving near-optimal calibeating and calibration rates. We also derive extensions to settings with multiple hint sequences. Finally, we empirically evaluate our algorithms on a classification dataset undergoing distribution shift.",
+      "authors": [
+        "Lunjia Hu",
+        "Kevin Tian",
+        "Chutong Yang"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.DS",
+        "cs.LG"
+      ],
+      "published": "2026-07-22T02:36:03+00:00",
+      "link": "https://arxiv.org/pdf/2607.19689v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "optimal recalibration method for online predictors improves time series forecasts",
+      "llm_evidence_cn": "在线预测器最优再校准方法，提升时间序列预测性能",
+      "llm_evidence": "在线预测器最优再校准方法，提升时间序列预测性能",
+      "canonical_evidence": "在线预测器最优再校准方法，提升时间序列预测性能",
+      "llm_tldr_en": "An optimal online recalibration algorithm achieving optimal epsilon-calibration tradeoffs for Lipschitz proper losses, with matching lower bounds.",
+      "llm_tldr_cn": "针对在线预测器的校准问题，该文提出了一种基于Blackwell可逼近性框架的最优在线再校准算法，在Lipschitz适当损失下达到最优的ε-校准权衡，并证明了匹配的下界，为时间序列预测的校准提供了理论基础。",
+      "llm_tldr": "针对在线预测器的校准问题，该文提出了一种基于Blackwell可逼近性框架的最优在线再校准算法，在Lipschitz适当损失下达到最优的ε-校准权衡，并证明了匹配的下界，为时间序列预测的校准提供了理论基础。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21922v1",
+      "source": "arxiv",
+      "title": "MissHyper: Restoring Clinical Synchronicity in Missingness-Guided Hypergraph Forecasting",
+      "abstract": "Clinical irregular multivariate time series are shaped not only by physiological dynamics but also by the measurement process that determines when and what to observe. In event-centric models, however, co-timestamp structure can be flattened too early: measurements acquired at the same timestamp are embedded as isolated nodes, leaving local patient-state context unavailable until later message-passing layers. We study this pre-propagation representation bottleneck and address it by restoring co-timestamp context before message passing begins. We propose MissHyper, a missingness-guided hypergraph forecasting model with pre-propagation synchronicity restoration. MissHyper augments each event with a local support-density cue, aggregates co-timestamp records to recover patient-state context, and uses a missingness-guided gate to adaptively fuse node-specific evidence with the recovered context. Across PhysioNet 2012, MIMIC-III, and MIMIC-IV, MissHyper achieves consistent gains in multi-step forecasting and outperforms a strong hypergraph baseline. These results suggest that improving event initialization can benefit sparse clinical forecasting without requiring a redesigned downstream propagation architecture. Ablations indicate that snapshot restoration, adaptive fusion, and support-density encoding all contribute, pointing to event initialization as a critical design axis for sparse clinical forecasting.",
+      "authors": [
+        "Mingyi Ma",
+        "Qingxiong Tan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-24T02:55:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.21922v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Missingness-guided hypergraph forecasting for irregular multivariate time series",
+      "llm_evidence_cn": "缺失引导超图预测用于不规则多元时间序列",
+      "llm_evidence": "缺失引导超图预测用于不规则多元时间序列",
+      "canonical_evidence": "缺失引导超图预测用于不规则多元时间序列",
+      "llm_tldr_en": "Proposes MissHyper, a missingness-guided hypergraph forecasting model for clinical irregular time series, restoring co-timestamp context before message passing.",
+      "llm_tldr_cn": "该论文针对临床不规则多元时间序列预测中时间戳扁平化导致上下文丢失的问题，提出MissHyper模型。通过恢复共时间戳上下文并利用缺失模式指导超图消息传递，在多个临床数据集上取得改进。该方法解决了事件驱动模型中的表示瓶颈。",
+      "llm_tldr": "该论文针对临床不规则多元时间序列预测中时间戳扁平化导致上下文丢失的问题，提出MissHyper模型。通过恢复共时间戳上下文并利用缺失模式指导超图消息传递，在多个临床数据集上取得改进。该方法解决了事件驱动模型中的表示瓶颈。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.19054v1",
+      "source": "arxiv",
+      "title": "Probabilistic Physics-Aware Machine Learning Predictions of Electric Truck Energy Consumption with Field Data",
+      "abstract": "In this work, we incorporate first principle physics into the construction of data-driven methods by considering a model that accounts for the different sources of energy losses during vehicle operations. Our results show that Bayesian linear regression based on this physics-aware model can improve the reliability of the expected energy consumption, as compared with standard linear regression. Further, it is shown that more complex machine learning models such as neural networks and gradient boosted regression trees, based on the same physical model, can further improve the accuracy in energy forecasting and significantly outperform standard versions of the same machine learning models. In addition to point predictions of the energy consumption, we develop a framework for estimating the corresponding uncertainty in the form of predicted standard deviation. Our results show that all of the models learn to estimate the uncertainty reasonably well.",
+      "authors": [
+        "Hannes Nilsson",
+        "Rafael Basso",
+        "Balázs Kulcsár",
+        "Morteza Haghir Chehreghani"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-21T12:43:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.19054v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "time series forecasting with physics-aware ML",
+      "llm_evidence_cn": "使用物理感知机器学习进行时间序列预测",
+      "llm_evidence": "使用物理感知机器学习进行时间序列预测",
+      "canonical_evidence": "使用物理感知机器学习进行时间序列预测",
+      "llm_tldr_en": "Proposes physics-aware ML models for electric truck energy consumption forecasting, showing Bayesian regression, neural networks, and GBRT outperforming standard models.",
+      "llm_tldr_cn": "本文针对电动卡车能耗预测问题，提出融合物理原理的机器学习方法。通过贝叶斯线性回归、神经网络和梯度提升回归树等模型，在真实场数据上实现更高精度的能耗预测。该方法将物理模型融入数据驱动框架，显著提高了时间序列预测的可靠性和准确性，为能耗预测提供了新的思路。",
+      "llm_tldr": "本文针对电动卡车能耗预测问题，提出融合物理原理的机器学习方法。通过贝叶斯线性回归、神经网络和梯度提升回归树等模型，在真实场数据上实现更高精度的能耗预测。该方法将物理模型融入数据驱动框架，显著提高了时间序列预测的可靠性和准确性，为能耗预测提供了新的思路。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.19522v1",
+      "source": "arxiv",
+      "title": "Geospatial Diffusion-based Evolution Synthesis (GeoDES) for Storm-Centered Weather Augmentation",
+      "abstract": "While machine learning-based weather models hold significant promise, they struggle to predict the detailed structure of large-scale weather systems such as cyclonic storms. Regional models are constrained by limited historical records within fixed geographic boundaries, while global models are computationally expensive and often operate at resolutions too coarse to capture fine-grained storm dynamics. To bridge this gap, we introduce the Geospatial Diffusion-based Evolution Synthesis (GeoDES) model, a custom image-to-video diffusion model. By focusing generation strictly on the evolving storm structure, GeoDES synthesizes physically consistent, high-fidelity weather events suitable for stress-testing forecast models and expanding meteorological datasets. Evaluations demonstrate that GeoDES outperforms prior methods on key metrics, achieving $52\\%$ lower Peak Vorticity Error and $8\\%$ higher Anomaly Correlation Coefficient than the next strongest methods on the North Atlantic test set.",
+      "authors": [
+        "Sonia Cromp",
+        "Satya Sai Srinath Namburi GNVV",
+        "Youran Wang",
+        "Grace Kisslinger",
+        "Frederic Sala",
+        "James Booth",
+        "Allegra LeGrande"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-07-21T19:10:12+00:00",
+      "link": "https://arxiv.org/pdf/2607.19522v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "weather augmentation for training forecast models",
+      "llm_evidence_cn": "用于训练预测模型的天气数据增强",
+      "llm_evidence": "用于训练预测模型的天气数据增强",
+      "canonical_evidence": "用于训练预测模型的天气数据增强",
+      "llm_tldr_en": "GeoDES uses diffusion models to synthesize physically consistent storm-centered weather events, enabling stress-testing and augmentation of forecast models.",
+      "llm_tldr_cn": "针对机器学习天气模型难以预测风暴细微结构的问题，提出GeoDES，一种基于扩散的图像到视频生成模型，专注于生成风暴演化过程。该模型能合成物理一致的高保真天气事件，用于压力测试和增强预测模型，弥补区域和全球模型的不足。",
+      "llm_tldr": "针对机器学习天气模型难以预测风暴细微结构的问题，提出GeoDES，一种基于扩散的图像到视频生成模型，专注于生成风暴演化过程。该模型能合成物理一致的高保真天气事件，用于压力测试和增强预测模型，弥补区域和全球模型的不足。",
+      "llm_tags": [
+        "query:ts-wq:composite"
+      ],
+      "matched_query_tag": "query:ts-wq:composite",
+      "matched_query_text": "Papers central to 请帮我查找时间序列预测和水文水质预测的内容, especially work that connects or combines: time series prediction; water quality prediction; hydrological prediction; time series forecasting; time series forecasting methods for water quality; hydrological water quality prediction using deep learning; temporal prediction models for water quality.",
+      "matched_requirement_id": "req-composite-ts-wq",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.21916v1",
+      "source": "arxiv",
+      "title": "Estimating dynamic models by matching random features",
+      "abstract": "Scientists increasingly express their ideas as dynamic models of complex processes. It is often much easier to simulate these models than to calculate the probability of their generating a particular outcome, making likelihood-based estimation infeasible. Existing likelihood-free approaches rely either on manually chosen summary statistics or on representations learned by neural networks. The former is error-prone and laborious, while the latter is computationally intensive, leaving many scientists in a difficult position. We show that, for a large class of dynamic models, parameters can be estimated by matching a small number of random features of the observed and simulated data. Specifically, we adapt results from nonlinear dynamics to show that models with a $p$-dimensional parameter can generically be identified from just $2p+1$ random features. We introduce two estimators for stationary and nonstationary processes, respectively, and we establish their consistency under mild regularity conditions. More broadly, our results serve as the foundation for a new class of random feature methods for simulation-based estimation and inference.",
+      "authors": [
+        "Michael Wieck-Sosa",
+        "Cosma Rohilla Shalizi"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "math.ST",
+        "nlin.CD",
+        "physics.data-an"
+      ],
+      "published": "2026-07-24T02:43:40+00:00",
+      "link": "https://arxiv.org/pdf/2607.21916v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "parameter estimation for dynamic models using random features",
+      "llm_evidence_cn": "使用随机特征匹配估计动态模型参数",
+      "llm_evidence": "使用随机特征匹配估计动态模型参数",
+      "canonical_evidence": "使用随机特征匹配估计动态模型参数",
+      "llm_tldr_en": "Proposes matching random features to estimate parameters of dynamic models, avoiding manual summary statistics or neural networks, applicable to complex simulations.",
+      "llm_tldr_cn": "针对动态模型参数估计中似然函数难以计算的问题，提出通过匹配随机特征来估计参数，避免手动选择摘要统计量或训练神经网络，适用于大规模动态模型，为模拟推断提供了高效且实用的方法。",
+      "llm_tldr": "针对动态模型参数估计中似然函数难以计算的问题，提出通过匹配随机特征来估计参数，避免手动选择摘要统计量或训练神经网络，适用于大规模动态模型，为模拟推断提供了高效且实用的方法。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.20309v1",
+      "source": "arxiv",
+      "title": "Adaptive deep nonparametric regression from dependent data under covariate shift",
+      "abstract": "Covariate shift often occurs because, in many real applications, the source and the target observations may be generated from different distributions. In this case, the standard metric under the source distribution is not appropriate. This paper considers deep neural network estimators for nonparametric quantile and Huber regression under covariate shift and from dependent observations. We deal with a generalized Bernstein-type inequality that is satisfied by many classical models, including i.i.d. observations, $φ$-mixing, strong mixing, and $\\mathcal{C}$-mixing processes. To perform the covariate shift phenomenon, we propose a sparse-penalized deep neural network (SPDNN) estimator that takes into account the discrepancy between the source and target distributions of the data. When the density ratio (between the source and target distributions of the covariate) is unknown, a two steps pre-training procedure is carried out: the first step is devoted to the construction of a least squares SPDNN estimator of the density ratio; which is used in the second step to perform a pre-training reweighted SPDNN estimator of the regression function. For both the quantile and the Huber regression, non-asymptotic error bounds of the proposed SPDNN estimators are established in the class of Hölder smooth functions. These estimators can adaptively attain (up to a logarithmic factor) the minimax optimal convergence rate from i.i.d. data as well as from several classical time series models.",
+      "authors": [
+        "William Kengne",
+        "Ehud Mossa Ockegna"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "published": "2026-07-22T15:55:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.20309v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "deep regression method for dependent data under covariate shift, useful for time series prediction adaptation",
+      "llm_evidence_cn": "依赖数据协变量偏移下的深度回归方法，可用于时间序列预测自适应",
+      "llm_evidence": "依赖数据协变量偏移下的深度回归方法，可用于时间序列预测自适应",
+      "canonical_evidence": "依赖数据协变量偏移下的深度回归方法，可用于时间序列预测自适应",
+      "llm_tldr_en": "Sparse-penalized deep neural network for nonparametric regression under covariate shift with dependent data, applicable to time series.",
+      "llm_tldr_cn": "协变量偏移常见于时间序列等依赖数据中。该文提出稀疏惩罚深度神经网络（SPDNN）估计器，基于广义Bernstein型不等式处理φ-混合、强混合等依赖过程，在协变量偏移下实现自适应非参数回归，为时间序列预测中的领域自适应提供了理论工具。",
+      "llm_tldr": "协变量偏移常见于时间序列等依赖数据中。该文提出稀疏惩罚深度神经网络（SPDNN）估计器，基于广义Bernstein型不等式处理φ-混合、强混合等依赖过程，在协变量偏移下实现自适应非参数回归，为时间序列预测中的领域自适应提供了理论工具。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.22268v1",
+      "source": "arxiv",
+      "title": "General Value Functions for Remaining Useful Life and Failure-Mode Prediction",
+      "abstract": "Remaining useful life (RUL) prediction and failure-mode classification are central tasks in predictive maintenance. Many data-driven pipelines use fixed-window supervised learning with complete terminal labels; such routes do not naturally encode the temporal recursion linking successive degradation-state predictions when observations are partial or unit identities are unavailable. We formulate prognostics as vector General Value Function (GVF) prediction on an absorbing degradation process, treating RUL and failure-mode probabilities as temporally consistent targets rather than independent window-level labels, and estimate them with a multi-step temporal-difference estimator, TD($n,λ$). Supporting theory identifies the Bellman fixed point of the vector GVFs, characterizes the linear projected-TD limit and its relation to complete-return Monte Carlo regression under realizability, and explains when bootstrapped TD targets are less variable than Monte Carlo returns. On an event-triggered multimode simulation and NASA C-MAPSS label-scarce stitch data, TD improves RUL and failure-mode prediction relative to a supervised same-backbone Monte Carlo control, especially under scarce complete labels. Practically, fragmented, identity-free degradation records can contribute local Bellman transitions instead of being discarded until complete run-to-failure labels are available.",
+      "authors": [
+        "Hao Yan",
+        "Ali Sarabi",
+        "Qing Zou",
+        "Boyang Xu"
+      ],
+      "primary_category": "stat.ML",
+      "categories": [
+        "stat.ML",
+        "cs.LG",
+        "stat.AP"
+      ],
+      "published": "2026-07-24T13:04:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.22268v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "General Value Function for temporal prediction of remaining useful life",
+      "llm_evidence_cn": "基于通用值函数的剩余寿命时序预测",
+      "llm_evidence": "基于通用值函数的剩余寿命时序预测",
+      "canonical_evidence": "基于通用值函数的剩余寿命时序预测",
+      "llm_tldr_en": "Proposes GVF-based temporal-difference learning for remaining useful life prediction, enabling temporally consistent forecasts from partial observations without complete terminal labels.",
+      "llm_tldr_cn": "该论文针对传统固定窗口监督学习无法有效处理部分观测下连续退化状态预测的问题，提出将剩余寿命预测建模为向量通用值函数预测，采用多步时序差分估计器TD(n,λ)进行求解。理论证明了Bellman不动点，实验表明该方法能提供时间一致的预测，适用于故障预测任务。",
+      "llm_tldr": "该论文针对传统固定窗口监督学习无法有效处理部分观测下连续退化状态预测的问题，提出将剩余寿命预测建模为向量通用值函数预测，采用多步时序差分估计器TD(n,λ)进行求解。理论证明了Bellman不动点，实验表明该方法能提供时间一致的预测，适用于故障预测任务。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.21131v1",
+      "source": "arxiv",
+      "title": "Demographically-Informed Heat-Mortality Risk Curves via Risk Graph Neural Networks",
+      "abstract": "Estimating heat-related mortality risk is a core task in environmental epidemiology, typically addressed with Distributed Lag Non-linear Models (DLNMs); interpretable exposure-response surfaces fitted to temperature-mortality time series. DLNMs are effective but ignore demographic and geographic context, despite well-established relevance to heat vulnerability. We propose Risk Graph Neural Networks (RGNNs), a hierarchical GNN encoder that uses granular census features to optimise DLNM coefficient vectors, preserving interpretable risk curve outputs while substantially improving predictive calibration. Evaluated across 10 regions of England and Wales on two unprecedented heat years, RGNN variants maintain both lower point-errors and near-nominal uncertainty coverage during the 2022 heatwave where baselines collapse.",
+      "authors": [
+        "Alex O. Davies",
+        "Eunice Lo",
+        "Rui Zhu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-23T10:08:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.21131v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Time series forecasting of heat-mortality risk using graph neural networks",
+      "llm_evidence_cn": "使用图神经网络进行热-死亡率风险的时间序列预测",
+      "llm_evidence": "使用图神经网络进行热-死亡率风险的时间序列预测",
+      "canonical_evidence": "使用图神经网络进行热-死亡率风险的时间序列预测",
+      "llm_tldr_en": "Uses risk graph neural networks to predict heat-mortality risk curves, improving calibration over traditional distributed lag non-linear models.",
+      "llm_tldr_cn": "本论文针对热相关死亡率风险评估中的时间序列预测问题，提出风险图神经网络（RGNN），利用人口统计特征优化分布滞后非线性模型的系数向量，在保持可解释性的同时提高预测校准能力。在英格兰和威尔士10个区域的两个异常高温年份上评估，RGNN在点误差和校准方面均优于传统方法。该方法展示了融合领域知识进行环境时间序列预测的有效性。",
+      "llm_tldr": "本论文针对热相关死亡率风险评估中的时间序列预测问题，提出风险图神经网络（RGNN），利用人口统计特征优化分布滞后非线性模型的系数向量，在保持可解释性的同时提高预测校准能力。在英格兰和威尔士10个区域的两个异常高温年份上评估，RGNN在点误差和校准方面均优于传统方法。该方法展示了融合领域知识进行环境时间序列预测的有效性。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.22491v1",
+      "source": "arxiv",
+      "title": "Susceptible Reservoir Architectures for Regime-Conditional Volatility Forecasting",
+      "abstract": "Volatility forecasting is dominated by persistence and measurement noise, leaving limited residual structure for nonlinear models to exploit. We introduce Susceptible Architectures (SUSA), a reservoir-design principle for volatility forecasting, and its two concrete implementations, based on complex-valued open-chain and periodic reservoirs and regime-conditioned experts to interpret reservoir features across calm, onset, recovery, and persistent-stress states. We also implement open-system $q$-qubit counterparts in Qiskit while retaining a common AR-Ridge anchor and a bounded residual correction trained under QLIKE. We evaluate models on 16 U.S. equity and exchange-traded-fund series using three disjoint chronological training, validation, and test folds, a 12-observation input window, and a five-observation forecast horizon. The proposed models perform competitively with GARCH, achieving statistically significant QLIKE improvements for specific assets (IWM, XLP). Also models' forecasts complement HARQ-style predictions: a stacked ensemble improves mean QLIKE by 0.0116 over its strongest constituent and wins in 75% of test scenarios.",
+      "authors": [
+        "Aliaksei Kaliutau"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-24T17:03:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.22491v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "time series forecasting with reservoir architectures",
+      "llm_evidence_cn": "使用储层架构进行时间序列预测",
+      "llm_evidence": "使用储层架构进行时间序列预测",
+      "canonical_evidence": "使用储层架构进行时间序列预测",
+      "llm_tldr_en": "Introduces Susceptible Architectures (SUSA) for volatility forecasting using reservoir computing and regime-conditioned experts, evaluated on equity series.",
+      "llm_tldr_cn": "针对金融波动率预测中噪声主导的问题，提出Susceptible Architectures (SUSA)储层设计原则，通过复值开链和周期储层以及状态条件专家，在股票和ETF序列上实现了有效的波动率预测，为时间序列建模提供了新架构。",
+      "llm_tldr": "针对金融波动率预测中噪声主导的问题，提出Susceptible Architectures (SUSA)储层设计原则，通过复值开链和周期储层以及状态条件专家，在股票和ETF序列上实现了有效的波动率预测，为时间序列建模提供了新架构。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.21785v1",
+      "source": "arxiv",
+      "title": "From Seasonality to Semantics: Benchmarking a Hybrid Probabilistic Forecasting System for Roadblocks in Bolivia",
+      "abstract": "Roadblocks in Bolivia are a social conflict phenomenon with devastating economic impacts, estimated at losses equivalent to 4% of the national Gross Domestic Product. Despite their recurrence and impact, there is a lack of local predictive systems to anticipate these events for logistical decision-making. This paper presents a hybrid probabilistic forecasting system that integrates time series decomposition (Prophet) with natural language processing (NLP) techniques applied to a six-year corpus of Bolivian news coverage. The methodology employs vector semantic embeddings and zero-shot classification models to capture signals of discursive escalation prior to the materialization of the roadblocks. Using an expanding walk-forward validation scheme applied over 1,762 days and seven forecasting horizons (H+1 to H+7), seven internal configurations and four external benchmarks were compared, including SARIMA and LightGBM. The results demonstrate that the hybrid configuration (Prophet + NLP, C6) consistently outperforms purely statistical models, achieving an AUC-ROC of 0.677 at H+1 and reducing the Brier Score by 10.9% relative to the baseline temporal model (0.220 vs. 0.247), maintaining a statistically significant error reduction across all evaluated horizons ($p < 0.02$). This research validates that the integration of semantic news signals allows for the detection of social tension peaks not captured by historical inertia, providing a technical tool for risk management in critical transport corridors.",
+      "authors": [
+        "Rodrigo Vargas Sainz",
+        "Christian Berón Curti"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-23T20:05:48+00:00",
+      "link": "https://arxiv.org/pdf/2607.21785v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "hybrid forecasting system combining time series decomposition and NLP methods",
+      "llm_evidence_cn": "结合时间序列和NLP的混合预测系统",
+      "llm_evidence": "结合时间序列和NLP的混合预测系统",
+      "canonical_evidence": "结合时间序列和NLP的混合预测系统",
+      "llm_tldr_en": "Hybrid probabilistic forecasting system combining time series decomposition (Prophet) and NLP for roadblock prediction in Bolivia.",
+      "llm_tldr_cn": "玻利维亚路障事件缺乏预测系统。该文提出一种混合概率预测框架，整合时间序列分解（Prophet）与NLP技术（语义嵌入与零样本分类），从新闻文本中捕获话语升级信号，在路障预测上取得了良好效果，展示了混合方法在社会冲突预测中的应用潜力，其思路可迁移至其他时间序列预测任务。",
+      "llm_tldr": "玻利维亚路障事件缺乏预测系统。该文提出一种混合概率预测框架，整合时间序列分解（Prophet）与NLP技术（语义嵌入与零样本分类），从新闻文本中捕获话语升级信号，在路障预测上取得了良好效果，展示了混合方法在社会冲突预测中的应用潜力，其思路可迁移至其他时间序列预测任务。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "time series prediction",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.21917v1",
+      "source": "arxiv",
+      "title": "MAPCast: A Convection Allowing MPAS Emulator for Ensemble-based Background Error Covariance Estimation Toward Multi-Scale Data Assimilation",
+      "abstract": "Machine learning (ML) emulators offer a cost-efficient alternative to numerical weather prediction models for generating convection-allowing background ensembles in ensemble-based data assimilation (DA). However, few studies have explored ML-based surrogate background ensembles for estimating background-error covariances (BECs). This study develops a convection-allowing emulator, MAPCast, trained on historical convection-allowing simulations from the Model for Prediction Across Scales (MPAS), and evaluates its ability to estimate BECs, paving the way toward multiscale DA. The evaluation uses 10 retrospective convective cases at 15- and 60-min forecast lead times corresponding to subhourly and hourly DA. MAPCast reproduces MPAS forecasts with good fidelity, including realistic storm coverage, temporal evolution, and similar spatial and spectral characteristics of state variables. Discrepancies are primarily confined to small spatial scales near sharp gradients and convective-scale features and variables. For BEC statistics, MAPCast captures ensemble spread magnitude and spatial distribution for most variables, although larger errors occur for storm-related fields that are vertical velocity and reflectivity. Correlation structures are reproduced most faithfully at mesoscale and above, followed by at convective scales, whereas cross-variable correlations are less accurately represented than univariate correlations, indicating that multivariate coupling remains the principal limitation. MAPCast shows weaker replication of full-scale versus decomposed large and small-scale correlations. BEC estimates derived from 15-min forecasts consistently outperform those from 60-min forecasts, suggesting that shorter lead times better preserve flow-dependent error structures.",
+      "authors": [
+        "Yongming Wang",
+        "Xuguang Wang"
+      ],
+      "primary_category": "physics.ao-ph",
+      "categories": [
+        "physics.ao-ph"
+      ],
+      "published": "2026-07-24T02:45:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.21917v1",
+      "tags": [
+        "keyword:ts-wq",
+        "query:ts-wq"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Convection-allowing emulator for ensemble-based background error covariance estimation in weather/hydrological models",
+      "llm_evidence_cn": "用于天气预报中集合背景误差协方差估计的对流许可仿真器",
+      "llm_evidence": "用于天气预报中集合背景误差协方差估计的对流许可仿真器",
+      "canonical_evidence": "用于天气预报中集合背景误差协方差估计的对流许可仿真器",
+      "llm_tldr_en": "Develops MAPCast, a ML emulator for convection-allowing MPAS simulations, to estimate background-error covariances for multi-scale data assimilation.",
+      "llm_tldr_cn": "本论文针对集合数据同化中背景误差协方差估计的计算成本问题，开发了MAPCast——一种对流许可的机器学习仿真器，基于历史MPAS模拟训练。在10个回顾性对流案例上评估15分钟和60分钟预报提前期的性能，证明其能够有效估计背景误差协方差，为多尺度数据同化铺平道路。该方法可应用于水文气象预测。",
+      "llm_tldr": "本论文针对集合数据同化中背景误差协方差估计的计算成本问题，开发了MAPCast——一种对流许可的机器学习仿真器，基于历史MPAS模拟训练。在10个回顾性对流案例上评估15分钟和60分钟预报提前期的性能，证明其能够有效估计背景误差协方差，为多尺度数据同化铺平道路。该方法可应用于水文气象预测。",
+      "llm_tags": [
+        "query:ts-wq"
+      ],
+      "matched_query_tag": "query:ts-wq",
+      "matched_query_text": "hydrological prediction",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
