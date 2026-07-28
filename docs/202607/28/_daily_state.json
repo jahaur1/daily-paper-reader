@@ -1,0 +1,233 @@
+{
+  "date": "20260728",
+  "date_label": "",
+  "generated_at": "2026-07-28 21:36:43 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.23146v1",
+      "route": "202607/28/2607.23146v1-foundation-models-and-fine-tuning-toward-a-new-generation-of-models-for-time-series-forecasting",
+      "title": "Foundation Models and Fine-Tuning: Toward a New Generation of Models for Time Series Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "时间序列预测基础模型",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23165v1",
+      "route": "202607/28/2607.23165v1-adaptive-multi-scale-forecasting-and-gate-localized-conformal-prediction-for-multivariate-nonstationary-time-series",
+      "title": "Adaptive Multi-Scale Forecasting and Gate-Localized Conformal Prediction for Multivariate Nonstationary Time Series",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "时间序列预测与不确定性量化",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23237v1",
+      "route": "202607/28/2607.23237v1-context-aware-concept-distillation-for-trustworthy-flood-prediction",
+      "title": "Context-Aware Concept Distillation for Trustworthy Flood Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "洪水预测，水文时间序列",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23983v1",
+      "route": "202607/28/2607.23983v1-hydroagent-formalizing-forecaster-expertise-into-skill-orchestrated-flood-forecasting-workflows",
+      "title": "HydroAgent: Formalizing Forecaster Expertise into Skill-Orchestrated Flood Forecasting Workflows",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "使用基于LLM的智能体框架进行洪水预报，直接涉及深度学习水文预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.24218v1",
+      "route": "202607/28/2607.24218v1-every-client-is-an-environment-federated-de-confounding-for-spatio-temporal-forecasting",
+      "title": "Every Client Is an Environment: Federated De-confounding for Spatio-Temporal Forecasting",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出联邦反混淆方法改进时空预测泛化，可用于水文时空预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.24399v1",
+      "route": "202607/28/2607.24399v1-multivariate-time-series-forecasting-with-adaptive-non-local-observables",
+      "title": "Multivariate Time Series Forecasting with Adaptive Non-Local Observables",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多元时间序列预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.20592v1",
+      "route": "202607/28/2607.20592v1-stemp-spatio-temporal-modelling-protocol",
+      "title": "STeMP: Spatio-Temporal Modelling Protocol",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "时空建模协议，适用于水文预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.24056v1",
+      "route": "202607/28/2607.24056v1-capacity-aware-deep-learning-for-generalizable-traffic-volume-estimation-across-links-and-cities",
+      "title": "Capacity-Aware Deep Learning for Generalizable Traffic Volume Estimation Across Links and Cities",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出基于容量的深度学习框架估计交通流量，方法可迁移至水文流量预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.22760v1",
+      "route": "202607/28/2607.22760v1-exdqlm-an-r-package-for-estimation-and-analysis-of-flexible-dynamic-quantile-linear-models",
+      "title": "exdqlm: An R Package for Estimation and Analysis of Flexible Dynamic Quantile Linear Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用于时间序列的贝叶斯分位数回归",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23018v1",
+      "route": "202607/28/2607.23018v1-covariance-boosted-gaussian-processes-for-spatiotemporal-irregularities",
+      "title": "Covariance-Boosted Gaussian Processes for Spatiotemporal Irregularities",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时空高斯过程预测方法",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23110v1",
+      "route": "202607/28/2607.23110v1-operator-neural-jump-odes-l2-optimal-prediction-in-function-spaces",
+      "title": "Operator Neural Jump ODEs: $L^2$-optimal prediction in function spaces",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "函数空间中的最优预测",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23396v1",
+      "route": "202607/28/2607.23396v1-distributed-and-recursive-bayesian-inference-for-big-data-and-complex-spatio-temporal-models",
+      "title": "Distributed and recursive Bayesian inference for Big Data and complex spatio-temporal models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时空模型的分布式贝叶斯推断",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.23503v1",
+      "route": "202607/28/2607.23503v1-impute-on-demand-adaptive-correlated-time-series-imputation-for-changing-environments",
+      "title": "Impute On-Demand: Adaptive Correlated Time Series Imputation for Changing Environments",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自适应相关时间序列插补方法",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    },
+    {
+      "paper_id": "2607.24673v1",
+      "route": "202607/28/2607.24673v1-causal-ts-a-python-library-for-causal-discovery-in-high-dimensional-and-nonstationary-time-series",
+      "title": "Causal-TS: A Python Library for Causal Discovery in High-Dimensional and Nonstationary Time Series",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ts-wq"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提供高维非平稳时间序列因果发现库，有助于时间序列预测建模",
+      "first_seen_at": "2026-07-28 21:36:43 UTC",
+      "updated_at": "2026-07-28 21:36:43 UTC"
+    }
+  ]
+}
