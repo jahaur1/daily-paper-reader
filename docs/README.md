@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-07-28</span>
+      <span class="dpr-home-dashboard-kicker">2026-07-29</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 0 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>8</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>0</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-07-28 21:36:43 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-07-29 20:44:27 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日处理14篇论文，精读6篇，重点关注时间序列预测领域的前沿进展。</p>
-<p>最值得看的两大方向：基于大模型微调的新一代时间序列预测模型，以及针对非平稳多变量序列的自适应多尺度预测与保形预测方法。</p>
-<p>建议优先精读这两篇9.0高分的论文，深入理解其模型设计与应用场景。</p>
+<p>今日无新推荐，系统未产出可展示论文。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Foundation Models and Fine-Tuning: Toward a New Generation of Models for Time Series Forecasting">Foundation Models and Fine-Tuning: Toward a New Generation of Models for Time Series Forecasting</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Multi-Scale Forecasting and Gate-Localized Conformal Prediction for Multivariate Nonstationary Time Series">Adaptive Multi-Scale Forecasting and Gate-Localized Conformal Prediction for Multivariate Nonstationary Time Series</span></li><li><span class="dpr-home-dashboard-paper-title" title="Context-Aware Concept Distillation for Trustworthy Flood Prediction">Context-Aware Concept Distillation for Trustworthy Flood Prediction</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>6</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">8 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="STeMP: Spatio-Temporal Modelling Protocol">STeMP: Spatio-Temporal Modelling Protocol</span></li><li><span class="dpr-home-dashboard-paper-title" title="Capacity-Aware Deep Learning for Generalizable Traffic Volume Estimation Across Links and Cities">Capacity-Aware Deep Learning for Generalizable Traffic Volume Estimation Across Links and Cities</span></li><li><span class="dpr-home-dashboard-paper-title" title="exdqlm: An R Package for Estimation and Analysis of Flexible Dynamic Quantile Linear Models">exdqlm: An R Package for Estimation and Analysis of Flexible Dynamic Quantile Linear Models</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ts-wq <strong>8</strong></span></div>
+
 </section>
 </div>
 
